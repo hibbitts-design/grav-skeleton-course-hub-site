@@ -1,0 +1,162 @@
+@import "compass/css3/transition"
+@import "compass/css3/transform"
+@import "compass/css3/box-shadow"
+@import "compass/css3/border-radius"
+@import "compass/css3/box-sizing"
+@import "compass/css3/filter"
+
+@mixin navbar($navbar-bg-color: transparent, $navbar-accent-color: #fff, $navbar-accent-hover-color: #fff, $navbar-brand-color: #fff, $navbar-brand-hover-color: #fff, $navbar-accent-active-color: #d8d8d8, $navbar-accent-active-hover-color: #d8d8d8, $navbar-padding: 0.5rem 8rem, $narbar-transition: all 0.5s ease)
+    background-color: $navbar-bg-color
+    border-bottom: 0
+    +transition($narbar-transition)
+    padding: $navbar-padding
+
+    @media screen and (max-width: 768px)
+        padding: 0.5rem
+
+        .navbar-collapse
+            background-color: #131313
+            text-align: left !important
+
+        .navbar-nav
+            > li > a
+                color: #fff !important
+
+            > .active > a, > .active > a:hover
+                background-color: #131313 !important
+
+    .navbar-center
+        display: inline-block
+        float: none
+
+    .navbar-collapse
+        text-align: center
+
+    .navbar-brand
+        color: $navbar-brand-color
+        font-weight: bold
+
+    .navbar-brand:hover
+        color: $navbar-brand-hover-color
+
+    .navbar-nav
+        > li > a
+            color: $navbar-accent-color
+
+        > li > a:hover
+            color: $navbar-accent-hover-color
+            text-decoration: underline
+
+        > .active > a
+            color: $navbar-accent-active-color
+
+        > .active > a:hover
+            color: $navbar-accent-active-hover-color
+
+        > .active > a, > .active > a:hover
+            background-color: $navbar-bg-color
+
+    .navbar-nav > li > .dropdown-menu, .dropdown-menu,
+        display: block
+        margin: 0
+        padding: 0
+        z-index: 1000
+        position: absolute
+        opacity: 0
+        +transform(scale(0))
+        +box-shadow(1px, 2px, 3px, rgba(0, 0, 0, 0.125))
+        +border-radius(0.8rem)
+        +box-sizing(border-box)
+        +filter(alpha(opacity=0))
+        +transition(all, 100ms, cubic-bezier(0.950, 0.050, 0.795, 0.035))
+        +transition-timing-function(cubic-bezier(0.950, 0.050, 0.795, 0.035))
+
+        @media screen and (max-width: 768px)
+            position: inherit !important
+            display: none !important
+
+            a
+                color: #fff !important
+
+    .navbar-nav > li.open > .dropdown-menu, .open .dropdown-menu
+        +transform(scale(1))
+        +filter(none)
+        opacity: 1
+        display: block !important
+
+    %triangle
+        border-left: 11px solid rgba(0, 0, 0, 0)
+        border-right: 11px solid rgba(0, 0, 0, 0)
+        content: ""
+        display: inline-block
+        position: absolute
+        left: 100%
+        margin-left: -90%
+
+        @media screen and (max-width: 768px)
+            display: none !important
+
+    .navbar-right %triangle
+        margin-left: -30%
+
+    .dropdown-menu:before
+        @extend %triangle
+        border-bottom: 11px solid rgba(0, 0, 0, 0.2)
+        top: -11px
+
+    .dropdown-menu:after
+        @extend %triangle
+        border-bottom: 11px solid #FFFFFF
+        top: -10px
+
+    .dropdown-menu > li > a
+        padding: 8px 20px
+        color: #333333
+
+    .dropdown-menu > li:first-child > a
+        border-radius: 10px 10px 0 0
+
+    .dropdown-menu > li:last-child > a
+        border-bottom: 0 none
+        border-radius: 0 0 10px 10px
+
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus
+        background-color: #F5F5F5
+        color: #333333
+        opacity: 1
+        text-decoration: none
+
+    .dropdown.open > a, .dropdown.open > a:hover, .dropdown.open > a:focus, .dropdown.open > a:active
+        color: $navbar-accent-color
+
+    .navbar-toggle
+        background-color: #333
+
+    
+
+    .highdensity-menu
+
+        @media screen and (max-width: 1170px)
+            max-width: 400px
+            padding-top: 2px
+
+            li
+                a
+                    padding: 2px 6px
+
+.navbar
+    +navbar()
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus
+    background-color: transparent
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover
+    background-color: #333
+
+.navbar.scrolled
+    +navbar(#fff, #6e6e6e, #6e6e6e, #010101, #6e6e6e, #010101, #010101)
+    opacity: 0.9
+    box-shadow: 0 0.05rem 1rem #333

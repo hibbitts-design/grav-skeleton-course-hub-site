@@ -1,0 +1,11 @@
+<div class="panel panel-{{ type|default('default') }}">
+  {% if heading_title is not null %}
+  <div class="panel-heading">{{ heading_title }}</div>
+  {% endif %}
+  <div class="panel-body">
+      {{ content }}
+  </div>
+  {% if footer_title is not null %}
+  <div class="panel-footer">{{ footer_title }}</div>
+  {% endif %}
+</div>

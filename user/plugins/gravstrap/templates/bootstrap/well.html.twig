@@ -1,0 +1,3 @@
+<div class="well{% if size is not null %} well-{{ size }}{% endif %} {{ attributes['class'] }}" {% include 'partials/_attributes.html.twig' with {'ignore': ['class']} %}>
+    {{ content }}
+</div>

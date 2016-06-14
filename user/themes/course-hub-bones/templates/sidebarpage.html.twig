@@ -1,0 +1,38 @@
+{# new twig template file based on existing item twig template file - hibbittsdesign.org #}
+{% embed 'partials/base.html.twig' %}
+
+  {% block content %}
+    {% if config.plugins.breadcrumbs.enabled %}
+      <div class="sg-breadcrumb">
+        <div class="row">
+          {% include 'partials/breadcrumbs.html.twig' %}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="blog-content-item row">
+      {# check content display flag - hibbittsdesign.org #}
+      {% if not grav.uri.param('onlydisplaypagecontent') %}
+        <div id="item" class="medium-8 columns medium-nopaddingleft">
+        {% else %}
+          <div id="item" class="medium-12 columns medium-nopaddingleft">
+          {% endif %}
+          {# remove rendering by external twig template - hibbittsdesign.org #}
+          <h3>{{page.title}}</h3>
+          {{ page.content }}
+          <br>
+          {# GitHub link - hibbittsdesign.org #}
+          {% if config.site.github.location == 'page' %}
+            {% include 'partials/github_page_link.html.twig' %}
+          {% endif %}
+        </div>
+        {# check content display flag - hibbittsdesign.org #}
+        {% if not grav.uri.param('onlydisplaypagecontent') %}
+          <div id="sidebar" class="medium-4 columns medium-nopaddingright">
+            {% include 'partials/sidebar.html.twig' with {'blog':page} %}
+          </div>
+        {% endif %}
+      </div>
+    {% endblock %}
+
+  {% endembed %}

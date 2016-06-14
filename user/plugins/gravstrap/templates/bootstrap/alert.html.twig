@@ -1,0 +1,4 @@
+{% set attributes = parse_attributes(attributes) %}
+<div class="alert alert-{{ type|default('danger') }} {{ attributes['class'] }}" role="alert" {% include 'partials/_attributes.html.twig' with {'ignore': ['class']} %}>
+    {{ content }}
+</div>

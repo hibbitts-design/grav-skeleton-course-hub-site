@@ -1,0 +1,50 @@
+title: Columns
+@extends: default
+
+form:
+  fields:
+    tabs:
+      fields:
+        advanced:
+          fields:
+            columns:
+              fields:
+                column1:
+                  fields:
+                    name:
+                      default: modular/columns
+                      @data-options: '\Grav\Common\Page\Pages::modularTypes'
+            overrides:
+              fields:
+                header.template:
+                  default: modular/columns
+                  @data-options: '\Grav\Common\Page\Pages::modularTypes'
+        styles:
+          type: tab
+          title: Row Style
+          fields:
+            header.styles:
+              type: textarea
+              label: Row Styles
+              size: medium
+            header.column_styles:
+              type: textarea
+              label: Column Block Styles
+              size: medium
+            header.column_number:
+              type: select
+              label: Max number of columns
+              size: x-small
+              classes: fancy
+              default: 3
+              options:
+                '2': '2'
+                '3': '3'
+                '4': '4'
+                '5': '5'
+                '6': '6'
+                '7': '7'
+                '8': '8'
+
+        assets:
+          type: ignore

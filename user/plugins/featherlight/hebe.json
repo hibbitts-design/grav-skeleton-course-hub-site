@@ -1,0 +1,15 @@
+{
+   "project":"grav-plugin-featherlight",
+   "platforms":{
+      "grav":{
+         "nodes":{
+            "plugin":[
+               {
+                  "source":"/",
+                  "destination":"/user/plugins/featherlight"
+               }
+            ]
+         }
+      }
+   }
+}

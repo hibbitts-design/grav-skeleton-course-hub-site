@@ -1,0 +1,142 @@
+<div class="list-item">
+
+  {% set header_image = page.header.header_image|defined(true) %}
+  {% set header_image_width  = page.header.header_image_width|defined(960) %}
+  {% set header_image_height = page.header.header_image_height|defined(400) %}
+  {% set header_image_file = page.header.header_image_file %}
+
+  <div class="list-blog-header">
+    {% if page.header.link %}
+      {# changed h4 to h3 - hibbittsdesign.org #}
+      <h3>
+        {% if page.header.continue_link is not sameas(false) %}
+          <a href="{{ page.url }}">
+            <i class="fa fa-angle-double-right"></i>
+          </a>
+        {% endif %}
+        <a href="{{ page.header.link }}">{{ page.title }}</a>
+      </h3>
+    {% else %}
+      {# changed h4 to h3 and added title icon - hibbittsdesign.org #}
+      {% if page.header.icon %}
+        {% set titleicon = page.header.icon %}
+      {% else %}
+        {% set titleicon = config.site.icon.post %}
+      {% endif %}
+      {# added support for content only display - hibbittsdesign.org #}
+      {% if not grav.uri.param('onlydisplaypagecontent')%}
+        <h3>
+          <a href="{{ page.url }}">
+            <i class="fa fa-{{ titleicon }}"></i>
+            {{ page.title }}</a>
+        </h3>
+      {% else %}
+        <h3>
+          <a href="{{ page.url }}/onlydisplaypagecontent:true">
+            <i class="fa fa-{{ titleicon }}"></i>
+            {{ page.title }}</a>
+        </h3>
+      {% endif %}
+    {% endif %}
+
+    {# remove date display - hibbittsdesign.org #}
+    {#
+    <span class="list-blog-date">
+      <span>{{ page.date|date("d") }}</span>
+      <em>{{ page.date|date("M") }}</em>
+    </span>
+    #}
+    {# remove tags display - hibbittsdesign.org #}
+    {#
+    {% if page.taxonomy.tag %}
+      <span class="tags">
+        {% for tag in page.taxonomy.tag %}
+          <a href="{{ blog.url }}/tag{{ config.system.param_sep }}{{ tag }}">{{ tag }}</a>
+        {% endfor %}
+      </span>
+    {% endif %}
+    #}
+    {% if header_image %}
+      {% if header_image_file %}
+        {% set header_image_media = page.media.images[header_image_file] %}
+      {% else %}
+        {% set header_image_media = page.media.images|first %}
+      {% endif %}
+      {{ header_image_media.cropZoom(header_image_width, header_image_height).html }}
+    {% endif %}
+
+  </div>
+
+  <div class="list-blog-padding">
+
+    {% if page.header.continue_link is sameas(false) %}
+      {{ page.content }}
+      {% if not truncate %}
+        <hr>
+        {# added github link - hibbittsdesign.org #}
+        {% if config.site.github.location == 'page' %}
+          {% include 'partials/github_page_link.html.twig' %}
+          <br>
+        {% endif %}
+        {% set show_prev_next = true %}
+      {% endif %}
+    {% elseif truncate and page.summary != page.content %}
+      {# added summary flag and title icon - hibbittsdesign.org #}
+      <p>{{ page.summary }}</p>
+      <p>
+        <a href="{{ page.url }}">View all of
+          {{ page.title }}
+          <i class="fa fa-chevron-right"></i>
+        </a>
+      </p>
+      <hr>
+    {% elseif truncate %}
+      {% if page.summary != page.content %}
+        {{ page.content|truncate(550) }}
+      {% else %}
+        {{ page.content }}
+      {% endif %}
+      <p>
+        <a href="{{ page.url }}">View all of
+          {{ page.title }}
+          <i class="fa fa-chevron-right"></i>
+        </a>
+      </p>
+    {% else %}
+      {# added summary flag and github link - hibbittsdesign.org #}
+      {% set content = page.content|slice(page.summary|length) %}
+      {# do not display summary on actual page - hibbittsdesign.org #}
+      {{ content }}
+      <hr>
+      {% if config.site.github.location == 'page' %}
+        {% include 'partials/github_page_link.html.twig' %}
+        <br>
+      {% endif %}
+      {% set show_prev_next = true %}
+    {% endif %}
+
+    {# check content display flag - hibbittsdesign.org #}
+    {% if not grav.uri.param('onlydisplaypagecontent') %}
+      {% if show_prev_next %}
+        <p class="prev-next sg-center">
+          {# swapped button order  - hibbittsdesign.org #}
+          {% if not page.isLast %}
+            <a class="button" href="{{ page.prevSibling.url }}">
+              <i class="fa fa-chevron-left"></i>
+              Previous
+            </a>
+          {% endif %}
+
+          {% if not page.isFirst %}
+            <a class="button" href="{{ page.nextSibling.url }}">
+              Next
+              <i class="fa fa-chevron-right"></i>
+            </a>
+          {% endif %}
+
+        </p>
+      {% endif %}
+    {% endif %}
+
+  </div>
+</div>

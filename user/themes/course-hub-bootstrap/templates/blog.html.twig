@@ -1,0 +1,81 @@
+{% embed 'partials/base.html.twig' %}
+
+  {% set collection = page.collection() %}
+  {% set base_url = page.url %}
+  {% set feed_url = base_url %}
+
+  {% if base_url == '/' %}
+    {% set base_url = '' %}
+  {% endif %}
+
+  {% if base_url == base_url_relative %}
+    {% set feed_url = base_url~'/'~page.slug %}
+  {% endif  %}
+
+  {% block content %}
+    {# removed blog title area - hibbittsdesign.org #}
+    {#
+				<div class="header">
+            <div class="container">
+                {{ page.content }}
+            </div>
+        </div>
+				#}
+    <div class="container">
+      <div class="row">
+        {# check content display flag - hibbittsdesign.org #}
+        {% if not grav.uri.param('onlydisplaypagecontent') %}
+          <div class="col-sm-8 blog-main">
+          {% else %}
+            <div class="col-sm-12 blog-main">
+            {% endif %}
+            {# Added reminders and preparations blocks and content check - hibbittsdesign.org #}
+            {% for module in page.collection('modular_content') %}
+              {% if (module.content|striptags)|trim %}
+                <p>{{ module.content }}</p>
+              {% endif %}
+            {% endfor %}
+
+            {% if config.plugins.breadcrumbs.enabled %}
+              {% include 'partials/breadcrumbs.html.twig' %}
+            {% endif %}
+
+            {# Added featured post ability - hibbittsdesign.org #}
+            {% for post in taxonomy.findTaxonomy({'tag':"Featured"}) %}
+              {% include 'partials/blog_item.html.twig' with {'page':post, 'truncate':true} %}
+            {% endfor %}
+
+            {% for child in collection %}
+              {% if "Featured" not in child.taxonomy['tag'] %}
+                {# multi-course hub compatibility - hibbittsdesign.org #}
+                {% if (not child.slug|contains('sidebar')) and (not child.slug|contains('headerimage')) %}
+                  {% include 'partials/blog_item.html.twig' with {'blog':page, 'page':child, 'truncate':true} %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+          </div>
+
+          {# check content display flag - hibbittsdesign.org #}
+          {% if not grav.uri.param('onlydisplaypagecontent') %}
+            <div class="col-sm-4 blog-sidebar">
+              {% include 'partials/sidebar.html.twig' with {'blog':page} %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endblock %}
+
+      {% block pagination %}
+        {% if config.plugins.pagination.enabled and collection.params.pagination %}
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 text-center">
+                {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endblock %}
+
+    {% endembed %}

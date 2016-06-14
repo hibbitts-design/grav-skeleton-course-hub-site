@@ -1,0 +1,71 @@
+title: Gallery
+@extends: default
+
+form:
+  fields:
+    tabs:
+      fields:
+        advanced:
+          fields:
+            columns:
+              fields:
+                column1:
+                  fields:
+                    name:
+                      default: modular/gallery
+                      @data-options: '\Grav\Common\Page\Pages::modularTypes'
+            overrides:
+              fields:
+                header.template:
+                  default: modular/gallery
+                  @data-options: '\Grav\Common\Page\Pages::modularTypes'
+        styles:
+          type: tab
+          title: Row Style
+          fields:
+            header.styles:
+              type: textarea
+              label: Row Styles
+              size: medium
+            header.image_styles:
+              type: textarea
+              label: Image Block Styles
+              size: medium
+            header.column_number:
+              type: select
+              label: Max number of columns
+              size: x-small
+              classes: fancy
+              default: 3
+              options:
+                '2': '2'
+                '3': '3'
+                '4': '4'
+                '5': '5'
+                '6': '6'
+                '7': '7'
+                '8': '8'
+
+        gallery:
+          type: tab
+          title: Images
+          fields:
+            header.gallery:
+              name: images
+              type: list
+              label: Images
+
+              fields:
+                .image:
+                  type: pagemediaselect
+                  label: Image
+                  help: Upload your images in the Content tab and hit save, then they will show up here.
+                .title:
+                  type: text
+                  label: Title
+                .description:
+                  type: text
+                  label: Description
+
+        assets:
+          type: ignore

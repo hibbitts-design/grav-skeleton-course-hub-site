@@ -1,0 +1,18 @@
+{% set attributes = parse_attributes(attributes) %}
+{% set column_attributes = parse_attributes(column_attributes) %}
+<section>
+    <div class="container {{ attributes['class'] }}" {% include 'partials/_attributes.html.twig' with {'ignore': ['class']} %}>
+        {% block module_page_content %}
+            {% if content != "" %}
+            <div class="row">
+                <div {% include 'partials/_attributes.html.twig' with { 'attributes': column_attributes } %}>
+                    {{ content }}
+                </div>
+            </div>
+            {% endif %}
+        {% endblock %}
+        
+        {% block module_content %}
+        {% endblock %}
+    </div>
+</section>
