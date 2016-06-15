@@ -2,7 +2,7 @@ title: CPT-363
 metadata:
     description: 'A short description of your course would go here'
 displaymenuentries:
-    enabled: true         # display of additional menu entries
+    enabled: false         # display of additional menu entries
 menu:                     # menu entry for adding external sites/tools
     - text: Grav
       icon: arrow-circle-right
@@ -10,7 +10,7 @@ menu:                     # menu entry for adding external sites/tools
 icon:                     # default font awesome icons for preparation and post entries
     post: calendar-o
 github:
-    location: none         # menu | page | none
+    location: menu         # menu | page | none
     icon: github
     tree: https://github.com/hibbitts-design/grav-skeleton-course-hub-site/edit/master/user/pages/
 twittertimeline:
