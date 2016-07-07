@@ -57,14 +57,16 @@
         <div class="container">
           {# added top of page navigation element - hibbittsdesign.org #}
           <div class="up-arrow">
-            <a href="#" id="top">
-              <i class="fa fa-angle-up"></i>
+            <a href="#" id="top" title="Top of Page">
+              <i class="fa fa-angle-up" aria-hidden="true"></i>
             </a>
           </div>
-          <p class="text-muted">Bootstrap Theme for
-            <a href="http://getgrav.org">Grav</a><br>Course companion template modifications by:<br>
-            <a href="http://hibbittsdesign.org">hibbittsdesign.org</a>
-          </p>
+          {% set content = pages.find('/footer').content %}
+          {% if content %}
+            <div class="text-muted">
+              {{ content }}
+            </div>
+          {% endif %}
         </div>
       </div>
     {% else %}

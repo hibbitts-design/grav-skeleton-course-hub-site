@@ -13,11 +13,13 @@
     <div class="blog-content-item row">
         <div id="item" class="medium-12 columns medium-nopaddingleft">
           {# remove rendering by external twig template - hibbittsdesign.org #}
+          {% if not page.header.hidepagetitle %}
           <h3>{{page.title}}</h3>
+          {% endif %}
           {{ page.content }}
           <br>
           {# GitHub link - hibbittsdesign.org #}
-          {% if config.site.github.location == 'page' %}
+          {% if config.site.github.location == 'page' and (not page.header.hidegithublink) %}
             {% include 'partials/github_page_link.html.twig' %}
           {% endif %}
         </div>

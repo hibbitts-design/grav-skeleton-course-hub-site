@@ -1,3 +1,56 @@
+# v1.3.8
+## 07/07/2016
+
+1. [](#improved)
+    * Improved accessibility of font awesome icons
+
+# v1.3.7
+## 06/26/2016
+
+1. [](#improved)
+    * Updated Twitter widget code
+
+# v1.3.6
+## 06/22/2016
+
+1. [](#new)
+    * Added setting to suppress the display of home menu link
+
+# v1.3.5
+## 06/22/2016
+
+1. [](#new)
+    * Added flag to hide page titles
+
+# v1.3.4
+## 06/21/2016
+
+1. [](#improved)
+    * Updated with latest version of Font Awesome
+
+# v1.3.3
+## 06/20/2016
+
+1. [](#improved)
+    * Added header options to hide and change default GitHub edit link
+    * Updated multi-course demo pages
+1. [](#bugfix)
+    * Foundation mobile menu fixes
+
+# v1.3.2
+## 06/16/2016
+
+1. [](#bugfix)
+    * Removed test blueprint fix for upcoming 1.1 release
+
+# v1.3.1
+## 06/16/2016
+
+1. [](#improved)
+    * Updated with the most recent versions of Foundation
+1. [](#bugfix)
+    * Twitter sidebar widget URL issue fixed
+
 # v1.3.0
 ## 06/14/2016
 

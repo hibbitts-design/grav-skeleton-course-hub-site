@@ -1,6 +1,9 @@
-{% macro loop(page) %}
+{% macro loop(page, config) %}
   {% for p in page.children.visible %}
-    {% set current_page = (p.active or p.activeChild) ? 'active' : '' %}
+  {% set current_page = (p.active or p.activeChild) ? 'active' : '' %}
+  {% if config.site.hidehomemenulink and p.slug == 'home' %}
+    {# Supress home menu link - hibbittsdesign.org #}
+  {% else %}
   <li class="{{ current_page }}">
     <a href="{{ p.url }}">
       {% if p.header.icon %}
@@ -10,17 +13,18 @@
     </a>
     {% if p.children.visible.count > 0 %}
       <ul class="vertical menu submenu">
-        {{ _self.loop(p) }}
+        {{ _self.loop(p, config) }}
       </ul>
     {% endif %}
   </li>
+  {% endif %}
 {% endfor %}
 {% endmacro %}
 
 <nav id="sg-mainmenu">
 <ul class="{% if theme_config.dropdown.enabled %}dropdown {% endif %}menu" {% if theme_config.dropdown.enabled %} data-dropdown-menu{% endif %}>
   {% if theme_config.dropdown.enabled %}
-    {{ _self.loop(pages) }}
+    {{ _self.loop(pages, config) }}
   {% else %}
     {% for page in pages.children.visible %}
       {% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
