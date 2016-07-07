@@ -1,3 +1,9 @@
+# v1.3.9
+## 07/07/2016
+
+1. [](#bugfix)
+    * Fixed incorrect rendering of menubar including GitHub menu item
+
 # v1.3.8
 ## 07/07/2016
 
