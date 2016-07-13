@@ -17,7 +17,7 @@ The **Course Hub** skeleton is intended to accompany a face-to-face, blended or 
 [Page Templates](#page-templates)  
 [Site Structure](#site-structure)  
 [Site Configuration](#site-configuration)  
-[Blog Item Page Options](blog-item-page-options)
+[Page Header Options](#page-header-options)
 
 ## Flipping your LMS with the Grav Course Hub
 
@@ -42,18 +42,20 @@ As an open source modern flat-file CMS, Grav offers a distinct set of advantages
 
 ### Course Hub Screenshot
 ![Course Hub Screenshot](/assets/screenshot.jpg)  
-_Figure 1. Example Grav Course Hub website, with GitHub collaborative page editing enabled.  Explore the demo online at [demo.hibbittsdesign.org/grav-course-hub/](http://demo.hibbittsdesign.org/grav-course-hub/)_
+_Figure 1. Example Grav Course Hub website, with GitHub collaborative page editing enabled.  Explore an example **single** course site at [demo.hibbittsdesign.org/grav-course-hub/](http://demo.hibbittsdesign.org/grav-course-hub/) and a **multiple** course site at [demo.hibbittsdesign.org/grav-multi-course-hub/](http://demo.hibbittsdesign.org/grav-multi-course-hub/)._
 
 ### Course Hub Highlights
 * A complete ready-to-run Grav package (open source)
 * Blog-format, with 'featured' (sticky) posts
-* Important reminders & class preparations areas
-* Site pages can be easily added/removed/changed
-* Image header area above site navbar
+* [Single course](http://hibbittsdesign.org/demo/grav-course-hub-bootstrap/) per Hub, [multiple courses](http://hibbittsdesign.org/demo/grav-multi-course-blog-hub/) per Hub or even [multiple course sub-sites](http://hibbittsdesign.org/demo/grav-multi-course-pages-hub/) (blog + multiple pages per course) per Hub
+* Optional important reminders & class preparations areas
+* Hub pages can be easily added/removed/changed
+* Uses [Markdown](https://daringfireball.net/projects/markdown/) for streamlined cross-platform content
+* Image header area above Hub navigation bar
 * Sidebar is a simple markdown file, which can also contain HTML
-* URL flag to only display page content (for display within LMS). For example, [http://demo.hibbittsdesign.org/grav-course-hub-bones/blog/week-03/onlydisplaypagecontent:true](http://demo.hibbittsdesign.org/grav-course-hub-bones/blog/week-03/onlydisplaypagecontent:true)
+* URL flag to only display page content (for display within LMS). For example, [http://demo.hibbittsdesign.org/grav-course-hub-bootstrap/home/week-03/onlydisplaypagecontent:true](http://demo.hibbittsdesign.org/grav-course-hub-bootstrap/home/week-03/onlydisplaypagecontent:true)
 * External links are automatically opened in a new Tab/Window
-* Built-in support for entire site to be collaboratively maintained on GitHub
+* Built-in support for entire Hub to be collaboratively maintained on GitHub or GitLab (for local hosting)
 * Since everything is built with Grav it can be _entirely_ customized
 
 To learn more about how to most effectively use the Grav Course Hub, visit [hibbittdesign.org](http://hibbittsdesign.org/blog/)
@@ -161,40 +163,55 @@ menu:                     # menu entry for adding external sites/tools
     - text: Grav
       icon: arrow-circle-right
       url: http://getgrav.org/
-icon:                     # default font awesome icons for preparation and post entries
+icon:                     # default Font Awesome icons for preparation and post entries
     post: calendar-o
 github:
-    location: none         # menu | page | none
+    location: none        # menu | page | none
     icon: github
-    tree: https://github.com/hibbitts-design/grav-skeleton-course-hub/edit/master/user/pages
+    tree: https://github.com/hibbitts-design/grav-skeleton-course-hub-site/edit/master/user/pages/
 twittertimeline:
-    enabled: false         # display of Twitter timeline on sidebar
-    widgetid: '590941541406941184'
+    enabled: false        # display of Twitter timeline on sidebar
+    url: https://twitter.com/hibbittsdesign/lists/cpt-363
+    text: A Twitter List by hibbittsdesign
+    height: 700
+hidehomemenulink: false   # suppress Home menu link
 ```
 
 | Setting | Child Setting | Description                                                                                                            |
 |---------|---------------|------------------------------------------------------------------------------------------------------------------------|
 | title   |               | The course number/id, to be displayed at the top of every page.                                                      |
-| metadata  |  description | The short description of the course hub site                                       |
+| metadata  |  description | The short description of the course hub site.                                       |
 | displaymenuentries  |  enabled | Can be set to `true` or `false`. When set to `true`, all defined menu items are added to the navbar.                                       |
-| menu  |  text | Text label for external links to be included on navbar                                       |
-| menu  |  icon | Font awesome icon code for external link (optional)                                        |
-| menu  |  url | URL for external link|                                    
-| icon  | post          | Change the default font awesome icon for the weekly blog posts (i.e. weekly summaries).           |
+| menu  |  text | Text label for an external link to be included on navbar.                                       |
+| menu  |  icon | Font Awesome icon code for an external link (optional).                                        |
+| menu  |  url | URL for an external link. |                                    
+| icon  | post          | Change the default Font Awesome icon for the weekly blog posts (i.e. weekly summaries).           |
 | github  | location       | Can be set to `page`, `menu` or `none`. When set to `page` or `menu`, it will display the **Edit this page** link to your GitHub repo in the indicated location. |
+| github  | icon       | Set the Font Awesome icon for the **Edit this page** menu or page link. |
 | github  | tree          | Sets the tree by which your site's content is based. Generally the repo your site's content is pulled from.            |
 | twittertimeline  | enabled       | Can be set to `true` or `false`. When set to `true`, it displays the Twitter timeline on your sidebar. |
-| twittertimeline  | widgetid       | The widget id of the Twiter timeline you want to embed on your sibebar |
+| twittertimeline  | URL       | The URL of the Twitter timeline you want to embed on your sidebar. |
+| twittertimeline  | text       | The text label of the Twitter timeline you want to embed on your sidebar. |
+| twittertimeline  | height       | The height of the Twitter timeline you want to embed on your sidebar. |
+| hidehomemenulink  |       | Can be set to `true` or `false`. When set to `true`, the Home menu link in the navbar is not displayed.|
 
-##Blog Item Page Options
+##Page Header Options
 
-In addition to standard page header options (i.e. 'Visible'), blog item pages support the following additional options:
+### Page Options for Blog Items
+Blog item pages support the following additional options:
 ```
-icon: users           # optional font awesome icon for page title
+icon: users           # optional Font Awesome icon for page title
 header_image: false   # display of header image located within page folder
 continue_link: false  # display entire post on blog listing page
 taxonomy:
   tag: Featured       # setting to make post 'sticky' (i.e. remain at top)
 ```
 
+### Page Options for All Pages
+All pages support the following additional options:
+```
+hidegithublink: true  # hide GitHub edit link for this page
+githublink: https://github.com/hibbitts-design/grav-skeleton-course-hub/tree/master/pages/01.home   # to override the automatically calculated GitHub URL
+hidepagetitle: true  # hide the display of the title of this page
+```
 ---

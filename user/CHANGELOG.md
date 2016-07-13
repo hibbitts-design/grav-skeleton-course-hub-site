@@ -1,3 +1,40 @@
+# v1.3.1
+## 07/12/2016
+
+1. [](#improved)
+    * Updated with newest Grav Course Hub theme releases
+    * Updated ReadMe file
+
+# v1.3.0
+## 06/27/2016
+
+1. [](#new)
+    * Added flag to hide page titles
+    * Added setting to suppress the display of home menu link
+1. [](#improved)
+    * Updated single and multi-course demo pages
+
+# v1.2.3
+## 06/21/2016
+
+1. [](#improved)
+    * Added header options to hide and change default GitHub edit link
+    * Updated multi-course demo pages
+
+# v1.2.2
+## 06/16/2016
+
+1. [](#improved)
+    * Updated example single site sidebar
+    * Changed default for dropdown menus to true
+    * Improved experimental multiple course (blog) support, including additional pages within each course
+
+# v1.2.1
+## 06/14/2016
+
+1. [](#bugfix)
+    * Skeleton screenshot image restored
+
 # v1.2.0
 ## 06/14/2016
 

@@ -1,3 +1,9 @@
+# v1.4.0
+## 07/12/2016
+
+1. [](#improved)
+    * Restored Blog header image display option within Vanilla Bones theme
+
 # v1.3.9
 ## 07/07/2016
 
