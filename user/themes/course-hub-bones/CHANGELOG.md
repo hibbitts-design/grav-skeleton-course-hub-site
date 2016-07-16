@@ -1,3 +1,16 @@
+# v1.4.2
+## 07/15/2016
+
+1. [](#bugfix)
+    * Fixed incorrect rendering of blog item which includes GitHub edit page link
+    * Adjusted vertical alignment of font awesome icons for menu items
+
+# v1.4.1
+## 07/15/2016
+
+1. [](#improved)
+    * Updated for Grav 1.1 + Admin Panel 1.1
+
 # v1.4.0
 ## 07/12/2016
 
