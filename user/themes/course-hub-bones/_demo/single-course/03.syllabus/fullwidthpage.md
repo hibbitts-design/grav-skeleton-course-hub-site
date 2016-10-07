@@ -1,5 +1,5 @@
 ---
-title: 'Syllabus'
+title: Syllabus
 published: true
 ---
 
