@@ -1,3 +1,105 @@
+# v1.2.4
+## 10/22/2016
+
+1. [](#bugfix)
+    * Fix for accented media files [#833](https://github.com/getgrav/grav-plugin-admin/issues/833)
+    * Fix for `CTRL + s` not saving in editor [#832](https://github.com/getgrav/grav-plugin-admin/pull/832)
+    * Fix for missing REDIS translations in admin [#1123](https://github.com/getgrav/grav/issues/1123)
+
+# v1.2.3
+## 10/19/2016
+
+1. [](#new)
+    * Added new `onAdminCreatePageFrontmatter()` event to support plugins such as `auto-date` by allowing frontmatter to be modified by plugins.
+    * Added a new independent `cache_enabled` option for admin plugin (default is `false`). Should fix various sync issues.
+    * Add an `onAdminData` event to allow plugins to add additional blueprints data
+1. [](#improved)
+    * Handle errors when a resource fails to install
+    * Page media and File field images thumbnail are now properly proportionate and 150x100
+    * Added the Codeception testing suite with an initial test
+1. [](#bugfix)
+    * Fix [#1034](https://github.com/getgrav/grav/issues/1034) redirect of page creation procedure when system.home.hide_in_urls is enabled
+    * Media (Page): Do not extend parent metehod for sending files since Safari and IE API for FormData don’t implement `delete` ([#772](https://github.com/getgrav/grav-plugin-admin/issues/772))
+    * Clean up POST keys containing square brackets, allows for regex ranges in routes ([#776](https://github.com/getgrav/grav-plugin-admin/issues/776))
+    * Fix [#773](https://github.com/getgrav/grav-plugin-admin/issues/773) allow filepicker work inside lists, respond to mutation event
+    * Better error handling for Feed when unable to connect
+    * Fixed UI for Pagemedia note when files cannot yet be uploaded ([#798](https://github.com/getgrav/grav-plugin-admin/issues/798))
+    * Fixed Submit buttons getting disabled in case of form invalidity disallowing to submit again ([#802](https://github.com/getgrav/grav-plugin-admin/issues/802))
+    * Fixed issue when reading the file size setting if set to `0` (in Pagemedia and File fields)
+    * Fixed issue with `file` field in collections that caused unexpected duplication of items ([#775](https://github.com/getgrav/grav-plugin-admin/issues/775))
+    * Dramatically improved `filepicker` performance. Data is only ever loaded when the drop-down is on focus, as it was supposed to be. Image preview of a selected item won't be rendered unless the field gains focus to avoid wasting resources. ([#788](https://github.com/getgrav/grav-plugin-admin/issues/788))
+    * Allow `filepicker` field to peak at the pending uploaded files and optimistically select them ([#792](https://github.com/getgrav/grav-plugin-admin/issues/792))
+    * Fix [#821](https://github.com/getgrav/grav-plugin-admin/issues/821) issue in saving a page to a new language when the filename does not contain the filename yet.
+
+# v1.2.2
+## 09/08/2016
+
+1. [](#bugfix)
+    * Fix [#767](https://github.com/getgrav/grav-plugin-admin/issues/767) Add styling for new HTML5 input field types
+    * Fix issue with checking the package dependencies when more than one package is being inspected
+
+# v1.2.1
+## 09/07/2016
+
+1. [](#bugfix)
+    * Fixed `tmp://` stream issue with Admin updated to 1.2 before Grav updated 1.1.4
+
+# v1.2.0
+## 09/07/2016
+
+1. [](#new)
+    * All new `file` field. All files get uploaded via Ajax and are stored upon Save. This improves the Save task tremendously as now there is no longer the need of waiting for the files to finish uploading. Fully backward compatible, `file` field now includes also a `limit` and `filesize` option in the blueprints. The former determines how many files are allowed to be uploaded when in combination with `multiple: true` (default: 10), the latter determines the file size limit (in MB) allowed for each file (default: 5MB)
+    * Added a new `filepicker` field, which allows to pick any file from an ajax-powered select box. The `pagemediaselect` field now internally uses the `filepicker` field to live-reload the available files, and to show image previews.
+1. [](#improved)
+    * Better error handling for 500 Internal Server Errors, when Fetch fails
+    * Various notifications style and other CSS fixes
+    * More language strings added
+    * Added `clear-tmp` to cache clear drop-down
+    * Unified JSON twig templates
+    * Better error handling for 500 Internal Server Errors, when Fetch fails.
+    * Updated vendor Libraries
+1. [](#bugfix)
+    * Curl fix for invalid cert errors with News Feed
+    * Avoid requiring `admin.super` for ajax calls [#739](https://github.com/getgrav/grav-plugin-admin/issues/739)
+    * Fix showing HTML in notifications, in the feed
+    * Fixed broken page type filtering
+    * Fixed `beforeunload` event not prompting to offer the choice to stay on the page in case of unsaved changes
+    * Fixed click-away detection for preventing loss of changes, that would get ignored in some circumstances (ie, from modal confirmation)
+    * Fixed issue with `_json` elements where nested fields merging would get stored in an unexpected way
+    * Fixed composer dependencies missing error message
+
+# v1.1.4
+## 08/14/2016
+
+1. [](#bugfix)
+    * Fixed Firefox News Feed dashboard widget layout
+
+# v1.1.3
+## 08/10/2016
+
+1. [](#new)
+    * Admin notifications system.  Admin will pull and cache notifications.  This will be used to announce important updates, security vulnerabilities, and general interest news.
+    * Ability to disable widgets in the dashboard
+    * Added news feed widget to the dashboard
+1. [](#improved)
+    * Updated FontAwesome to v4.6.3
+    * Use new List functionality for Media Configuration
+    * Get fresh media list for `Controller::getListMedia()` rather that cache so always latest.
+    * Add translation strings for the new system.force_ssl option
+    * Reworked List UI to better handle drag & drop sort. To sort it is now required to use the left drag handle [#724](https://github.com/getgrav/grav-plugin-admin/issues/724)
+    * Lists now features a new YAML option `controls: [top|bottom|both]` (default: bottom) which will display the "Add Item" button at the Top and/or Bottom position relative to the list. When the Top button is pressed, a new item will be added at the beginning of the list, when the Bottom button is pressed, a new item will be appended to the list.
+    * Lists now features two new YAML options `sortby: [field]` (default: disabled) and `sortby_dir: [asc|desc]` (default: asc) which will display a new Sorting button in the list allowing to automatically reindex the collection based on the given sort field set.
+    * Lists now features a new YAML option `collapsed: [true|false]` (default: false) and a new UI/UX that allows for collapsing / expanding collection items, allowing to better managing long lists of items. It is advised to always put as first field the most significant one, so that when a list is collapsed it can be still easily browsed.
+    * It is now possible to sort Array fields via drag & drop [#950](https://github.com/getgrav/grav/issues/950)
+1. [](#bugfix)
+    * Fixed issue in Admin favicon URL [#704](https://github.com/getgrav/grav-plugin-admin/issues/704)
+    * Fixed issue in `selfupgrade` where the package would get downloaded in the wrong destination
+    * Hide tab when user is not authorized to access it [#712](https://github.com/getgrav/grav-plugin-admin/issues/712)
+    * Fixed Lists issue when reindexing, causing Radio fields to potentially lose their `checked` status
+    * Avoid overwriting a file when uploaded with the same filename through the Admin blueprint `file` field type if `avoid_overwriting` is enabled on the field
+    * Fixed issue with Array field in `value_only` mode, improperly displaying the key when no value was set
+    * Translate the description of a blueprint field [#729](https://github.com/getgrav/grav-plugin-admin/issues/729)
+
 # v1.1.2
 ## 07/16/2016
 
@@ -9,13 +111,13 @@
     * Check for null payload before going on [#526](https://github.com/getgrav/grav-plugin-admin/issues/526)
     * Redraw Dashboard Charts when collapsing/expanding the sidebar
     * Fix for `cache/compiled` errors resulting from page media uploads [getgrav/grav#938](https://github.com/getgrav/grav/issues/938)
-    
+
 # v1.1.1
 ## 07/14/2016
 
 1. [](#bugfix)
     * Fixed issue with forms causing creation of new pages not to work [#698](https://github.com/getgrav/grav-plugin-admin/issues/698) and [getgrav/grav#934](https://github.com/getgrav/grav/issues/934)
-    
+
 # v1.1.0
 ## 07/14/2016
 

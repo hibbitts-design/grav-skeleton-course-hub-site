@@ -1,3 +1,83 @@
+# v2.0.7
+## 11/17/2016
+
+1. [](#improved)
+    * Added method to set all data in a form
+    * Added params to form action URL
+    * Added ability to add ids to buttons and to set them disabled 
+1. [](#bugfix)
+    * Moved Files Upload GC logic to function in front-end only
+
+# v2.0.6
+## 10/19/2016
+
+1. [](#bugfix)
+    * Fixed translations for `display` field
+    * Fixed [#95](https://github.com/getgrav/grav-plugin-form/issues/95) multilanguage forms submission
+    * Fixed duplicate textarea class tag [#98](https://github.com/getgrav/grav-plugin-form/issues/98)
+
+# v2.0.5
+## 09/15/2016
+
+1. [](#bugfix)
+    * Fix passing updating the header through event, no need for return value
+
+# v2.0.4
+## 09/15/2016
+
+1. [](#improved)
+    * Allow filling the page header form dynamically (e.g. use case: Comments plugin)
+
+# v2.0.3
+## 09/12/2016
+
+1. [](#improved)
+    * Use `Page::slug()` for form name if not set in the form itself (better backwards compatibility)
+
+# v2.0.2
+## 09/08/2016
+
+1. [](#improved)
+    * Added support for Grav's autoescape twig setting
+    * Allow to add additional markup fields in form and field twig overrides
+    * Updated the french language translation
+
+# v2.0.1
+## 09/07/2016
+
+1. [](#bugfix)
+    * Fixed a backwards compatibility issue with Admin forms
+
+# v2.0.0
+## 09/07/2016
+
+1. [](#new)
+    * Forms now supports multiple forms per page!
+    * Access forms from any other page within the current page
+    * Instantiate forms directly in page content with Twig processing enabled
+    * New Twig function to get forms data from any other page
+    * Ability to use Twig in saved filename
+    * Reworked the `file` field. All files get uploaded via Ajax and are stored upon Submit. Fully backward compatible, `file` field now includes also a `limit` and `filesize` option. The former determines how many files are allowed to be uploaded when in combination with `multiple: true` (default: 10), the latter determines the file size limit (in MB) allowed for each file (default: 5MB)
+1. [](#improved)
+    * Added several missing HTML5 form input field types [#87](https://github.com/getgrav/grav-plugin-form/issues/87)
+    * Added Support for CSS id in form definition
+
+# v1.3.2
+## 08/10/2016
+
+1. [](#improved)
+    * Added Romanian translation
+1. [](#bugfix)
+    * Fixed an issue with Recaptcha secret throwing errors [#84](https://github.com/getgrav/grav-plugin-form/pull/84)
+
+# v1.3.1
+## 07/27/2016
+
+1. [](#improved)
+    * Added support for multiple emails in `email` field (add `multiple: true` to enable)
+1. [](#bugfix)
+    * Fixed backward incompatibility with forms submission and data retrieval [getgrav/grav#933](https://github.com/getgrav/grav/issues/933)
+
 # v1.3.0
 ## 07/14/2016
 

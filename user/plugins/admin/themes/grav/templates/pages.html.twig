@@ -167,7 +167,7 @@
             {% endif %}
 
             <div class="button-group">
-                <button class="button disable-after-click" name="task" value="save" form="blueprints" type="submit"><i class="fa fa-check"></i> {{ "PLUGIN_ADMIN.SAVE"|tu }}</button>
+                <button class="button" name="task" value="save" form="blueprints" type="submit"><i class="fa fa-check"></i> {{ "PLUGIN_ADMIN.SAVE"|tu }}</button>
                 {% if exists and admin.multilang %}
                     {% if context.untranslatedLanguages %}
                         <button type="button" class="button dropdown-toggle" data-toggle="dropdown">
@@ -177,7 +177,7 @@
                             {% for langCode in context.untranslatedLanguages %}
                                 {% set langName = admin.siteLanguages[langCode] %}
                                 {% if langCode != page_lang %}
-                                    <li><button class="button disable-after-click task" name="task" value="saveas" lang="{{langCode}}" form="blueprints" type="submit">{{ "PLUGIN_ADMIN.SAVE_AS"|tu }} {{ langName[:1]|upper ~ langName[1:] }}</button>
+                                    <li><button class="button task" name="task" value="saveas" lang="{{langCode}}" form="blueprints" type="submit">{{ "PLUGIN_ADMIN.SAVE_AS"|tu }} {{ langName[:1]|upper ~ langName[1:] }}</button>
                                 {% endif %}
                             {% endfor %}
                         </ul>
@@ -201,14 +201,10 @@
 
 {% block content %}
     <div class="clear">
-    {% include 'partials/messages.html.twig' %}
     {% if mode == 'new' %}
         {% include 'partials/blueprints-new.html.twig' with { blueprints: admin.blueprints('pages/page'), data: context } %}
     {% elseif mode == 'edit' %}
-        {% set uploadLimit = grav.config.system.media.upload_limit / 1024 / 1024 %}
-        {% set dropzoneSettings = { maxFileSize: uploadLimit } %}
-
-        <div class="admin-form-wrapper" data-media-url="{{ base_url }}/media/{{ admin.route|trim('/') }}.json" data-media-local="{{ base_url_relative_frontend|rtrim('/') }}/{{ admin.route|trim('/') }}" data-dropzone-options="{{ dropzoneSettings|json_encode|e('html_attr') }}">
+        <div class="admin-form-wrapper">
             <div id="admin-topbar">
 
                 {% if admin.multilang and page_lang %}
@@ -282,16 +278,6 @@
     {% endif %}
     </div>
 
-    <div class="remodal" data-remodal-id="generic" data-remodal-options="hashTracking: false">
-        <form>
-            <h1>{{ "PLUGIN_ADMIN.ERROR"|tu }}</h1>
-            <div class="error-content"></div>
-            <div class="button-bar">
-                <a class="button remodal-cancel" data-remodal-action="cancel" href="#">{{ "PLUGIN_ADMIN.CLOSE"|tu }}</a>
-            </div>
-        </form>
-    </div>
-
     {% if mode == 'list' %}
 
         <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
@@ -335,20 +321,6 @@
             <div class="button-bar">
             <button data-remodal-action="cancel" class="button secondary remodal-cancel"><i class="fa fa-fw fa-close"></i> {{ "PLUGIN_ADMIN.CANCEL"|tu }}</button>
             <a class="button disable-after-click" data-delete-action href="#"><i class="fa fa-fw fa-check"></i> {{ "PLUGIN_ADMIN.CONTINUE"|tu }}</a>
-            </div>
-        </form>
-    </div>
-
-    <div class="remodal" data-remodal-id="delete-media" data-remodal-options="hashTracking: false">
-        <form>
-            <h1>{{ "PLUGIN_ADMIN.MODAL_DELETE_FILE_CONFIRMATION_REQUIRED_TITLE"|tu }}</h1>
-            <p class="bigger">
-                {{ "PLUGIN_ADMIN.MODAL_DELETE_FILE_CONFIRMATION_REQUIRED_DESC"|tu }}
-            </p>
-            <br>
-            <div class="button-bar">
-            <button data-remodal-action="cancel" class="button secondary remodal-cancel"><i class="fa fa-fw fa-close"></i> {{ "PLUGIN_ADMIN.CANCEL"|tu }}</button>
-            <button data-remodal-action="confirm" class="button remodal-confirm disable-after-click"><i class="fa fa-fw fa-check"></i> {{ "PLUGIN_ADMIN.CONTINUE"|tu }}</button>
             </div>
         </form>
     </div>

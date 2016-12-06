@@ -2,6 +2,7 @@
 <script type="text/javascript">
     window.GravAdmin = window.GravAdmin || {};
     window.GravAdmin.config = {
+        current_url: '{{ uri.route(true) }}',
         base_url_relative: '{{ base_url_relative }}',
         route: '{{ admin.route|trim('/') }}',
         param_sep: '{{ config.system.param_sep }}',
@@ -12,6 +13,7 @@
         admin_nonce: '{{ admin.getNonce }}',
         language: '{{ grav.user.language|default('en') }}',
         pro_enabled: '{{ config.plugins["admin-pro"].enabled }}',
+        local_notifications: '{{ config.system.local_notifications|default(false) }}',
         site: {
             delimiter: '{{ config.site.summary.delimiter|default('===') }}'
         }

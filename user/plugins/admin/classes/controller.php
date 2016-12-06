@@ -8,6 +8,7 @@ use Grav\Common\Filesystem\Folder;
 use Grav\Common\GPM\Installer;
 use Grav\Common\Grav;
 use Grav\Common\Data;
+use Grav\Common\Page\Media;
 use Grav\Common\Page\Page;
 use Grav\Common\Page\Pages;
 use Grav\Common\Page\Collection;
@@ -91,7 +92,7 @@ class AdminController
      * @param string $route
      * @param array  $post
      */
-    public function __construct(Grav $grav, $view, $task, $route, $post)
+    public function __construct(Grav $grav = null, $view = null, $task = null, $route = null, $post = null)
     {
         $this->grav = $grav;
         $this->view = $view;
@@ -106,6 +107,9 @@ class AdminController
         $this->post = $this->getPost($post);
         $this->route = $route;
         $this->admin = $this->grav['admin'];
+        if ($this->grav['uri']) {
+            $this->uri = $this->grav['uri']->url();
+        }
     }
 
     /**
@@ -186,15 +190,17 @@ class AdminController
                 $success = true;
                 $this->admin->setMessage($e->getMessage(), 'error');
             }
+        } else {
+            $success = $this->grav->fireEvent('onAdminTaskExecute', new Event(['controller' => $this, 'method' => $method]));
+        }
 
-            // Grab redirect parameter.
-            $redirect = isset($this->post['_redirect']) ? $this->post['_redirect'] : null;
-            unset($this->post['_redirect']);
+        // Grab redirect parameter.
+        $redirect = isset($this->post['_redirect']) ? $this->post['_redirect'] : null;
+        unset($this->post['_redirect']);
 
-            // Redirect if requested.
-            if ($redirect) {
-                $this->setRedirect($redirect);
-            }
+        // Redirect if requested.
+        if ($redirect) {
+            $this->setRedirect($redirect);
         }
 
         return $success;
@@ -338,6 +344,196 @@ class AdminController
     }
 
     /**
+     * Used by the filepicker field to get a list of files in a folder.
+     */
+    protected function taskGetFilesInFolder()
+    {
+        if (!$this->authorizeTask('save', $this->dataPermissions())) {
+             return false;
+        }
+
+        $data = $this->view == 'pages' ? $this->admin->page(true) : $this->prepareData([]);
+        $settings = $data->blueprints()->schema()->getProperty($this->post['name']);
+
+        if (isset($settings['folder'])) {
+            $folder = $settings['folder'];
+        } else {
+            $folder = '@self';
+        }
+
+        // Do not use self@ outside of pages
+        if ($this->view != 'pages' && in_array($folder, ['@self', 'self@'])) {
+            $this->admin->json_response = [
+                'status' => 'error',
+                'message' => sprintf($this->admin->translate('PLUGIN_ADMIN.FILEUPLOAD_PREVENT_SELF', null, true), $folder)
+            ];
+            return false;
+        }
+
+        // Set destination
+        $folder = Folder::getRelativePath(rtrim($folder, '/'));
+        $folder = $this->admin->getPagePathFromToken($folder);
+
+        $available_files = Folder::all($folder, ['recursive' => false]);
+
+        // Peak in the flashObject for optimistic filepicker updates
+        $pending_files = [];
+        $sessionField = base64_encode($this->uri);
+        $flash = $this->admin->session()->getFlashObject('files-upload');
+
+        if ($flash && isset($flash[$sessionField])) {
+            foreach ($flash[$sessionField] as $field => $data) {
+                foreach ($data as $file) {
+                    if (dirname($file['path']) === $folder) {
+                        $pending_files[] = $file['name'];
+                    }
+                }
+            }
+        }
+
+        $this->admin->session()->setFlashObject('files-upload', $flash);
+
+        // Handle Accepted file types
+        // Accept can only be file extensions (.pdf|.jpg)
+        if (isset($settings['accept'])) {
+            $available_files = array_filter($available_files, function($file) use ($settings) {
+                return $this->filterAcceptedFiles($file, $settings);
+            });
+
+            $pending_files = array_filter($pending_files, function($file) use ($settings) {
+                return $this->filterAcceptedFiles($file, $settings);
+            });
+        }
+
+        $this->admin->json_response = [
+            'status' => 'success',
+            'files' => $available_files,
+            'pending' => $pending_files,
+            'folder' => $folder
+        ];
+
+        return true;
+    }
+
+    protected function filterAcceptedFiles($file, $settings)
+    {
+        $valid = false;
+
+        foreach ((array) $settings['accept'] as $type) {
+            $find = str_replace('*', '.*', $type);
+            $valid |= preg_match('#' . $find . '$#', $file);
+        }
+
+        return $valid;
+    }
+
+    protected function taskGetNewsFeed()
+    {
+        $cache = $this->grav['cache'];
+
+        if ($this->post['refresh'] == 'true') {
+            $cache->delete('news-feed');
+        }
+
+        $feed_data = $cache->fetch('news-feed');
+
+        if (!$feed_data) {
+            try {
+                $feed = $this->admin->getFeed();
+                if (is_object($feed)) {
+
+                    require_once(__DIR__ . '/../twig/AdminTwigExtension.php');
+                    $adminTwigExtension = new AdminTwigExtension();
+
+                    $feed_items = $feed->getItems();
+
+                    // Feed should only every contain 10, but just in case!
+                    if (count($feed_items > 10)) {
+                        $feed_items = array_slice($feed_items, 0, 10);
+                    }
+
+                    foreach($feed_items as $item) {
+                        $datetime =  $adminTwigExtension->adminNicetimeFilter($item->getDate()->getTimestamp());
+                        $feed_data[] = '<li><span class="date">'.$datetime.'</span> <a href="'.$item->getUrl().'" target="_blank" title="'.str_replace('"', '″', $item->getTitle()).'">'.$item->getTitle().'</a></li>';
+                    }
+                }
+
+                // cache for 1 hour
+                $cache->save('news-feed', $feed_data, 60*60);
+
+            } catch (\Exception $e) {
+                $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+                return;
+            }
+        }
+
+        $this->admin->json_response = ['status' => 'success', 'feed_data' => $feed_data];
+    }
+
+    /**
+     * Get Notifications from cache.
+     *
+     */
+    protected function taskGetNotifications()
+    {
+        $cache = $this->grav['cache'];
+        if (!(bool)$this->grav['config']->get('system.cache.enabled') || !$notifications = $cache->fetch('notifications')) {
+            //No notifications cache (first time)
+            $this->admin->json_response = ['status' => 'success', 'notifications' => [], 'need_update' => true];
+            return;
+        }
+
+        $need_update = false;
+        if (!$last_checked = $cache->fetch('notifications_last_checked')) {
+            $need_update = true;
+        } else {
+            if (time() - $last_checked > 86400) {
+                $need_update = true;
+            }
+        }
+
+        try {
+            $notifications = $this->admin->processNotifications($notifications);
+        } catch (\Exception $e) {
+            $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            return;
+        }
+
+        $this->admin->json_response = ['status' => 'success', 'notifications' => $notifications, 'need_update' => $need_update];
+    }
+
+    /**
+     * Process Notifications. Store the notifications object locally.
+     *
+     * @return bool
+     */
+    protected function taskProcessNotifications()
+    {
+        $cache = $this->grav['cache'];
+
+        $data = $this->post;
+        $notifications = json_decode($data['notifications']);
+
+        try {
+            $notifications = $this->admin->processNotifications($notifications);
+        } catch (\Exception $e) {
+            $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            return;
+        }
+
+        $show_immediately = false;
+        if (!$cache->fetch('notifications_last_checked')) {
+            $show_immediately = true;
+        }
+
+        $cache->save('notifications', $notifications);
+        $cache->save('notifications_last_checked', time());
+
+        $this->admin->json_response = ['status' => 'success', 'notifications' => $notifications, 'show_immediately' => $show_immediately];
+        return true;
+    }
+
+    /**
      * Handle getting a new package dependencies needed to be installed
      *
      * @return bool
@@ -345,8 +541,9 @@ class AdminController
     protected function taskGetPackagesDependencies()
     {
         $data = $this->post;
-        $packages = isset($data['packages']) ? $data['packages'] : '';
+        $packages = isset($data['packages']) ? explode(',', $data['packages']) : '';
         $packages = (array)$packages;
+
         try {
             $this->admin->checkPackagesCanBeInstalled($packages);
             $dependencies = $this->admin->getDependenciesNeededToInstall($packages);
@@ -364,7 +561,7 @@ class AdminController
     protected function taskInstallDependenciesOfPackages()
     {
         $data = $this->post;
-        $packages = isset($data['packages']) ? $data['packages'] : '';
+        $packages = isset($data['packages']) ? explode(',', $data['packages']) : '';
         $packages = (array)$packages;
 
         $type = isset($data['type']) ? $data['type'] : '';
@@ -419,14 +616,12 @@ class AdminController
 
         require_once __DIR__ . '/gpm.php';
 
-        $result = false;
-
         try {
             $result = \Grav\Plugin\Admin\Gpm::install($package, ['theme' => ($type == 'theme')]);
         } catch (\Exception $e) {
             $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
 
-            return;
+            return false;
         }
 
         if ($result) {
@@ -480,10 +675,8 @@ class AdminController
 
             $this->admin->json_response = ['status' => 'error', 'message' => $message];
 
-            return;
+            return false;
         }
-
-        $result = false;
 
         try {
             $dependencies = $this->admin->dependenciesThatCanBeRemovedWhenRemoving($package);
@@ -491,7 +684,7 @@ class AdminController
         } catch (\Exception $e) {
             $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
 
-            return;
+            return false;
         }
 
         if ($result) {
@@ -703,6 +896,39 @@ class AdminController
     }
 
     /**
+     * Clear the cache.
+     *
+     * @return bool True if the action was performed.
+     */
+    protected function taskHideNotification()
+    {
+        if (!$this->authorizeTask('hide notification', ['admin.login'])) {
+            return false;
+        }
+
+        $notification_id = $this->grav['uri']->param('notification_id');
+
+        if (!$notification_id) {
+            $this->admin->json_response = [
+                'status'  => 'error'
+            ];
+            return false;
+        }
+
+        $filename = $this->grav['locator']->findResource('user://data/notifications/' . $this->grav['user']->username . YAML_EXT, true, true);
+        $file = CompiledYamlFile::instance($filename);
+        $data = $file->content();
+        $data[] = $notification_id;
+        $file->save($data);
+
+        $this->admin->json_response = [
+            'status'  => 'success'
+        ];
+
+        return true;
+    }
+
+    /**
      * Handle the backup action
      *
      * @return bool True if the action was performed.
@@ -837,11 +1063,11 @@ class AdminController
             if (count($flags)) {
                 $types = [];
 
-                $pageTypes = Pages::pageTypes();
+                $pageTypes = array_keys(Pages::pageTypes());
                 foreach ($pageTypes as $pageType) {
-                    if (($pageType = array_search($pageType, $flags)) !== false) {
+                    if (($pageKey = array_search($pageType, $flags)) !== false) {
                         $types[] = $pageType;
-                        unset($flags[$pageType]);
+                        unset($flags[$pageKey]);
                     }
                 }
 
@@ -906,8 +1132,10 @@ class AdminController
         }
 
         $media_list = [];
-        foreach ($page->media()->all() as $name => $media) {
-            $media_list[$name] = ['url' => $media->cropZoom(150, 100)->url(), 'size' => $media->get('size')];
+        $media = new Media($page->path());
+
+        foreach ($media->all() as $name => $medium) {
+            $media_list[$name] = ['url' => $medium->cropZoom(150, 100)->url(), 'size' => $medium->get('size')];
         }
         $this->admin->json_response = ['status' => 'success', 'results' => $media_list];
 
@@ -955,6 +1183,13 @@ class AdminController
                 $this->admin->json_response = [
                     'status'  => 'error',
                     'message' => $this->admin->translate('PLUGIN_ADMIN.EXCEEDED_FILESIZE_LIMIT')
+                ];
+
+                return false;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                $this->admin->json_response = [
+                    'status'  => 'error',
+                    'message' => $this->admin->translate('PLUGIN_ADMIN.UPLOAD_ERR_NO_TMP_DIR')
                 ];
 
                 return false;
@@ -1106,9 +1341,9 @@ class AdminController
      */
     protected function taskProcessMarkdown()
     {
-//        if (!$this->authorizeTask('process markdown', ['admin.pages', 'admin.super'])) {
-//            return;
-//        }
+        /*if (!$this->authorizeTask('process markdown', ['admin.pages', 'admin.super'])) {
+            return;
+        }*/
 
         try {
             $page = $this->admin->page(true);
@@ -1300,164 +1535,6 @@ class AdminController
     }
 
     /**
-     * @param $field
-     *
-     * @return array
-     */
-    private function cleanFilesData($field)
-    {
-        /** @var Page $page */
-        $page = null;
-        $cleanFiles = [];
-
-        $file = $_FILES['data'];
-
-        $errors = (array)Utils::getDotNotation($file['error'], $field['name']);
-
-        foreach ($errors as $index => $error) {
-            if ($error == UPLOAD_ERR_OK) {
-
-                $fieldname = $field['name'];
-
-                // Deal with multiple files
-                if (isset($field['multiple']) && $field['multiple'] == true) {
-                    $fieldname = $fieldname . ".$index";
-                }
-
-                $tmp_name = Utils::getDotNotation($file['tmp_name'], $fieldname);
-                $name = Utils::getDotNotation($file['name'], $fieldname);
-                $type = Utils::getDotNotation($file['type'], $fieldname);
-                $size = Utils::getDotNotation($file['size'], $fieldname);
-
-                $original_destination = null;
-                $destination = Folder::getRelativePath(rtrim($field['destination'], '/'));
-
-                if (!$this->match_in_array($type, $field['accept'])) {
-                    throw new \RuntimeException('File "' . $name . '" is not an accepted MIME type.');
-                }
-
-                if (isset($field['random_name']) && $field['random_name'] === true) {
-                    $path_parts = pathinfo($name);
-                    $name = Utils::generateRandomString(15) . '.' . $path_parts['extension'];
-                }
-
-                $resolved_destination = $this->admin->getPagePathFromToken($destination);
-                $upload_path = $resolved_destination . '/' . $name;
-
-                // Create dir if need be
-                if (!is_dir($resolved_destination)) {
-                    Folder::mkdir($resolved_destination);
-                }
-
-                if (move_uploaded_file($tmp_name, $upload_path)) {
-                    $path = $destination . '/' . $name;
-                    $fileData = [
-                        'name'  => $name,
-                        'path'  => $path,
-                        'type'  => $type,
-                        'size'  => $size,
-                        'file'  => $destination . '/' . $name,
-                        'route' => $page ? $path : null
-                    ];
-
-                    $cleanFiles[$field['name']][$path] = $fileData;
-                } else {
-                    throw new \RuntimeException("Unable to upload file(s) to $destination/$name");
-                }
-
-
-            } else {
-                if ($error != UPLOAD_ERR_NO_FILE) {
-                    throw new \RuntimeException("Unable to upload file(s) - Error: " . $field['name'] . ": " . $this->upload_errors[$error]);
-                }
-            }
-        }
-
-        return $cleanFiles;
-    }
-
-    /**
-     * @param string       $needle
-     * @param array|string $haystack
-     *
-     * @return bool
-     */
-    private function match_in_array($needle, $haystack)
-    {
-        foreach ((array)$haystack as $item) {
-            if (true == preg_match("#^" . strtr(preg_quote($item, '#'), ['\*' => '.*', '\?' => '.']) . "$#i",
-                    $needle)
-            ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param mixed $obj
-     *
-     * @return mixed
-     */
-    private function processFiles($obj)
-    {
-        if (!isset($_FILES['data'])) {
-            return $obj;
-        }
-
-        $blueprints = $obj->blueprints();
-
-        if (!isset($blueprints['form']['fields'])) {
-            throw new \RuntimeException('Blueprints missing form fields definition');
-        }
-        $fields = $blueprints['form']['fields'];
-
-        $found_files = $this->findFields('file', $fields);
-
-        foreach ($found_files as $key => $data) {
-            if ($this->view == 'pages') {
-                $keys = explode('.', preg_replace('/^header./', '', $key));
-                $init_key = array_shift($keys);
-                if (count($keys) > 0) {
-                    $new_data = isset($obj->header()->$init_key) ? $obj->header()->$init_key : [];
-                    Utils::setDotNotation($new_data, implode('.', $keys), $data);
-                } else {
-                    $new_data = $data;
-                }
-                $obj->modifyHeader($init_key, $new_data);
-            } else {
-                $obj->set($key, $data);
-            }
-        }
-
-        return $obj;
-    }
-
-    public function findFields($type, $fields, $found = [])
-    {
-        foreach ($fields as $key => $field) {
-
-            if (isset($field['type']) && $field['type'] == $type) {
-                $file_field = $this->cleanFilesData($field);
-            } elseif (isset($field['fields'])) {
-                $result = $this->findFields($type, $field['fields'], $found);
-                if (!empty($result)) {
-                    $found = array_merge($found, $result);
-                }
-            } else {
-                $file_field = null;
-            }
-
-            if (isset($file_field) && (!is_array($file_field) || !empty($file_field))) {
-                $found = array_merge($file_field, $found);
-            }
-        }
-
-        return $found;
-    }
-
-    /**
      * Get the next available ordering number in a folder
      *
      * @return string the correct order string to prepend
@@ -1517,7 +1594,7 @@ class AdminController
         $this->admin->setMessage($this->admin->translate('PLUGIN_ADMIN.SUCCESSFULLY_SAVED'), 'info');
 
         $multilang = $this->isMultilang();
-        $admin_route = $this->grav['config']->get('plugins.admin.route');
+        $admin_route = $this->admin->base;
         $redirect_url = '/' . ($multilang ? ($this->grav['session']->admin_lang) : '') . $admin_route . '/' . $this->view;
         $this->setRedirect($redirect_url);
 
@@ -1545,6 +1622,237 @@ class AdminController
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * Handles ajax upload for files.
+     * Stores in a flash object the temporary file and deals with potential file errors.
+     *
+     * @return bool True if the action was performed.
+     */
+    public function taskFilesUpload()
+    {
+        if (!$this->authorizeTask('save', $this->dataPermissions()) || !isset($_FILES)) {
+            return false;
+        }
+
+        /** @var Config $config */
+        $config = $this->grav['config'];
+        $data = $this->view == 'pages' ? $this->admin->page(true) : $this->prepareData([]);
+        $settings = $data->blueprints()->schema()->getProperty($this->post['name']);
+        $settings = (object) array_merge(
+            ['avoid_overwriting' => false,
+             'random_name' => false,
+             'accept' => ['image/*'],
+             'limit' => 10,
+             'filesize' => $config->get('system.media.upload_limit', 5242880) // 5MB
+            ],
+            (array) $settings,
+            ['name' => $this->post['name']]
+        );
+
+        $upload = $this->normalizeFiles($_FILES['data'], $settings->name);
+
+        if (!isset($settings->destination)) {
+            $this->admin->json_response = [
+                'status' => 'error',
+                'message' => $this->admin->translate('PLUGIN_ADMIN.DESTINATION_NOT_SPECIFIED', null, true)
+            ];
+
+            return false;
+        }
+
+        // Do not use self@ outside of pages
+        if ($this->view != 'pages' && in_array($settings->destination, ['@self', 'self@'])) {
+            $this->admin->json_response = [
+                'status' => 'error',
+                'message' => sprintf($this->admin->translate('PLUGIN_ADMIN.FILEUPLOAD_PREVENT_SELF', null, true), $settings->destination)
+            ];
+
+            return false;
+        }
+
+        // Handle errors and breaks without proceeding further
+        if ($upload->file->error != UPLOAD_ERR_OK) {
+            $this->admin->json_response = [
+                'status' => 'error',
+                'message' => sprintf($this->admin->translate('PLUGIN_ADMIN.FILEUPLOAD_UNABLE_TO_UPLOAD', null, true), $upload->file->name, $this->upload_errors[$upload->file->error])
+            ];
+
+            return false;
+        } else {
+            // Remove the error object to avoid storing it
+            unset($upload->file->error);
+
+            // we need to move the file at this stage or else
+            // it won't be available upon save later on
+            // since php removes it from the upload location
+            $tmp_dir = Admin::getTempDir();
+            $tmp_file = $upload->file->tmp_name;
+            $tmp = $tmp_dir . '/uploaded-files/' . basename($tmp_file);
+
+            Folder::create(dirname($tmp));
+            if (!move_uploaded_file($tmp_file, $tmp)) {
+                $this->admin->json_response = [
+                    'status' => 'error',
+                    'message' => sprintf($this->admin->translate('PLUGIN_ADMIN.FILEUPLOAD_UNABLE_TO_MOVE', null, true), '', $tmp)
+                ];
+
+                return false;
+            }
+
+            $upload->file->tmp_name = $tmp;
+        }
+
+        // Handle file size limits
+        $settings->filesize *= 1048576; // 2^20 [MB in Bytes]
+        if ($settings->filesize > 0 && $upload->file->size > $settings->filesize) {
+            $this->admin->json_response = [
+                'status'  => 'error',
+                'message' => $this->admin->translate('PLUGIN_ADMIN.EXCEEDED_GRAV_FILESIZE_LIMIT')
+            ];
+
+            return false;
+        }
+
+
+        // Handle Accepted file types
+        // Accept can only be mime types (image/png | image/*) or file extensions (.pdf|.jpg)
+        $accepted = false;
+        $errors = [];
+        foreach ((array) $settings->accept as $type) {
+            // Force acceptance of any file when star notation
+            if ($type == '*') {
+                $accepted = true;
+                break;
+            }
+
+            $isMime = strstr($type, '/');
+            $find = str_replace('*', '.*', $type);
+
+            $match = preg_match('#'. $find .'$#', $isMime ? $upload->file->type : $upload->file->name);
+            if (!$match) {
+                $message = $isMime ? 'The MIME type "' . $upload->file->type . '"' : 'The File Extension';
+                $errors[] = $message . ' for the file "' . $upload->file->name . '" is not an accepted.';
+                $accepted |= false;
+            }  else {
+                $accepted |= true;
+            }
+        }
+
+        if (!$accepted) {
+            $this->admin->json_response = [
+                'status' => 'error',
+                'message' => implode('<br />', $errors)
+            ];
+
+            return false;
+        }
+
+        // Retrieve the current session of the uploaded files for the field
+        // and initialize it if it doesn't exist
+        $sessionField = base64_encode($this->uri);
+        $flash = $this->admin->session()->getFlashObject('files-upload');
+        if (!$flash) { $flash = []; }
+        if (!isset($flash[$sessionField])) { $flash[$sessionField] = []; }
+        if (!isset($flash[$sessionField][$upload->field])) { $flash[$sessionField][$upload->field] = []; }
+
+        // Set destination
+        $destination = Folder::getRelativePath(rtrim($settings->destination, '/'));
+        $destination = $this->admin->getPagePathFromToken($destination);
+
+        // Create destination if needed
+        if (!is_dir($destination)) {
+            Folder::mkdir($destination);
+        }
+
+        // Generate random name if required
+        if ($settings->random_name) { // TODO: document
+            $extension = pathinfo($upload->file->name)['extension'];
+            $upload->file->name = Utils::generateRandomString(15) . '.' . $extension;
+        }
+
+        // Handle conflicting name if needed
+        if ($settings->avoid_overwriting) { // TODO: document
+            if (file_exists($destination . '/' . $upload->file->name)) {
+                $upload->file->name = date('YmdHis') . '-' . $upload->file->name;
+            }
+        }
+
+        // Prepare object for later save
+        $path = $destination . '/' . $upload->file->name;
+        $upload->file->path = $path;
+        // $upload->file->route = $page ? $path : null;
+
+        // Prepare data to be saved later
+        $flash[$sessionField][$upload->field][$path] = (array) $upload->file;
+
+        // Finally store the new uploaded file in the field session
+        $this->admin->session()->setFlashObject('files-upload', $flash);
+        $this->admin->json_response = [
+            'status' => 'success',
+            'session' => \json_encode([
+                'sessionField' => base64_encode($this->uri),
+                'path' => $upload->file->path,
+                'field' => $settings->name
+            ])
+        ];
+
+        return true;
+    }
+
+    /**
+     * Removes a file from the flash object session, before it gets saved
+     *
+     * @return bool True if the action was performed.
+     */
+    public function taskFilesSessionRemove()
+    {
+        if (!$this->authorizeTask('save', $this->dataPermissions()) || !isset($_FILES)) {
+            return false;
+        }
+
+        // Retrieve the current session of the uploaded files for the field
+        // and initialize it if it doesn't exist
+        $sessionField = base64_encode($this->uri);
+        $request = \json_decode($this->post['session']);
+
+        // Ensure the URI requested matches the current one, otherwise fail
+        if ($request->sessionField !== $sessionField) {
+            return false;
+        }
+
+        // Retrieve the flash object and remove the requested file from it
+        $flash = $this->admin->session()->getFlashObject('files-upload');
+        $endpoint = $flash[$request->sessionField][$request->field][$request->path];
+
+        if (isset($endpoint)) {
+            if (file_exists($endpoint['tmp_name'])) {
+                unlink($endpoint['tmp_name']);
+            }
+
+            unset($endpoint);
+        }
+
+        // Walk backward to cleanup any empty field that's left
+        // Field
+        if (!count($flash[$request->sessionField][$request->field])) {
+            unset($flash[$request->sessionField][$request->field]);
+        }
+
+        // Session Field
+        if (!count($flash[$request->sessionField])) {
+            unset($flash[$request->sessionField]);
+        }
+
+
+        // If there's anything left to restore in the flash object, do so
+        if (count($flash)) {
+            $this->admin->session()->setFlashObject('files-upload', $flash);
+        }
+
+        $this->admin->json_response = ['status' => 'success'];
         return true;
     }
 
@@ -1610,8 +1918,6 @@ class AdminController
             $obj = $obj->move($parent);
             $this->preparePage($obj, false, $obj->language());
 
-            $obj = $this->processFiles($obj);
-
             // Reset slug and route. For now we do not support slug twig variable on save.
             $obj->slug($original_slug);
 
@@ -1644,7 +1950,7 @@ class AdminController
         } else {
             // Handle standard data types.
             $obj = $this->prepareData($data);
-            $obj = $this->processFiles($obj);
+
             try {
                 $obj->validate();
             } catch (\Exception $e) {
@@ -1654,6 +1960,42 @@ class AdminController
             }
 
             $obj->filter();
+        }
+
+        // Process previously uploaded files for the current URI
+        // and finally store them. Everything else will get discarded
+        $queue = $this->admin->session()->getFlashObject('files-upload');
+        $queue = $queue[base64_encode($this->uri)];
+        if (is_array($queue)) {
+            foreach ($queue as $key => $files) {
+                foreach ($files as $destination => $file) {
+                    if (!rename($file['tmp_name'], $destination)) {
+                        throw new \RuntimeException(sprintf($this->admin->translate('PLUGIN_ADMIN.FILEUPLOAD_UNABLE_TO_MOVE', null, true), '"' . $file['tmp_name'] . '"', $destination));
+                    }
+
+                    unset($files[$destination]['tmp_name']);
+                }
+
+                if ($this->view == 'pages') {
+                    $keys = explode('.', preg_replace('/^header./', '', $key));
+                    $init_key = array_shift($keys);
+                    if (count($keys) > 0) {
+                        $new_data = isset($obj->header()->$init_key) ? $obj->header()->$init_key : [];
+                        Utils::setDotNotation($new_data, implode('.', $keys), $files, true);
+                    } else {
+                        $new_data = $files;
+                    }
+                    if (isset($data['header'][$init_key])) {
+                        $obj->modifyHeader($init_key, array_replace_recursive([], $data['header'][$init_key], $new_data));
+                    } else {
+                        $obj->modifyHeader($init_key, $new_data);
+                    }
+                } else {
+                    // TODO: [this is JS handled] if it's single file, remove existing and use set, if it's multiple, use join
+                    $obj->join($key, $files); // stores
+                }
+
+            }
         }
 
         if ($obj) {
@@ -1687,7 +2029,7 @@ class AdminController
                     $obj->language($this->grav['session']->admin_lang);
                 }
             }
-            $admin_route = $this->grav['config']->get('plugins.admin.route');
+            $admin_route = $this->admin->base;
 
             //Handle system.home.hide_in_urls
             $route = $obj->route();
@@ -1696,14 +2038,14 @@ class AdminController
                 $home_route = $config->get('system.home.alias');
                 $topParent = $obj->topParent();
                 if (isset($topParent)) {
-                    if ($topParent->route() == $home_route) {
-                        $route = (string)$topParent->route() . $route;
+                    $top_parent_route = (string)$topParent->route();
+                    if ($top_parent_route == $home_route && substr($route, 0, strlen($top_parent_route) + 1) != ($top_parent_route . '/')) {
+                        $route = $top_parent_route . $route;
                     }
                 }
             }
 
-            $redirect_url = '/' . ($multilang ? ($obj->language()) : '') . $admin_route . '/' . $this->view . $route;
-
+            $redirect_url = ($multilang ? '/' . $obj->language() : '') . $admin_route . '/' . $this->view . $route;
             $this->setRedirect($redirect_url);
         }
 
@@ -1990,7 +2332,7 @@ class AdminController
 
         $this->admin->setMessage($this->admin->translate('PLUGIN_ADMIN.SUCCESSFULLY_SWITCHED_LANGUAGE'), 'info');
 
-        $admin_route = $this->grav['config']->get('plugins.admin.route');
+        $admin_route = $this->admin->base;
         $this->setRedirect('/' . $language . $admin_route . '/' . $redirect);
 
     }
@@ -2019,21 +2361,9 @@ class AdminController
 
         $file = $obj->file();
         if ($file) {
-            $filename = substr($obj->name(), 0, -(strlen('.' . $language . '.md')));
+            $filename = $this->determineFilenameIncludingLanguage($obj->name(), $language);
 
-            if (substr($filename, -3, 1) == '.') {
-                if (substr($filename, -2) == substr($language, 0, 2)) {
-                    $filename = str_replace(substr($filename, -2), $language, $filename);
-                }
-            } elseif (substr($filename, -6, 1) == '.') {
-                if (substr($filename, -5) == substr($language, 0, 5)) {
-                    $filename = str_replace(substr($filename, -5), $language, $filename);
-                }
-            } else {
-                $filename .= '.' . $language;
-            }
-
-            $path = $obj->path() . DS . $filename . '.md';
+            $path = $obj->path() . DS . $filename;
             $aFile = File::instance($path);
             $aFile->save();
 
@@ -2050,6 +2380,29 @@ class AdminController
         $this->setRedirect('/' . $language . $uri->route());
 
         return true;
+    }
+
+    /**
+     * The what should be the new filename when saving as a new language
+     *
+     * @param string $current_filename the current file name, including .md. Example: default.en.md
+     * @param string $language The new language it will be saved as. Example: 'it' or 'en-GB'.
+     *
+     * @return string The new filename. Example: 'default.it'
+     */
+    public function determineFilenameIncludingLanguage($current_filename, $language)
+    {
+        $filename = substr($current_filename, 0, -(strlen('.md')));
+
+        if (substr($filename, -3, 1) == '.') {
+            $filename = str_replace(substr($filename, -2), $language, $filename);
+        } elseif (substr($filename, -6, 1) == '.') {
+            $filename = str_replace(substr($filename, -5), $language, $filename);
+        } else {
+            $filename .= '.' . $language;
+        }
+
+        return $filename . '.md';
     }
 
     /**
@@ -2079,7 +2432,7 @@ class AdminController
             return false;
         }
 
-        $filename = base64_decode($this->route);
+        $filename = base64_decode($this->grav['uri']->param('route'));
 
         $file = File::instance($filename);
         $resultRemoveMedia = false;
@@ -2099,14 +2452,20 @@ class AdminController
         }
 
         if ($resultRemoveMedia && $resultRemoveMediaMeta) {
-            $this->admin->setMessage($this->admin->translate('PLUGIN_ADMIN.REMOVE_SUCCESSFUL'), 'info');
+            $this->admin->json_response = [
+                'status'  => 'success',
+                'message' => $this->admin->translate('PLUGIN_ADMIN.REMOVE_SUCCESSFUL')
+            ];
+
+            return true;
         } else {
-            $this->admin->setMessage($this->admin->translate('PLUGIN_ADMIN.REMOVE_FAILED'), 'error');
+            $this->admin->json_response = [
+                'status'  => 'success',
+                'message' => $this->admin->translate('PLUGIN_ADMIN.REMOVE_FAILED')
+            ];
+
+            return false;
         }
-
-        $this->post = ['_redirect' => 'media'];
-
-        return true;
     }
 
     /**
@@ -2167,16 +2526,11 @@ class AdminController
                     break;
             }
         }
-//
-//
-        $redirect = base64_decode($uri->param('redirect'));
-        $route = $this->grav['config']->get('plugins.admin.route');
 
-        if (substr($redirect, 0, strlen($route)) == $route) {
-            $redirect = substr($redirect, strlen($route) + 1);
-        }
-
-        $this->post = ['_redirect' => $redirect];
+        $this->admin->json_response = [
+            'status'  => 'success',
+            'message' => $this->admin->translate('PLUGIN_ADMIN.REMOVE_SUCCESSFUL')
+        ];
 
         return true;
     }
@@ -2194,9 +2548,11 @@ class AdminController
 
         // Decode JSON encoded fields and merge them to data.
         if (isset($post['_json'])) {
-            $post = array_merge_recursive($post, $this->jsonDecode($post['_json']));
+            $post = array_replace_recursive($post, $this->jsonDecode($post['_json']));
             unset($post['_json']);
         }
+
+        $post = $this->cleanDataKeys($post);
 
         return $post;
     }
@@ -2383,5 +2739,47 @@ class AdminController
         }
 
         return true;
+    }
+
+    /**
+     * Internal method to normalize the $_FILES array
+     *
+     * @param array  $data $_FILES starting point data
+     * @param string $key
+     * @return object a new Object with a normalized list of files
+     */
+    protected function normalizeFiles($data, $key = '') {
+        $files = new \stdClass();
+        $files->field = $key;
+        $files->file = new \stdClass();
+
+        foreach($data as $fieldName => $fieldValue) {
+            // Since Files Upload are always happening via Ajax
+            // we are not interested in handling `multiple="true"`
+            // because they are always handled one at a time.
+            // For this reason we normalize the value to string,
+            // in case it is arriving as an array.
+            $value = (array) Utils::getDotNotation($fieldValue, $key);
+            $files->file->{$fieldName} = array_shift($value);
+        }
+
+        return $files;
+    }
+
+    protected function cleanDataKeys($source = []){
+        $out = [];
+
+        if (is_array($source)) {
+            foreach($source as $key => $value){
+                $key = str_replace('%5B', '[', str_replace('%5D', ']', $key));
+                if (is_array($value)) {
+                    $out[$key] = $this->cleanDataKeys($value);
+                } else{
+                    $out[$key] = $value;
+                }
+            }
+        }
+
+        return $out;
     }
 }

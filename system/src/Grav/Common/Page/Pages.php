@@ -745,16 +745,18 @@ class Pages
             switch (strtolower($config->get('system.cache.check.method', 'file'))) {
                 case 'none':
                 case 'off':
-                    $last_modified = 0;
+                    $hash = 0;
                     break;
                 case 'folder':
-                    $last_modified = Folder::lastModifiedFolder($pages_dir);
+                    $hash = Folder::lastModifiedFolder($pages_dir);
                     break;
+                case 'hash':
+                    $hash = Folder::hashAllFiles($pages_dir);
                 default:
-                    $last_modified = Folder::lastModifiedFile($pages_dir);
+                    $hash = Folder::lastModifiedFile($pages_dir);
             }
 
-            $page_cache_id = md5($pages_dir . $last_modified . $language->getActive() . $config->checksum());
+            $page_cache_id = md5($pages_dir . $hash . $language->getActive() . $config->checksum());
 
             list($this->instances, $this->routes, $this->children, $taxonomy_map, $this->sort) = $cache->fetch($page_cache_id);
             if (!$this->instances) {
@@ -846,14 +848,22 @@ class Pages
         }
 
         $content_exists = false;
-        $pages_found = glob($directory . '/*' . CONTENT_EXT);
+        $pages_found = new \GlobIterator($directory . '/*' . CONTENT_EXT);
+        $page_found = null;
+
         $page_extension = '';
 
-        if ($pages_found) {
+        if ($pages_found && count($pages_found) > 0) {
+
             $page_extensions = $language->getFallbackPageExtensions();
+
             foreach ($page_extensions as $extension) {
                 foreach ($pages_found as $found) {
-                    if (preg_match('/^.*\/[0-9A-Za-z\-\_]+(' . $extension . ')$/', $found)) {
+                    if ($found->isDir()) {
+                        continue;
+                    }
+                    $regex = '/^[^\.]*' . preg_quote($extension) . '$/';
+                    if (preg_match($regex, $found->getFilename())) {
                         $page_found = $found;
                         $page_extension = $extension;
                         break 2;
@@ -863,8 +873,7 @@ class Pages
         }
 
         if ($parent && !empty($page_found)) {
-            $file = new \SplFileInfo($page_found);
-            $page->init($file, $page_extension);
+            $page->init($page_found, $page_extension);
 
             $content_exists = true;
 
@@ -895,6 +904,12 @@ class Pages
                     $last_modified = $modified;
                 }
             } elseif ($file->isDir() && !in_array($file->getFilename(), $this->ignore_folders)) {
+
+                // if folder contains separator, continue
+                if (Utils::contains($file->getFilename(), $config->get('system.param_sep', ':'))) {
+                    continue;
+                }
+
                 if (!$page->path()) {
                     $page->path($file->getPath());
                 }
@@ -1065,8 +1080,13 @@ class Pages
         } else {
             // else just sort the list according to specified key
             if (extension_loaded('intl')) {
-                $col = new \Collator(setlocale(LC_COLLATE, 0)); //`setlocale` with a 0 param returns the current locale set
-                $col->asort($list, $sort_flags);
+                $locale = setlocale(LC_COLLATE, 0); //`setlocale` with a 0 param returns the current locale set
+                $col = \Collator::create($locale);
+                if ($col) {
+                    $col->asort($list, $sort_flags);
+                } else {
+                    asort($list, $sort_flags);
+                }
             } else {
                 asort($list, $sort_flags);
             }

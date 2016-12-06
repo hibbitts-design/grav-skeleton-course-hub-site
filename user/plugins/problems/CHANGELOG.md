@@ -1,9 +1,23 @@
+# v1.4.5
+## 09/14/2016
+
+1. [](#bugfix)
+    * Show the correct status for the Zip extension check
+
+# v1.4.4
+## 09/08/2016
+
+1. [](#new)
+    * Added check for new root folder `tmp` and try to create if missing
+1. [](#bugfix)
+    * Fixed Whoops error if `backup` folder doesn't exist and cannot be created
+
 # v1.4.3
 ## 05/27/2016
 
 1. [](#new)
     * Reverted compression checks
-    
+
 # v1.4.2
 ## 05/23/2016
 
@@ -31,7 +45,7 @@
 1. [](#new)
     * Set minimum PHP requirements to 5.5.9
 1. [](#improved)
-    * Ensure problems plugin runs before admin    
+    * Ensure problems plugin runs before admin
 
 # v1.3.2
 ## 12/09/2015

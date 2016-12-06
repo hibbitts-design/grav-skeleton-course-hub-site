@@ -69,7 +69,7 @@ class ReflectionCaster
         }
 
         $prefix = Caster::PREFIX_DYNAMIC;
-        unset($a['name'], $a[$prefix.'0'], $a[$prefix.'this'], $a[$prefix.'parameter'], $a[Caster::PREFIX_VIRTUAL.'extra']);
+        unset($a['name'], $a[$prefix.'this'], $a[$prefix.'parameter'], $a[Caster::PREFIX_VIRTUAL.'extra']);
 
         return $a;
     }
@@ -84,7 +84,7 @@ class ReflectionCaster
         $prefix = Caster::PREFIX_VIRTUAL;
 
         $a += array(
-            $prefix.'type' => $c->__toString(),
+            $prefix.'name' => method_exists('ReflectionType', 'getName') ? $c->getName() : $c->__toString(),
             $prefix.'allowsNull' => $c->allowsNull(),
             $prefix.'isBuiltin' => $c->isBuiltin(),
         );
@@ -168,7 +168,7 @@ class ReflectionCaster
         ));
 
         if (isset($a[$prefix.'returnType'])) {
-            $a[$prefix.'returnType'] = (string) $a[$prefix.'returnType'];
+            $a[$prefix.'returnType'] = method_exists('ReflectionType', 'getName') ? $a[$prefix.'returnType']->getName() : $a[$prefix.'returnType']->__toString();
         }
         if (isset($a[$prefix.'this'])) {
             $a[$prefix.'this'] = new CutStub($a[$prefix.'this']);
@@ -224,12 +224,13 @@ class ReflectionCaster
             'position' => 'getPosition',
             'isVariadic' => 'isVariadic',
             'byReference' => 'isPassedByReference',
+            'allowsNull' => 'allowsNull',
         ));
 
         try {
             if (method_exists($c, 'hasType')) {
                 if ($c->hasType()) {
-                    $a[$prefix.'typeHint'] = $c->getType()->__toString();
+                    $a[$prefix.'typeHint'] = method_exists('ReflectionType', 'getName') ? $c->getType()->getName() : $c->getType()->__toString();
                 }
             } else {
                 $v = explode(' ', $c->__toString(), 6);
@@ -242,15 +243,22 @@ class ReflectionCaster
                 $a[$prefix.'typeHint'] = $m[1];
             }
         }
+        if (!isset($a[$prefix.'typeHint'])) {
+            unset($a[$prefix.'allowsNull']);
+        }
 
         try {
             $a[$prefix.'default'] = $v = $c->getDefaultValue();
             if (method_exists($c, 'isDefaultValueConstant') && $c->isDefaultValueConstant()) {
                 $a[$prefix.'default'] = new ConstStub($c->getDefaultValueConstantName(), $v);
             }
+            if (null === $v) {
+                unset($a[$prefix.'allowsNull']);
+            }
         } catch (\ReflectionException $e) {
-            if (isset($a[$prefix.'typeHint']) && $c->allowsNull()) {
+            if (isset($a[$prefix.'typeHint']) && $c->allowsNull() && !method_exists('ReflectionType', 'getName')) {
                 $a[$prefix.'default'] = null;
+                unset($a[$prefix.'allowsNull']);
             }
         }
 

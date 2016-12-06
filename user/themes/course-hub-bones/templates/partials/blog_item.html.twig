@@ -79,6 +79,8 @@
           <br>
         {% endif %}
         {% set show_prev_next = true %}
+      {% else %}
+        <hr>
       {% endif %}
     {% elseif truncate and page.summary != page.content %}
       {# added summary flag and title icon - hibbittsdesign.org #}

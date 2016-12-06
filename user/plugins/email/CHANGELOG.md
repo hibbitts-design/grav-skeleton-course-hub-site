@@ -1,3 +1,34 @@
+# v2.5.1
+## 10/19/2016
+
+1. [](#improved)
+    * CLI command will fallback to use the `to` from email plugin config if not provided
+    * Explicit Composer based class loader to fix issues with class case
+    
+# v2.5.0
+## 09/07/2016
+
+1. [](#new)
+    * Added a new `bin/plugin email test-email` CLI command
+1. [](#improved)
+    * Moved Email `Utils` class from Login to Email plugin
+    * Provide a sample base `email/base.html.twig` template for emails
+1. [](#bugfix)
+    * Fix handling attachments with the updated file upload field
+
+# v2.4.3
+## 08/16/2016
+
+1. [](#improved)
+    * Added Russian translation
+    * Updated Swiftmailer to 5.4.3 [#37](https://github.com/getgrav/grav-plugin-email/issues/37)
+
+# v2.4.2
+## 08/10/2016
+
+1. [](#improved)
+    * Added Croatian translation
+
 # v2.4.1
 ## 07/14/2016
 
@@ -47,11 +78,11 @@
 ## 12/11/2015
 
 1. [](#new)
-	* Added support for from/sender name (Thomas Keitel)
-	* Added support for message content type (Thomas Keitel)
-	* Added support for reply addresses (Thomas Keitel)
-	* Added support for CC/BCC (Thomas Keitel)
-	* Added support for multiple body parts (Thomas Keitel)
+    * Added support for from/sender name (Thomas Keitel)
+    * Added support for message content type (Thomas Keitel)
+    * Added support for reply addresses (Thomas Keitel)
+    * Added support for CC/BCC (Thomas Keitel)
+    * Added support for multiple body parts (Thomas Keitel)
 1. [](#bugfix)
     * Fix email engine selection (z38)
 

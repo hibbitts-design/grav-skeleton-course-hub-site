@@ -3,11 +3,13 @@ namespace Grav\Plugin\Admin;
 
 use Grav\Common\Grav;
 use Grav\Common\GPM\GPM as GravGPM;
+use Grav\Common\GPM\Licenses;
 use Grav\Common\GPM\Installer;
 use Grav\Common\GPM\Response;
 use Grav\Common\GPM\Upgrader;
 use Grav\Common\Filesystem\Folder;
 use Grav\Common\GPM\Common\Package;
+use Grav\Plugin\Admin;
 
 /**
  * Class Gpm
@@ -91,7 +93,8 @@ class Gpm
                 return false;
             }
 
-            $local = static::download($package);
+            $license = Licenses::get($package->slug);
+            $local = static::download($package, $license);
 
             Installer::install($local, $options['destination'],
                 ['install_path' => $package->install_path, 'theme' => $options['theme']]);
@@ -193,19 +196,37 @@ class Gpm
      *
      * @return string
      */
-    private static function download(Package $package)
+    private static function download(Package $package, $license = null)
     {
-        $contents = Response::get($package->zipball_url, []);
+        $query = '';
 
-        $cache_dir = Grav::instance()['locator']->findResource('cache://', true);
-        $cache_dir = $cache_dir . DS . 'tmp/Grav-' . uniqid();
-        Folder::mkdir($cache_dir);
+        if ($package->premium) {
+            $query = \json_encode(array_merge(
+                $package->premium,
+                [
+                    'slug' => $package->slug,
+                    'filename' => $package->premium['filename'],
+                    'license_key' => $license
+                ]
+            ));
+
+            $query = '?d=' . base64_encode($query);
+        }
+
+        try {
+            $contents = Response::get($package->zipball_url . $query, []);
+        } catch (\Exception $e) {
+            throw new \RuntimeException($e->getMessage());
+        }
+
+        $tmp_dir = Admin::getTempDir() . '/Grav-' . uniqid();
+        Folder::mkdir($tmp_dir);
 
         $filename = $package->slug . basename($package->zipball_url);
 
-        file_put_contents($cache_dir . DS . $filename . '.zip', $contents);
+        file_put_contents($tmp_dir . DS . $filename . '.zip', $contents);
 
-        return $cache_dir . DS . $filename . '.zip';
+        return $tmp_dir . DS . $filename . '.zip';
     }
 
     /**
@@ -253,8 +274,7 @@ class Gpm
         }
 
         $update = $upgrader->getAssets()['grav-update'];
-        $cache_dir = Grav::instance()['locator']->findResource('cache://', true);
-        $tmp = $cache_dir . 'tmp/Grav-' . uniqid();
+        $tmp = Admin::getTempDir() . '/Grav-' . uniqid();
         $file = self::_downloadSelfupgrade($update, $tmp);
 
         Installer::install($file, GRAV_ROOT,

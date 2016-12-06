@@ -54,6 +54,7 @@ class Page
     protected $routable;
     protected $modified;
     protected $redirect;
+    protected $external_url;
     protected $items;
     protected $header;
     protected $frontmatter;
@@ -84,6 +85,7 @@ class Page
     protected $home_route;
     protected $hide_home_route;
     protected $ssl;
+    protected $template_format;
 
     /**
      * @var Page Unmodified (original) version of the page. Used for copying and moving the page.
@@ -162,8 +164,8 @@ class Page
                     unset($process_fields[$field]);
                 }
             }
-            $text_header = Grav::instance()['twig']->processString(json_encode($process_fields), ['page'=>$this]);
-            $this->header((object) (json_decode($text_header, true) + $ignored_fields));
+            $text_header = Grav::instance()['twig']->processString(json_encode($process_fields), ['page' => $this]);
+            $this->header((object)(json_decode($text_header, true) + $ignored_fields));
         }
     }
 
@@ -364,6 +366,9 @@ class Page
             if (isset($this->header->redirect)) {
                 $this->redirect = trim($this->header->redirect);
             }
+            if (isset($this->header->external_url)) {
+                $this->external_url = trim($this->header->external_url);
+            }
             if (isset($this->header->order_dir)) {
                 $this->order_dir = trim($this->header->order_dir);
             }
@@ -414,7 +419,10 @@ class Page
                 $this->last_modified = (bool)$this->header->last_modified;
             }
             if (isset($this->header->ssl)) {
-                $this->ssl = (bool) $this->header->ssl;
+                $this->ssl = (bool)$this->header->ssl;
+            }
+            if (isset($this->header->template_format)) {
+                $this->template_format = $this->header->template_format;
             }
         }
 
@@ -498,7 +506,9 @@ class Page
             $size = 300;
         }
 
-        return html_entity_decode(Utils::truncateHTML($content, $size));
+        $summary = Utils::truncateHTML($content, $size);
+
+        return html_entity_decode($summary);
     }
 
     /**
@@ -620,6 +630,7 @@ class Page
         if ($this->content === null) {
             $this->content();
         }
+
         return $this->getContentMeta();
     }
 
@@ -638,18 +649,20 @@ class Page
      * Return the whole contentMeta array as it currently stands
      *
      * @param null $name
+     *
      * @return mixed
      */
     public function getContentMeta($name = null)
     {
         if ($name) {
-            if(isset($this->content_meta[$name])) {
+            if (isset($this->content_meta[$name])) {
                 return $this->content_meta[$name];
             } else {
                 return null;
             }
 
         }
+
         return $this->content_meta;
     }
 
@@ -657,6 +670,7 @@ class Page
      * Sets the whole content meta array in one shot
      *
      * @param $content_meta
+     *
      * @return mixed
      */
     public function setContentMeta($content_meta)
@@ -757,9 +771,7 @@ class Page
             return (bool)$this->order();
         }
         if ($name == 'folder') {
-            $regex = '/^[0-9]+\./u';
-
-            return preg_replace($regex, '', $this->folder);
+            return preg_replace(PAGE_ORDER_PREFIX_REGEX, '', $this->folder);
         }
         if ($name == 'name') {
             $language = $this->language() ? '.' . $this->language() : '';
@@ -1095,6 +1107,27 @@ class Page
     }
 
     /**
+     * Allows a page to override the output render format, usually the extension provided
+     * in the URL. (e.g. `html`, `json`, `xml`, etc).
+     *
+     * @param null $var
+     *
+     * @return null
+     */
+    public function templateFormat($var = null)
+    {
+        if ($var !== null) {
+            $this->template_format = $var;
+        }
+
+        if (empty($this->template_format)) {
+            $this->template_format = Grav::instance()['uri']->extension();
+        }
+
+        return $this->template_format;
+    }
+
+    /**
      * Gets and sets the extension field.
      *
      * @param null $var
@@ -1127,7 +1160,8 @@ class Page
 
         // if not set in the page get the value from system config
         if (empty($this->url_extension)) {
-            $this->url_extension = trim(isset($this->header->append_url_extension) ? $this->header->append_url_extension : Grav::instance()['config']->get('system.pages.append_url_extension', false));
+            $this->url_extension = trim(isset($this->header->append_url_extension) ? $this->header->append_url_extension : Grav::instance()['config']->get('system.pages.append_url_extension',
+                false));
         }
 
         return $this->url_extension;
@@ -1204,8 +1238,7 @@ class Page
         if ($this->visible === null) {
             // Set item visibility in menu if folder is different from slug
             // eg folder = 01.Home and slug = Home
-            $regex = '/^[0-9]+\./u';
-            if (preg_match($regex, $this->folder)) {
+            if (preg_match(PAGE_ORDER_PREFIX_REGEX, $this->folder)) {
                 $this->visible = true;
             } else {
                 $this->visible = false;
@@ -1289,7 +1322,7 @@ class Page
     public function ssl($var = null)
     {
         if ($var !== null) {
-            $this->ssl = (bool) $var;
+            $this->ssl = (bool)$var;
         }
 
         return $this->ssl;
@@ -1350,21 +1383,28 @@ class Page
                 // Backward compatibility for nested arrays in metas
                 if (is_array($value)) {
                     foreach ($value as $property => $prop_value) {
-                        $prop_key                  = $key . ":" . $property;
-                        $this->metadata[$prop_key] = ['name' => $prop_key, 'property' => $prop_key, 'content' => htmlspecialchars($prop_value, ENT_QUOTES, 'UTF-8')];
+                        $prop_key = $key . ":" . $property;
+                        $this->metadata[$prop_key] = [
+                            'name'     => $prop_key,
+                            'property' => $prop_key,
+                            'content'  => htmlspecialchars($prop_value, ENT_QUOTES, 'UTF-8')
+                        ];
                     }
                 } else {
                     // If it this is a standard meta data type
                     if ($value) {
                         if (in_array($key, $header_tag_http_equivs)) {
-                            $this->metadata[$key] = ['http_equiv' => $key, 'content' => htmlspecialchars($value, ENT_QUOTES, 'UTF-8')];
+                            $this->metadata[$key] = [
+                                'http_equiv' => $key,
+                                'content'    => htmlspecialchars($value, ENT_QUOTES, 'UTF-8')
+                            ];
                         } elseif ($key == 'charset') {
                             $this->metadata[$key] = ['charset' => htmlspecialchars($value, ENT_QUOTES, 'UTF-8')];
                         } else {
                             // if it's a social metadata with separator, render as property
-                            $separator    = strpos($key, ':');
+                            $separator = strpos($key, ':');
                             $hasSeparator = $separator && $separator < strlen($key) - 1;
-                            $entry        = ['name' => $key, 'content' => htmlspecialchars($value, ENT_QUOTES, 'UTF-8')];
+                            $entry = ['name' => $key, 'content' => htmlspecialchars($value, ENT_QUOTES, 'UTF-8')];
 
                             if ($hasSeparator) {
                                 $entry['property'] = $key;
@@ -1392,15 +1432,14 @@ class Page
     {
         if ($var !== null && $var !== "") {
             $this->slug = $var;
-            if(!preg_match('/^[a-z0-9][-a-z0-9]*$/', $this->slug)){
-                Grav::instance()['log']->notice("Invalid slug set in YAML frontmatter: " . $this->rawRoute() . " => ".  $this->slug);
+            if (!preg_match('/^[a-z0-9][-a-z0-9]*$/', $this->slug)) {
+                Grav::instance()['log']->notice("Invalid slug set in YAML frontmatter: " . $this->rawRoute() . " => " . $this->slug);
             }
         }
 
         if (empty($this->slug)) {
             $this->slug = strtolower(preg_replace(PAGE_ORDER_PREFIX_REGEX, '', $this->folder));
         }
-
 
 
         return $this->slug;
@@ -1469,6 +1508,11 @@ class Page
 
         /** @var Uri $uri */
         $uri = $grav['uri'];
+
+        // Override any URL when external_url is set
+        if (isset($this->external_url)) {
+            return $this->external_url;
+        }
 
         // get pre-route
         if ($include_lang && $language->enabled()) {
@@ -1566,8 +1610,7 @@ class Page
         if (empty($this->raw_route)) {
             $baseRoute = $this->parent ? (string)$this->parent()->rawRoute() : null;
 
-            $regex = '/^[0-9]+\./u';
-            $slug = preg_replace($regex, '', $this->folder);
+            $slug = preg_replace(PAGE_ORDER_PREFIX_REGEX, '', $this->folder);
 
             $this->raw_route = isset($baseRoute) ? $baseRoute . '/' . $slug : null;
         }
@@ -2144,7 +2187,10 @@ class Page
      */
     public function home()
     {
-        return $this->find('/') == $this;
+        $home = Grav::instance()['config']->get('system.home.alias');
+        $is_home = ($this->route() == $home || $this->rawRoute() == $home);
+
+        return $is_home;
     }
 
     /**
@@ -2226,7 +2272,7 @@ class Page
                             if (empty($page->taxonomy[$taxonomy]) || !in_array(htmlspecialchars_decode($item,
                                     ENT_QUOTES), $page->taxonomy[$taxonomy])
                             ) {
-                                $collection->remove();
+                                $collection->remove($page->path());
                             }
                         }
                     }
@@ -2300,11 +2346,6 @@ class Page
             return new Collection($result);
         }
 
-        // We only evaluate commands which start with @
-        if (empty($cmd) || $cmd[0] != '@') {
-            return $value;
-        }
-
         /** @var Pages $pages */
         $pages = Grav::instance()['pages'];
 
@@ -2315,6 +2356,7 @@ class Page
         $results = new Collection();
 
         switch ($current) {
+            case 'self@':
             case '@self':
                 if (!empty($parts)) {
                     switch ($parts[0]) {
@@ -2337,6 +2379,9 @@ class Page
                             $results = $collection->addPage($this->parent());
                             break;
                         case 'siblings':
+                            if (!$this->parent()) {
+                                return new Collection();
+                            }
                             $results = $this->parent()->children()->remove($this->path());
                             break;
                         case 'descendants':
@@ -2348,6 +2393,7 @@ class Page
                 $results = $results->published();
                 break;
 
+            case 'page@':
             case '@page':
                 $page = null;
 
@@ -2363,27 +2409,33 @@ class Page
                 // Handle a @page.descendants
                 if (!empty($parts)) {
                     switch ($parts[0]) {
+                        case 'modular':
+                            $results = new Collection();
+                            $results = $results->addPage($page)->Modular();
+                            break;
+                        case 'page':
                         case 'self':
                             $results = new Collection();
-                            $results = $results->addPage($page);
+                            $results = $results->addPage($page)->nonModular();
                             break;
 
                         case 'descendants':
-                            $results = $pages->all($page)->remove($page->path());
+                            $results = $pages->all($page)->remove($page->path())->nonModular();
                             break;
 
                         case 'children':
-                            $results = $page->children();
+                            $results = $page->children()->nonModular();
                             break;
                     }
                 } else {
-                    $results = $page->children();
+                    $results = $page->children()->nonModular();
                 }
 
-                $results = $results->nonModular()->published();
+                $results = $results->published();
 
                 break;
 
+            case 'root@':
             case '@root':
                 if (!empty($parts) && $parts[0] == 'descendants') {
                     $results = $pages->all($pages->root())->nonModular()->published();
@@ -2392,7 +2444,7 @@ class Page
                 }
                 break;
 
-
+            case 'taxonomy@':
             case '@taxonomy':
                 // Gets a collection of pages by using one of the following formats:
                 // @taxonomy.category: blog

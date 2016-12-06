@@ -99,7 +99,7 @@ class SimplesearchPlugin extends Plugin
 
         // Support `route: '@self'` syntax
         if($route === '@self') {
-            $route = $page.route();
+            $route = $page->route();
             $this->config->set('plugins.simplesearch.route', $route);
         }
 
@@ -180,7 +180,6 @@ class SimplesearchPlugin extends Plugin
                 }
             }
         }
-
 
         if (!empty($extras)) {
             $this->collection->append($extras);

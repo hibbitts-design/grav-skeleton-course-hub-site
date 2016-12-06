@@ -254,6 +254,12 @@ tr {
     }
 }
 
+#admin-main .admin-block a.gumroad-button {
+    background: $critical-bg !important;
+    color: $critical-text !important;
+}
+
+
 #admin-login-wrapper {
     background: radial-gradient(circle at center, lighten($page-bg, 10%) 0%, darken($page-bg, 10%) 100%);
 }
@@ -399,7 +405,6 @@ tr {
     .grav-update {
         background: $update-bg;
         color: $update-text;
-
         a.button, span.button, button.button {
             @include button-color(shade($update-bg, 20%), $update-text, true);
         }
@@ -456,6 +461,58 @@ tr {
             }
         }
     }
+
+    // Notifications
+    .content-padding {
+        div[class*=notifications-container] {
+
+            .alert.note {
+                background: $content-bg;
+                color: $content-text;
+
+                &.alert {
+                    border-bottom: 2px solid darken($content-bg, 5%);
+                }
+
+                a:not(.button) {
+                    color: $content-link;
+                    &:hover {
+                        color: darken($content-link, 5%);
+                    }
+                }
+            }
+
+            .alert.warning {
+                background: $critical_bg;
+                color: $critical_text;
+
+                &.alert {
+                    border-bottom: 2px solid darken($critical_bg, 5%);
+                }
+
+                a {
+                    color: $critical_text;
+                    &:hover {
+                        color: lighten($critical_text, 10%);
+                    }
+                }
+            }
+        }
+    }
+
+    #notifications {
+        .badge.alert {
+            &.note {
+                background: $content_link;
+                color: $content_bg;
+            }
+            &.warning {
+                background: $critical_bg;
+                color: $critical_text;
+            }
+        }
+
+    }
 }
 
 .sidebar-mobile-open {
@@ -469,6 +526,16 @@ tr {
 }
 
 #admin-dashboard {
+
+    .admin-block {
+        li {
+            border-bottom: 1px solid $underline;
+        }
+    }
+
+    .dashboard-item {
+
+    }
 
     .primary-accent {
         @include linear-gradient(darken($primary-accent-bg, 7%), $primary-accent-bg);
@@ -587,7 +654,17 @@ form {
         color: $form-field-text;
     }
 
-    input[type=text], input[type=password], input[type=email], input[type=date] {
+    input[type=text],
+    input[type=password],
+    input[type=email],
+    input[type=date],
+    input[type=tel],
+    input[type=time],
+    input[type=week],
+    input[type=month],
+    input[type=number],
+    input[type=color],
+    input[type=url] {
         border: $form-border-width solid $form-border;
         background: $form-field-bg;
         color: $form-field-text;
@@ -641,7 +718,7 @@ form {
     }
 
     .form-input-file {
-        border: 4px dashed $form-border;
+        border: 2px dashed $form-border;
 
         p {
             color: $form-field-text;
@@ -676,6 +753,9 @@ form {
 }
 
 .form-order-wrapper {
+    .note {
+        background: inherit;
+    }
     ul#ordering {
         li {
             border: 1px solid $form-border;
@@ -701,6 +781,11 @@ form {
                 color: darken($content-text, 10%);
             }
         }
+    }
+
+    .collection-sort {
+        background: #e9e9e9;
+        border-right: 1px solid #ddd;
     }
 }
 
@@ -820,11 +905,20 @@ form {
 .info {
     background: $update-bg;
     color: $update-text;
+
+    &.alert {
+        border-bottom: 2px solid darken($update-bg, 5%);
+    }
+
     a {
         color: darken($update-text, 10%);
         &:hover {
             color: $update-text;
         }
+    }
+
+    a.button, span.button, button.button {
+        @include button-color(shade($update-bg, 20%), $update-text, true);
     }
 }
 
@@ -832,26 +926,52 @@ form {
     color: $update-bg;
 }
 
-.notice {
+.notice, .note {
     background: $notice-bg;
     color: $notice-text;
+
+    &.alert {
+        border-bottom: 2px solid darken($notice-bg, 5%);
+    }
+
     a {
         color: darken($notice-text, 10%);
         &:hover {
             color: $notice-text;
         }
     }
+
+    a.button, span.button, button.button {
+        @include button-color(shade($notice-bg, 20%), $notice-text, true);
+    }
 }
 
-.error {
+.notice-reverse, .note-reverse {
+    color: $notice-bg;
+}
+
+.error, .warning {
     background: $critical-bg;
     color: $critical-text;
+
+    &.alert {
+        border-bottom: 2px solid darken($critical-bg, 5%);
+    }
+
     a {
         color: darken($critical-text, 10%);
         &:hover {
             color: $critical-text;
         }
     }
+
+    a.button, span.button, button.button {
+        @include button-color(shade($critical-bg, 20%), $critical-text, true);
+    }
+}
+
+.error-reverse, .warning-reverse {
+    color: $critical-bg;
 }
 
 .primary-accent {
@@ -1079,7 +1199,7 @@ form {
             color: $critical-bg;
         }
 
-        &:hover .dz-remove, &:hover .dz-insert {
+        &:hover .dz-remove:not(.file-thumbnail-remove), &:hover .dz-insert {
             border:1px solid darken($content-bg,5%);
             &:hover {
                 background: $content-bg;

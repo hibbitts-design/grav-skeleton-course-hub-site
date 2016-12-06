@@ -6,7 +6,13 @@
         <label>{{ field.label|tu }}</label>
     </div>
     <div class="form-data form-uploads-wrapper">
-        <div id="grav-dropzone" class="dropzone"></div>
+        {% set uploadLimit = grav.config.system.media.upload_limit / 1024 / 1024 %}
+        {% set dropzoneSettings = { maxFileSize: uploadLimit } %}
+        <div id="grav-dropzone"
+             class="dropzone"
+             data-media-url="{{ base_url }}/media/{{ admin.route|trim('/') }}.json"
+             data-media-local="{{ base_url_relative_frontend|rtrim('/') }}/{{ admin.route|trim('/') }}"
+             data-dropzone-options="{{ dropzoneSettings|json_encode|e('html_attr') }}"></div>
         <span>{{ value|join("\n") }}</span>
     </div>
 </div>
@@ -14,9 +20,7 @@
 <div class="form-tab">
     <div class="form-field">
         <div class="form-label">
-            <span class="note">
-                {{ "PLUGIN_ADMIN.CANNOT_ADD_MEDIA_FILES_PAGE_NOT_SAVED"|tu }}
-            </span>
+            {{ "PLUGIN_ADMIN.CANNOT_ADD_MEDIA_FILES_PAGE_NOT_SAVED"|tu }}
         </div>
     </div>
 </div>

@@ -1,10 +1,38 @@
+# v2.1.2
+## 10/01/2016
+
+1. [](#bugfix)
+    * Fixed an old reference to `LoginUtils` and replaced with new `EmailUtils`
+
+# v2.1.1
+## 09/08/2016
+
+1. [](#improved)
+    * Use better detection for admin allowing multi-site setup with subfolders
+
+# v2.1.0
+## 09/07/2016
+
+1. [](#improved)
+    * Added support for Grav's autoescape twig setting
+    * Dropped unused variable reference
+    * Moved Email Utils to Email plugin
+    * Updated vendor libraries
+    * Allow explicitly showing the login page on pages that are not the Login form template [#11](https://github.com/getgrav/grav-plugin-maintenance/issues/11)
+
+# v2.0.1
+## 08/10/2016
+
+1. [](#improved)
+    * Added Romanian
+
 # v2.0.0
 ## 07/14/2016
 
 1. [](#improved)
     * Optimized nonce creation
     * Point account path to core's account stream [#85](https://github.com/getgrav/grav-plugin-login/issues/85)
-    
+
 # v2.0.0-rc.2
 ## 06/21/2016
 

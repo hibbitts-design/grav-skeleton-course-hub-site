@@ -36,11 +36,10 @@ Step 2: Setup the rights
 ------------------------
 
 You need your PHP script to have access to the cache directory, you can for instance
-create a `cache` directory with mode 777:
+create a `cache` directory (be sure the web server can write it):
 
 ```
 mkdir cache
-chmod 777 cache
 ```
 
 Step 3: Access the cache
@@ -92,7 +91,7 @@ You can use the following methods:
   returned, else, `NULL` will be returned.
 * `setPrefixSize($prefixSize)`: sets the prefix size for directories, default is 5. For instance, the
   cache file for `helloworld.txt`, will be `'h/e/l/l/o/helloworld.txt`.
-* `setDirectoryMode($directoryMode)`: sets the directory mode when creating direcotries, default is `0755`.
+* `setDirectoryMode($directoryMode)`: sets the directory mode when creating directories, default is `0755`.
   Does not affect any directories previously created.
 * `getOrCreate($filename, $conditions = array(), $function, $file = false)`: this will check if the `$filename`
   cache file exists and verifies `$conditions` (see below). If the cache file is OK, it will return its

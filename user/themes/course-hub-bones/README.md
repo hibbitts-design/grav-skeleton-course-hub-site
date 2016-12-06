@@ -5,27 +5,30 @@
 **Course Hub** is a [Grav](http://getgrav.org) child theme based on [Bones Vanilla](https://github.com/smartgravity/grav-theme-bones-vanilla), intended to accompany a face-to-face, blended or fully online university course. It also supports a [flipped-LMS approach](http://hibbittsdesign.org/blog/posts/flipped-lms-using-an-open-and-collaborative-platform) using Grav as an open and collaborative Web platform.
 
 # Features
-
-* A complete ready-to-run Grav Skeleton Package (open source)
+* A complete ready-to-run Grav package (open source)
 * Blog-format, with 'featured' (sticky) posts
-* Important reminders & class preparations areas
-* Additional site pages can be easily added
+* [Single course](http://hibbittsdesign.org/demo/grav-course-hub-bones/) per Hub, [multiple courses](http://hibbittsdesign.org/demo/grav-multi-course-blog-hub/) per Hub or even [multiple course sub-sites](http://hibbittsdesign.org/demo/grav-multi-course-pages-hub/) (blog + multiple pages per course) per Hub
+* Optional important reminders & class preparations areas
+* Hub pages can be easily added/removed/changed
+* Uses [Markdown](https://daringfireball.net/projects/markdown/) for streamlined cross-platform content
+* Image header area above Hub navigation bar
 * Sidebar is a simple markdown file, which can also contain HTML
-* URL flag to only display page content (for display within LMS). For example, http://demo.hibbittsdesign.org/grav-course-hub-bones/blog/week-03/onlydisplaypagecontent:true
+* URL flag to only display page content (for display within LMS). For example, [http://demo.hibbittsdesign.org/grav-course-hub-bones/home/week-03/onlydisplaypagecontent:true](http://demo.hibbittsdesign.org/grav-course-hub-bones/home/week-03/onlydisplaypagecontent:true)
 * External links are automatically opened in a new Tab/Window
-* Built-in support for entire site to be maintained on GitHub
-* Since everything is built with Grav it can be entirely customized.
+* Built-in support for entire Hub to be collaboratively maintained on GitHub or GitLab (for local hosting)
+* Since everything is built with Grav it can be _entirely_ customized
 
 To learn more about how to most effectively use the Grav Course Hub, visit [hibbittdesign.org](http://hibbittsdesign.org/blog/)
 
 # Course Hub Page Templates
 
 * Blog template (blog.html.twig)
-* Important reminders template (important-reminders.html.twig)
-* Class preparations template (class-preparations.html.twig)
+* Important reminders template (important_reminders.html.twig)
+* Weekly preparations template (preparations.html.twig)
 * Blog item template (blog_item.html.twig)
 * Item template (item.html.twig)
-* Page template (page.html.twig)
+* Page with Sidebar template (sidebarpage.html.twig)
+* Full width Page template (fullwidthpage.html.twig)
 * Sidebar template (sidebar.html.twig)
 
 #Site Structure

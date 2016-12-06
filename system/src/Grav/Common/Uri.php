@@ -8,6 +8,7 @@
 
 namespace Grav\Common;
 
+use Grav\Common\Language\Language;
 use Grav\Common\Page\Page;
 
 class Uri
@@ -207,6 +208,7 @@ class Uri
 
         $grav = Grav::instance();
 
+        /** @var Language $language */
         $language = $grav['language'];
 
         $uri_bits = Uri::parseUrl($url);
@@ -275,14 +277,11 @@ class Uri
         }
 
         // Set some defaults
-        $this->root = $this->base . $this->root_path;
+        $this->root = $grav['config']->get('system.custom_base_url') ?: $this->base . $this->root_path;
         $this->url = $this->base . $this->uri;
 
         // get any params and remove them
         $uri = str_replace($this->root, '', $this->url);
-
-        // remove double slashes
-        $uri = preg_replace('#/{2,}#', '/', $uri);
 
         // remove the setup.php based base if set:
         $setup_base = $grav['pages']->base();
@@ -292,7 +291,7 @@ class Uri
 
         // If configured to, redirect trailing slash URI's with a 301 redirect
         if ($config->get('system.pages.redirect_trailing_slash', false) && $uri != '/' && Utils::endsWith($uri, '/')) {
-            $grav->redirect(rtrim($uri, '/'), 301);
+            $grav->redirect(str_replace($this->root, '', rtrim($uri, '/')), 301);
         }
 
         // process params
@@ -344,7 +343,7 @@ class Uri
         }
 
         // Set some Grav stuff
-        $grav['base_url_absolute'] = $this->rootUrl(true);
+        $grav['base_url_absolute'] = $grav['config']->get('system.custom_base_url') ?: $this->rootUrl(true);
         $grav['base_url_relative'] = $this->rootUrl(false);
         $grav['base_url'] = $grav['config']->get('system.absolute_urls') ? $grav['base_url_absolute'] : $grav['base_url_relative'];
     }
@@ -767,14 +766,14 @@ class Uri
     /**
      * Converts links from absolute '/' or relative (../..) to a Grav friendly format
      *
-     * @param Page   $page         the current page to use as reference
+     * @param Page $page the current page to use as reference
      * @param string $url the URL as it was written in the markdown
-     * @param string $type         the type of URL, image | link
-     * @param bool   $absolute     if null, will use system default, if true will use absolute links internally
-     *
+     * @param string $type the type of URL, image | link
+     * @param bool $absolute if null, will use system default, if true will use absolute links internally
+     * @param bool $route_only only return the route, not full URL path
      * @return string the more friendly formatted url
      */
-    public static function convertUrl(Page $page, $url, $type = 'link', $absolute = false)
+    public static function convertUrl(Page $page, $url, $type = 'link', $absolute = false, $route_only = false)
     {
         $grav = Grav::instance();
 
@@ -921,6 +920,10 @@ class Uri
             $url['path'] = $url_path;
         } else {
             $url = $url_path;
+        }
+
+        if ($route_only) {
+            $url = str_replace($base_url, '', $url);
         }
 
         return $url;

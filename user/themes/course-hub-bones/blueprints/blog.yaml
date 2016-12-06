@@ -45,7 +45,7 @@ form:
               default: 5
               validate:
                 required: true
-                type: number
+                type: integer
                 min: 1
 
             header.content.order.by:
@@ -74,6 +74,32 @@ form:
               options:
                 1: Enabled
                 0: Disabled
+
+            coursehub2:
+                type: section
+                title: GitHub/GitLab
+                underline: true
+
+            header.hidegithublink:
+                type: toggle
+                label: Display GitHub/GitLab Edit Page Link
+                help: Determines if the GitHub/GitLab edit Page link is displayed for this page
+                default: 0
+                highlight: 0
+                options:
+                    0:  Yes
+                    1:  No
+                validate:
+                    type: bool
+                    
+            header.githublink:
+                type: text
+                size: large
+                label: Custom GitHub/GitLab Page URL
+                help: Custom GitHub/GitLab URL for this page, to override the automatically calculated URL
+                default: null
+                validate:
+                    type: URL
 
         assets:
           type: tab

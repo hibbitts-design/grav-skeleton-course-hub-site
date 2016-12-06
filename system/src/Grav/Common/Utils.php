@@ -9,8 +9,6 @@
 namespace Grav\Common;
 
 use DateTime;
-use DateTimeZone;
-use Grav\Common\Grav;
 use Grav\Common\Helpers\Truncator;
 use RocketTheme\Toolbox\Event\Event;
 
@@ -183,26 +181,28 @@ abstract class Utils
      * Truncate HTML by number of characters. not "word-safe"!
      *
      * @param  string $text
-     * @param  int    $length
+     * @param  int $length in characters
+     * @param  string $ellipsis
      *
      * @return string
      */
-    public static function truncateHtml($text, $length = 100)
+    public static function truncateHtml($text, $length = 100, $ellipsis = '...')
     {
-        return Truncator::truncate($text, $length, ['length_in_chars' => true]);
+        return Truncator::truncateLetters($text, $length, $ellipsis);
     }
 
     /**
      * Truncate HTML by number of characters in a "word-safe" manor.
      *
      * @param  string $text
-     * @param  int    $length
+     * @param  int    $length in words
+     * @param  string $ellipsis
      *
      * @return string
      */
-    public static function safeTruncateHtml($text, $length = 100)
+    public static function safeTruncateHtml($text, $length = 25, $ellipsis = '...')
     {
-        return Truncator::truncate($text, $length, ['length_in_chars' => true, 'word_safe' => true]);
+        return Truncator::truncateWords($text, $length, $ellipsis);
     }
 
     /**
@@ -233,7 +233,7 @@ abstract class Utils
             Grav::instance()->fireEvent('onBeforeDownload', new Event(['file' => $file]));
 
             $file_parts = pathinfo($file);
-            $mimetype = Utils::getMimeType($file_parts['extension']);
+            $mimetype = Utils::getMimeByExtension($file_parts['extension']);
             $size   = filesize($file); // File size
 
             // clean all buffers
@@ -319,22 +319,84 @@ abstract class Utils
     }
 
     /**
-     * Return the mimetype based on filename
+     * Return the mimetype based on filename extension
      *
      * @param string $extension Extension of file (eg "txt")
+     * @param string $default
      *
      * @return string
      */
-    public static function getMimeType($extension)
+    public static function getMimeByExtension($extension, $default = 'application/octet-stream')
     {
         $extension = strtolower($extension);
-        $config = Grav::instance()['config']->get('media.types');
 
-        if (isset($config[$extension])) {
-            return $config[$extension]['mime'];
+        // look for some standard types
+        switch ($extension) {
+            case null:
+                return $default;
+            case 'json':
+                return 'application/json';
+            case 'html':
+                return 'text/html';
+            case 'atom':
+                return 'application/atom+xml';
+            case 'rss':
+                return 'application/rss+xml';
+            case 'xml':
+                return 'application/xml';
         }
 
-        return 'application/octet-stream';
+        $media_types = Grav::instance()['config']->get('media.types');
+
+        if (isset($media_types[$extension])) {
+            if (isset($media_types[$extension]['mime'])) {
+                return $media_types[$extension]['mime'];
+            }
+        }
+
+        return $default;
+    }
+
+    /**
+     * Return the mimetype based on filename extension
+     *
+     * @param string $mime mime type (eg "text/html")
+     * @param string $default default value
+     *
+     * @return string
+     */
+    public static function getExtensionByMime($mime, $default = 'html')
+    {
+        $mime = strtolower($mime);
+
+        // look for some standard mime types
+        switch ($mime) {
+            case '*/*':
+            case 'text/*':
+            case 'text/html':
+                return 'html';
+            case 'application/json':
+                return 'json';
+            case 'application/atom+xml':
+                return 'atom';
+            case 'application/rss+xml':
+                return 'rss';
+            case 'application/xml':
+                return 'xml';
+        }
+
+        $media_types = Grav::instance()['config']->get('media.types');
+
+        foreach ($media_types as $extension => $type) {
+            if ($extension == 'defaults') {
+                continue;
+            }
+            if (isset($type['mime']) && $type['mime'] == $mime) {
+                return $extension;
+            }
+        }
+
+        return $default;
     }
 
     /**
@@ -430,6 +492,27 @@ abstract class Utils
         }
 
         return $result;
+    }
+
+    /**
+     * Flatten an array
+     *
+     * @param $array
+     * @return array
+     */
+    public static function arrayFlatten($array)
+    {
+        $flatten = array();
+        foreach ($array as $key => $inner){
+            if (is_array($inner)) {
+                foreach ($inner as $inner_key => $value) {
+                    $flatten[$inner_key] = $value;
+                }
+            } else {
+                $flatten[$key] = $inner;
+            }
+        }
+        return $flatten;
     }
 
     /**
@@ -690,12 +773,14 @@ abstract class Utils
      * Set portion of array (passed by reference) for a dot-notation key
      * and set the value
      *
-     * @param $array
-     * @param $key
-     * @param $value
+     * @param      $array
+     * @param      $key
+     * @param      $value
+     * @param bool $merge
+     *
      * @return mixed
      */
-    public static function setDotNotation(&$array, $key, $value)
+    public static function setDotNotation(&$array, $key, $value, $merge = false)
     {
         if (is_null($key)) return $array = $value;
 
@@ -713,7 +798,14 @@ abstract class Utils
             $array =& $array[$key];
         }
 
-        $array[array_shift($keys)] = $value;
+        $key = array_shift($keys);
+
+        if (!$merge || !isset($array[$key])) {
+            $array[$key] = $value;
+        } else {
+            $array[$key] = array_merge($array[$key], $value);
+        }
+
 
         return $array;
     }
