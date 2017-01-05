@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
+class ComposerStaticInit8162262ea9c9ff4d718aea0bd6cb6ff1
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -308,6 +308,7 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Grav\\Common\\Errors\\Errors' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/Errors.php',
         'Grav\\Common\\Errors\\SimplePageHandler' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/SimplePageHandler.php',
         'Grav\\Common\\File\\CompiledFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledFile.php',
+        'Grav\\Common\\File\\CompiledJsonFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledJsonFile.php',
         'Grav\\Common\\File\\CompiledMarkdownFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledMarkdownFile.php',
         'Grav\\Common\\File\\CompiledYamlFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledYamlFile.php',
         'Grav\\Common\\Filesystem\\Folder' => __DIR__ . '/../..' . '/system/src/Grav/Common/Filesystem/Folder.php',
@@ -335,6 +336,7 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Grav\\Common\\Getters' => __DIR__ . '/../..' . '/system/src/Grav/Common/Getters.php',
         'Grav\\Common\\Grav' => __DIR__ . '/../..' . '/system/src/Grav/Common/Grav.php',
         'Grav\\Common\\GravTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/GravTrait.php',
+        'Grav\\Common\\Helpers\\Base32' => __DIR__ . '/../..' . '/system/src/Grav/Common/Helpers/Base32.php',
         'Grav\\Common\\Helpers\\Excerpts' => __DIR__ . '/../..' . '/system/src/Grav/Common/Helpers/Excerpts.php',
         'Grav\\Common\\Helpers\\Truncator' => __DIR__ . '/../..' . '/system/src/Grav/Common/Helpers/Truncator.php',
         'Grav\\Common\\Inflector' => __DIR__ . '/../..' . '/system/src/Grav/Common/Inflector.php',
@@ -347,7 +349,9 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Grav\\Common\\Page\\Collection' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Collection.php',
         'Grav\\Common\\Page\\Header' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Header.php',
         'Grav\\Common\\Page\\Media' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Media.php',
+        'Grav\\Common\\Page\\Medium\\AbstractMedia' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/AbstractMedia.php',
         'Grav\\Common\\Page\\Medium\\AudioMedium' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/AudioMedium.php',
+        'Grav\\Common\\Page\\Medium\\GlobalMedia' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/GlobalMedia.php',
         'Grav\\Common\\Page\\Medium\\ImageFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/ImageFile.php',
         'Grav\\Common\\Page\\Medium\\ImageMedium' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/ImageMedium.php',
         'Grav\\Common\\Page\\Medium\\Link' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/Link.php',
@@ -383,6 +387,7 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Grav\\Common\\Service\\ConfigServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/ConfigServiceProvider.php',
         'Grav\\Common\\Service\\ErrorServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/ErrorServiceProvider.php',
         'Grav\\Common\\Service\\LoggerServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/LoggerServiceProvider.php',
+        'Grav\\Common\\Service\\MessagesServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/MessagesServiceProvider.php',
         'Grav\\Common\\Service\\OutputServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/OutputServiceProvider.php',
         'Grav\\Common\\Service\\PageServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/PageServiceProvider.php',
         'Grav\\Common\\Service\\StreamsServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/StreamsServiceProvider.php',
@@ -586,6 +591,9 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Monolog\\Handler\\RotatingFileHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/RotatingFileHandler.php',
         'Monolog\\Handler\\SamplingHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SamplingHandler.php',
         'Monolog\\Handler\\SlackHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SlackHandler.php',
+        'Monolog\\Handler\\SlackWebhookHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SlackWebhookHandler.php',
+        'Monolog\\Handler\\Slack\\SlackRecord' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/Slack/SlackRecord.php',
+        'Monolog\\Handler\\SlackbotHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SlackbotHandler.php',
         'Monolog\\Handler\\SocketHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SocketHandler.php',
         'Monolog\\Handler\\StreamHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/StreamHandler.php',
         'Monolog\\Handler\\SwiftMailerHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/SwiftMailerHandler.php',
@@ -601,6 +609,7 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Monolog\\Processor\\MemoryPeakUsageProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/MemoryPeakUsageProcessor.php',
         'Monolog\\Processor\\MemoryProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/MemoryProcessor.php',
         'Monolog\\Processor\\MemoryUsageProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/MemoryUsageProcessor.php',
+        'Monolog\\Processor\\MercurialProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/MercurialProcessor.php',
         'Monolog\\Processor\\ProcessIdProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/ProcessIdProcessor.php',
         'Monolog\\Processor\\PsrLogMessageProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/PsrLogMessageProcessor.php',
         'Monolog\\Processor\\TagProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/TagProcessor.php',
@@ -946,6 +955,7 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Twig_Node_SetTemp' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Node/SetTemp.php',
         'Twig_Node_Spaceless' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Node/Spaceless.php',
         'Twig_Node_Text' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Node/Text.php',
+        'Twig_Node_With' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Node/With.php',
         'Twig_Parser' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Parser.php',
         'Twig_ParserInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/ParserInterface.php',
         'Twig_Profiler_Dumper_Blackfire' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Profiler/Dumper/Blackfire.php',
@@ -959,14 +969,19 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Twig_Sandbox_SecurityError' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityError.php',
         'Twig_Sandbox_SecurityNotAllowedFilterError' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityNotAllowedFilterError.php',
         'Twig_Sandbox_SecurityNotAllowedFunctionError' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityNotAllowedFunctionError.php',
+        'Twig_Sandbox_SecurityNotAllowedMethodError' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityNotAllowedMethodError.php',
+        'Twig_Sandbox_SecurityNotAllowedPropertyError' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityNotAllowedPropertyError.php',
         'Twig_Sandbox_SecurityNotAllowedTagError' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityNotAllowedTagError.php',
         'Twig_Sandbox_SecurityPolicy' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityPolicy.php',
         'Twig_Sandbox_SecurityPolicyInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Sandbox/SecurityPolicyInterface.php',
         'Twig_SimpleFilter' => __DIR__ . '/..' . '/twig/twig/lib/Twig/SimpleFilter.php',
         'Twig_SimpleFunction' => __DIR__ . '/..' . '/twig/twig/lib/Twig/SimpleFunction.php',
         'Twig_SimpleTest' => __DIR__ . '/..' . '/twig/twig/lib/Twig/SimpleTest.php',
+        'Twig_Source' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Source.php',
+        'Twig_SourceContextLoaderInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/SourceContextLoaderInterface.php',
         'Twig_Template' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Template.php',
         'Twig_TemplateInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TemplateInterface.php',
+        'Twig_TemplateWrapper' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TemplateWrapper.php',
         'Twig_Test' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Test.php',
         'Twig_TestCallableInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TestCallableInterface.php',
         'Twig_TestInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TestInterface.php',
@@ -997,6 +1012,7 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
         'Twig_TokenParser_Set' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TokenParser/Set.php',
         'Twig_TokenParser_Spaceless' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TokenParser/Spaceless.php',
         'Twig_TokenParser_Use' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TokenParser/Use.php',
+        'Twig_TokenParser_With' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TokenParser/With.php',
         'Twig_TokenStream' => __DIR__ . '/..' . '/twig/twig/lib/Twig/TokenStream.php',
         'Twig_Util_DeprecationCollector' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Util/DeprecationCollector.php',
         'Twig_Util_TemplateDirIterator' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Util/TemplateDirIterator.php',
@@ -1023,11 +1039,11 @@ class ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit5e13fe9cf22c4dafc96ae3aa546169c0::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8162262ea9c9ff4d718aea0bd6cb6ff1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8162262ea9c9ff4d718aea0bd6cb6ff1::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit8162262ea9c9ff4d718aea0bd6cb6ff1::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8162262ea9c9ff4d718aea0bd6cb6ff1::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8162262ea9c9ff4d718aea0bd6cb6ff1::$classMap;
 
         }, null, ClassLoader::class);
     }

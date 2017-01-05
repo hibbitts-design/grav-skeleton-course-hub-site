@@ -222,7 +222,7 @@ class JS extends Minify
             return $placeholder;
         };
 
-        $pattern = '\/.*?(?<!\\\\)(\\\\\\\\)*+\/[gimy]*(?![0-9a-zA-Z\/])';
+        $pattern = '\/.+?(?<!\\\\)(\\\\\\\\)*\/[gimy]*(?![0-9a-zA-Z\/])';
 
         // a regular expression can only be followed by a few operators or some
         // of the RegExp methods (a `\` followed by a variable or value is
@@ -237,7 +237,7 @@ class JS extends Minify
         // (https://github.com/matthiasmullie/minify/issues/56)
         $operators = $this->getOperatorsForRegex($this->operatorsBefore, '/');
         $operators += $this->getOperatorsForRegex($this->keywordsReserved, '/');
-        $this->registerPattern('/'.$pattern.'\s*\n?(?=\s*('.implode('|', $operators).'))/', $callback);
+        $this->registerPattern('/'.$pattern.'\s*\n(?=\s*('.implode('|', $operators).'))/', $callback);
     }
 
     /**
