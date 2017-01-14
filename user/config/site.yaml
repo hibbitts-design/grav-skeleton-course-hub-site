@@ -33,3 +33,7 @@ twittertimeline:
   text: 'A Twitter List by @hibbittsdesign'
   height: 700
 hidehomemenulink: false
+gitrepo:
+  editlinklocation: menu
+  editlinktext: 'Edit this Page'
+  editlinkicon: github
