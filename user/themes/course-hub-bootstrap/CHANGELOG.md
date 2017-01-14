@@ -1,3 +1,37 @@
+# v1.5.5
+## 01/14/2017
+
+1. [](#improved)
+    * Further refined Git Sync plugin config checks
+    * Updated included Font Awesome icons
+
+# v1.5.4
+## 01/13/2017
+
+1. [](#new)
+    * Added configuration assistance to Edit in Git links
+
+# v1.5.3
+## 01/08/2017
+
+1. [](#improved)
+    * Added styling to HTML alerts (thanks to OleVik)
+
+# v1.5.2
+## 01/07/2017
+
+1. [](#improved)
+    * Revised 'Edit in Git' URL calculation to align with other Grav projects
+    * Added link to guide first-time Edit this Page in Git config
+1. [](#bugfix)
+    * Changed required theme settings alerts from Javascript dialog to HTML
+
+# v1.5.1
+## 12/27/2016
+
+1. [](#improved)
+    * Updated the names of all Git-related site and page header variables
+
 # v1.5.0
 ## 12/08/2016
 
@@ -10,7 +44,7 @@
 ## 10/17/2016
 
 1. [](#improved)
-    * Updated custom page Blueprints for Course Hub options, including additional GitHub/GitLab page header options
+    * Updated custom page Blueprints for Course Hub options, including additional Git Repository page header options
 
 # v1.4.8
 ## 10/09/2016

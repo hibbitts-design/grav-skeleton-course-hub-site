@@ -18,9 +18,9 @@
           {% endif %}
           {{ page.content }}
           <br>
-          {# GitHub link - hibbittsdesign.org #}
-          {% if config.site.github.location == 'page' and (not page.header.hidegithublink) %}
-            {% include 'partials/github_page_link.html.twig' %}
+          {# Git repository edit link - hibbittsdesign.org #}
+          {% if config.site.gitrepo.editlinklocation == 'page' and (not page.header.hidegitrepoeditlink) %}
+            {% include 'partials/gitrepo_page_link.html.twig' %}
           {% endif %}
         </div>
         {# removed sidebar rendering - hibbittsdesign.org #}

@@ -73,9 +73,9 @@
       {{ page.content }}
       {% if not truncate %}
         <hr>
-        {# added github link - hibbittsdesign.org #}
-        {% if config.site.github.location == 'page' and (not page.header.hidegithublink) %}
-          {% include 'partials/github_page_link.html.twig' %}
+        {# added Git repository edit link - hibbittsdesign.org #}
+        {% if config.site.gitrepo.editlinklocation == 'page' and (not page.header.hidegitrepoeditlink) %}
+          {% include 'partials/gitrepo_page_link.html.twig' %}
           <br>
         {% endif %}
         {% set show_prev_next = true %}
@@ -105,13 +105,13 @@
         </a>
       </p>
     {% else %}
-      {# added summary flag and github link - hibbittsdesign.org #}
+      {# added summary flag and git repository edit link - hibbittsdesign.org #}
       {% set content = page.content|slice(page.summary|length) %}
       {# do not display summary on actual page - hibbittsdesign.org #}
       {{ content }}
       <hr>
-      {% if config.site.github.location == 'page' and (not page.header.hidegithublink) %}
-        {% include 'partials/github_page_link.html.twig' %}
+      {% if config.site.gitrepo.editlinklocation == 'page' and (not page.header.hidegitrepoeditlink) %}
+        {% include 'partials/gitrepo_page_link.html.twig' %}
         <br>
       {% endif %}
       {% set show_prev_next = true %}
