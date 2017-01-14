@@ -26,7 +26,7 @@ icon:
 github:
   location: menu
   icon: github
-  tree: 'https://github.com/hibbitts-design/grav-skeleton-course-hub-site/edit/master/user/pages/'
+  tree: 'https://github.com/hibbitts-design/grav-skeleton-course-hub-site/edit/master/user'
 twittertimeline:
   enabled: false
   url: 'https://twitter.com/hibbittsdesign/lists/cpt-363'
