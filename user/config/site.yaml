@@ -15,7 +15,7 @@ summary:
 blog:
   route: /blog
 displaymenuentries:
-  enabled: true
+  enabled: false
 menu:
   -
     text: Grav
@@ -37,3 +37,4 @@ gitrepo:
   editlinklocation: menu
   editlinktext: 'Edit this Page'
   editlinkicon: github
+  edittreeurl: 'https://github.com/hibbitts-design/grav-skeleton-course-hub-site/tree/master/user'
