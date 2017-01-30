@@ -1,5 +1,5 @@
 name: Course Hub Bones
-version: 1.5.7
+version: 1.5.9
 description: "A customized version of the Bones Vanilla theme (built with Foundation) for use with the Grav Course Hub skeleton package."
 icon: university
 author:
@@ -20,6 +20,7 @@ dependencies:
   - featherlight
   - feed
   - form
+  - git-sync
   - login
   - markdown-fontawesome
   - page-inject

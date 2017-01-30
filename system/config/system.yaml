@@ -36,6 +36,7 @@ pages:
     markdown: true                          # Process Markdown
     twig: false                             # Process Twig
   twig_first: false                         # Process Twig before markdown when processing both on a page
+  never_cache_twig: false                   # Only cache content, never cache twig processed in content (incompatible with `twig_first: true`)
   events:
     page: true                              # Enable page level events
     twig: true                              # Enable Twig level events
@@ -72,6 +73,7 @@ cache:
   prefix: 'g'                               # Cache prefix string (prevents cache conflicts)
   lifetime: 604800                          # Lifetime of cached data in seconds (0 = infinite)
   gzip: false                               # GZip compress the page output
+  allow_webserver_gzip: false               # If true, `content-encoding: identity` but connection isn't closed before `onShutDown()` event
   redis:
     socket: false                           # Path to redis unix socket (e.g. /var/run/redis/redis.sock), false = use server and port to connect
 

@@ -7,7 +7,7 @@
  * @link https://github.com/donatj/PhpUserAgent
  * @link http://donatstudios.com/PHP-Parser-HTTP_USER_AGENT
  * @param string|null $u_agent User agent string to parse or null. Uses $_SERVER['HTTP_USER_AGENT'] on NULL
- * @throws InvalidArgumentException on not having a proper user agent to parse.
+ * @throws \InvalidArgumentException on not having a proper user agent to parse.
  * @return string[] an array with browser, version and platform keys
  */
 function parse_user_agent( $u_agent = null ) {
@@ -52,8 +52,8 @@ function parse_user_agent( $u_agent = null ) {
 		$platform = 'Chrome OS';
 	}
 
-	preg_match_all('%(?P<browser>Camino|Kindle(\ Fire)?|Firefox|Iceweasel|Safari|MSIE|Trident|AppleWebKit|TizenBrowser|Chrome|
-				Vivaldi|IEMobile|Opera|OPR|Silk|Midori|Edge|CriOS|UCBrowser|
+	preg_match_all('%(?P<browser>Camino|Kindle(\ Fire)?|Firefox|Iceweasel|IceCat|Safari|MSIE|Trident|AppleWebKit|
+				TizenBrowser|Chrome|Vivaldi|IEMobile|Opera|OPR|Silk|Midori|Edge|CriOS|UCBrowser|
 				Baiduspider|Googlebot|YandexBot|bingbot|Lynx|Version|Wget|curl|
 				Valve\ Steam\ Tenfoot|
 				NintendoBrowser|PLAYSTATION\ (\d|Vita)+)
@@ -97,7 +97,7 @@ function parse_user_agent( $u_agent = null ) {
 
 	$key = 0;
 	$val = '';
-	if( $browser == 'Iceweasel' ) {
+	if( $browser == 'Iceweasel' || strtolower($browser) == 'icecat' ) {
 		$browser = 'Firefox';
 	} elseif( $find('Playstation Vita', $key) ) {
 		$platform = 'PlayStation Vita';
@@ -122,9 +122,9 @@ function parse_user_agent( $u_agent = null ) {
 		$version = $result['version'][$key];
 	} elseif( $find(array( 'IEMobile', 'Edge', 'Midori', 'Vivaldi', 'Valve Steam Tenfoot', 'Chrome' ), $key, $browser) ) {
 		$version = $result['version'][$key];
-	} elseif( $browser == 'MSIE' || ($rv_result && $find('Trident', $key)) ) {
+	} elseif( $rv_result && $find('Trident', $key) ) {
 		$browser = 'MSIE';
-		$version = $rv_result ?: $result['version'][$key];
+		$version = $rv_result;
 	} elseif( $find('UCBrowser', $key) ) {
 		$browser = 'UC Browser';
 		$version = $result['version'][$key];

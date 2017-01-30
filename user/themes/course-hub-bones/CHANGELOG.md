@@ -1,3 +1,16 @@
+# v1.5.9
+## 01/26/2017
+
+1. [](#improved)
+    * Updated icon of Edit in Git setup links
+
+# v1.5.8
+## 01/25/2017
+
+1. [](#new)
+    * Added Git Sync plugin as dependency
+    * Added CC License Picker display
+
 # v1.5.7
 ## 01/14/2017
 
