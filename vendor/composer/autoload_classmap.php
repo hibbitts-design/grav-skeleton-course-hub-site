@@ -324,6 +324,8 @@ return array(
     'MatthiasMullie\\Minify\\JS' => $vendorDir . '/matthiasmullie/minify/src/JS.php',
     'MatthiasMullie\\Minify\\Minify' => $vendorDir . '/matthiasmullie/minify/src/Minify.php',
     'MatthiasMullie\\PathConverter\\Converter' => $vendorDir . '/matthiasmullie/path-converter/src/Converter.php',
+    'MatthiasMullie\\PathConverter\\ConverterInterface' => $vendorDir . '/matthiasmullie/path-converter/src/ConverterInterface.php',
+    'MatthiasMullie\\PathConverter\\NoConverter' => $vendorDir . '/matthiasmullie/path-converter/src/NoConverter.php',
     'Monolog\\ErrorHandler' => $vendorDir . '/monolog/monolog/src/Monolog/ErrorHandler.php',
     'Monolog\\Formatter\\ChromePHPFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
     'Monolog\\Formatter\\ElasticaFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php',
