@@ -5,6 +5,7 @@ use Grav\Common\Cache;
 use Grav\Common\Config\Config;
 use Grav\Common\File\CompiledYamlFile;
 use Grav\Common\Filesystem\Folder;
+use Grav\Common\GPM\GPM as GravGPM;
 use Grav\Common\GPM\Installer;
 use Grav\Common\Grav;
 use Grav\Common\Data;
@@ -556,7 +557,10 @@ class AdminController extends AdminBaseController
             $config->reload();
 
             if ($this->view === 'user') {
-                $this->grav['user']->merge(User::load($this->admin->route)->toArray());
+                if ($obj->username == $this->grav['user']->username) {
+                    //Editing current user. Reload user object
+                    $this->grav['user']->merge(User::load($this->admin->route)->toArray());
+                }
             }
         }
 
@@ -788,6 +792,51 @@ class AdminController extends AdminBaseController
         }
 
         $this->admin->json_response = ['status' => 'success', 'feed_data' => $feed_data];
+    }
+
+    /**
+     * Get update status from GPM
+     */
+    protected function taskGetUpdates()
+    {
+        $data     = $this->post;
+        $flush = isset($data['flush']) && $data['flush'] == true ? true : false;
+
+        if (isset($this->grav['session'])) {
+            $this->grav['session']->close();
+        }
+
+        try {
+            $gpm = new GravGPM($flush);
+
+            $resources_updates = $gpm->getUpdatable();
+            if ($gpm->grav != null) {
+                $grav_updates = [
+                    "isUpdatable" => $gpm->grav->isUpdatable(),
+                    "assets"      => $gpm->grav->getAssets(),
+                    "version"     => GRAV_VERSION,
+                    "available"   => $gpm->grav->getVersion(),
+                    "date"        => $gpm->grav->getDate(),
+                    "isSymlink"   => $gpm->grav->isSymlink()
+                ];
+
+                $this->admin->json_response = [
+                    "status"  => "success",
+                    "payload" => [
+                        "resources" => $resources_updates,
+                        "grav"      => $grav_updates,
+                        "installed" => $gpm->countInstalled(),
+                        'flushed'   => $flush
+                    ]
+                ];
+            } else {
+                $this->admin->json_response = ["status" => "error", "message" => "Cannot connect to the GPM"];
+            }
+
+        } catch (\Exception $e) {
+            $this->admin->json_response = ["status" => "error", "message" => $e->getMessage()];
+        }
+
     }
 
     /**
@@ -1537,32 +1586,49 @@ class AdminController extends AdminBaseController
         }
 
         $targetPath = $page->path() . '/' . $filename;
+        $fileParts = pathinfo($filename);
 
-        if (!file_exists($targetPath)) {
+        $found = false;
+
+        if (file_exists($targetPath)) {
+            $found = true;
+            $result = unlink($targetPath);
+
+            if (!$result) {
+                $this->admin->json_response = [
+                    'status'  => 'error',
+                    'message' => $this->admin->translate('PLUGIN_ADMIN.FILE_COULD_NOT_BE_DELETED') . ': ' . $filename
+                ];
+
+                return false;
+            }
+        }
+
+
+        foreach (scandir($page->path()) as $file) {
+            if (preg_match("/{$fileParts['filename']}@\d+x\.{$fileParts['extension']}$/", $file)) {
+                $result = unlink($page->path() . '/' . $file);
+
+                if (!$result) {
+                    $this->admin->json_response = [
+                        'status'  => 'error',
+                        'message' => $this->admin->translate('PLUGIN_ADMIN.FILE_COULD_NOT_BE_DELETED') . ': ' . $filename
+                    ];
+
+                    return false;
+                }
+
+                $found = true;
+            }
+        }
+
+        if (!$found) {
             $this->admin->json_response = [
                 'status'  => 'error',
                 'message' => $this->admin->translate('PLUGIN_ADMIN.FILE_NOT_FOUND') . ': ' . $filename
             ];
 
             return false;
-        }
-
-        $fileParts = pathinfo($filename);
-        $result    = unlink($targetPath);
-
-        if (!$result) {
-            $this->admin->json_response = [
-                'status'  => 'error',
-                'message' => $this->admin->translate('PLUGIN_ADMIN.FILE_COULD_NOT_BE_DELETED') . ': ' . $filename
-            ];
-
-            return false;
-        }
-
-        foreach (scandir($page->path()) as $file) {
-            if (preg_match("/{$fileParts['filename']}@\d+x\.{$fileParts['extension']}$/", $file)) {
-                unlink($page->path() . '/' . $file);
-            }
         }
 
         $this->grav->fireEvent('onAdminAfterDelMedia', new Event(['page' => $page]));
@@ -1973,6 +2039,7 @@ class AdminController extends AdminBaseController
             $aPage->init(new \SplFileInfo($path), $language . '.md');
             $aPage->header($obj->header());
             $aPage->rawMarkdown($obj->rawMarkdown());
+            $aPage->template($obj->template());
             $aPage->validate();
             $aPage->filter();
             $aPage->save();

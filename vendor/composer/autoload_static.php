@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7deceaa9aeec755a82677d4e669a9849
+class ComposerStaticInitcc0bfb0747d68462acd177d00a576744
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -307,6 +307,7 @@ class ComposerStaticInit7deceaa9aeec755a82677d4e669a9849
         'Grav\\Common\\Errors\\BareHandler' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/BareHandler.php',
         'Grav\\Common\\Errors\\Errors' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/Errors.php',
         'Grav\\Common\\Errors\\SimplePageHandler' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/SimplePageHandler.php',
+        'Grav\\Common\\Errors\\SystemFacade' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/SystemFacade.php',
         'Grav\\Common\\File\\CompiledFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledFile.php',
         'Grav\\Common\\File\\CompiledJsonFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledJsonFile.php',
         'Grav\\Common\\File\\CompiledMarkdownFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledMarkdownFile.php',
@@ -1043,11 +1044,11 @@ class ComposerStaticInit7deceaa9aeec755a82677d4e669a9849
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit7deceaa9aeec755a82677d4e669a9849::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit7deceaa9aeec755a82677d4e669a9849::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit7deceaa9aeec755a82677d4e669a9849::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit7deceaa9aeec755a82677d4e669a9849::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit7deceaa9aeec755a82677d4e669a9849::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcc0bfb0747d68462acd177d00a576744::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcc0bfb0747d68462acd177d00a576744::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitcc0bfb0747d68462acd177d00a576744::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitcc0bfb0747d68462acd177d00a576744::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitcc0bfb0747d68462acd177d00a576744::$classMap;
 
         }, null, ClassLoader::class);
     }

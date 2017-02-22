@@ -1,3 +1,18 @@
+# v2.1.1
+## 02/17/2017
+
+1. [](#improved)
+    * Better default output for select, checkbox and checkboxes fields in the form destination page and in the emails sent via form submit [#121](https://github.com/getgrav/grav-plugin-form/issues/121)
+
+# v2.1.0
+## 02/10/2017
+
+1. [](#improved)
+    * Reworked logic so form caching is based on `Pages::getPagesCacheId()`
+    * Added `url` option for button field
+1. [](#bugfix)
+    * Fixed issue with `honeypot` field not throwing exception properly
+
 # v2.0.10
 ## 02/08/2017
 

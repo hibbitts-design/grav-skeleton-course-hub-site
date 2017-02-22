@@ -103,6 +103,7 @@ return array(
     'Grav\\Common\\Errors\\BareHandler' => $baseDir . '/system/src/Grav/Common/Errors/BareHandler.php',
     'Grav\\Common\\Errors\\Errors' => $baseDir . '/system/src/Grav/Common/Errors/Errors.php',
     'Grav\\Common\\Errors\\SimplePageHandler' => $baseDir . '/system/src/Grav/Common/Errors/SimplePageHandler.php',
+    'Grav\\Common\\Errors\\SystemFacade' => $baseDir . '/system/src/Grav/Common/Errors/SystemFacade.php',
     'Grav\\Common\\File\\CompiledFile' => $baseDir . '/system/src/Grav/Common/File/CompiledFile.php',
     'Grav\\Common\\File\\CompiledJsonFile' => $baseDir . '/system/src/Grav/Common/File/CompiledJsonFile.php',
     'Grav\\Common\\File\\CompiledMarkdownFile' => $baseDir . '/system/src/Grav/Common/File/CompiledMarkdownFile.php',

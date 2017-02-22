@@ -697,17 +697,17 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v2.8.16",
-        "version_normalized": "2.8.16.0",
+        "version": "v2.8.17",
+        "version_normalized": "2.8.17.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "8d2df79c132df0b14df305727fb2c26d33ab5492"
+            "reference": "eb4526a20ba9e691f50a7510ea3db3728ada958f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/8d2df79c132df0b14df305727fb2c26d33ab5492",
-            "reference": "8d2df79c132df0b14df305727fb2c26d33ab5492",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eb4526a20ba9e691f50a7510ea3db3728ada958f",
+            "reference": "eb4526a20ba9e691f50a7510ea3db3728ada958f",
             "shasum": ""
         },
         "require": {
@@ -720,7 +720,7 @@
         "suggest": {
             "ext-symfony_debug": ""
         },
-        "time": "2017-01-02T20:30:24+00:00",
+        "time": "2017-01-24T13:02:12+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -954,23 +954,23 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v2.8.16",
-        "version_normalized": "2.8.16.0",
+        "version": "v2.8.17",
+        "version_normalized": "2.8.17.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
-            "reference": "dbe61fed9cd4a44c5b1d14e5e7b1a8640cfb2bf2"
+            "reference": "322a8c2dfbca15ad6b1b27e182899f98ec0e0153"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/dbe61fed9cd4a44c5b1d14e5e7b1a8640cfb2bf2",
-            "reference": "dbe61fed9cd4a44c5b1d14e5e7b1a8640cfb2bf2",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/322a8c2dfbca15ad6b1b27e182899f98ec0e0153",
+            "reference": "322a8c2dfbca15ad6b1b27e182899f98ec0e0153",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.9"
         },
-        "time": "2017-01-03T13:49:52+00:00",
+        "time": "2017-01-21T16:40:50+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1005,8 +1005,8 @@
     },
     {
         "name": "symfony/event-dispatcher",
-        "version": "v2.8.16",
-        "version_normalized": "2.8.16.0",
+        "version": "v2.8.17",
+        "version_normalized": "2.8.17.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/event-dispatcher.git",
@@ -1224,17 +1224,17 @@
     },
     {
         "name": "symfony/console",
-        "version": "v2.8.16",
-        "version_normalized": "2.8.16.0",
+        "version": "v2.8.17",
+        "version_normalized": "2.8.17.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "2e18b8903d9c498ba02e1dfa73f64d4894bb6912"
+            "reference": "f3c234cd8db9f7e520a91d695db7d8bb5daeb7a4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/2e18b8903d9c498ba02e1dfa73f64d4894bb6912",
-            "reference": "2e18b8903d9c498ba02e1dfa73f64d4894bb6912",
+            "url": "https://api.github.com/repos/symfony/console/zipball/f3c234cd8db9f7e520a91d695db7d8bb5daeb7a4",
+            "reference": "f3c234cd8db9f7e520a91d695db7d8bb5daeb7a4",
             "shasum": ""
         },
         "require": {
@@ -1252,7 +1252,7 @@
             "symfony/event-dispatcher": "",
             "symfony/process": ""
         },
-        "time": "2017-01-08T20:43:03+00:00",
+        "time": "2017-02-06T12:04:06+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
