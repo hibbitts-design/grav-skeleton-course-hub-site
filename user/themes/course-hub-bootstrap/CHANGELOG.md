@@ -1,3 +1,15 @@
+# v1.6.0
+## 02/23/2017
+
+1. [](#new)
+    * Added Edit this Theme in Git link
+
+# v1.5.9
+## 02/19/2017
+
+1. [](#improved)
+    * Revised handling of custom.css theme file to better support inherited theme usage
+
 # v1.5.8
 ## 01/26/2017
 

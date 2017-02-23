@@ -18,7 +18,7 @@ home:
   alias: /home
   hide_in_urls: false
 pages:
-  theme: course-hub-bootstrap
+  theme: mytheme
   order:
     by: default
     dir: asc
@@ -33,6 +33,7 @@ pages:
     markdown: true
     twig: false
   twig_first: false
+  never_cache_twig: false
   events:
     page: true
     twig: true
@@ -78,8 +79,10 @@ cache:
     method: file
   driver: auto
   prefix: g
+  cli_compatibility: false
   lifetime: 604800
   gzip: false
+  allow_webserver_gzip: false
   redis:
     socket: false
 twig:

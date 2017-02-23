@@ -1,0 +1,56 @@
+.pagination > li  {
+    font-size: 16px; /* Default font size increased */
+}
+
+#error {
+  text-align: center;
+}
+
+.up-arrow {
+  text-align: center;
+  font-size: 4em;
+}
+
+.myheader {
+  background-color: #464646;
+  background-repeat:no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-position:center;
+  width: auto;
+  height: 210px;
+}
+
+.sidebar-content {
+  margin-bottom: 14px!important;
+}
+
+.sidebar-content h5 {
+  color: #666666;
+  margin-top: 24px;
+  margin-bottom: 2px;
+}
+
+.topstickypost h3 {
+  color: #666666;
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1024px) {
+    .myheader {
+        height: 170px;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 700px) {
+    .myheader {
+        height: 130px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .myheader {
+        height: 90px;
+    }
+}
