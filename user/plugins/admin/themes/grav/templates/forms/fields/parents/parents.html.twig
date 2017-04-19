@@ -1,0 +1,10 @@
+{% extends "forms/fields/pages/pages.html.twig" %}
+
+{% block input %}
+    {% if value is empty %}
+        {% set value = admin.getLastPageRoute %}
+    {% endif %}
+    {% set defaults = {show_root:true, show_all:true, show_slug:true} %}
+    {% set field = field|merge(defaults) %}
+    {{ parent() }}
+{% endblock %}

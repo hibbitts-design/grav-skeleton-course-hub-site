@@ -1,3 +1,39 @@
+# v2.4.0
+## 04/19/2017
+
+1. [](#new)
+    * Added the ability for front-end forms to use advanced blueprint features such as `data-*@` and `config-*@`
+    * Added support for dynamically added pages to process forms properly
+    * Added a new avatar field for displaying account avatar
+    * Added method to get all `data` from a form
+    * Support `task` in button types
+1. [](#improved)
+    * Added a new default ajax handler twig template
+    * Moved twig events to always process even if forms are not defined
+    * Some code cleanup
+    * Handle `null` with session-based form
+    * Added support for append/prepend to number field
+1. [](#bugfix)
+    * Always process form events as long as a `$_POST` exists [login #101](https://github.com/getgrav/grav-plugin-login/issues/101)
+    * Various fixes for `file` field
+    * Allow manually added pages to process forms and upload files
+    * Fixed issue with nested fileds not showing up in `data.*.twig` templates
+
+# v2.3.1
+## 03/23/2017
+
+1. [](#bugfix)
+    * Only include `outerclasses` DIV if defined [#135](https://github.com/getgrav/grav-plugin-form/issues/135)
+
+# v2.3.0
+## 03/17/2017
+
+1. [](#new)
+    * Ability to process any form on any page via `action:`.  Super useful if you want to handle form processing on some other non-form page (or Ajax)
+    * Added the ability for the form to set the `template:` to use to render the form processing response.
+1. [](#bugfix)
+    * Fix `number` field so it works with min value `0` [#130](https://github.com/getgrav/grav-plugin-form/issues/130)
+
 # v2.2.0
 ## 03/13/2017
 
@@ -5,7 +41,7 @@
     * Added new `fieldset` form field [#125](https://github.com/getgrav/grav-plugin-form/issues/125)
     * Added new `conditional form field` to show fields only if some `condition` is set
 1. [](#improved)
-    * Added the option to have outerclasses on buttons [#124](https://github.com/getgrav/grav-plugin-form/issues/124)
+    * Added the option to have outer-classes on buttons [#124](https://github.com/getgrav/grav-plugin-form/issues/124)
     * Added the option to disable fields label if not defined [#126](https://github.com/getgrav/grav-plugin-form/issues/126)
 
 # v2.1.1

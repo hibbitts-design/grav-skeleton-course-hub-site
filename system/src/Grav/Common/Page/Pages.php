@@ -292,35 +292,85 @@ class Pages
     }
 
     /**
+     * Get a page ancestor.
+     *
+     * @param  string $route The relative URL of the page
+     * @param  string $path The relative path of the ancestor folder
+     *
+     * @return Page|null
+     */
+    public function ancestor($route, $path = null)
+    {
+        if (!is_null($path)) {
+
+            $page = $this->dispatch($route, true);
+
+            if ($page->path() == $path) {
+                return $page;
+            } elseif (!$page->parent()->root()) {
+                return $this->ancestor($page->parent()->route(), $path);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get a page ancestor trait.
+     *
+     * @param  string $route The relative route of the page
+     * @param  string $field The field name of the ancestor to query for
+     *
+     * @return Page|null
+     */
+    public function inherited($route, $field = null)
+    {
+        if (!is_null($field)) {
+
+            $page = $this->dispatch($route, true);
+
+            $ancestorField = $page->parent()->value('header.' . $field);
+
+            if ($ancestorField != null) {
+                return $page->parent();
+            } elseif (!$page->parent()->root()) {
+                return $this->inherited($page->parent()->route(), $field);
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * alias method to return find a page.
      *
-     * @param string $url The relative URL of the page
+     * @param string $route The relative URL of the page
      * @param bool   $all
      *
      * @return Page|null
      */
-    public function find($url, $all = false)
+    public function find($route, $all = false)
     {
-        return $this->dispatch($url, $all, false);
+        return $this->dispatch($route, $all, false);
     }
 
     /**
      * Dispatch URI to a page.
      *
-     * @param string $url The relative URL of the page
+     * @param string $route The relative URL of the page
      * @param bool $all
      *
      * @param bool $redirect
      * @return Page|null
      * @throws \Exception
      */
-    public function dispatch($url, $all = false, $redirect = true)
+    public function dispatch($route, $all = false, $redirect = true)
     {
         // Fetch page if there's a defined route to it.
-        $page = isset($this->routes[$url]) ? $this->get($this->routes[$url]) : null;
+        $page = isset($this->routes[$route]) ? $this->get($this->routes[$route]) : null;
         // Try without trailing slash
-        if (!$page && Utils::endsWith($url, '/')) {
-            $page = isset($this->routes[rtrim($url, '/')]) ? $this->get($this->routes[rtrim($url, '/')]) : null;
+        if (!$page && Utils::endsWith($route, '/')) {
+            $page = isset($this->routes[rtrim($route, '/')]) ? $this->get($this->routes[rtrim($route, '/')]) : null;
         }
 
         // Are we in the admin? this is important!
@@ -340,13 +390,13 @@ class Pages
                 $config = $this->grav['config'];
 
                 // See if route matches one in the site configuration
-                $route = $config->get("site.routes.{$url}");
-                if ($route) {
-                    $page = $this->dispatch($route, $all);
+                $site_route = $config->get("site.routes.{$route}");
+                if ($site_route) {
+                    $page = $this->dispatch($site_route, $all);
                 } else {
                     // Try Regex style redirects
                     $uri = $this->grav['uri'];
-                    $source_url = $url;
+                    $source_url = $route;
                     $extension = $uri->extension();
                     if (isset($extension) && !Utils::endsWith($uri->url(), $extension)) {
                         $source_url.= '.' . $extension;
@@ -454,6 +504,51 @@ class Pages
     }
 
     /**
+     * Get available parents raw routes.
+     *
+     * @return array
+     */
+    public static function parentsRawRoutes()
+    {
+        $rawRoutes = true;
+
+        return self::getParents($rawRoutes);
+    }
+
+    /**
+     * Get available parents routes
+     *
+     * @param bool $rawRoutes get the raw route or the normal route
+     *
+     * @return array
+     */
+    private static function getParents($rawRoutes)
+    {
+        $grav = Grav::instance();
+
+        /** @var Pages $pages */
+        $pages = $grav['pages'];
+
+        $parents = $pages->getList(null, 0, $rawRoutes);
+
+        if (isset($grav['admin'])) {
+            // Remove current route from parents
+
+            /** @var Admin $admin */
+            $admin = $grav['admin'];
+
+            $page = $admin->getPage($admin->route);
+            $page_route = $page->route();
+            if (isset($parents[$page_route])) {
+                unset($parents[$page_route]);
+            }
+
+        }
+
+        return $parents;
+    }
+
+    /**
      * Get list of route/title of all pages.
      *
      * @param Page $current
@@ -464,7 +559,7 @@ class Pages
      *
      * @throws \RuntimeException
      */
-    public function getList(Page $current = null, $level = 0, $rawRoutes = false)
+    public function getList(Page $current = null, $level = 0, $rawRoutes = false, $showAll = true, $showFullpath = false, $showSlug = false, $limitLevels = false)
     {
         if (!$current) {
             if ($level) {
@@ -482,11 +577,27 @@ class Pages
             } else {
                 $route = $current->route();
             }
-            $list[$route] = str_repeat('&nbsp; ', ($level - 1) * 2) . $current->title();
+
+            if ($showFullpath) {
+                $option = $current->route();
+            } else {
+                $extra  = $showSlug ? '(' . $current->slug() . ') ' : '';
+                $option = str_repeat('&mdash;-', $level). '&rtrif; ' . $extra . $current->title();
+
+
+            }
+
+            $list[$route] = $option;
+
+
         }
 
-        foreach ($current->children() as $next) {
-            $list = array_merge($list, $this->getList($next, $level + 1, $rawRoutes));
+        if ($limitLevels == false || ($level+1 < $limitLevels)) {
+            foreach ($current->children() as $next) {
+                if ($showAll || $next->routable()) {
+                    $list = array_merge($list, $this->getList($next, $level + 1, $rawRoutes, $showAll, $showFullpath, $showSlug, $limitLevels));
+                }
+            }
         }
 
         return $list;
@@ -633,50 +744,7 @@ class Pages
         return self::getParents($rawRoutes);
     }
 
-    /**
-     * Get available parents raw routes.
-     *
-     * @return array
-     */
-    public static function parentsRawRoutes()
-    {
-        $rawRoutes = true;
 
-        return self::getParents($rawRoutes);
-    }
-
-    /**
-     * Get available parents routes
-     *
-     * @param bool $rawRoutes get the raw route or the normal route
-     *
-     * @return array
-     */
-    private static function getParents($rawRoutes)
-    {
-        $grav = Grav::instance();
-
-        /** @var Pages $pages */
-        $pages = $grav['pages'];
-
-        $parents = $pages->getList(null, 0, $rawRoutes);
-
-        if (isset($grav['admin'])) {
-            // Remove current route from parents
-
-            /** @var Admin $admin */
-            $admin = $grav['admin'];
-
-            $page = $admin->getPage($admin->route);
-            $page_route = $page->route();
-            if (isset($parents[$page_route])) {
-                unset($parents[$page_route]);
-            }
-
-        }
-
-        return $parents;
-    }
 
     /**
      * Gets the home route

@@ -628,6 +628,7 @@ return array(
     'Twig_Cache_Null' => $vendorDir . '/twig/twig/lib/Twig/Cache/Null.php',
     'Twig_Compiler' => $vendorDir . '/twig/twig/lib/Twig/Compiler.php',
     'Twig_CompilerInterface' => $vendorDir . '/twig/twig/lib/Twig/CompilerInterface.php',
+    'Twig_ContainerRuntimeLoader' => $vendorDir . '/twig/twig/lib/Twig/ContainerRuntimeLoader.php',
     'Twig_Environment' => $vendorDir . '/twig/twig/lib/Twig/Environment.php',
     'Twig_Error' => $vendorDir . '/twig/twig/lib/Twig/Error.php',
     'Twig_Error_Loader' => $vendorDir . '/twig/twig/lib/Twig/Error/Loader.php',

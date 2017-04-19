@@ -8,6 +8,13 @@ form:
                 type: userinfo
                 size: large
 
+            avatar:
+                type: file
+                size: large
+                destination: 'user://accounts/avatars'
+                multiple: false
+                random_name: true
+
             content:
                 type: section
                 title: PLUGIN_ADMIN.ACCOUNT
@@ -37,7 +44,7 @@ form:
                 validate:
                   required: false
                   message: PLUGIN_ADMIN.PASSWORD_VALIDATION_MESSAGE
-                  pattern: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+                  config-pattern@: system.pwd_regex
 
             fullname:
                 type: text

@@ -18,27 +18,46 @@
         z-index: 1;
     }
     .CodeMirror-selected {
-        background: #ebf4ff;
+        background: Highlight;
     }
 
+    .CodeMirror-gutters {
+        height: 100%!important;
+    }
 }
 
 .grav-editor-fullscreen {
     position: fixed;
-    top: 0;
+    top: 4.2rem;
     left: 0;
     bottom: 0;
     right: 0;
     z-index: 99999;
     padding: 0 !important;
     margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+
+    .grav-editor-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0;
+    }
 
     .grav-editor-content, .CodeMirror-wrap, .grav-editor-preview {
         height: 100% !important;
     }
 
+    .grav-editor-toolbar {
+        flex: 0 0 auto;
+    }
+
     .grav-editor-toolbar, .grav-editor-toolbar ul li:first-child a, .grav-editor-toolbar-flip ul li:last-child a {
-        border-radius: 0;
+        border-radius: 0 !important;
+    }
+
+    .grav-editor-resizer {
+        display: none;
     }
 }
 
@@ -78,7 +97,7 @@
             cursor: pointer;
             background-color: transparent;
             border-radius: 0;
-            padding: 0.4rem 0.8rem;
+            padding: 0.4rem;
             margin-top: -1px;
             border: 1px solid transparent;
 

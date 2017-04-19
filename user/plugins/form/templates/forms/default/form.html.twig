@@ -1,3 +1,7 @@
+{% if form is null %}
+    {% set form = grav.session.getFlashObject('form') %}
+{% endif  %}
+
 {% if form.message %}
     {% if form.inline_errors and form.messages %}
         <div class="alert notices {{ form.message_color ?: 'green' }}"><p>{{ "FORM.VALIDATION_FAIL"|t|raw }}</p></div>
@@ -49,7 +53,7 @@
   {% endblock %}
 
   {% for button in form.buttons %}
-      <div class="{% if button.outerclasses is defined %} {{ button.outerclasses }}{% endif %}">
+      {% if button.outerclasses is defined %}<div class="{{ button.outerclasses }}">{% endif %}
           {% if button.url %}
               <a href="{{ button.url starts with 'http' ? button.url : url(button.url) }}">
           {% endif %}
@@ -59,14 +63,19 @@
                 class="{{ button.classes|default('button') }}"
                 {% endblock %}
                 {% if button.disabled %}disabled="disabled"{% endif %}
+
                 type="{{ button.type|default('submit') }}"
+
+                {% if button.task %}
+                    name="task" value="{{ button.task }}"
+                {% endif %}
             >
                 {{ button.value|t|default('Submit') }}
           </button>
           {% if button.url %}
               </a>
           {% endif %}
-      </div>
+      {% if button.outerclasses is defined %}</div>{% endif %}
   {% endfor %}
 
   {% block inner_markup_buttons_end %}

@@ -1,3 +1,104 @@
+# v1.4.1
+## 04/19/2017
+
+1. [](#bugfix)
+    * Reverted [#1069](https://github.com/getgrav/grav-plugin-admin/pull/1069) as it conflicts ith Gantry5
+
+# v1.4.0
+## 04/19/2017
+
+1. [](#new)
+    * Added ability to add new pages/folders while editing existing page
+1. [](#improved)
+    * Initialize theme in Admin Plugin [#1069](https://github.com/getgrav/grav-plugin-admin/pull/1069)
+    * Use new system configuration entries for username and password format
+    * Reworked Page parent field to use `Pages::getList()` rather than logic in Twig field itself
+    * More robust styling of admin themes page [#1067](https://github.com/getgrav/grav-plugin-admin/pull/1067)
+    * Fix fullscreen editor height [#1065](https://github.com/getgrav/grav-plugin-admin/pull/1065)
+    * Fix small UI issue in the editor with `codemirror.lineNumbers` && `codemirror.styleActiveLine` enabled
+    * Fix UI performance issue in the dashboard [#1064](https://github.com/getgrav/grav-plugin-admin/issues/1064)
+1. [](#bugfix)
+    * Fixed issue with parent not working with custom slug [#1068](https://github.com/getgrav/grav-plugin-admin/issues/1068)
+    * Fixed issue with new page modal not remembering last choice [#1072](https://github.com/getgrav/grav-plugin-admin/issues/1072)
+    
+# v1.3.3
+## 04/12/2017
+
+1. [](#bugfix)
+    * Fix for regression introduced in the automatic page template switch when changing page parent [#1059](https://github.com/getgrav/grav-plugin-admin/issues/1059) [grav#1403](https://github.com/getgrav/grav/issues/1403) [#1062](https://github.com/getgrav/grav-plugin-admin/issues/1062)
+    * Fix issue with editor field in lists [#1037](https://github.com/getgrav/grav-plugin-admin/issues/1037)
+
+# v1.3.2
+## 04/10/2017
+
+1. [](#improved)
+    * Added new 'parents' field and switched Page blueprints to use this
+1. [](#bugfix)
+    * Fix for regression in h3 style in the Spacer field [#267](https://github.com/getgrav/grav-plugin-admin/issues/267)
+    * Fix missing preview in page media for SVG images [#1051](https://github.com/getgrav/grav-plugin-admin/issues/1051)
+    * Fix missing check when reordering [#1053](https://github.com/getgrav/grav-plugin-admin/issues/1053)
+    * Fix for editors not getting refreshed when changing tab [#1052](https://github.com/getgrav/grav-plugin-admin/issues/1052)
+    * Fix for mobile tabs in page editing [#1057](https://github.com/getgrav/grav-plugin-admin/issues/1057)
+
+# v1.3.1
+## 03/31/2017
+
+1. [](#bugfix)
+    * Fix for `Undefined index: file_path` error with Direct Install [#1043](https://github.com/getgrav/grav-plugin-admin/issues/1043)
+
+# v1.3.0
+## 03/31/2017
+
+1. [](#new)
+    * User uploadable avatar (still falls back to Gravatar if not provided)
+1. [](#improved)
+    * Improved tabs CSS to handle long titles [#1036](https://github.com/getgrav/grav-plugin-admin/issues/1036)
+    * Fixed `step` in range field [Form#136](https://github.com/getgrav/grav-plugin-form/issues/136)
+1. [](#bugfix)
+    * Fixed issue with exception thrown when `copying` and `moving` a page [#1042](https://github.com/getgrav/grav-plugin-admin/issues/1042)
+    * Automatically calculate the *next* numeric folder prefix [Core#1386](https://github.com/getgrav/grav/issues/1386)
+
+# v1.3.0-rc.3
+## 03/22/2017
+
+1. [](#new)
+    * All new `Page Ordering` implementation.  Completely revamped and will only reorder with folder-prefix enabled.  You can now reorder all siblings at the same time.
+    * Added a new `Advanced - Override` to allow option to display pages by folder name (default) or Collection definition
+    * Improved `range` form field with touch and counter support [#1016](https://github.com/getgrav/grav-plugin-admin/pull/1016)
+1. [](#bugfix)
+    * Cleanup package files via GPM install to make them more windows-friendly [#1361](https://github.com/getgrav/grav/pull/1361)
+
+# v1.3.0-rc.2
+## 03/17/2017
+
+1. [](#improved)
+    * Do not attempt to fetch any notification if settings are disabled [#942](https://github.com/getgrav/grav-plugin-admin/issues/942)
+
+# v1.3.0-rc.1
+## 03/13/2017
+
+1. [](#new)
+    * New flex-based/js Tabs system for better flexibility and improved UX.
+    * Added new **toolbox** with `Direct-Install` option via ZIP or URL.
+    * Added an option to reinstall a plugin/theme already installed [#984](https://github.com/getgrav/grav-plugin-admin/issues/984)
+    * Added a new **range field** [#995](https://github.com/getgrav/grav-plugin-admin/issues/995)
+    * When creating a new page, automatically select the Page Template based on Parent Page Child Type [#1008](https://github.com/getgrav/grav-plugin-admin/issues/1008)
+1. [](#improved)
+    * Page Media field now is available when folder is created, not just markdown file [#1000](https://github.com/getgrav/grav-plugin-admin/issues/1000)
+    * Separated user details and avatar in separate twig to allow more granular overriding in plugins [#989](https://github.com/getgrav/grav-plugin-admin/issues/989)
+    * Nicer layout of themes list on wider screen
+    * Editor full-screen option displays title/save options [#948](https://github.com/getgrav/grav-plugin-admin/issues/948)
+    * Use native OS highlight colors for the editor [#977](https://github.com/getgrav/grav-plugin-admin/issues/977)
+    * Force admin pages to set `Page::expires(0)` so it's not cached [#1009](https://github.com/getgrav/grav-plugin-admin/issues/1009)
+    * Added support for up to 15 tabs (was 10) [#954](https://github.com/getgrav/grav-plugin-admin/issues/954)
+    * Only reorder pages in the admin if collection uses `@self` and `order.by`
+    * Improved configuration tab sizes when you have lots of tabs
+    * Modified default media select size from 150px x 100px to 200px x 150px
+1. [](#bugfix)
+    * Fixed rendering issue with Chrome and sortables collections [#1002](https://github.com/getgrav/grav-plugin-admin/issues/1002)
+    * Fixed issue with removal of file that has been just uploaded and stored in the session
+
+
 # v1.2.14
 ## 02/17/2017
 

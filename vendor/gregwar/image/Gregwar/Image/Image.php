@@ -14,13 +14,16 @@ use Gregwar\Image\Exceptions\GenerationError;
  * @method Image saveGif($file)
  * @method Image savePng($file)
  * @method Image saveJpeg($file, $quality)
+ * @method Image resize($width = null, $height = null, $background = 'transparent', $force = false, $rescale = false, $crop = false)
+ * @method Image forceResize($width = null, $height = null, $background = 'transparent')
+ * @method Image scaleResize($width = null, $height = null, $background = 'transparent', $crop = false)
  * @method Image cropResize($width = null, $height = null, $background=0xffffff)
  * @method Image scale($width = null, $height = null, $background=0xffffff, $crop = false)
  * @method Image ($width = null, $height = null, $background = 0xffffff, $force = false, $rescale = false, $crop = false)
  * @method Image crop($x, $y, $width, $height)
  * @method Image enableProgressive()
  * @method Image force($width = null, $height = null, $background = 0xffffff)
- * @method Image zoomCrop($width, $height, $background = 0xffffff)
+ * @method Image zoomCrop($width, $height, $background = 0xffffff, $xPos, $yPos)
  * @method Image fillBackground($background = 0xffffff)
  * @method Image negate()
  * @method Image brightness($brightness)
@@ -513,6 +516,10 @@ class Image
         } catch (GenerationError $e) {
             $file = $e->getNewFile();
         }
+
+        // Nulling the resource
+        $this->getAdapter()->setSource(new Source\File($file));
+        $this->getAdapter()->deinit();
 
         if ($actual) {
             return $file;
