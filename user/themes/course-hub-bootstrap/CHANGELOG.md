@@ -1,8 +1,28 @@
+# v1.6.5
+## 05/15/2017
+
+1. [](#bugfix)
+    * Removed unneeded theme blueprint
+
+# v1.6.4
+## 05/14/2017
+
+1. [](#bugfix)
+    * Fixed display issue within Admin Panel of theme-related plugin status messages
+
+# v1.6.3
+## 05/13/2017
+
+1. [](#new)
+    * Added Markdown Notices plugin dependency
+1. [](#bugfix)
+    * Corrected default setting for page visibility
+
 # v1.6.2
 ## 05/03/2017
 
 1. [](#improved)
-    * Added automatic check for dynamically generated pages (i.e. Login, Search, etc.).
+    * Added automatic check for dynamically generated pages (i.e. Login, Search, etc.)
 
 # v1.6.1
 ## 04/01/2017

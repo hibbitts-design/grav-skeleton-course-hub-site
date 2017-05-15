@@ -40,7 +40,8 @@ form:
       label: PLUGIN_ADMIN.PAGE_FILE
       help: PLUGIN_ADMIN.PAGE_FILE_HELP
       data-options@: '\Grav\Common\Page\Pages::types'
-      data-default@: '\Grav\Plugin\Admin\Admin::getLastPageName'
+      #data-default@: '\Grav\Plugin\admin::getLastPageName'
+      default: 'sidebarpage'
       validate:
         required: true
 
