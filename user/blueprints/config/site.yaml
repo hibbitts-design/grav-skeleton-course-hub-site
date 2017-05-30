@@ -32,7 +32,7 @@ form:
                     label:                     Edit Page Link Font Awesome Icon
                     default:                   'github'
                     description:               Icon short name.
-                    help:                      Determines the default Font Awesome icon used for Edit Page links.
+                    help:                      Enter the short name of the Font Awesome icon for the link, for example 'gitlab'.
                     validate:
                         type:                  text
 
@@ -40,11 +40,10 @@ form:
                     type:                      text
                     size:                      large
                     label:                     Git Repository Tree URL
-                    help:                      Enter the URL for the 'pages' folder in your Git repository that contains your Grav site pages.
-                    description:               URL path to the Git repository, up to but not including '/pages/...'.
+                    help:                      Enter the URL that leads to the pages folder of your Git Repository.
+                    description:               "URL path to the pages folder, but with '/pages' and everything following it removed. For example, 'https://github.com/paulhibbitts/demo-grav-course-hub/tree/master'."
                     validate:
                         type:                  URL
-
         sectiontwo:
             type:                              section
             title:                             Edit Site Theme Files in Git Link
