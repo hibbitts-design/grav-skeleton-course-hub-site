@@ -1,3 +1,23 @@
+# v1.6.2
+## 06/06/2017
+
+1. [](#bugfix)
+    * Fix issue with feeds not rendering with cache enabled [#27](https://github.com/getgrav/grav-plugin-feed/pull/27)
+
+# v1.6.1
+## 05/30/2017
+
+1. [](#bugfix)
+    * Optimized logic to disable JSON feeds by default and only set the template when there's a collection
+1. [](#improved)
+    * Improved JSON template to `json_encode()` all output
+
+# v1.6.0
+## 05/25/2017
+
+1. [](#new)
+    * Added support for new JSON feed format by @RosemaryOrchard [#21](https://github.com/getgrav/grav-plugin-feed/pull/21)
+
 # v1.5.3
 ## 04/12/2017
 

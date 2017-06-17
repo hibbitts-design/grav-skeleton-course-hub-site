@@ -55,6 +55,10 @@ class FeedPlugin extends Plugin
 
         $this->feed_config = (array) $this->config->get('plugins.feed');
 
+        if ($this->feed_config['enable_json_feed']) {
+            $this->valid_types[] = 'json';
+        }
+
         /** @var Uri $uri */
         $uri = $this->grav['uri'];
         $this->type = $uri->extension();
@@ -85,7 +89,7 @@ class FeedPlugin extends Plugin
         // Overwrite regular content with feed config, so you can influence the collection processing with feed config
         if (property_exists($page->header(), 'content')) {
             $page->header()->content = array_merge($page->header()->content, $this->feed_config);
-        }    
+        }
     }
 
     /**
@@ -107,6 +111,14 @@ class FeedPlugin extends Plugin
     }
 
     /**
+     * Set feed template as current twig template
+     */
+    public function onTwigSiteVariables()
+    {
+        $this->grav['twig']->template = 'feed.' . $this->type . '.twig';
+    }
+
+    /**
      * Add current directory to twig lookup paths.
      */
     public function onTwigTemplatePaths()
@@ -114,14 +126,6 @@ class FeedPlugin extends Plugin
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 
-    /**
-     * Set needed variables to display the feed.
-     */
-    public function onTwigSiteVariables()
-    {
-        $twig = $this->grav['twig'];
-        $twig->template = 'feed.' . $this->type . '.twig';
-    }
 
     /**
      * Extend page blueprints with feed configuration options.

@@ -41,6 +41,11 @@ gitrepo:
   edittreeurl: 'https://github.com/hibbitts-design/grav-skeleton-course-hub-site/tree/master/user'
   editthemelinklocation: none
   editthemelinktext: 'Site Theme Files'
+  editnotetext: 'Have a suggestion or correction?'
 cc_license:
   enabled: false
   type: ccby
+hidesidebaronblogpages:
+  enabled: false
+chromeless:
+  enabled: false

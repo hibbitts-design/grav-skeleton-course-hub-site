@@ -19,6 +19,13 @@ form:
                         'menu':                Menu
                         'page':                Page
 
+                gitrepo.editnotetext:
+                  type:                        input.text
+                  size:                        long
+                  label:                       Text before Edit Page Link (on only Pages)
+                  default:                     'Have a suggestion or correction?'
+                  description:                 'The text before the View/Edit Git link (only when displayed on a Page). For example, ''Have a suggestion or correction?''.'
+
                 gitrepo.editlinktext:
                   type:                        input.text
                   size:                        medium
@@ -44,6 +51,7 @@ form:
                     description:               "URL path to the pages folder, but with '/pages' and everything following it removed. For example, 'https://github.com/paulhibbitts/demo-grav-course-hub/tree/master'."
                     validate:
                         type:                  URL
+
         sectiontwo:
             type:                              section
             title:                             Edit Site Theme Files in Git Link
@@ -133,6 +141,17 @@ form:
 
             fields:
 
+                hidesidebaronblogpages.enabled:
+                    type:                      toggle
+                    label:                     Display Sidebar on Blog Pages
+                    highlight:                 0
+                    default:                   0
+                    options:
+                        0:                     Yes
+                        1:                     No
+                    validate:
+                        type:                  bool
+
                 twittertimeline.enabled:
                     type:                      toggle
                     label:                     Display Twitter Widget in Sidebar
@@ -207,3 +226,21 @@ form:
                     label:                     CC License Text
                     validate:
                         type:                  text
+
+        sectionseven:
+            type:                              section
+            title:                             Chromeless Pages
+            underline:                         true
+
+            fields:
+                chromeless.enabled:
+                    type:                      toggle
+                    label:                     Hide Global Navigation Elements on all Pages
+                    description:               'When enabled, only page content will be displayed. This is often useful when embedding Course Hub pages within another system (e.g. an LMS such as Canvas using the <a href="https://www.eduappcenter.com/apps/63#.WUWhaRPysXo" target="_blank">Redirect Tool</a> LTI).'
+                    highlight:                 0
+                    default:                   0
+                    options:
+                        1:                     Yes
+                        0:                     No
+                    validate:
+                        type:                  bool
