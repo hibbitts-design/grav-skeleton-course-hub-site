@@ -38,7 +38,6 @@ gitrepo:
   editlinklocation: menu
   editlinktext: 'Edit this Page'
   editlinkicon: github
-  edittreeurl: 'https://github.com/hibbitts-design/grav-skeleton-course-hub-site/tree/master/user'
   editthemelinklocation: none
   editthemelinktext: 'Site Theme Files'
   editnotetext: 'Have a suggestion or correction?'
