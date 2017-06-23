@@ -1,3 +1,9 @@
+# v1.6.9
+## 06/23/2017
+
+1. [](#improved)
+    * Added invisible h3 tags for screen readers when visible page titles are hidden
+
 # v1.6.8
 ## 06/17/2017
 
