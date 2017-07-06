@@ -23,4 +23,3 @@ feed:
     limit: 10
 pagination: false
 ---
-
