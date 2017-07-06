@@ -1,3 +1,21 @@
+# v1.7.1
+## 07/03/2017
+
+1. [](#new)
+    * Added 'chromeless' alias for 'onlydisplaypagecontent' URL flag
+
+# v1.7.0
+## 06/26/2017
+
+1. [](#improved)
+    * Updated accessibility of links
+
+# v1.6.9
+## 06/23/2017
+
+1. [](#improved)
+    * Added invisible h3 tags for screen readers when visible page titles are hidden
+
 # v1.6.8
 ## 06/17/2017
 
