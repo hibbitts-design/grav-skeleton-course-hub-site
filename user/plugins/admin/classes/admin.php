@@ -27,11 +27,14 @@ use RocketTheme\Toolbox\Session\Session;
 use Symfony\Component\Yaml\Yaml;
 use Composer\Semver\Semver;
 use PicoFeed\Reader\Reader;
+use RobThree\Auth\TwoFactorAuth;
 
 define('LOGIN_REDIRECT_COOKIE', 'grav-login-redirect');
 
 class Admin
 {
+    const MEDIA_PAGINATION_INTERVAL = 20;
+
     /**
      * @var Grav
      */
@@ -94,6 +97,21 @@ class Admin
      * @var array
      */
     protected $permissions;
+
+    /**
+     * @var bool
+     */
+    protected $load_additional_files_in_background = false;
+
+    /**
+     * @var bool
+     */
+    protected $loading_additional_files_in_background = false;
+
+    /**
+     * @var array
+     */
+    protected $temp_messages = [];
 
     /**
      * Constructor.
@@ -278,6 +296,25 @@ class Admin
         return $tmp_dir;
     }
 
+    public static function getPageMedia()
+    {
+        $files = [];
+        $grav = Grav::instance();
+
+        $pages = $grav['pages'];
+        $route = '/' . ltrim($grav['admin']->route, '/');
+
+        /** @var Page $page */
+        $page         = $pages->dispatch($route);
+        $parent_route = null;
+        if ($page) {
+            $media = $page->media()->all();
+            $files = array_keys($media);
+        }
+        return $files;
+
+    }
+
     /**
      * Get current session.
      *
@@ -313,6 +350,17 @@ class Admin
      */
     public function authenticate($data, $post)
     {
+        $count = $this->grav['config']->get('plugins.login.max_login_count', 5);
+        $interval = $this->grav['config']->get('plugins.login.max_login_interval', 10);
+        $login = $this->grav['login'];
+
+        if ($login->isUserRateLimited($this->user, 'login_attempts', $count, $interval)) {
+            $this->setMessage($this->translate(['PLUGIN_LOGIN.TOO_MANY_LOGIN_ATTEMPTS', $interval]), 'error');
+            $this->grav->redirect($post['redirect']);
+            return true;
+        }
+
+
         if (!$this->user->authenticated && isset($data['username']) && isset($data['password'])) {
             // Perform RegEX check on submitted username to check for emails
             if (filter_var($data['username'], FILTER_VALIDATE_EMAIL)) {
@@ -327,7 +375,6 @@ class Admin
             }
 
             if ($user->exists()) {
-                $user->authenticated = true;
 
                 // Authenticate user.
                 $result = $user->authenticate($data['password']);
@@ -338,7 +385,18 @@ class Admin
             }
         }
 
-        $action = [];
+
+        $twofa_admin_enabled = $this->grav['config']->get('plugins.admin.twofa_enabled', false);
+        if ($twofa_admin_enabled && isset($user->twofa_enabled) &&
+            $user->twofa_enabled == true && !$user->authenticated) {
+            $this->session->redirect = $post['redirect'];
+            $this->session->user = $user;
+
+            $this->grav->redirect($this->base . '/twofa');
+        }
+
+        $user->authenticated = true;
+        $login->resetRateLimit($user,'login_attempts');
 
         if ($user->authorize('admin.login')) {
             $this->user = $this->session->user = $user;
@@ -371,6 +429,16 @@ class Admin
         $messages->add($msg, $type);
     }
 
+    public function addTempMessage($msg, $type)
+    {
+        $this->temp_messages[] = ['message' => $msg, 'scope' => $type];
+    }
+
+    public function getTempMessages()
+    {
+        return $this->temp_messages;
+    }
+
     /**
      * Translate a string to the user-defined language
      *
@@ -396,7 +464,6 @@ class Admin
         } else {
             $languages = (array)$languages;
         }
-
 
         if ($lookup) {
             if (empty($languages) || reset($languages) == null) {
@@ -534,11 +601,44 @@ class Admin
             $file     = CompiledYamlFile::instance($filename);
             $obj->file($file);
             $data[$type] = $obj;
+        } elseif (preg_match('|media-manager/|', $type)) {
+            $filename = base64_decode(preg_replace('|media-manager/|', '', $type));
+
+            $file = File::instance($filename);
+
+            $obj = new \StdClass();
+            $obj->title = $file->basename();
+            $obj->path = $file->filename();
+            $obj->file = $file;
+            $obj->page = $this->grav['pages']->get(dirname($obj->path));
+
+            $filename = pathinfo($obj->title)['filename'];
+            $filename = str_replace(['@3x', '@2x'], '', $filename);
+            if (isset(pathinfo($obj->title)['extension'])) {
+                $filename .= '.' . pathinfo($obj->title)['extension'];
+            }
+
+            if ($obj->page && isset($obj->page->media()[$filename])) {
+                $obj->metadata = new Data\Data($obj->page->media()[$filename]->metadata());
+            }
+
+            $data[$type] = $obj;
         } else {
             throw new \RuntimeException("Data type '{$type}' doesn't exist!");
         }
 
         return $data[$type];
+    }
+
+    protected function hasErrorMessage()
+    {
+        $msgs = $this->grav['messages']->all();
+        foreach ($msgs as $msg) {
+            if (isset($msg['scope']) && $msg['scope'] === 'error') {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -1226,46 +1326,7 @@ class Admin
 
     public function getPagePathFromToken($path)
     {
-        $path_parts = pathinfo($path);
-        $page       = null;
-
-        $basename = '';
-        if (isset($path_parts['extension'])) {
-            $basename = '/' . $path_parts['basename'];
-            $path     = $path_parts['dirname'];
-        }
-
-        $regex = '/(@self|self@)|((?:@page|page@):(?:.*))|((?:@theme|theme@):(?:.*))/';
-        preg_match($regex, $path, $matches);
-
-        if ($matches) {
-            if ($matches[1]) {
-                // self@
-                $page = $this->page(true);
-            } elseif ($matches[2]) {
-                // page@
-                $parts = explode(':', $path);
-                $route = $parts[1];
-                $page  = $this->grav['page']->find($route);
-            } elseif ($matches[3]) {
-                // theme@
-                $parts = explode(':', $path);
-                $route = $parts[1];
-                $theme = str_replace(ROOT_DIR, '', $this->grav['locator']->findResource("theme://"));
-
-                return $theme . $route . $basename;
-            }
-        } else {
-            return $path . $basename;
-        }
-
-        if (!$page) {
-            throw new \RuntimeException('Page route not found: ' . $path);
-        }
-
-        $path = str_replace($matches[0], rtrim($page->relativePagePath(), '/'), $path);
-
-        return $path . $basename;
+        return Utils::getPagePathFromToken($path, $this->page(true));
     }
 
     /**
@@ -1369,7 +1430,8 @@ class Admin
                 $page->name($name . '.md');
 
                 // Fire new event to allow plugins to manipulate page frontmatter
-                $this->grav->fireEvent('onAdminCreatePageFrontmatter', new Event(['header' => &$header]));
+                $this->grav->fireEvent('onAdminCreatePageFrontmatter', new Event(['header' => &$header,
+                        'data' => $data]));
 
                 $page->header($header);
                 $page->frontmatter(Yaml::dump((array)$page->header(), 10, 2, false));
@@ -1408,18 +1470,323 @@ class Admin
 
     }
 
-    public function cleanContent($content)
-    {
-        $string = strip_tags($content);
-        $string = htmlspecialchars_decode($string, ENT_QUOTES);
-        $string = str_replace("\n", ' ', $string);
-
-        return trim($string);
-    }
-
     public function getRouteDetails()
     {
         return [$this->base, $this->location, $this->route];
     }
 
+    /**
+     * Get the files list
+     *
+     * @todo allow pagination
+     * @return array
+     */
+    public function files($filtered = true, $page_index = 0)
+    {
+        $param_type = $this->grav['uri']->param('type');
+        $param_date = $this->grav['uri']->param('date');
+        $param_page = $this->grav['uri']->param('page');
+        $param_page = str_replace('\\', '/', $param_page);
+
+        $files_cache_key = 'media-manager-files';
+
+        if ($param_type) {
+            $files_cache_key .= "-{$param_type}";
+        }
+        if ($param_date) {
+            $files_cache_key .= "-{$param_date}";
+        }
+        if ($param_page) {
+            $files_cache_key .= "-{$param_page}";
+        }
+
+        $page_files = null;
+
+        $cache_enabled = $this->grav['config']->get('plugins.admin.cache_enabled');
+        if (!$cache_enabled) {
+            $this->grav['cache']->setEnabled(true);
+        }
+
+        $page_files = $this->grav['cache']->fetch(md5($files_cache_key));
+
+        if (!$cache_enabled) {
+            $this->grav['cache']->setEnabled(false);
+        }
+
+        if (!$page_files) {
+            $page_files = [];
+            $pages = $this->grav['pages'];
+
+            if ($param_page) {
+                $page = $pages->dispatch($param_page);
+
+                $page_files = $this->getFiles('images', $page, $page_files, $filtered);
+                $page_files = $this->getFiles('videos', $page, $page_files, $filtered);
+                $page_files = $this->getFiles('audios', $page, $page_files, $filtered);
+                $page_files = $this->getFiles('files', $page, $page_files, $filtered);
+            } else {
+                $allPages = $pages->all();
+
+                if ($allPages) foreach ($allPages as $page) {
+                    $page_files = $this->getFiles('images', $page, $page_files, $filtered);
+                    $page_files = $this->getFiles('videos', $page, $page_files, $filtered);
+                    $page_files = $this->getFiles('audios', $page, $page_files, $filtered);
+                    $page_files = $this->getFiles('files', $page, $page_files, $filtered);
+                }
+            }
+
+            if (count($page_files) >= self::MEDIA_PAGINATION_INTERVAL) {
+                $this->shouldLoadAdditionalFilesInBackground(true);
+            }
+
+            if (!$cache_enabled) {
+                $this->grav['cache']->setEnabled(true);
+            }
+            $this->grav['cache']->save(md5($files_cache_key), $page_files, 600); //cache for 10 minutes
+            if (!$cache_enabled) {
+                $this->grav['cache']->setEnabled(false);
+            }
+
+        }
+
+        if (count($page_files) >= self::MEDIA_PAGINATION_INTERVAL) {
+            $page_files = array_slice($page_files, $page_index * self::MEDIA_PAGINATION_INTERVAL, self::MEDIA_PAGINATION_INTERVAL);
+        }
+
+        return $page_files;
+    }
+
+    public function shouldLoadAdditionalFilesInBackground($status = null)
+    {
+        if ($status) {
+            $this->load_additional_files_in_background = true;
+        }
+
+        return $this->load_additional_files_in_background;
+    }
+
+    public function loadAdditionalFilesInBackground($status = null)
+    {
+        if (!$this->loading_additional_files_in_background) {
+            $this->loading_additional_files_in_background = true;
+            $this->files(false, false);
+            $this->shouldLoadAdditionalFilesInBackground(false);
+            $this->loading_additional_files_in_background = false;
+        }
+    }
+
+    private function getFiles($type, $page, $page_files, $filtered)
+    {
+        $page_files = $this->getMediaOfType($type, $page, $page_files);
+
+        if ($filtered) {
+            $page_files = $this->filterByType($page_files);
+            $page_files = $this->filterByDate($page_files);
+        }
+
+        return $page_files;
+    }
+
+    /**
+     * Get all the media of a type ('images' | 'audios' | 'videos' | 'files')
+     *
+     * @param string $type
+     * @param Page\Page $page
+     * @param array $files
+     *
+     * @return array
+     */
+    private function getMediaOfType($type, $page, $page_files) {
+        if ($page) {
+
+//            $path = $page->path();
+            $media = $page->media();
+            $mediaOfType = $media->$type();
+
+            foreach($mediaOfType as $title => $file) {
+                $page_files[] = [
+                    'title' => $title,
+                    'type' => $type,
+                    'page_route' => $page->route(),
+                    'file' => $file->higherQualityAlternative()
+                ];
+            }
+
+            return $page_files;
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * Filter media by type
+     *
+     * @param array $filesFiltered
+     *
+     * @return array
+     */
+    private function filterByType($filesFiltered)
+    {
+        $filter_type = $this->grav['uri']->param('type');
+        if (!$filter_type) {
+            return $filesFiltered;
+        }
+
+        $filesFiltered = array_filter($filesFiltered, function ($file) use ($filter_type) {
+            return $file['type'] == $filter_type;
+        });
+
+        return $filesFiltered;
+    }
+
+    /**
+     * Filter media by date
+     *
+     * @param array $filesFiltered
+     *
+     * @return array
+     */
+    private function filterByDate($filesFiltered)
+    {
+        $filter_date = $this->grav['uri']->param('date');
+        if (!$filter_date) {
+            return $filesFiltered;
+        }
+
+        $year = substr($filter_date, 0, 4);
+        $month = substr($filter_date, 5, 2);
+
+        $filesFilteredByDate = [];
+
+        foreach($filesFiltered as $file) {
+            $filedate = $this->fileDate($file['file']);
+            $fileYear = $filedate->format('Y');
+            $fileMonth = $filedate->format('m');
+
+            if ($fileYear == $year && $fileMonth == $month) {
+                $filesFilteredByDate[] = $file;
+            }
+        }
+
+        return $filesFilteredByDate;
+    }
+
+    /**
+     * Return the DateTime object representation of a file modified date
+     *
+     * @param File $file
+     *
+     * @return DateTime
+     */
+    private function fileDate($file) {
+        $datetime = new \DateTime();
+        $datetime->setTimestamp($file->toArray()['modified']);
+        return $datetime;
+    }
+
+    /**
+     * Get the files dates list to be used in the Media Files filter
+     *
+     * @return array
+     */
+    public function filesDates()
+    {
+        $files = $this->files(false);
+        $dates = [];
+
+        foreach ($files as $file) {
+            $datetime = $this->fileDate($file['file']);
+            $year = $datetime->format('Y');
+            $month = $datetime->format('m');
+
+            if (!isset($dates[$year])) {
+                $dates[$year] = [];
+            }
+
+            if (!isset($dates[$year][$month])) {
+                $dates[$year][$month] = 1;
+            } else {
+                $dates[$year][$month]++;
+            }
+        }
+
+        return $dates;
+    }
+
+    /**
+     * Get the pages list to be used in the Media Files filter
+     *
+     * @return array
+     */
+    public function pages()
+    {
+        $pages = $this->grav['pages']->all();
+
+        $pagesWithFiles = [];
+        if ($pages) foreach ($pages as $page) {
+            if (count($page->media()->all())) {
+                $pagesWithFiles[] = $page;
+            }
+        }
+
+        return $pagesWithFiles;
+    }
+
+    /**
+     * Get an instance of the TwoFactorAuth object
+     *
+     * @return TwoFactorAuth
+     */
+    public function get2FA()
+    {
+        $provider = new BaconQRProvider();
+        $twofa = new TwoFactorAuth('Grav', 6, 30, 'sha1', $provider);
+        return $twofa;
+    }
+
+    /**
+     * Get's an array of secret QRCode + chunked secret
+     *
+     * @param null $secret if not provided a new secret will be generated
+     * @return bool
+     */
+    public function get2FAData($secret = null)
+    {
+        try {
+            $user = clone($this->grav['user']);
+            $twofa = $this->get2FA();
+
+            // generate secret if needed
+            if (!$secret) {
+                $secret = $twofa->createSecret(160);
+            }
+
+            $label =  $user->username . ':' . $this->grav['config']->get('site.title');
+            $image = $twofa->getQRCodeImageAsDataUri($label, $secret);
+
+            $user->twofa_secret = str_replace(' ','',$secret);
+
+            unset($user->authenticated);
+            $user->save();
+
+            $this->json_response = ['status' => 'success', 'image' => $image, 'secret' => trim(chunk_split($secret, 4, ' '))];
+        } catch (\Exception $e) {
+            $this->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            return false;
+        }
+        return true;
+    }
+
+    public static function doAnyUsersExist()
+    {
+        // check for existence of a user account
+        $account_dir = $file_path = Grav::instance()['locator']->findResource('account://');
+        $user_check = glob($account_dir . '/*.yaml');
+
+        if ($user_check != false && count((array)$user_check) > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }

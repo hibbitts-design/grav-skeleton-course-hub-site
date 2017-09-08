@@ -1,3 +1,63 @@
+# v2.9.0
+## 09/07/2017
+
+1. [](#new)
+    * Added **Refresh Prevention** capabilities (Not enabled by default) [#184](https://github.com/getgrav/grav-plugin-form/issues/184)
+    * Added support for field `attributes` [#176](https://github.com/getgrav/grav-plugin-form/pull/176)
+    * Added global variables for setting form classes
+    * Added support for new `select_optgroup` form field [#165](https://github.com/getgrav/grav-plugin-form/issues/165)
+1. [](#improved)
+    * Moved messages output into partial to allow style overriding
+    * Logic cleanup
+    * Updated Italian and Russian translations
+1. [](#bugfix)
+    * Fixed an issue with conditional field not always displaying properly
+    * Only add Twig form variable if not already set
+    * Fixed issue with multiple forms on a page failing on Captcha client-side validation [#182](https://github.com/getgrav/grav-plugin-form/issues/182)
+    * Fixed issue with Ajax forms return full form HTML on error [#163](https://github.com/getgrav/grav-plugin-form/issues/163)
+    
+# v2.8.2
+## 08/18/2017
+
+1. [](#new)
+    * Added new `columns` and `column` fields for controlled form layout
+
+# v2.8.1
+## 08/15/2017
+
+1. [](#improved)
+    * Added extra class support to the default field for more flexible styling 
+
+# v2.8.0
+## 07/16/2017
+
+1. [](#bugfix)
+    * Fixed a typo in the spanish translation [#167](https://github.com/getgrav/grav-plugin-form/pull/167)
+
+# v2.8.0-rc.2
+## 06/22/2017
+
+1. [](#improved)
+    * Add default client-side validation for captcha, with error popup [#139](https://github.com/getgrav/grav-plugin-form/issues/139)
+    * Added key observe for select
+    * Added Czech translation
+1. [](#bugfix)
+    * Bug fix for radio type form field [#154](https://github.com/getgrav/grav-plugin-form/pull/154)
+    * Remove double escaping [#155](https://github.com/getgrav/grav-plugin-form/issues/154)
+
+# v2.8.0-rc.1
+## 05/22/2017
+
+1. [](#new)
+    * Bundled as RC release for Grav/Admin RC releases
+
+# v2.7.1
+## 05/22/2017
+
+1. [](#improved)
+    * Force modular sub-pages with forms to set `$never_cache_twig = true` to improve form processing reliability [#153](https://github.com/getgrav/grav-plugin-form/issues/153)
+    * Use new `Utils::getPagePathFromToken()` method
+
 # v2.7.0
 ## 05/16/2017
 

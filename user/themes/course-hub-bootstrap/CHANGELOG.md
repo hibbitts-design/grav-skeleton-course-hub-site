@@ -1,3 +1,16 @@
+# v1.7.3
+## 09/08/2017
+
+1. [](#improved)
+    * Added site name to default RSS/Atom Feed names
+    * Ordering for home page modular content areas now set in parent page frontmatter
+
+# v1.7.2
+## 09/07/2017
+
+1. [](#bugfix)
+    * Set alphabetical ordering for home page modular content areas
+
 # v1.7.1
 ## 07/03/2017
 

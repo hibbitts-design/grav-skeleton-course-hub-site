@@ -1,13 +1,144 @@
+# v1.3.3
+## 09/07/2017
+
+1. [](#new)
+    * Added support for 2-Factor Authentication in admin profile
+    * Added `gaussianBlur` media method [#1623](https://github.com/getgrav/grav/pull/1623)
+    * Added new `|chunk_split()`, `|basename`, and `|dirname` Twig filter
+    * Added new `tl` Twig filter/function to support specific translations [#1618](https://github.com/getgrav/grav/issues/1618)
+1. [](#improved)
+    * User `authorization` now requires a check for `authenticated` - REQUIRED: `Login v2.4.0`
+    * Added options to `Page::summary()` to support size without HTML tags [#1554](https://github.com/getgrav/grav/issues/1554)
+    * Forced `natsort` on plugins to ensure consistent plugin load ordering across platforms [#1614](https://github.com/getgrav/grav/issues/1614)
+    * Use new `multilevel` field to handle Asset Collections [#1201](https://github.com/getgrav/grav-plugin-admin/issues/1201)
+    * Added support for redis `password` option [#1620](https://github.com/getgrav/grav/issues/1620)
+    * Use 302 rather than 301 redirects by default [#1619](https://github.com/getgrav/grav/issues/1619)
+    * GPM Installer will try to load alphanumeric version of the class if no standard class found [#1630](https://github.com/getgrav/grav/issues/1630)
+    * Add current page position to `User` class [#1632](https://github.com/getgrav/grav/issues/1632)
+    * Added option to enable case insensitive URLs [#1638](https://github.com/getgrav/grav/issues/1638)
+    * Updated vendor libraries
+    * Updated `travis.yml` to add support for PHP 7.1 as well as 7.0.21 for test suite
+1. [](#bugfix)
+    * Fixed UTF8 2 character support in `Page::summary()` [#1554](https://github.com/getgrav/grav/issues/1554)
+
+# v1.3.2
+## 08/16/2017
+
+1. [](#new)
+    * Added a new `cache_control` system and page level property [#1591](https://github.com/getgrav/grav/issues/1591)
+    * Added a new `clear_images_by_default` system property to stop cache clear events from removing processed images [#1481](https://github.com/getgrav/grav/pull/1481)
+    * Added new `onTwigLoader()` event to enable utilization of loader methods
+    * Added new `Twig::addPath()` and `Twig::prependPath()` methods to wrap loader methods and support namespacing [#1604](https://github.com/getgrav/grav/issues/1604)
+    * Added new `array_key_exists()` Twig function wrapper
+    * Added a new `Collection::intersect()` method [#1605](github.com/getgrav/grav/issues/1605)
+1. [](#bugfix)
+    * Allow `session.timetout` field to be set to `0` via blueprints [#1598](https://github.com/getgrav/grav/issues/1598)
+    * Fixed `Data::exists()` and `Data::raw()` functions breaking if `Data::file()` hasn't been called with non-null value
+    * Fixed parent theme auto-loading in child themes of Gantry 5
+    
+# v1.3.1
+## 07/19/2017
+
+1. [](#bugfix)
+    * Fix ordering for Linux + International environments [#1574](https://github.com/getgrav/grav/issues/1574)
+    * Check if medium thumbnail exists before resetting
+    * Update Travis' auth token
+
+# v1.3.0
+## 07/16/2017
+
+1. [](#bugfix)
+    * Fixed an undefined variable `$difference` [#1563](https://github.com/getgrav/grav/pull/1563)
+    * Fix broken range slider [grav-plugin-admin#1153](https://github.com/getgrav/grav-plugin-admin/issues/1153)
+    * Fix natural sort when > 100 pages [#1564](https://github.com/getgrav/grav/pull/1564)
+
+# v1.3.0-rc.5
+## 07/05/2017
+
+1. [](#new)
+    * Setting `system.session.timeout` to 0 clears the session when the browser session ends [#1538](https://github.com/getgrav/grav/pull/1538)
+    * Created a `CODE_OF_CONDUCT.md` so everyone knows how to behave :)
+1. [](#improved)
+    * Renamed new `media()` Twig function to `media_directory()` to avoid conflict with Page's `media` object
+1. [](#bugfix)
+    * Fixed global media files disappearing after a reload [#1545](https://github.com/getgrav/grav/issues/1545)
+    * Fix for broken regex redirects/routes via `site.yaml`
+    * Sanitize the error message in the error handler page
+
+# v1.3.0-rc.4
+## 06/22/2017
+
+1. [](#new)
+    * Added `lower` and `upper` Twig filters
+    * Added `pathinfo()` Twig function
+    * Added 165 new thumbnail images for use in `media.yaml`
+1. [](#improved)
+    * Improved error message when running `bin/grav install` instead of `bin/gpm install`, and also when running on a non-skeleton site [#1027](https://github.com/getgrav/grav/issues/1027)
+    * Updated vendor libraries
+1. [](#bugfix)
+    * Don't rebuild metadata every time, only when file does not exist
+    * Restore GravTrait in ConsoleTrait [grav-plugin-login#119](https://github.com/getgrav/grav-plugin-login/issues/119)
+    * Fix Windows routing with built-in server [#1502](https://github.com/getgrav/grav/issues/1502)
+    * Fix [#1504](https://github.com/getgrav/grav/issues/1504) `process_twig` and `frontmatter.yaml`
+    * Nicetime fix: 0 seconds from now -> just now [#1509](https://github.com/getgrav/grav/issues/1509)
+
+# v1.3.0-rc.3
+## 05/22/2017
+
+1. [](#new)
+    * Added new unified `Utils::getPagePathFromToken()` method which is used by various plugins (Admin, Forms, Downloads, etc.)
+1. [](#improved)
+    * Optionally remove unpublished pages from the translated languages, move into untranslated list [#1482](https://github.com/getgrav/grav/pull/1482)
+    * Improved reliability of `hash` file-check method
+1. [](#bugfix)
+    * Updated to latest Toolbox library to fix issue with some blueprints rendering in admin plugin [#1117](https://github.com/getgrav/grav-plugin-admin/issues/1117)
+    * Fix output handling in RenderProcessor [#1483](https://github.com/getgrav/grav/pull/1483)
+
+# v1.3.0-rc.2
+## 05/17/2017
+
+1. [](#new)
+    * Added new `media` and `vardump` Twig functions
+1. [](#improved)
+    * Put in various checks to ensure Exif is available before trying to use it
+    * Add timestamp to configuration settings [#1445](https://github.com/getgrav/grav/pull/1445)
+1. [](#bugfix)
+    * Fix an issue saving YAML textarea fields in expert mode [#1480](https://github.com/getgrav/grav/pull/1480)
+    * Moved `onOutputRendered()` back into Grav core
+
+# v1.3.0-rc.1
+## 05/16/2017
+
+1. [](#new)
+    * Added support for a single array field in the forms
+    * Added EXIF support with automatic generation of Page Media metafiles
+    * Added Twig function to get EXIF data on any image file
+    * Added `Pages::baseUrl()`, `Pages::homeUrl()` and `Pages::url()` functions
+    * Added `base32_encode`, `base32_decode`, `base64_encode`, `base64_decode` Twig filters
+    * Added `Debugger::getCaller()` to figure out where the method was called from
+    * Added support for custom output providers like Slim Framework
+    * Added `Grav\Framework\Collection` classes for creating collections
+1. [](#improved)
+    * Add more controls over HTML5 video attributes (autoplay, poster, loop controls) [#1442](https://github.com/getgrav/grav/pull/1442)
+    * Removed logging statement for invalid slug [#1459](https://github.com/getgrav/grav/issues/1459)
+    * Groups selection pre-filled in user form
+    * Improve error handling in `Folder::move()`
+    * Added extra parameter for `Twig::processSite()` to include custom context
+    * Updated RocketTheme Toolbox vendor library
+1. [](#bugfix)
+    * Fix to force route/redirect matching from the start of the route by default [#1446](https://github.com/getgrav/grav/issues/1446)
+    * Edit check for valid slug [#1459](https://github.com/getgrav/grav/issues/1459)
+
 # v1.2.4
 ## 04/24/2017
 
 1. [](#improved)
-    * Added optional ignores for `Installer::sophisticatedInstall()` [#1447](https://github.com/getgrav/grav/issues/1447)  
+    * Added optional ignores for `Installer::sophisticatedInstall()` [#1447](https://github.com/getgrav/grav/issues/1447)
 1. [](#bugfix)
     * Allow multiple calls to `Themes::initTheme()` without throwing errors
     * Fixed querystrings in root pages with multi-lang enabled [#1436](https://github.com/getgrav/grav/issues/1436)
     * Allow support for `Pages::getList()` with `show_modular` option [#1080](https://github.com/getgrav/grav-plugin-admin/issues/1080)
-    
+
 # v1.2.3
 ## 04/19/2017
 
@@ -16,7 +147,7 @@
     * Allow `user/accounts.yaml` overrides and implemented more robust theme initialization
     * improved `getList()` method to do more powerful things
     * Fix Typo in GPM [#1427](https://github.com/getgrav/grav/issues/1427)
- 
+
 # v1.2.2
 ## 04/11/2017
 

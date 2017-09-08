@@ -2,7 +2,7 @@
 /**
  * @package    Grav.Common.GPM
  *
- * @copyright  Copyright (C) 2014 - 2016 RocketTheme, LLC. All rights reserved.
+ * @copyright  Copyright (C) 2014 - 2017 RocketTheme, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -236,6 +236,12 @@ class Installer
 
         if (class_exists($class_name)) {
             return $class_name;
+        }
+
+        $class_name_alphanumeric = preg_replace('/[^a-zA-Z0-9]+/', '', $class_name);
+
+        if (class_exists($class_name_alphanumeric)) {
+            return $class_name_alphanumeric;
         }
 
         return $installer;

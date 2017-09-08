@@ -16,6 +16,7 @@ use Grav\Plugin\Admin\AdminTwigExtension;
 use Grav\Plugin\Admin\Popularity;
 use Grav\Plugin\Admin\Themes;
 use Grav\Plugin\Admin\AdminController;
+use Grav\Plugin\Login\Login;
 use RocketTheme\Toolbox\Event\Event;
 use RocketTheme\Toolbox\Session\Session;
 
@@ -84,7 +85,11 @@ class AdminPlugin extends Plugin
     {
         if (!Grav::instance()['config']->get('plugins.admin-pro.enabled')) {
             return [
-                'onPluginsInitialized' => [['setup', 100000], ['onPluginsInitialized', 1001]],
+                'onPluginsInitialized' => [
+                                            ['setup', 100000],
+                                            ['onPluginsInitialized', 1001]
+                                          ],
+                'onPageInitialized'    => ['onPageInitialized', 0],
                 'onShutdown'           => ['onShutdown', 1000],
                 'onFormProcessed'      => ['onFormProcessed', 0],
                 'onAdminDashboard'     => ['onAdminDashboard', 0],
@@ -93,6 +98,17 @@ class AdminPlugin extends Plugin
         }
 
         return [];
+    }
+
+    public function onPageInitialized()
+    {
+        $page = $this->grav['page'];
+
+        $template = $this->grav['uri']->param('tmpl');
+
+        if ($template) {
+            $page->template($template);
+        }
     }
 
     /**
@@ -117,12 +133,10 @@ class AdminPlugin extends Plugin
         $this->admin_route = rtrim($this->grav['pages']->base(), '/') . $this->base;
         $this->uri = $this->grav['uri'];
 
-        // check for existence of a user account
-        $account_dir = $file_path = $this->grav['locator']->findResource('account://');
-        $user_check = glob($account_dir . '/*.yaml');
+        $users_exist = Admin::doAnyUsersExist();
 
         // If no users found, go to register
-        if ($user_check == false || count((array)$user_check) == 0) {
+        if (!$users_exist) {
             if (!$this->isAdminPath()) {
                 $this->grav->redirect($this->admin_route);
             }
@@ -195,8 +209,11 @@ class AdminPlugin extends Plugin
         $action = $event['action'];
 
         switch ($action) {
-
             case 'register_admin_user':
+
+                if (Admin::doAnyUsersExist()) {
+                    throw new \RuntimeException('A user account already exists, please create an admin account manually.');
+                }
 
                 if (!$this->config->get('plugins.login.enabled')) {
                     throw new \RuntimeException($this->grav['language']->translate('PLUGIN_LOGIN.PLUGIN_LOGIN_DISABLED'));
@@ -258,7 +275,8 @@ class AdminPlugin extends Plugin
                 $this->grav['session']->user = $user;
                 unset($this->grav['user']);
                 $this->grav['user'] = $user;
-                $user->authenticated = $user->authorize('site.login');
+                $user->authenticated = true;
+                $user->authorized = $user->authorize('site.login');
 
                 $messages = $this->grav['messages'];
                 $messages->add($this->grav['language']->translate('PLUGIN_ADMIN.LOGIN_LOGGED_IN'), 'info');
@@ -275,7 +293,6 @@ class AdminPlugin extends Plugin
     {
         // Only activate admin if we're inside the admin path.
         if ($this->active) {
-
             // Store this version and prefer newer method
             if (method_exists($this, 'getBlueprint')) {
                 $this->version = $this->getBlueprint()->version;
@@ -460,7 +477,6 @@ class AdminPlugin extends Plugin
         $twig_paths[] = __DIR__ . '/themes/' . $this->theme . '/templates';
 
         $this->grav['twig']->twig_paths = $twig_paths;
-
     }
 
     /**
@@ -483,10 +499,22 @@ class AdminPlugin extends Plugin
         $twig->twig_vars['admin'] = $this->admin;
         $twig->twig_vars['admin_version'] = $this->version;
 
+        $fa_icons_file = CompiledYamlFile::instance($this->grav['locator']->findResource('plugin://admin/themes/grav/templates/forms/fields/iconpicker/icons' . YAML_EXT));
+        $fa_icons = $fa_icons_file->content();
+        $fa_icons = array_map(function ($icon) {
+            //only pick used values
+            return ['id' => $icon['id'], 'unicode' => $icon['unicode']];
+        }, $fa_icons['icons']);
+
+        $twig->twig_vars['fa_icons'] = $fa_icons;
+
         // add form if it exists in the page
         $header = $page->header();
         if (isset($header->form)) {
-            $twig->twig_vars['form'] = new Form($page);
+            // preserve form validation
+            if (!isset($twig->twig_vars['form'])) {
+                $twig->twig_vars['form'] = new Form($page);
+            }
         }
 
         // Gather Plugin-hooked nav items
@@ -508,11 +536,14 @@ class AdminPlugin extends Plugin
      */
     public function onShutdown()
     {
-        // Just so we know that we're in this debug mode
-        if ($this->config->get('plugins.admin.popularity.enabled')) {
-
-            // Only track non-admin
-            if (!$this->active) {
+        if ($this->active) {
+            //only activate when Admin is active
+            if ($this->admin->shouldLoadAdditionalFilesInBackground()) {
+                $this->admin->loadAdditionalFilesInBackground();
+            }
+        } else {
+            //if popularity is enabled, track non-admin hits
+            if ($this->config->get('plugins.admin.popularity.enabled')) {
                 $this->popularity->trackHit();
             }
         }
@@ -658,6 +689,7 @@ class AdminPlugin extends Plugin
             'DROP_FILES_HERE_TO_UPLOAD',
             'DELETE',
             'INSERT',
+            'METADATA',
             'VIEW',
             'UNDO',
             'REDO',
@@ -804,4 +836,53 @@ class AdminPlugin extends Plugin
         $admin->addPermissions($permissions);
     }
 
+    /**
+     * Helper function to replace Pages::Types()
+     * and to provide an event to manipulate the data
+     *
+     * Dispatches 'onAdminPageTypes' event
+     * with 'types' data member which is a
+     * reference to the data
+     */
+    public static function pagesTypes()
+    {
+        $types = Pages::types();
+
+        // First filter by configuration
+        $hideTypes = Grav::instance()['config']->get('plugins.admin.hide_page_types', []);
+        foreach ($hideTypes as $type) {
+            unset($types[$type]);
+        }
+
+        // Allow manipulating of the data by event
+        $e = new Event(['types' => &$types]);
+        Grav::instance()->fireEvent('onAdminPageTypes', $e);
+
+        return $types;
+    }
+
+    /**
+     * Helper function to replace Pages::modularTypes()
+     * and to provide an event to manipulate the data
+     *
+     * Dispatches 'onAdminModularPageTypes' event
+     * with 'types' data member which is a
+     * reference to the data
+     */
+    public static function pagesModularTypes()
+    {
+        $types = Pages::modularTypes();
+
+        // First filter by configuration
+        $hideTypes = Grav::instance()['config']->get('plugins.admin.hide_modular_page_types', []);
+        foreach ($hideTypes as $type) {
+            unset($types[$type]);
+        }
+
+        // Allow manipulating of the data by event
+        $e = new Event(['types' => &$types]);
+        Grav::instance()->fireEvent('onAdminModularPageTypes', $e);
+
+        return $types;
+    }
 }

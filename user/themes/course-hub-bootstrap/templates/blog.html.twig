@@ -31,6 +31,7 @@
             <div class="col-sm-12 blog-main">
             {% endif %}
             {# Added reminders and preparations blocks and content check - hibbittsdesign.org #}
+
             {% for module in page.collection('modular_content') %}
               {% if (module.content|striptags)|trim %}
                 <p>{{ module.content }}</p>

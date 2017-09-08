@@ -65,7 +65,7 @@ class ExceptionCaster
         $prefix = Caster::PREFIX_PROTECTED;
         $xPrefix = "\0Exception\0";
 
-        if (isset($a[$xPrefix.'previous'], $a[$xPrefix.'trace'])) {
+        if (isset($a[$xPrefix.'previous'], $a[$xPrefix.'trace']) && $a[$xPrefix.'previous'] instanceof \Exception) {
             $b = (array) $a[$xPrefix.'previous'];
             array_unshift($b[$xPrefix.'trace'], array(
                 'function' => 'new '.get_class($a[$xPrefix.'previous']),
@@ -148,7 +148,7 @@ class ExceptionCaster
             if (file_exists($f['file']) && 0 <= self::$srcContext) {
                 $src[$f['file'].':'.$f['line']] = self::extractSource(explode("\n", file_get_contents($f['file'])), $f['line'], self::$srcContext);
 
-                if (!empty($f['class']) && is_subclass_of($f['class'], 'Twig_Template') && method_exists($f['class'], 'getDebugInfo')) {
+                if (!empty($f['class']) && (is_subclass_of($f['class'], 'Twig\Template') || is_subclass_of($f['class'], 'Twig_Template')) && method_exists($f['class'], 'getDebugInfo')) {
                     $template = isset($f['object']) ? $f['object'] : unserialize(sprintf('O:%d:"%s":0:{}', strlen($f['class']), $f['class']));
 
                     $templateName = $template->getTemplateName();
@@ -234,11 +234,13 @@ class ExceptionCaster
         }
 
         if (!($filter & Caster::EXCLUDE_VERBOSE)) {
-            array_unshift($trace, array(
-                'function' => $xClass ? 'new '.$xClass : null,
-                'file' => $a[Caster::PREFIX_PROTECTED.'file'],
-                'line' => $a[Caster::PREFIX_PROTECTED.'line'],
-            ));
+            if (isset($a[Caster::PREFIX_PROTECTED.'file'], $a[Caster::PREFIX_PROTECTED.'line'])) {
+                array_unshift($trace, array(
+                    'function' => $xClass ? 'new '.$xClass : null,
+                    'file' => $a[Caster::PREFIX_PROTECTED.'file'],
+                    'line' => $a[Caster::PREFIX_PROTECTED.'line'],
+                ));
+            }
             $a[$xPrefix.'trace'] = new TraceStub($trace, self::$traceArgs);
         }
         if (empty($a[$xPrefix.'previous'])) {

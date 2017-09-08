@@ -1,5 +1,5 @@
 name: Admin Panel
-version: 1.4.2
+version: 1.6.0
 description: Adds an advanced administration panel to manage your site
 icon: empire
 author:
@@ -13,10 +13,10 @@ docs: https://github.com/getgrav/grav-plugin-admin/blob/develop/README.md
 license: MIT
 
 dependencies:
-    - { name: grav, version: '>=1.2.4' }
-    - { name: form, version: '>=2.4.0' }
+    - { name: grav, version: '>=1.3.3' }
+    - { name: form, version: '>=2.9.0' }
     - { name: email, version: '~2.0' }
-    - { name: login, version: '~2.0' }
+    - { name: login, version: '>=2.4.0' }
 
 form:
   validation: loose
@@ -42,6 +42,18 @@ form:
       label: PLUGIN_ADMIN.ADMIN_CACHING
       help: PLUGIN_ADMIN.ADMIN_CACHING_HELP
       highlight: 0
+      options:
+          1: PLUGIN_ADMIN.YES
+          0: PLUGIN_ADMIN.NO
+      validate:
+          type: bool
+
+    twofa_enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.2FA_TITLE
+      help: PLUGIN_ADMIN.2FA_ENABLED_HELP
+      default: 1
+      highlight: 1
       options:
           1: PLUGIN_ADMIN.YES
           0: PLUGIN_ADMIN.NO
@@ -125,6 +137,26 @@ form:
         expert: Expert
       help: Auto will use blueprint if available, if none found, it will use "Expert" mode.
 
+    frontend_pages_target:
+      type: select
+      label: Open frontend pages in
+      size: medium
+      default: _blank
+      options:
+        _blank: New tab
+        frontend_tab: Separate tab (always the same)
+        _self: Current tab
+
+    pages.show_parents:
+      type: select
+      size: medium
+      label: Parent dropdown
+      highlight: 1
+      options:
+        both: Show slug and folder
+        folder: Show folder
+        fullpath: Show fullpath
+
     google_fonts:
       type: toggle
       label: Use Google Fonts
@@ -151,6 +183,12 @@ form:
       validate:
         type: bool
       help: Show the "Found an issue? Please report it on GitHub." message.
+
+    pages_list_display_field:
+      type: text
+      size: small
+      label: Pages List Display Field
+      help: "Field of the page to use in the list of pages if present. Defaults/Fallback to title."
 
     enable_auto_updates_check:
       type: toggle
@@ -185,6 +223,16 @@ form:
       validate:
         type: bool
       help: Ask the user confirmation when deleting a page
+
+    hide_page_types:
+      type: array
+      label: Hide page types in Admin
+      value_only: true
+
+    hide_modular_page_types:
+      type: array
+      label: Hide modular page types in Admin
+      value_only: true
 
     Dashboard:
       type: section
@@ -354,5 +402,3 @@ form:
       type: hidden
       label: Visitors history
       default: 20
-
-

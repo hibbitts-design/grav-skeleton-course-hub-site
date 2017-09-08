@@ -2,17 +2,20 @@
 /**
  * @package    Grav.Common.Twig
  *
- * @copyright  Copyright (C) 2014 - 2016 RocketTheme, LLC. All rights reserved.
+ * @copyright  Copyright (C) 2014 - 2017 RocketTheme, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
 namespace Grav\Common\Twig;
 
 use Grav\Common\Grav;
+use Grav\Common\Page\Collection;
+use Grav\Common\Page\Media;
 use Grav\Common\Utils;
 use Grav\Common\Markdown\Parsedown;
 use Grav\Common\Markdown\ParsedownExtra;
 use Grav\Common\Uri;
+use Grav\Common\Helpers\Base32;
 use RocketTheme\Toolbox\ResourceLocator\UniformResourceLocator;
 
 class TwigExtension extends \Twig_Extension
@@ -64,6 +67,8 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFilter('*ize', [$this, 'inflectorFilter']),
             new \Twig_SimpleFilter('absolute_url', [$this, 'absoluteUrlFilter']),
             new \Twig_SimpleFilter('contains', [$this, 'containsFilter']),
+            new \Twig_SimpleFilter('chunk_split', [$this, 'chunkSplitFilter']),
+
             new \Twig_SimpleFilter('defined', [$this, 'definedDefaultFilter']),
             new \Twig_SimpleFilter('ends_with', [$this, 'endsWithFilter']),
             new \Twig_SimpleFilter('fieldName', [$this, 'fieldNameFilter']),
@@ -71,6 +76,10 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFilter('ltrim', [$this, 'ltrimFilter']),
             new \Twig_SimpleFilter('markdown', [$this, 'markdownFilter']),
             new \Twig_SimpleFilter('md5', [$this, 'md5Filter']),
+            new \Twig_SimpleFilter('base32_encode', [$this, 'base32EncodeFilter']),
+            new \Twig_SimpleFilter('base32_decode', [$this, 'base32DecodeFilter']),
+            new \Twig_SimpleFilter('base64_encode', [$this, 'base64EncodeFilter']),
+            new \Twig_SimpleFilter('base64_decode', [$this, 'base64DecodeFilter']),
             new \Twig_SimpleFilter('nicetime', [$this, 'nicetimeFilter']),
             new \Twig_SimpleFilter('randomize', [$this, 'randomizeFilter']),
             new \Twig_SimpleFilter('modulus', [$this, 'modulusFilter']),
@@ -83,11 +92,14 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFilter('sort_by_key', [$this, 'sortByKeyFilter']),
             new \Twig_SimpleFilter('starts_with', [$this, 'startsWithFilter']),
             new \Twig_SimpleFilter('t', [$this, 'translate']),
+            new \Twig_SimpleFilter('tl', [$this, 'translateLanguage']),
             new \Twig_SimpleFilter('ta', [$this, 'translateArray']),
             new \Twig_SimpleFilter('truncate', ['\Grav\Common\Utils', 'truncate']),
             new \Twig_SimpleFilter('truncate_html', ['\Grav\Common\Utils', 'truncateHTML']),
             new \Twig_SimpleFilter('json_decode', [$this, 'jsonDecodeFilter']),
             new \Twig_SimpleFilter('array_unique', 'array_unique'),
+            new \Twig_SimpleFilter('basename', 'basenameFilter'),
+            new \Twig_SimpleFilter('dirname', 'dirnameFilter'),
         ];
     }
 
@@ -101,18 +113,23 @@ class TwigExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('array', [$this, 'arrayFunc']),
             new \Twig_SimpleFunction('array_key_value', [$this, 'arrayKeyValueFunc']),
+            new \Twig_SimpleFunction('array_key_exists', [$this, 'arrayKeyExistsFunc']),
+            new \Twig_SimpleFunction('array_intersect', [$this, 'arrayIntersectFunc']),
             new \Twig_simpleFunction('authorize', [$this, 'authorize']),
             new \Twig_SimpleFunction('debug', [$this, 'dump'], ['needs_context' => true, 'needs_environment' => true]),
             new \Twig_SimpleFunction('dump', [$this, 'dump'], ['needs_context' => true, 'needs_environment' => true]),
+            new \Twig_SimpleFunction('vardump', [$this, 'vardumpFunc']),
             new \Twig_SimpleFunction('evaluate', [$this, 'evaluateStringFunc'], ['needs_context' => true, 'needs_environment' => true]),
             new \Twig_SimpleFunction('evaluate_twig', [$this, 'evaluateTwigFunc'], ['needs_context' => true, 'needs_environment' => true]),
             new \Twig_SimpleFunction('gist', [$this, 'gistFunc']),
             new \Twig_SimpleFunction('nonce_field', [$this, 'nonceFieldFunc']),
+            new \Twig_SimpleFunction('pathinfo', [$this, 'pathinfoFunc']),
             new \Twig_simpleFunction('random_string', [$this, 'randomStringFunc']),
             new \Twig_SimpleFunction('repeat', [$this, 'repeatFunc']),
             new \Twig_SimpleFunction('regex_replace', [$this, 'regexReplace']),
             new \Twig_SimpleFunction('string', [$this, 'stringFunc']),
             new \Twig_simpleFunction('t', [$this, 'translate']),
+            new \Twig_simpleFunction('tl', [$this, 'translateLanguage']),
             new \Twig_simpleFunction('ta', [$this, 'translateArray']),
             new \Twig_SimpleFunction('url', [$this, 'urlFunc']),
             new \Twig_SimpleFunction('json_decode', [$this, 'jsonDecodeFilter']),
@@ -120,6 +137,9 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFunction('redirect_me', [$this, 'redirectFunc']),
             new \Twig_SimpleFunction('range', [$this, 'rangeFunc']),
             new \Twig_SimpleFunction('isajaxrequest', [$this, 'isAjaxFunc']),
+            new \Twig_SimpleFunction('exif', [$this, 'exifFunc']),
+            new \Twig_SimpleFunction('media_directory', [$this, 'mediaDirFunc']),
+
         ];
     }
 
@@ -132,7 +152,7 @@ class TwigExtension extends \Twig_Extension
      */
     public function fieldNameFilter($str)
     {
-        $path = explode('.', $str);
+        $path = explode('.', rtrim($str, '.'));
 
         return array_shift($path) . ($path ? '[' . implode('][', $path) . ']' : '');
     }
@@ -275,6 +295,51 @@ class TwigExtension extends \Twig_Extension
     }
 
     /**
+     * Return Base32 encoded string
+     *
+     * @param $str
+     * @return string
+     */
+    public function base32EncodeFilter($str)
+    {
+        return Base32::encode($str);
+    }
+
+    /**
+     * Return Base32 decoded string
+     *
+     * @param $str
+     * @return bool|string
+     */
+    public function base32DecodeFilter($str)
+    {
+        return Base32::decode($str);
+    }
+
+    /**
+     * Return Base64 encoded string
+     *
+     * @param $str
+     * @return string
+     */
+    public function base64EncodeFilter($str)
+    {
+        return base64_encode($str);
+    }
+
+    /**
+     * Return Base64 decoded string
+     *
+     * @param $str
+     * @return bool|string
+     */
+    public function base64DecodeFilter($str)
+    {
+        return base64_decode($str);
+    }
+
+
+    /**
      * Sorts a collection by key
      *
      * @param  array    $input
@@ -315,6 +380,19 @@ class TwigExtension extends \Twig_Extension
         ksort($array);
 
         return $array;
+    }
+
+    /**
+     * Wrapper for chunk_split() function
+     *
+     * @param $value
+     * @param $chars
+     * @param string $split
+     * @return string
+     */
+    public function chunkSplitFilter($value, $chars, $split = '-')
+    {
+        return chunk_split($value, $chars, $split);
     }
 
     /**
@@ -389,6 +467,10 @@ class TwigExtension extends \Twig_Extension
             $difference = $now - $unix_date;
             $tense      = $this->grav['language']->translate('NICETIME.AGO', null, true);
 
+        } else if ($now == $unix_date) {
+            $difference = $now - $unix_date;
+            $tense      = $this->grav['language']->translate('NICETIME.JUST_NOW', null, false);
+
         } else {
             $difference = $unix_date - $now;
             $tense      = $this->grav['language']->translate('NICETIME.FROM_NOW', null, true);
@@ -414,7 +496,12 @@ class TwigExtension extends \Twig_Extension
 
         $periods[$j] = $this->grav['language']->translate($periods[$j], null, true);
 
-        return "$difference $periods[$j] {$tense}";
+        if ($now == $unix_date) {
+            return "{$tense}";
+        }
+        else {
+            return "$difference $periods[$j] {$tense}";
+        }
     }
 
     /**
@@ -524,6 +611,20 @@ class TwigExtension extends \Twig_Extension
     public function translate()
     {
         return $this->grav['language']->translate(func_get_args());
+    }
+
+    /**
+     * Translate Strings
+     *
+     * @param $args
+     * @param array|null $languages
+     * @param bool $array_support
+     * @param bool $html_out
+     * @return mixed
+     */
+    public function translateLanguage($args, array $languages = null, $array_support = false, $html_out = false)
+    {
+        return $this->grav['language']->translate($args, $languages, $array_support, $html_out);
     }
 
     /**
@@ -754,6 +855,36 @@ class TwigExtension extends \Twig_Extension
     }
 
     /**
+     * Check to see if an array key exists
+     *
+     * @param string $key           key of item
+     * @param string $current_array optional array to add to
+     *
+     * @return array
+     */
+    public function arrayKeyExistsFunc($key, $current_array = null)
+    {
+        return array_key_exists($key, $current_array);
+    }
+
+    /**
+     * Wrapper for array_intersect() method
+     *
+     * @param $array1
+     * @param $array2
+     * @return array
+     */
+    public function arrayIntersectFunc($array1, $array2)
+    {
+        if ($array1 instanceof Collection && $array2 instanceof Collection) {
+            return $array1->intersect($array2);
+        } else {
+            return array_intersect($array1, $array2);
+        }
+
+    }
+
+    /**
      * Returns a string from a value. If the value is array, return it json encoded
      *
      * @param $value
@@ -905,5 +1036,98 @@ class TwigExtension extends \Twig_Extension
         return (
             !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
             && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+    }
+
+    /**
+     * Get's the Exif data for a file
+     *
+     * @param $image
+     * @param bool $raw
+     * @return mixed
+     */
+    public function exifFunc($image, $raw = false)
+    {
+        if (isset($this->grav['exif'])) {
+
+            /** @var UniformResourceLocator $locator */
+            $locator = $this->grav['locator'];
+
+            if ($locator->isStream($image)) {
+                $image = $locator->findResource($image);
+            }
+
+            $exif_reader = $this->grav['exif']->getReader();
+
+            if (file_exists($image) && $this->config->get('system.media.auto_metadata_exif') && $exif_reader) {
+
+                $exif_data = $exif_reader->read($image);
+
+                if ($exif_data) {
+                    if ($raw) {
+                        return $exif_data->getRawData();
+                    } else {
+                        return $exif_data->getData();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Process a folder as Media and return a media object
+     *
+     * @param $media_dir
+     * @return Media
+     */
+    public function mediaDirFunc($media_dir)
+    {
+        /** @var UniformResourceLocator $locator */
+        $locator = $this->grav['locator'];
+
+        if ($locator->isStream($media_dir)) {
+            $media_dir = $locator->findResource($media_dir);
+        }
+
+        if (file_exists($media_dir)) {
+            return new Media($media_dir);
+        }
+
+    }
+
+    /**
+     * Dump a variable to the browser
+     *
+     * @param $var
+     */
+    public function vardumpFunc($var)
+    {
+        var_dump($var);
+    }
+
+    /**
+     * Simple wrapper for pathinfo()
+     *
+     * @param $var
+     * @return mixed
+     */
+    public function pathinfoFunc($var)
+    {
+        return pathinfo($var);
+    }
+
+    /**
+     * Simple wrapper for basename()
+     *
+     * @param $var
+     * @return string
+     */
+    public function basenameFilter($var)
+    {
+        return basename($var);
+    }
+
+    public function dirnameFilter($var)
+    {
+        return dirname($var);
     }
 }

@@ -17,6 +17,7 @@ sitemap:
 modular_content:
     items: '@self.modular'
     order:
+        by: folder
         dir: desc
 feed:
     description: 'Course Hub Description'
