@@ -1,3 +1,16 @@
+# v2.4.2
+## 09/29/2017
+
+1. [](#bugfix)
+    * Fixed issue with protected page media without access [#132](https://github.com/getgrav/grav-plugin-login/issues/132)
+    * Improved validation of email to support RFC5322 [Grav#1648](https://github.com/getgrav/grav/issues/1648)
+
+# v2.4.1
+## 09/12/2017
+
+1. [](#bugfix)
+    * Fixed an issue with 3rd party login plugins [#130](https://github.com/getgrav/grav-plugin-login/issues/130)
+
 # v2.4.0
 ## 09/07/2017
 

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit829070c7e4309080b0958a0a655ad023
+class ComposerStaticInitebad8ca6e0ad645d471dfb21f54c56c5
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -68,6 +68,10 @@ class ComposerStaticInit829070c7e4309080b0958a0a655ad023
         array (
             'Doctrine\\Common\\Cache\\' => 22,
             'DebugBar\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
         ),
     );
 
@@ -180,6 +184,10 @@ class ComposerStaticInit829070c7e4309080b0958a0a655ad023
         array (
             0 => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar',
         ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
     );
 
     public static $fallbackDirsPsr4 = array (
@@ -234,6 +242,7 @@ class ComposerStaticInit829070c7e4309080b0958a0a655ad023
     );
 
     public static $classMap = array (
+        'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
         'DOMLettersIterator' => __DIR__ . '/..' . '/antoligy/dom-string-iterators/src/DOMLettersIterator.php',
         'DOMWordsIterator' => __DIR__ . '/..' . '/antoligy/dom-string-iterators/src/DOMWordsIterator.php',
         'DebugBar\\Bridge\\CacheCacheCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/CacheCacheCollector.php',
@@ -913,6 +922,7 @@ class ComposerStaticInit829070c7e4309080b0958a0a655ad023
         'Twig\\Extension\\InitRuntimeInterface' => __DIR__ . '/..' . '/twig/twig/src/Extension/InitRuntimeInterface.php',
         'Twig\\Extension\\OptimizerExtension' => __DIR__ . '/..' . '/twig/twig/src/Extension/OptimizerExtension.php',
         'Twig\\Extension\\ProfilerExtension' => __DIR__ . '/..' . '/twig/twig/src/Extension/ProfilerExtension.php',
+        'Twig\\Extension\\RuntimeExtensionInterface' => __DIR__ . '/..' . '/twig/twig/src/Extension/RuntimeExtensionInterface.php',
         'Twig\\Extension\\SandboxExtension' => __DIR__ . '/..' . '/twig/twig/src/Extension/SandboxExtension.php',
         'Twig\\Extension\\StagingExtension' => __DIR__ . '/..' . '/twig/twig/src/Extension/StagingExtension.php',
         'Twig\\Extension\\StringLoaderExtension' => __DIR__ . '/..' . '/twig/twig/src/Extension/StringLoaderExtension.php',
@@ -1285,11 +1295,11 @@ class ComposerStaticInit829070c7e4309080b0958a0a655ad023
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit829070c7e4309080b0958a0a655ad023::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit829070c7e4309080b0958a0a655ad023::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit829070c7e4309080b0958a0a655ad023::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit829070c7e4309080b0958a0a655ad023::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit829070c7e4309080b0958a0a655ad023::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitebad8ca6e0ad645d471dfb21f54c56c5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitebad8ca6e0ad645d471dfb21f54c56c5::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitebad8ca6e0ad645d471dfb21f54c56c5::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitebad8ca6e0ad645d471dfb21f54c56c5::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitebad8ca6e0ad645d471dfb21f54c56c5::$classMap;
 
         }, null, ClassLoader::class);
     }

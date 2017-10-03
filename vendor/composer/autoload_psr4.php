@@ -33,5 +33,6 @@ return array(
     'Grav\\' => array($baseDir . '/system/src/Grav'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
     'DebugBar\\' => array($vendorDir . '/maximebf/debugbar/src/DebugBar'),
+    'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     '' => array($vendorDir . '/antoligy/dom-string-iterators/src'),
 );
