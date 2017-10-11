@@ -6,6 +6,7 @@ author:
 taxonomies:
   - category
   - tag
+  - author
 metadata:
   description: 'A short description of your course would go here'
 summary:
@@ -32,8 +33,6 @@ menu:
     icon: arrow-circle-right
     url: 'http://getgrav.org/'
 hidehomemenulink: false
-icon:
-  post: calendar-o
 hidesidebaronblogpages:
   enabled: false
 twittertimeline:
@@ -48,3 +47,5 @@ hidesidebaronblog:
   enabled: '0'
 chromelesspages:
   enabled: false
+icon:
+  post: calendar-o
