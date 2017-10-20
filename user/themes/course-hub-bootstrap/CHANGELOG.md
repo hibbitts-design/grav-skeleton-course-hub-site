@@ -1,3 +1,23 @@
+# v1.8.2
+## 10/20/2017
+
+1. [](#improved)
+    * Updated course hub demo pages in theme '_demo' folder
+1. [](#bugfix)
+    * Support for custom 'Edit in Git' URL in page header restored
+
+# v1.8.1
+## 10/20/2017
+
+1. [](#bugfix)
+    * Fixed automatic 'Site Theme Files' URL calculation
+
+# v1.8.0
+## 10/19/2017
+
+1. [](#bugfix)
+    * Fixed automatic 'Edit in Git' tree URL calculation for BitBucket and generic Git repositories
+
 # v1.7.9
 ## 10/18/2017
 
