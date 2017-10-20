@@ -1,3 +1,32 @@
+# v1.3.7
+## 10/18/2017
+
+1. [](#bugfix)
+    * Regression Uri: `base_url_absolute` always has the port number [#1690](https://github.com/getgrav/grav-plugin-admin/issues/1690)
+    * Uri: Prefer using REQUEST_SCHEME instead of HTTPS [#1698](https://github.com/getgrav/grav-plugin-admin/issues/1698)
+    * Fixed routing paths with urlencoded spaces and non-latin letters [#1688](https://github.com/getgrav/grav-plugin-admin/issues/1688)
+
+# v1.3.6
+## 10/12/2017
+
+1. [](#bugfix)
+    * Regression: Ajax error in Nginx [admin#1244](https://github.com/getgrav/grav-plugin-admin/issues/1244)
+    * Remove the `_url=$uri` portion of the the Nginx `try_files` command [admin#1244](https://github.com/getgrav/grav-plugin-admin/issues/1244)
+    
+# v1.3.5
+## 10/11/2017
+
+1. [](#improved)
+    * Refactored `URI` class with numerous bug fixes, and optimizations
+    * Override `system.media.upload_limit` with PHP's `post_max_size` or `upload_max_filesize`
+    * Updated `bin/grav clean` command to remove unnecessary vendor files (save some bytes) 
+    * Added a `http_status_code` Twig function to allow setting HTTP status codes from Twig directly.
+    * Deter XSS attacks via URI path/uri methods (credit:newbthenewbd)
+    * Added support for `$uri->toArray()` and `(string)$uri`
+    * Added support for `type` on `Asstes::addInlineJs()` [#1683](https://github.com/getgrav/grav/pull/1683)
+1. [](#bugfix)
+    * Fixed method signature error with `GPM\InstallCommand::processPackage()` [#1682](https://github.com/getgrav/grav/pull/1682)   
+
 # v1.3.4
 ## 09/29/2017
 
