@@ -25,6 +25,7 @@ gitrepo:
   editlinkicon: github
   editthemelinklocation: none
   editthemelinktext: 'Site Theme Files'
+  typeofgitsyncrepolink: edit
 displaymenuentries:
   enabled: false
 menu:
