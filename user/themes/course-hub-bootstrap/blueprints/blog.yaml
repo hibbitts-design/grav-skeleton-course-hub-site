@@ -13,12 +13,22 @@ form:
 
           fields:
 
+            coursehub1:
+                type: section
+                title: Page Metadata
+                underline: true
+
+            header.metadata:
+               type: array
+               label: Metadata Items
+               required: true
+
             coursehub2:
                 type: section
                 title: Git Repository
                 underline: true
 
-            header.hidegitrepoeditlink:
+            header.hide_git_sync_repo_link:
                 type: toggle
                 label: Display Git Repository Edit Page Link
                 help: Determines if the Git Repository edit Page link is displayed for this page
@@ -30,7 +40,7 @@ form:
                 validate:
                     type: bool
 
-            header.gitrepoeditlinkurl:
+            header.git_sync_repo_link:
                 type: text
                 size: large
                 label: Custom Git Repository Page URL

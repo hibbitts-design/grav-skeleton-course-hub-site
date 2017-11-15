@@ -1,8 +1,43 @@
+# v1.9.1
+## 11/15/2017
+
+1. [](#improved)
+    * Aligned page header variable name to hide Git Sync link with Open Publishing Space (hide_git_sync_repo_link)
+    * Aligned other page header variables to be in the same style as Open Publishing Space (i.e. hide_from_post_list, git_sync_repo_link and hide_page_title)
+1. [](#bugfix)
+    * Fixed modular 'default' template
+
+# v1.9.0
+## 11/09/2017
+
+1. [](#bugfix)
+    * Restored 'Twitter feed' template and blueprint files to expected locations
+
+# v1.8.9
+## 11/09/2017
+
+1. [](#improved)
+    * Renamed 'Twitter widget' template to 'Twitter feed' (same as in the Open Publishing Space theme)
+
+# v1.8.8
+## 11/04/2017
+
+1. [](#new)
+    * Added experimental embed.ly card page template
+    * Added experimental Twitter widget page template
+    * Added blog list page metadata blueprint
+
+# v1.8.7
+## 10/27/2017
+
+1. [](#improved)
+    * Updated course hub demo pages in theme '_demo' folder
+
 # v1.8.6
 ## 10/26/2017
 
 1. [](#improved)
-    * Adjusted order of items in footer area
+    * Adjusted order of items in Footer area
 
 # v1.8.5
 ## 10/26/2017
