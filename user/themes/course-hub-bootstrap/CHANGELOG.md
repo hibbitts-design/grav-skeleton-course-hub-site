@@ -1,3 +1,15 @@
+# v1.9.3
+## 11/19/2017
+
+1. [](#bugfix)
+    * Fixed support for blog header image credit storage in external meta file
+
+# v1.9.2
+## 11/19/2017
+
+1. [](#improved)
+    * Added support for header image with 'class preparations' modular template
+
 # v1.9.1
 ## 11/15/2017
 
