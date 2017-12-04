@@ -1,7 +1,7 @@
 ---
 title: 'UX Techniques Guide'
-visible: true
 cache_enable: false
+visible: true
 content:
     items: '@self.children'
     order:

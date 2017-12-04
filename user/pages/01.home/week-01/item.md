@@ -10,8 +10,8 @@ header_image_creditlink: 'https://www.flickr.com/photos/13202489@N04/17656394823
 [Jan 5th Class One-minute Summaries](https://canvas.sfu.ca/courses/25492/discussion_topics/440794)
 
 ##### Presented Slides  
-[Course Overview Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder/)  
-[Introduction to UX Design Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder/)
+[Course Overview Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder#)  
+[Introduction to UX Design Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder#)
 
 ===
 
@@ -19,11 +19,11 @@ header_image_creditlink: 'https://www.flickr.com/photos/13202489@N04/17656394823
 [Jan 5th Class One-minute Summaries](https://canvas.sfu.ca/courses/25492/discussion_topics/440794)
 
 ##### Presented Slides  
-Course Overview ([HTML Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder/) | [PDF Slides](http://1drv.ms/1PKX6bG))  
-<div class="embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" src="//slides.com/paulhibbitts/cpt-363-slides-placeholder/embed?style=light" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+Course Overview ([HTML Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder#) | [PDF Slides](https://1drv.ms/b/s!Aoj9Cstt0NJ0kf5lDMUg1gRvHwaFyg))  
+<div class="embed-responsive embed-responsive-4by3"><iframe src="//slides.com/paulhibbitts/cpt-363-slides-placeholder/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
-Introduction to UX ([HTML Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder/) | [PDF Slides](http://1drv.ms/1PKX6bG))  
-<div class="embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" src="//slides.com/paulhibbitts/cpt-363-slides-placeholder/embed?style=light" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+Introduction to UX ([HTML Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder#) | [PDF Slides](https://1drv.ms/b/s!Aoj9Cstt0NJ0kf5lDMUg1gRvHwaFyg))  
+<div class="embed-responsive embed-responsive-4by3"><iframe src="//slides.com/paulhibbitts/cpt-363-slides-placeholder/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
 ##### Supplemental Slides  
 [Interaction Design History](http://www.slideshare.net/mrettig/interaction-design-history)  
