@@ -1,31 +1,32 @@
 ---
-title: 'Week 2 (Jan 12th - 18th)'
-date: 01/12/2016
+title: 'Week 2 (Sep 13 - 19)'
 published: true
+date: '13-09-2017 00:00'
+header_image_credit: 'CannedTuna, Flickr.com'
+header_image_creditlink: 'https://www.flickr.com/photos/cannedtuna/4853380320/'
 ---
 
-##### Summaries and Questions  
-[Jan 12th Class One-minute Summaries](https://canvas.sfu.ca/courses/25492/discussion_topics/440793)
-
-##### Presented Slides  
-[The Process of UX Design Slides](http://slides.com/paulhibbitts/cpt-365-slides-in-progress#)  
+##### Presented Slides
+[The Process of UX Design](https://www.swipe.to/1951fq)  
 
 ===
 
 ##### Summaries and Questions  
-[Jan 12th Class One-minute Summaries](https://canvas.sfu.ca/courses/25492/discussion_topics/440793)
+[Sep 13th Class One-minute Summaries](https://canvas.sfu.ca/courses/36662/assignments/267537)
 
 ##### Presented Slides  
-The Process of UX Design ([HTML Slides](http://slides.com/paulhibbitts/cpt-365-slides-in-progress#) | [PDF Slides](#))  
-<div class="flex-video"><iframe src="//slides.com/paulhibbitts/cpt-365-slides-in-progress/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+The Process of UX Design ([Download slides as PDF](#))
+<div class="embed-responsive embed-responsive-16by9"><figure><iframe src="https://www.swipe.to/embed/9967fp" allowfullscreen></iframe></figure></div>
 
-##### Assignments  
-[UI Assessment (Peer Reviews Required for Grade)](https://canvas.sfu.ca/courses/22099/assignments/112756)  
+##### CMPT-363 UX Design Process/Toolkit
+![CMPT-363 UX Design Process/Toolkit Diagram](/images/ux-design-process-v4.png)
 
-##### Handouts  
-[Microsoft Product Reaction Cards (DOC)](http://www.microsoft.com/usability/UEPostings/ProductReactionCards.doc)  
+##### Assignments
+[Project Proposal](https://canvas.sfu.ca/courses/36662/assignments/267529)   
 
-##### Required Readings  
-[Usability 101: Introduction to Usability](http://www.nngroup.com/articles/usability-101-introduction-to-usability/)
-<a class="embedly-card" data-card-align="left" href="http://www.nngroup.com/articles/usability-101-introduction-to-usability/">Usability 101: Introduction to Usability</a>
+##### Handouts
+[Product Reaction Cards](https://canvas.sfu.ca/courses/36662/files/folder/Handouts/Product%20Reaction%20Cards)  
+
+##### Recommended Reading  
+<a class="embedly-card" data-card-align="left" href="https://medium.com/salesforce-ux/designing-digital-products-with-mental-models-45ac5c0a9dc2">Designing Digital Products with Mental Models</a>
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>

@@ -7,12 +7,13 @@ form:
             type:                              section
             title:                             Chromeless Pages
             underline:                         true
+            ordering@:                         1
 
             fields:
                 chromeless.enabled:
                     type:                      toggle
                     label:                     Hide Global Navigation Elements on all Pages
-                    description:               'When enabled, only page content will be displayed. This is often useful when embedding Course Hub pages within another system (e.g. an LMS such as Canvas using the <a href="https://www.eduappcenter.com/apps/63#.WUWhaRPysXo" target="_blank">Redirect Tool</a> LTI).'
+                    description:               "When enabled, all global navigation elements will be hidden and only content will be displayed for all site pages. To selectively display only content, append '/chromeless:true' to the URL of a site page."
                     highlight:                 1
                     default:                   0
                     options:
@@ -23,8 +24,9 @@ form:
 
         sectiontwo:
             type:                              section
-            title:                             Git Sync Link
+            title:                             Git Sync Link Setup
             underline:                         true
+            ordering@:                         2
 
             fields:
                 gitrepo.editlinklocation:
@@ -47,6 +49,19 @@ form:
                         view: View Git Repository
                         edit: View/Edit Page in Git Repository
 
+        sectionthree:
+            type:                              section
+            title:                             Git Sync Link Options
+            underline:                         true
+            ordering@:                         3
+
+            fields:
+                gitrepo.editnotetext:
+                  type:                        input.text
+                  size:                        long
+                  label:                       Text before Git Sync Link on Pages
+                  description:                 The text before the Git Sync link when displayed on a page, e.g. 'Have a suggestion or correction?'.
+
                 gitrepo.editlinkicon:
                     type:                      text
                     size:                      small
@@ -62,13 +77,6 @@ form:
                   label:                       Custom Git Sync Link Text
                   description:                 Git Sync link text, e.g. 'View Page in GitHub'.
 
-                gitrepo.editnotetext:
-                  type:                        input.text
-                  size:                        long
-                  label:                       Text before Git Sync Link on Pages
-                  default:                     'Have a suggestion or correction?'
-                  description:                 'The text before the Git Sync link (only when displayed on a Page).'
-
                 gitrepo.edittreeurl:
                     type:                      text
                     size:                      long
@@ -78,32 +86,34 @@ form:
                     validate:
                         type:                  URL
 
-        sectionthree:
+        sectionfour:
             type:                              section
-            title:                             Edit Site Theme Files in Git Link
+            title:                             Git Sync Site Theme Files Link
             underline:                         true
+            ordering@:                         4
 
             fields:
                 gitrepo.editthemelinklocation:
                     type:                      select
-                    label:                     Display of Edit Site Theme Files Link
+                    label:                     Display of Site Theme Files Link
                     default:                   None
                     size:                      small
                     options:
-                        'none':                None
-                        'footer':              Footer
+                          'footer':            Footer
+                          'none':              None
 
                 gitrepo.editthemelinktext:
                   type:                        input.text
                   size:                        medium
-                  label:                       Edit Site Theme Files Link Text
+                  label:                       Site Theme Files Link Text
                   default:                     'Site Theme Files'
-                  description:                 Customize the Edit Site Theme Files link text.
+                  description:                 Customize the Site Theme Files link text.
 
-        sectionfour:
+        sectionfive:
             type:                              section
             title:                             Menubar
             underline:                         true
+            ordering@:                         5
 
             fields:
                 displaymenuentries.enabled:
@@ -145,26 +155,11 @@ form:
                     validate:
                         type:                  bool
 
-        sectionfive:
-            type:                              section
-            title:                             Blog Posts
-            underline:                         true
-
-            fields:
-                icon.post:
-                    type:                      text
-                    size:                      small
-                    label:                     Default Blog Post Font Awesome Icon
-                    default:                   'calendar-o'
-                    description:               Short name, e.g. 'calendar-o'.
-                    help:                      Determines the default Font Awesome icon used for the blog posts.
-                    validate:
-                        type:                  text
-
         sectionsix:
             type:                              section
-            title:                             Sidebar
+            title:                             Blog Options
             underline:                         true
+            ordering@:                         6
 
             fields:
 
@@ -179,46 +174,21 @@ form:
                     validate:
                         type:                  bool
 
-                twittertimeline.enabled:
-                    type:                      toggle
-                    label:                     Display Twitter Widget in Sidebar
-                    highlight:                 1
-                    default:                   0
-                    options:
-                        1:                     Yes
-                        0:                     No
-                    validate:
-                        type:                  bool
-
-                twittertimeline.url:
+                icon.post:
                     type:                      text
-                    size:                      large
-                    label:                     Twitter Widget URL
-                    help:                      Enter the URL for your embedable Twitter Widget.
-                    validate:
-                        type:                  URL
-
-                twittertimeline.text:
-                    type:                      text
-                    size:                      large
-                    label:                     Twitter Widget Text
+                    size:                      medium
+                    label:                     Default Blog Post Font Awesome Icon
+                    default:                   'calendar-o'
+                    description:               Short name, e.g. 'calendar-o'.
+                    help:                      Determines the default Font Awesome icon used for the blog posts.
                     validate:
                         type:                  text
-
-                twittertimeline.height:
-                    type:                      text
-                    size:                      small
-                    label:                     Twitter Widget Height (px)
-                    default:                   600
-                    validate:
-                        type:                  int
-                        min:                   100
-                        max:                   1000
 
         sectionseven:
             type:                              section
             title:                             Creative Commons (CC) License
             underline:                         true
+            ordering@:                         7
 
             fields:
                 cc_license.enabled:
@@ -246,10 +216,21 @@ form:
                       ccbyncsa:                'CC Attribution Non-Commercial Share Alike'
                       ccbyncnd:                'CC Attribution Non-Commercial No Derivatives'
 
+                cc_license.icon:
+                    type:                      toggle
+                    label:                     Display Only CC License Icon
+                    highlight:                 0
+                    default:                   0
+                    options:
+                        0:                     Yes
+                        1:                     No
+                    validate:
+                        type:                  bool
+
                 cc_license.text:
                     type:                      text
                     size:                      long
-                    description:               'For example, ''Except where otherwise noted.'''
-                    label:                     CC License Text
+                    description:               'For example, ''Except for embedded content or elsewhere noted.'''
+                    label:                     Additional CC License Text
                     validate:
                         type:                  text

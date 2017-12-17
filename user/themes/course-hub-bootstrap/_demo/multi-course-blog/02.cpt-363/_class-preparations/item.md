@@ -3,11 +3,14 @@ title: 'Class Preparations'
 published: true
 ---
 
-### Jan 26th CPT-363 Class Preparations
+### Oct 4th Class Preparations
 
-##### Required Readings
-[Persona Empathy Mapping](http://www.cooper.com/journal/2014/05/persona-empathy-mapping)
+##### Required Reading
+[A Five-Step Process For Conducting User Research](http://www.smashingmagazine.com/2013/09/5-step-process-conducting-user-research/)
 
-[Required Reading Quiz](https://canvas.sfu.ca/courses/25492/quizzes/34783?classes=btn,btn-primary)  
+[Required Reading Quiz](https://canvas.sfu.ca/courses/36662/quizzes/65506?classes=btn,btn-primary)
 
-Weekly quizzes are due by 10:00am the day of class. After attending this class, [share your one-minute summary](https://canvas.sfu.ca/courses/25492/discussion_topics/440791) before midnight, January 26th.
+##### Slides to be Discussed
+[User Research](https://www.swipe.to/embed/9967fp)
+
+Did you attend this class? [Share your one-minute summary](https://canvas.sfu.ca/courses/36662/assignments/267534) before midnight, the day of class.

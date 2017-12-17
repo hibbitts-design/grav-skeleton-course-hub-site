@@ -1,29 +1,27 @@
 ---
-title: 'Week 3 (Jan 19th - 25th)'
-date: 01/19/2016
+title: 'Week 3 (Sep 20 - 26)'
 published: true
+date: '20-09-2017 00:00'
+header_image_credit: 'Emilio Küffer, Flickr.com'
+header_image_creditlink: 'https://www.flickr.com/photos/emiliokuffer/6384294717/'
 ---
 
-##### Summaries and Questions  
-[Jan 19th Class One-minute Summaries](https://canvas.sfu.ca/courses/25492/discussion_topics/440792)
-
-##### Presented Slides  
-[User Research Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder#)  
+##### Presented Slides
+[Strategic UX Design](https://swipe.to/9967fp)
 
 ===
 
 ##### Summaries and Questions  
-[Jan 19th Class One-minute Summaries](https://canvas.sfu.ca/courses/25492/discussion_topics/440792)
+[Sep 20th Class One-minute Summaries](https://canvas.sfu.ca/courses/36662/assignments/267536)
 
 ##### Presented Slides  
-User Research Slides ([HTML Slides](http://slides.com/paulhibbitts/cpt-363-slides-placeholder#) | [PDF Slides](#))
-<div class="embed-responsive embed-responsive-4by3"><iframe src="//slides.com/paulhibbitts/cpt-363-slides-placeholder/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+Strategic UX Design ([Download slides as PDF](#))
+<div class="embed-responsive embed-responsive-16by9"><figure><iframe src="https://www.swipe.to/embed/9967fp" allowfullscreen></iframe></figure></div>
 
-##### Supplemental Video  
-[What People Are Really Doing Video](http://vimeo.com/album/169777/video/7099570)  
-<div class="embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/7099570?title=0&byline=0&portrait=0" width="500" height="275" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+##### Assignments
+[Project Proposal - Group Component](https://canvas.sfu.ca/courses/36662/assignments/240534)  
+[Project Proposal - Individual Component](https://canvas.sfu.ca/courses/36662/assignments/240533)  
 
 ##### Required Reading  
-[A Five-Step Process For Conducting User Research](http://www.smashingmagazine.com/2013/09/23/5-step-process-conducting-user-research/)  
-<a class="embedly-card" data-card-align="left" href="http://www.smashingmagazine.com/2013/09/23/5-step-process-conducting-user-research/">A Five-Step Process For Conducting User Research</a>
+<a class="embedly-card" data-card-align="left" href="http://www.uxmatters.com/mt/archives/2012/09/3-keys-to-aligning-ux-with-business-strategy.php">3 Keys to Aligning UX with Business Strategy</a>
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>

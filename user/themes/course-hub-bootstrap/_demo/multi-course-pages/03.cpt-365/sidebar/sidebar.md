@@ -8,7 +8,7 @@ visible: false
 ##### Course Pages
 [CPT 365 Home](/cpt-365/home)  
 [CPT 365 Resources](/cpt-365/resources)  
-[CPT 365 Syllabus](/cpt-363/syllabus)  
+[CPT 365 Syllabus](/cpt-365/syllabus)  
 
 ##### Course Facilitators
 Some Name  

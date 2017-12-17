@@ -1,3 +1,42 @@
+# v1.9.76
+## 12/17/2017
+
+1. [](#improved)
+    * Multi-course site examples updated to align with new basic example in '_demo' pages folder
+
+# v1.9.75
+## 12/16/2017
+
+1. [](#bugfix)
+    * Removed large photo image files from '_demo' folder
+
+# v1.9.74
+## 12/16/2017
+
+1. [](#new)
+    * Added 'advanced' single course example, which includes extensive use of custom content types and modular content, in '_demo' pages folder
+1. [](#improved)
+    * Updated single course site example (now called 'basic') in '_demo' pages folder
+    * Updated Bootstrap Bootstrap CSS to v3.3.7
+
+# v1.9.73
+## 12/14/2017
+
+1. [](#new)
+    * Added swipe deck page template
+    * Added swipe deck link only page template
+    * Added swipe figure CSS for embedded slide decks
+1. [](#improved)
+    * Updated embed.ly card link only page template
+1. [](#bugfix)
+    * Fixed Git Sync link template custom icon issue
+
+# v1.9.72
+## 12/12/2017
+
+1. [](#new)
+    * Added embed.ly card link only page template
+
 # v1.9.71
 ## 12/10/2017
 
