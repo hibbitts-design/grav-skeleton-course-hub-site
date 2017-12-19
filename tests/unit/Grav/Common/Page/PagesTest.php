@@ -21,23 +21,18 @@ class PagesTest extends \Codeception\TestCase\Test
     /** @var Page $root_page */
     protected $root_page;
 
-    static $run = false;
-
     protected function _before()
     {
-        $this->grav = Fixtures::get('grav');
+        $grav = Fixtures::get('grav');
+        $this->grav = $grav();
         $this->pages = $this->grav['pages'];
         $this->grav['config']->set('system.home.alias', '/home');
 
-        if (!self::$run) {
-            /** @var UniformResourceLocator $locator */
-            $locator = $this->grav['locator'];
+        /** @var UniformResourceLocator $locator */
+        $locator = $this->grav['locator'];
 
-            $locator->addPath('page', '', 'tests/fake/simple-site/user/pages', false);
-            $this->pages->init();
-            self::$run = true;
-        }
-
+        $locator->addPath('page', '', 'tests/fake/simple-site/user/pages', false);
+        $this->pages->init();
     }
 
     public function testBase()
@@ -234,8 +229,8 @@ class PagesTest extends \Codeception\TestCase\Test
     {
         $list = $this->pages->getList();
         $this->assertTrue(is_array($list));
-        $this->assertSame('Home', $list['/']);
-        $this->assertSame('Blog', $list['/blog']);
+        $this->assertSame('&mdash;-&rtrif; Home', $list['/']);
+        $this->assertSame('&mdash;-&rtrif; Blog', $list['/blog']);
     }
 
     public function testGetTypes()

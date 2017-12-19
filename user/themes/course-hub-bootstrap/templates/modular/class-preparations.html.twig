@@ -13,11 +13,14 @@
         {{ page.media.images|first.cropResize(900,600).html('','blog-header-image') }}
       {% else %}
         {% if header_image %}
-        {% if header_image_file %}
-          {% set header_image_media = page.media.images[header_image_file] %}
-        {% else %}
-          {% set header_image_media = page.media.images|first %}
-        {% endif %}
+          {% if header_image_file %}
+            {% set image_parts = pathinfo(header_image_file) %}
+            {% set image_basename = image_parts.basename %}
+            {% set image_page = image_parts.dirname == '.' ? page : page.find(image_parts.dirname) %}
+            {% set header_image_media = image_page.media[image_basename] %}
+          {% else %}
+            {% set header_image_media = page.media.images|first %}
+          {% endif %}
 
           {# support image credit tag with optional image meta file - hibbittsdesign.org #}
           {% if header_image_media %}
@@ -25,7 +28,7 @@
               {% set image_credit = page.header.header_image_credit %}
               {% set image_creditlink = page.header.header_image_creditlink %}
               {% set image_alt_text = page.header.header_image_alt_text %}
-            {% elseif header_image_media.meta.header_image_credit  %}
+            {% elseif header_image_media.meta.header_image_credit %}
               {% set image_credit = header_image_media.meta.header_image_credit %}
               {% set image_creditlink = header_image_media.meta.header_image_creditlink %}
               {% set image_alt_text = header_image_media.meta.header_image_alt_text %}
