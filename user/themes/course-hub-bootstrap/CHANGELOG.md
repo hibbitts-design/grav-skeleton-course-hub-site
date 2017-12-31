@@ -1,3 +1,13 @@
+# v1.9.82
+## 12/31/2017
+
+1. [](#improved)
+    * Updated RSS Feed and Blog Item blueprints
+    * Streamlined RSS Feed template logic
+1. [](#bugfix)
+    * Fixed the default visibility of the Git Sync link on 'UX News' demo page
+    * Removed unused template files
+
 # v1.9.81
 ## 12/30/2017
 
