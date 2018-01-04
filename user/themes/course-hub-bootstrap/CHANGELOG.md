@@ -1,3 +1,15 @@
+# v1.9.85
+## 01/04/2018
+
+1. [](#improved)
+    * Added option to show all paragraphs (i.e. entire post) in RSS Feed items
+
+# v1.9.84
+## 01/02/2018
+
+1. [](#improved)
+    * Updated 'basic' and 'advanced' course demo pages in theme '_demo' folder
+
 # v1.9.83
 ## 01/01/2018
 
@@ -114,6 +126,7 @@
 1. [](#new)
     * Added experimental CSS styling option to better match Canvas LMS when embedding content
 
+# v1.9.6
 ## 12/04/2017
 
 1. [](#improved)
