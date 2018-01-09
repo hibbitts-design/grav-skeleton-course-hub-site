@@ -1,7 +1,7 @@
 ---
 title: 'Course Welcome'
 date: '01-05-2017 00:00'
-header_image: '0'
+header_image: false
 icon: users
 hide_from_post_list: false
 continue_link: false
