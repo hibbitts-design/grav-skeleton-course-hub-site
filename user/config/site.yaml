@@ -1,8 +1,8 @@
 title: CPT-363
 default_lang: en
 author:
-  name: 'John Appleseed'
-  email: john@email.com
+  name: 'Site Author'
+  email: siteauthor@email.com
 taxonomies:
   - category
   - tag
@@ -20,12 +20,10 @@ chromeless:
   enabled: false
 gitrepo:
   editlinklocation: menu
-  editnotetext: 'Have a suggestion?'
-  editlinktext: 'Edit this Page'
-  editlinkicon: github
   editthemelinklocation: none
   editthemelinktext: 'Site Theme Files'
   typeofgitsyncrepolink: edit
+  editnotetext: 'Have a suggestion?'
 displaymenuentries:
   enabled: false
 menu:
@@ -39,7 +37,7 @@ hidesidebaronblogpages:
 twittertimeline:
   enabled: false
   url: 'https://twitter.com/hibbittsdesign/lists/cpt-363'
-  text: 'A Twitter List by @hibbittsdesign'
+  text: 'A Twitter Lists by @hibbittsdesign'
   height: 700
 cc_license:
   enabled: false
