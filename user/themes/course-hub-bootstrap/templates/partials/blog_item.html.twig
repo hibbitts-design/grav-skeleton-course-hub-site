@@ -20,11 +20,14 @@
     {% else %}
       {# added page title icon - hibbittsdesign.org #}
       {% if page.header.icon %}
-            {% set titleicon = page.header.icon %}
-          {% else %}
-            {% if config.site.icon.post %}
-              {% set titleicon = config.site.icon.post %}
-            {% endif %}
+        {% set titleicon = page.header.icon %}
+      {% else %}
+        {% if config.site.icon.post %}
+          {% set titleicon = config.site.icon.post %}
+        {% endif %}
+        {% if page.parent.header.post_icon %}
+          {% set titleicon = page.parent.header.post_icon %}
+        {% endif %}
       {% endif %}
       {% if not (grav.uri.param('hidepagetitle')) %}
         {% if titleicon %}
@@ -132,14 +135,26 @@
         <p>{{ page.content }}</p>
       {% endif %}
       <p>
-        <a href="{{ page.url }}">Continue Reading...</a>
+        {% if page.parent.header.continue_links_as_buttons %}
+          <a class="btn btn-default" href="{{ page.url }}">View all of
+        {% else %}
+          <a href="{{ page.url }}">View all of
+        {% endif %}
+        {{ page.title }}
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
       </p>
+      <hr>
     {% else %}
       {# added summary flag and Git repository edit link -  hibbittsdesign.org #}
       {% set content = page.content|slice(page.summary|length) %}
-      {# do not display summary on actual page - hibbittsdesign.org #}
+      {# do not display summary on actual page unless there is no summary - hibbittsdesign.org #}
       {% if not (grav.uri.param('summaryonly')) %}
-      <p>{{ content }}</p>
+      {% if content is not empty  %}
+          <p>{{ content }}</p>
+      {% else %}
+          <p>{{ page.summary }}</p>
+      {% endif %}
         <hr>
         {% if ( page.header.git_sync_repo_link_display is defined and page.header.git_sync_repo_link_display == 'page' ) or (( config.site.gitrepo.editlinklocation == 'page' and page.header.git_sync_repo_link_display is not defined ) and not (page.header.hide_git_sync_repo_link)) %}
           <br>

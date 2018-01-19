@@ -1,3 +1,16 @@
+# v1.9.97
+## 01/18/2018
+
+1. [](#improved)
+    * Relocated Blog Post custom icon from Site options to Blog List options
+    * Updated 'intermediate', 'advanced' and default course demo pages in theme '_demo' folder
+
+# v1.9.96
+## 01/17/2018
+
+1. [](#improved)
+    * Updated handling of blog item display, where if no summary is present that the same content is displayed for both the summary and actual page
+
 # v1.9.95
 ## 01/15/2018
 
