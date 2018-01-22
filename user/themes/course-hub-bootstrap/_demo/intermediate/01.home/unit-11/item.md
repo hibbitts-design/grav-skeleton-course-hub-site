@@ -2,13 +2,13 @@
 title: 'Week 11 (Nov 15 - 21)'
 date: 11/15/2017
 published: false
-hide_from_post_list: true
+hide_from_post_list: false
 ---
 
-<!--- Your module summary content goes below here -->
-
-<!--- Your module summary content goes above here -->
+##### Your H5 Heading
+Your _awesome_ summary goes here.
 
 ===
 
-<!--- Your weekly materials content goes below here -->
+##### Your H5 Heading
+Your even **more amazing** content goes here.
