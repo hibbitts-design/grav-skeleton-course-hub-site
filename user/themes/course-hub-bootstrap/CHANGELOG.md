@@ -1,3 +1,33 @@
+# v2.0.4
+## 02/02/2018
+
+1. [](#improved)
+    * Updated global handling of 'chromeless' and 'hidepagetitle' URL flags (thanks Ricardo)
+
+# v2.0.3
+## 02/01/2018
+
+1. [](#improved)
+    * Updated example RSS Feed page in 'advanced' course example
+1. [](#bugfix)
+    * Added handling for initial release of RSS Feed page configuration
+
+# v2.0.2
+## 02/01/2018
+
+1. [](#new)
+    * Added experimental pagination controls for RSS Feed page sorted by 'date' (thanks OleVik)
+1. [](#improved)
+    * Updated example RSS Feed page in 'advanced' course example
+    * Added visual indicator for active page on blog list pages
+
+# v2.0.1
+## 01/23/2018
+
+1. [](#new)
+    * Added experimental CSS styling option to better match Moodle Boost theme when embedding content
+    * Added default content for pages created using Admin Panel button bar
+
 # v2.0.0
 ## 01/22/2018
 
@@ -174,7 +204,7 @@
     * Added MediaPicker functionality for (blog) item header images
 1. [](#improved)
     * Removed on-hover social sharing buttons from embedded embed.ly scripts
-    * Revised logic for hiding home page link in menubar to be name independent
+    * Revised logic for hiding home page link in menu to be name independent
 
 # v1.9.76
 ## 12/17/2017
