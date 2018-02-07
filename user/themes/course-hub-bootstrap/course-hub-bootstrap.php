@@ -9,6 +9,7 @@ use RocketTheme\Toolbox\Event\Event;
 
 class CourseHubBootstrap extends Theme
 {
+
   public static function getSubscribedEvents()
   {
       return [
