@@ -1,5 +1,5 @@
 ---
-title: 'Readings'
+title: 'All Readings'
 published: true
 child_type: embedlycard
 visible: false
