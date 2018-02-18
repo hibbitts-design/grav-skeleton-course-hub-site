@@ -3,19 +3,19 @@ form:
   fields:
     section:
         type: section
-        title: Add Blog Page Item
+        title: Add Page with Sidebar
 
     title:
       type: text
-      label: Blog Item Title
+      label: Page Title
       validate:
         required: true
 
-    test:
+    text:
         type: display
         size: large
         label:
-        content: "This page will appear under your Blog (i.e. Home) page."
+        content: "This top-level page will also be added to your site menu."
 
     folder:
       type: hidden
@@ -23,11 +23,11 @@ form:
 
     route:
       type: hidden
-      default: /home
+      default: /
 
     name:
       type: hidden
-      default: 'item'
+      default: 'sidebarpage'
 
     visible:
       type: hidden
