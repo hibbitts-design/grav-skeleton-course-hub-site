@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
+class ComposerStaticInitc20d976fd5f3f95078c3e718d2970622
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -47,6 +47,7 @@ class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
         ),
@@ -147,6 +148,10 @@ class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
         'RocketTheme\\Toolbox\\ArrayTraits\\' => 
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/ArrayTraits/src',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -253,6 +258,8 @@ class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
         'DebugBar\\Bridge\\SlimCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SlimCollector.php',
         'DebugBar\\Bridge\\SwiftMailer\\SwiftLogCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftLogCollector.php',
         'DebugBar\\Bridge\\SwiftMailer\\SwiftMailCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftMailCollector.php',
+        'DebugBar\\Bridge\\TwigProfileCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/TwigProfileCollector.php',
+        'DebugBar\\Bridge\\Twig\\TimeableTwigExtensionProfiler' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TimeableTwigExtensionProfiler.php',
         'DebugBar\\Bridge\\Twig\\TraceableTwigEnvironment' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TraceableTwigEnvironment.php',
         'DebugBar\\Bridge\\Twig\\TraceableTwigTemplate' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TraceableTwigTemplate.php',
         'DebugBar\\Bridge\\Twig\\TwigCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TwigCollector.php',
@@ -437,15 +444,25 @@ class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
         'Grav\\Common\\Service\\ConfigServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/ConfigServiceProvider.php',
         'Grav\\Common\\Service\\ErrorServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/ErrorServiceProvider.php',
         'Grav\\Common\\Service\\LoggerServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/LoggerServiceProvider.php',
-        'Grav\\Common\\Service\\MessagesServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/MessagesServiceProvider.php',
         'Grav\\Common\\Service\\OutputServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/OutputServiceProvider.php',
         'Grav\\Common\\Service\\PageServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/PageServiceProvider.php',
+        'Grav\\Common\\Service\\SessionServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/SessionServiceProvider.php',
         'Grav\\Common\\Service\\StreamsServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/StreamsServiceProvider.php',
         'Grav\\Common\\Service\\TaskServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/TaskServiceProvider.php',
         'Grav\\Common\\Session' => __DIR__ . '/../..' . '/system/src/Grav/Common/Session.php',
         'Grav\\Common\\Taxonomy' => __DIR__ . '/../..' . '/system/src/Grav/Common/Taxonomy.php',
         'Grav\\Common\\Theme' => __DIR__ . '/../..' . '/system/src/Grav/Common/Theme.php',
         'Grav\\Common\\Themes' => __DIR__ . '/../..' . '/system/src/Grav/Common/Themes.php',
+        'Grav\\Common\\Twig\\Node\\TwigNodeMarkdown' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeMarkdown.php',
+        'Grav\\Common\\Twig\\Node\\TwigNodeScript' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeScript.php',
+        'Grav\\Common\\Twig\\Node\\TwigNodeStyle' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeStyle.php',
+        'Grav\\Common\\Twig\\Node\\TwigNodeSwitch' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeSwitch.php',
+        'Grav\\Common\\Twig\\Node\\TwigNodeTryCatch' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeTryCatch.php',
+        'Grav\\Common\\Twig\\TokenParser\\TwigTokenParserMarkdown' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/TokenParser/TwigTokenParserMarkdown.php',
+        'Grav\\Common\\Twig\\TokenParser\\TwigTokenParserScript' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/TokenParser/TwigTokenParserScript.php',
+        'Grav\\Common\\Twig\\TokenParser\\TwigTokenParserStyle' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/TokenParser/TwigTokenParserStyle.php',
+        'Grav\\Common\\Twig\\TokenParser\\TwigTokenParserSwitch' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/TokenParser/TwigTokenParserSwitch.php',
+        'Grav\\Common\\Twig\\TokenParser\\TwigTokenParserTryCatch' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/TokenParser/TwigTokenParserTryCatch.php',
         'Grav\\Common\\Twig\\Twig' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Twig.php',
         'Grav\\Common\\Twig\\TwigEnvironment' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/TwigEnvironment.php',
         'Grav\\Common\\Twig\\TwigExtension' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/TwigExtension.php',
@@ -473,10 +490,50 @@ class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
         'Grav\\Console\\Gpm\\UpdateCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Gpm/UpdateCommand.php',
         'Grav\\Console\\Gpm\\VersionCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Gpm/VersionCommand.php',
         'Grav\\Console\\TerminalObjects\\Table' => __DIR__ . '/../..' . '/system/src/Grav/Console/TerminalObjects/Table.php',
+        'Grav\\Framework\\Cache\\AbstractCache' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/AbstractCache.php',
+        'Grav\\Framework\\Cache\\Adapter\\ChainCache' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/Adapter/ChainCache.php',
+        'Grav\\Framework\\Cache\\Adapter\\DoctrineCache' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/Adapter/DoctrineCache.php',
+        'Grav\\Framework\\Cache\\Adapter\\FileCache' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/Adapter/FileCache.php',
+        'Grav\\Framework\\Cache\\Adapter\\MemoryCache' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/Adapter/MemoryCache.php',
+        'Grav\\Framework\\Cache\\Adapter\\SessionCache' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/Adapter/SessionCache.php',
+        'Grav\\Framework\\Cache\\CacheInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/CacheInterface.php',
+        'Grav\\Framework\\Cache\\CacheTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/CacheTrait.php',
+        'Grav\\Framework\\Cache\\Exception\\CacheException' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/Exception/CacheException.php',
+        'Grav\\Framework\\Cache\\Exception\\InvalidArgumentException' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Cache/Exception/InvalidArgumentException.php',
+        'Grav\\Framework\\Collection\\AbstractFileCollection' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Collection/AbstractFileCollection.php',
         'Grav\\Framework\\Collection\\AbstractLazyCollection' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Collection/AbstractLazyCollection.php',
         'Grav\\Framework\\Collection\\ArrayCollection' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Collection/ArrayCollection.php',
         'Grav\\Framework\\Collection\\CollectionInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Collection/CollectionInterface.php',
         'Grav\\Framework\\Collection\\FileCollection' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Collection/FileCollection.php',
+        'Grav\\Framework\\Collection\\FileCollectionInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Collection/FileCollectionInterface.php',
+        'Grav\\Framework\\ContentBlock\\ContentBlock' => __DIR__ . '/../..' . '/system/src/Grav/Framework/ContentBlock/ContentBlock.php',
+        'Grav\\Framework\\ContentBlock\\ContentBlockInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/ContentBlock/ContentBlockInterface.php',
+        'Grav\\Framework\\ContentBlock\\HtmlBlock' => __DIR__ . '/../..' . '/system/src/Grav/Framework/ContentBlock/HtmlBlock.php',
+        'Grav\\Framework\\ContentBlock\\HtmlBlockInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/ContentBlock/HtmlBlockInterface.php',
+        'Grav\\Framework\\Object\\Access\\ArrayAccessTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Access/ArrayAccessTrait.php',
+        'Grav\\Framework\\Object\\Access\\NestedArrayAccessTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Access/NestedArrayAccessTrait.php',
+        'Grav\\Framework\\Object\\Access\\NestedPropertyCollectionTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Access/NestedPropertyCollectionTrait.php',
+        'Grav\\Framework\\Object\\Access\\NestedPropertyTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Access/NestedPropertyTrait.php',
+        'Grav\\Framework\\Object\\Access\\OverloadedPropertyTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Access/OverloadedPropertyTrait.php',
+        'Grav\\Framework\\Object\\ArrayObject' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/ArrayObject.php',
+        'Grav\\Framework\\Object\\Base\\ObjectCollectionTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Base/ObjectCollectionTrait.php',
+        'Grav\\Framework\\Object\\Base\\ObjectTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Base/ObjectTrait.php',
+        'Grav\\Framework\\Object\\Interfaces\\NestedObjectInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Interfaces/NestedObjectInterface.php',
+        'Grav\\Framework\\Object\\Interfaces\\ObjectCollectionInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Interfaces/ObjectCollectionInterface.php',
+        'Grav\\Framework\\Object\\Interfaces\\ObjectInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Interfaces/ObjectInterface.php',
+        'Grav\\Framework\\Object\\LazyObject' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/LazyObject.php',
+        'Grav\\Framework\\Object\\ObjectCollection' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/ObjectCollection.php',
+        'Grav\\Framework\\Object\\PropertyObject' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/PropertyObject.php',
+        'Grav\\Framework\\Object\\Property\\ArrayPropertyTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Property/ArrayPropertyTrait.php',
+        'Grav\\Framework\\Object\\Property\\LazyPropertyTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Property/LazyPropertyTrait.php',
+        'Grav\\Framework\\Object\\Property\\MixedPropertyTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Property/MixedPropertyTrait.php',
+        'Grav\\Framework\\Object\\Property\\ObjectPropertyTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Object/Property/ObjectPropertyTrait.php',
+        'Grav\\Framework\\Psr7\\AbstractUri' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Psr7/AbstractUri.php',
+        'Grav\\Framework\\Route\\Route' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Route/Route.php',
+        'Grav\\Framework\\Route\\RouteFactory' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Route/RouteFactory.php',
+        'Grav\\Framework\\Uri\\Uri' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Uri/Uri.php',
+        'Grav\\Framework\\Uri\\UriFactory' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Uri/UriFactory.php',
+        'Grav\\Framework\\Uri\\UriPartsFilter' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Uri/UriPartsFilter.php',
         'Gregwar\\Cache\\Cache' => __DIR__ . '/..' . '/gregwar/cache/Gregwar/Cache/Cache.php',
         'Gregwar\\Cache\\CacheInterface' => __DIR__ . '/..' . '/gregwar/cache/Gregwar/Cache/CacheInterface.php',
         'Gregwar\\Cache\\GarbageCollect' => __DIR__ . '/..' . '/gregwar/cache/Gregwar/Cache/GarbageCollect.php',
@@ -719,6 +776,9 @@ class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\SimpleCache\\CacheException' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheException.php',
+        'Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheInterface.php',
+        'Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/simple-cache/src/InvalidArgumentException.php',
         'RocketTheme\\Toolbox\\ArrayTraits\\ArrayAccess' => __DIR__ . '/..' . '/rockettheme/toolbox/ArrayTraits/src/ArrayAccess.php',
         'RocketTheme\\Toolbox\\ArrayTraits\\ArrayAccessWithGetters' => __DIR__ . '/..' . '/rockettheme/toolbox/ArrayTraits/src/ArrayAccessWithGetters.php',
         'RocketTheme\\Toolbox\\ArrayTraits\\Constructor' => __DIR__ . '/..' . '/rockettheme/toolbox/ArrayTraits/src/Constructor.php',
@@ -1295,11 +1355,11 @@ class ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInita073b7ff2ba78a0eff350774cdeb4f4c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc20d976fd5f3f95078c3e718d2970622::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc20d976fd5f3f95078c3e718d2970622::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitc20d976fd5f3f95078c3e718d2970622::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc20d976fd5f3f95078c3e718d2970622::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc20d976fd5f3f95078c3e718d2970622::$classMap;
 
         }, null, ClassLoader::class);
     }

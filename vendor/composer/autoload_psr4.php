@@ -24,6 +24,7 @@ return array(
     'RocketTheme\\Toolbox\\DI\\' => array($vendorDir . '/rockettheme/toolbox/DI/src'),
     'RocketTheme\\Toolbox\\Blueprints\\' => array($vendorDir . '/rockettheme/toolbox/Blueprints/src'),
     'RocketTheme\\Toolbox\\ArrayTraits\\' => array($vendorDir . '/rockettheme/toolbox/ArrayTraits/src'),
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),

@@ -1,8 +1,10 @@
 # PHP User Agent Parser
 
-[![Latest Stable Version](https://poser.pugx.org/donatj/phpuseragentparser/v/stable.png)](https://packagist.org/packages/donatj/phpuseragentparser) [![Total Downloads](https://poser.pugx.org/donatj/phpuseragentparser/downloads.png)](https://packagist.org/packages/donatj/phpuseragentparser) [![Latest Unstable Version](https://poser.pugx.org/donatj/phpuseragentparser/v/unstable.png)](https://packagist.org/packages/donatj/phpuseragentparser) [![License](https://poser.pugx.org/donatj/phpuseragentparser/license.png)](https://packagist.org/packages/donatj/phpuseragentparser)
-[![Build Status](https://travis-ci.org/donatj/PhpUserAgent.png?branch=master)](https://travis-ci.org/donatj/PhpUserAgent)
-[![HHVM Status](http://hhvm.h4cc.de/badge/donatj/phpuseragentparser.png?style=flat)](http://hhvm.h4cc.de/package/donatj/phpuseragentparser) 
+[![Join the chat at https://gitter.im/PhpUserAgentParser/Lobby](https://badges.gitter.im/PhpUserAgentParser/Lobby.svg)](https://gitter.im/PhpUserAgentParser/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![Latest Stable Version](https://poser.pugx.org/donatj/phpuseragentparser/v/stable.svg)](https://packagist.org/packages/donatj/phpuseragentparser) [![Total Downloads](https://poser.pugx.org/donatj/phpuseragentparser/downloads.svg)](https://packagist.org/packages/donatj/phpuseragentparser) [![Latest Unstable Version](https://poser.pugx.org/donatj/phpuseragentparser/v/unstable.svg)](https://packagist.org/packages/donatj/phpuseragentparser) [![License](https://poser.pugx.org/donatj/phpuseragentparser/license.svg)](https://packagist.org/packages/donatj/phpuseragentparser)
+[![Build Status](https://travis-ci.org/donatj/PhpUserAgent.svg?branch=master)](https://travis-ci.org/donatj/PhpUserAgent)
+[![HHVM Status](http://hhvm.h4cc.de/badge/donatj/phpuseragentparser.svg?style=flat)](http://hhvm.h4cc.de/package/donatj/phpuseragentparser) 
 
 ## What It Is
 
@@ -20,6 +22,8 @@ It can also correctly identify exotic versions of IE others fail on.
 It offers 100% unit test coverage, is installable via Composer, and is very easy to use.
 
 ## What It Does Not Do
+
+This is not meant as a browser "knowledge engine" but rather a simple parser. Anything not adequately provided directly by the user agent string itself will simply not be provided by this.
 
 ### OS Versions
 
