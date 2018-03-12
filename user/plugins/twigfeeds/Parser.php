@@ -8,6 +8,7 @@ require __DIR__ . '/vendor/autoload.php';
 use PicoFeed\Reader\Reader;
 use PicoFeed\Config\Config;
 use PicoFeed\PicoFeedException;
+use PicoFeed\Client\TimeoutException;
 use PicoFeed\Client\InvalidCertificateException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -61,6 +62,7 @@ class Parser
      * 
      * @throws PicoFeedException If PicoFeed Reader fails
      * @throws IOException If Symfony Filesystem dumpFile fails
+     * @throws TimeoutException In case of a timeout
      * @throws Exception For other errors
      * 
      * @return array Structured feed
@@ -150,6 +152,9 @@ class Parser
             }
         } catch (PicoFeedException $e) {
             throw new \Exception($e);
+        } catch (TimeoutException $e) {
+            error_log("Connection timed out in PicoFeed, called by TwigFeed plugin in Grav.", 0);
+            return array();
         } catch (Exception $e) {
             throw new \Exception($e);
         }
