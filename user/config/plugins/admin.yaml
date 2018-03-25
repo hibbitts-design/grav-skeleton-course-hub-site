@@ -23,7 +23,7 @@ session:
 warnings:
   delete_page: true
 edit_mode: normal
-frontend_pages_target: _blank
+frontend_preview_target: _blank
 show_github_msg: false
 pages_list_display_field: title
 google_fonts: true
@@ -43,6 +43,7 @@ popularity:
     daily: '30'
     monthly: '12'
     visitors: '20'
+frontend_pages_target: _blank
 add_modals:
   -
     label: 'Add Homepage Blog Item'

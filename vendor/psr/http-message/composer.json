@@ -1,7 +1,8 @@
 {
-    "name": "psr/simple-cache",
-    "description": "Common interfaces for simple caching",
-    "keywords": ["psr", "psr-16", "cache", "simple-cache", "caching"],
+    "name": "psr/http-message",
+    "description": "Common interface for HTTP messages",
+    "keywords": ["psr", "psr-7", "http", "http-message", "request", "response"],
+    "homepage": "https://github.com/php-fig/http-message",
     "license": "MIT",
     "authors": [
         {
@@ -14,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Psr\\SimpleCache\\": "src/"
+            "Psr\\Http\\Message\\": "src/"
         }
     },
     "extra": {
