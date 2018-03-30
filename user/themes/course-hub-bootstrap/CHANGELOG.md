@@ -1,3 +1,17 @@
+# v2.2.2
+## 03/31/2018
+
+1. [](#improved)
+    * Updated H5P content page blueprint
+1. [](#bugfix)
+    * Temporarily changed H5P content item reference to node (ID) only
+
+# v2.2.1
+## 03/31/2018
+
+1. [](#improved)
+    * Updated example H5P content pages in 'advanced' course examples in theme '_demo' folder
+
 # v2.2.0
 ## 03/28/2018
 
