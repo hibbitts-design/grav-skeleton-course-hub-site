@@ -135,4 +135,4 @@ Once this is done, you should be able to see the new theme on the frontend. Keep
 
 Within the `_demo\` folder included with this theme is an example `pages` folder to copy over to your `users` folder. Be sure to keep a backup of your existing `pages` folder if you are working with an existing site.
 
-These example pages assume that '/blog' is set in the `\config\system.yaml\` file as the 'home:alias:' value and that the 'Breadcrumbs' plugin is not enabled.
+These example pages assume that '/home' is set in the `\config\system.yaml\` file as the 'home:alias:' value and that the 'Breadcrumbs' plugin is not enabled.
