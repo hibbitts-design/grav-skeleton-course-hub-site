@@ -3,7 +3,7 @@ route: /admin
 cache_enabled: false
 theme: grav
 content_padding: true
-twofa_enabled: true
+twofa_enabled: false
 sidebar:
   activate: tab
   hover_delay: 100
