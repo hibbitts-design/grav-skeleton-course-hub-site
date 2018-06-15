@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Dropzone from 'dropzone';
+import EXIF from 'exif-js';
 import request from '../../utils/request';
 import { config, translations } from 'grav-config';
 
@@ -69,6 +70,8 @@ const DropzoneMediaConfig = {
           <a class="dz-view" title="${translations.PLUGIN_ADMIN.VIEW}" href="#" target="_blank" data-dz-view>${translations.PLUGIN_ADMIN.VIEW}</a>
         </div>`.trim()
 };
+
+global.EXIF = EXIF;
 
 const ACCEPT_FUNC = function(file, done, settings) {
     const resolution = settings.resolution;
@@ -162,7 +165,6 @@ export default class FilesField {
     }
 
     getURI() {
-        console.log(this.container.data('mediaUri'));
         return this.container.data('mediaUri') || '';
     }
 

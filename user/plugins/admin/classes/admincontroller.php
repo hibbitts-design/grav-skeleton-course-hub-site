@@ -613,12 +613,14 @@ class AdminController extends AdminBaseController
 
         // Special handler for user data.
         if ($this->view === 'user') {
+            if (!$this->grav['user']->exists()) {
+                $this->admin->setMessage($this->admin->translate('PLUGIN_ADMIN.NO_USER_EXISTS'),'error');
+                return false;
+            }
             if (!$this->admin->authorize(['admin.super', 'admin.users'])) {
-                //not admin.super or admin.users
+                // no user file or not admin.super or admin.users
                 if ($this->prepareData($data)->username !== $this->grav['user']->username) {
-                    $this->admin->setMessage($this->admin->translate('PLUGIN_ADMIN.INSUFFICIENT_PERMISSIONS_FOR_TASK') . ' save.',
-                        'error');
-
+                    $this->admin->setMessage($this->admin->translate('PLUGIN_ADMIN.INSUFFICIENT_PERMISSIONS_FOR_TASK') . ' save.','error');
                     return false;
                 }
             }
@@ -1574,6 +1576,8 @@ class AdminController extends AdminBaseController
     {
         $this->uri = $this->uri ?: $this->grav['uri'];
         $uri = $this->uri->post('uri');
+        $order = $this->uri->post('order') ?: null;
+
         if ($uri) {
             /** @var UniformResourceLocator $locator */
             $locator = $this->grav['locator'];
@@ -1584,8 +1588,11 @@ class AdminController extends AdminBaseController
 
             $media_path = $page ? $page->path() : null;
         }
+        if ($order) {
+            $order = array_map('trim', explode(',', $order));
+        }
 
-        return $media_path ? new Media($media_path) : null;
+        return $media_path ? new Media($media_path, $order) : null;
     }
 
     /**
@@ -1687,9 +1694,16 @@ class AdminController extends AdminBaseController
             return false;
         }
 
+        /** @var UniformResourceLocator $locator */
+        $locator = $this->grav['locator'];
+        $path = $media->path();
+        if ($locator->isStream($path)) {
+            $path = $locator->findResource($path, true, true);
+        }
+
         // Upload it
         if (!move_uploaded_file($_FILES['file']['tmp_name'],
-            sprintf('%s/%s', $media->path(), $_FILES['file']['name']))
+            sprintf('%s/%s', $path, $_FILES['file']['name']))
         ) {
             $this->admin->json_response = [
                 'status'  => 'error',
@@ -1759,7 +1773,13 @@ class AdminController extends AdminBaseController
             return false;
         }
 
+        /** @var UniformResourceLocator $locator */
+        $locator = $this->grav['locator'];
+
         $targetPath = $media->path() . '/' . $filename;
+        if ($locator->isStream($targetPath)) {
+            $targetPath = $locator->findResource($targetPath, true, true);
+        }
         $fileParts  = pathinfo($filename);
 
         $found = false;

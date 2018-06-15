@@ -298,12 +298,16 @@ tr {
         }
     }
 
-    .instructions {
+    .instructions, p {
         color: rgba($nav-text,0.8);
     }
 
     h1 {
         background: darken($nav-bg, 5%) url(../images/logo.svg) 50% 50% no-repeat;
+    }
+
+    h5 {
+        color: $nav-text;
     }
 
     form {
@@ -674,6 +678,10 @@ form {
                 input {
                     color: $form-field-text;
                 }
+
+                a.remove {
+                    color: $page-bg !important;
+                }
             }
         }
     }
@@ -909,16 +917,16 @@ form {
 }
 
 .form-fieldset {
-    background-color: #f7f7f7;
-    border: 2px solid #e1e1e1;
+    background-color: darken($content-bg, 1%);
+    border: 1px solid $form-border;
 }
 
 .form-fieldset--label {
-    background-color: #f3f3f3;
+    background-color: darken($content-bg, 4%);
 
     &:hover,
     .form-fieldset input:checked + & {
-        background-color: #eee;
+        background-color: darken($content-bg, 6%);
     }
 }
 #admin-main {

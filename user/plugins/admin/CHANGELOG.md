@@ -1,3 +1,39 @@
+# v1.8.4
+## 06/11/2018
+
+1. [](#improved)
+    * Including EXIF JS library in the modules dependencies to fix orientation when uploading images
+1. [](#bugfix)
+    * Initialize session on setup [#1451](https://github.com/getgrav/grav-plugin-admin/issues/1451)
+    * Force a `null` order when empty in the post request
+    * Fixed some 2FA form styling issues
+
+# v1.8.3
+## 05/31/2018
+
+1. [](#new)
+    * Added support for selectize plugins as options in the selectize field
+1. [](#bugfix)
+    * Fixed deep linking in admin after login [#1456](https://github.com/getgrav/grav-plugin-admin/issues/1456)
+    * Fixed Undefined property: `stdClass::$image` in v1.8.2 [#1454](https://github.com/getgrav/grav-plugin-admin/issues/1454)
+    * Pass media order when calling `task:listmedia`
+
+# v1.8.2
+## 05/24/2018
+
+1. [](#new)
+    * Added custom object support for filepicker field
+    * Don't allow saving of a user with no local account file
+    * Controls for `list` field were not in sync between top and bottom
+1. [](#improved)
+    * More subtle `fieldset` styling
+1. [](#bugfix)
+    * Check if `$object->blueprints()` exists in `onAdminAfterSave`
+    * When creating first user, check `admin.login` not `site.login`
+    * Fix admin login redirects for multisite setups
+    * Fixed issue with filepicker field where images wouldn't properly merge with the current value if in a page header 
+    * Fixed media delete for streams
+
 # v1.8.1
 ## 05/15/2018
 
