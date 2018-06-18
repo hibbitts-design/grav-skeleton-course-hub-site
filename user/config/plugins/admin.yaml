@@ -23,7 +23,7 @@ session:
 warnings:
   delete_page: true
 edit_mode: normal
-frontend_pages_target: _blank
+frontend_preview_target: inline
 show_github_msg: false
 pages_list_display_field: title
 google_fonts: true
@@ -43,6 +43,7 @@ popularity:
     daily: '30'
     monthly: '12'
     visitors: '20'
+frontend_pages_target: _blank
 add_modals:
   -
     label: 'Add Blog Item'
@@ -56,3 +57,25 @@ add_modals:
     label: 'Add Fullwidth Page'
     blueprint: admin/pages/new_fullwidth_page
     show_in: dropdown
+hide_page_types:
+  - embedlycardlinkonly
+  - embedlycardtitleonly
+  - error
+  - external
+  - formdata
+  - page
+  - pdftitleonly
+  - pdflinkonly
+  - simplesearch_results
+  - speakerdecklinkonly
+  - speakerdecktitleonly
+  - swipedecklinkonly
+  - swipedecktitleonly
+pagemedia:
+  resize_width: 0
+  resize_height: 0
+  res_min_width: 0
+  res_min_height: 0
+  res_max_width: 0
+  res_max_height: 0
+  resize_quality: 0.8
