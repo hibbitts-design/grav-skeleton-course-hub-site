@@ -245,17 +245,17 @@
     },
     {
         "name": "donatj/phpuseragentparser",
-        "version": "v0.9.0",
-        "version_normalized": "0.9.0.0",
+        "version": "v0.10.0",
+        "version_normalized": "0.10.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/donatj/PhpUserAgent.git",
-            "reference": "ea79de6a18e52285e62cd75cf1cebe276ecaf503"
+            "reference": "9de58cc2a3e986bfee7f4cea3365c830b765cf65"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/ea79de6a18e52285e62cd75cf1cebe276ecaf503",
-            "reference": "ea79de6a18e52285e62cd75cf1cebe276ecaf503",
+            "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/9de58cc2a3e986bfee7f4cea3365c830b765cf65",
+            "reference": "9de58cc2a3e986bfee7f4cea3365c830b765cf65",
             "shasum": ""
         },
         "require": {
@@ -266,7 +266,7 @@
             "donatj/drop": "*",
             "phpunit/phpunit": "~4.8"
         },
-        "time": "2017-10-23T16:52:52+00:00",
+        "time": "2018-06-21T15:54:46+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1340,17 +1340,17 @@
     },
     {
         "name": "symfony/console",
-        "version": "v2.8.41",
-        "version_normalized": "2.8.41.0",
+        "version": "v2.8.43",
+        "version_normalized": "2.8.43.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "e8e59b74ad1274714dad2748349b55e3e6e630c7"
+            "reference": "42a0adc7dd656ca2e360285eb6d822df9ce0b160"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/e8e59b74ad1274714dad2748349b55e3e6e630c7",
-            "reference": "e8e59b74ad1274714dad2748349b55e3e6e630c7",
+            "url": "https://api.github.com/repos/symfony/console/zipball/42a0adc7dd656ca2e360285eb6d822df9ce0b160",
+            "reference": "42a0adc7dd656ca2e360285eb6d822df9ce0b160",
             "shasum": ""
         },
         "require": {
@@ -1368,7 +1368,7 @@
             "symfony/event-dispatcher": "",
             "symfony/process": ""
         },
-        "time": "2018-05-15T21:17:45+00:00",
+        "time": "2018-07-09T12:58:09+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1462,8 +1462,8 @@
     },
     {
         "name": "symfony/event-dispatcher",
-        "version": "v2.8.41",
-        "version_normalized": "2.8.41.0",
+        "version": "v2.8.43",
+        "version_normalized": "2.8.43.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/event-dispatcher.git",
@@ -1703,17 +1703,17 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v2.8.41",
-        "version_normalized": "2.8.41.0",
+        "version": "v2.8.43",
+        "version_normalized": "2.8.43.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "c3d7a096ccaba86e2fadeb444ca32fcbc5a31ebd"
+            "reference": "b77b888c33407f9d4f6e7c6ab4fe7fb5336d41d7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/c3d7a096ccaba86e2fadeb444ca32fcbc5a31ebd",
-            "reference": "c3d7a096ccaba86e2fadeb444ca32fcbc5a31ebd",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b77b888c33407f9d4f6e7c6ab4fe7fb5336d41d7",
+            "reference": "b77b888c33407f9d4f6e7c6ab4fe7fb5336d41d7",
             "shasum": ""
         },
         "require": {
@@ -1731,7 +1731,7 @@
             "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
             "ext-symfony_debug": ""
         },
-        "time": "2018-04-25T14:40:02+00:00",
+        "time": "2018-07-04T15:34:47+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1773,8 +1773,8 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v2.8.41",
-        "version_normalized": "2.8.41.0",
+        "version": "v2.8.43",
+        "version_normalized": "2.8.43.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
@@ -1825,28 +1825,29 @@
     },
     {
         "name": "twig/twig",
-        "version": "v1.35.3",
-        "version_normalized": "1.35.3.0",
+        "version": "v1.35.4",
+        "version_normalized": "1.35.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "b48680b6eb7d16b5025b9bfc4108d86f6b8af86f"
+            "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/b48680b6eb7d16b5025b9bfc4108d86f6b8af86f",
-            "reference": "b48680b6eb7d16b5025b9bfc4108d86f6b8af86f",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
+            "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "php": ">=5.3.3",
+            "symfony/polyfill-ctype": "^1.8"
         },
         "require-dev": {
             "psr/container": "^1.0",
             "symfony/debug": "^2.7",
             "symfony/phpunit-bridge": "^3.3"
         },
-        "time": "2018-03-20T04:25:58+00:00",
+        "time": "2018-07-13T07:12:17+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1880,12 +1881,12 @@
             },
             {
                 "name": "Twig Team",
-                "homepage": "http://twig.sensiolabs.org/contributors",
+                "homepage": "https://twig.symfony.com/contributors",
                 "role": "Contributors"
             }
         ],
         "description": "Twig, the flexible, fast, and secure template language for PHP",
-        "homepage": "http://twig.sensiolabs.org",
+        "homepage": "https://twig.symfony.com",
         "keywords": [
             "templating"
         ]
