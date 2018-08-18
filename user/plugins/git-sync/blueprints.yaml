@@ -65,7 +65,7 @@ form:
       underline: true
     sync.on_save:
       type: toggle
-      label: Sync on Save
+      label: Sync on Page Save
       help: Sync with the remote directory when a page is saved through the admin
       default: 1
       highlight: 1
@@ -76,7 +76,7 @@ form:
         type: bool
     sync.on_delete:
       type: toggle
-      label: Sync on Delete
+      label: Sync on Page Delete
       help: Sync with the remote directory when a page is deleted through the admin
       default: 1
       highlight: 1
