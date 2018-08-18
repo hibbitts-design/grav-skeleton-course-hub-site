@@ -59,6 +59,43 @@ form:
       label: Repository Web Hook
       placeholder: /_git-sync
       default: /_git-sync
+    Sync:
+      type: section
+      title: Automatic Synchronization
+      underline: true
+    sync.on_save:
+      type: toggle
+      label: Sync on Save
+      help: Sync with the remote directory when a page is saved through the admin
+      default: 1
+      highlight: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+    sync.on_delete:
+      type: toggle
+      label: Sync on Delete
+      help: Sync with the remote directory when a page is deleted through the admin
+      default: 1
+      highlight: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+    sync.on_media:
+      type: toggle
+      label: Sync on Media Changes
+      help: Sync with the remote directory when a media is uploaded or deleted through the admin immediatly (instead of only syncing when the page is saved)
+      default: 1
+      highlight: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
     Advanced:
       type: section
       title: Advanced

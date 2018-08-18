@@ -28,7 +28,7 @@ show_github_msg: false
 pages_list_display_field: title
 google_fonts: true
 admin_icons: font-awesome
-enable_auto_updates_check: false
+enable_auto_updates_check: true
 notifications:
   feed: true
   dashboard: true
