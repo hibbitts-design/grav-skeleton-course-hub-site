@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita60c19786bec352cc4de2c61a77bef21
+class ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -499,6 +499,7 @@ class ComposerStaticInita60c19786bec352cc4de2c61a77bef21
         'Grav\\Common\\User\\Group' => __DIR__ . '/../..' . '/system/src/Grav/Common/User/Group.php',
         'Grav\\Common\\User\\User' => __DIR__ . '/../..' . '/system/src/Grav/Common/User/User.php',
         'Grav\\Common\\Utils' => __DIR__ . '/../..' . '/system/src/Grav/Common/Utils.php',
+        'Grav\\Common\\Yaml' => __DIR__ . '/../..' . '/system/src/Grav/Common/Yaml.php',
         'Grav\\Console\\Cli\\BackupCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/BackupCommand.php',
         'Grav\\Console\\Cli\\CleanCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/CleanCommand.php',
         'Grav\\Console\\Cli\\ClearCacheCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/ClearCacheCommand.php',
@@ -1444,11 +1445,11 @@ class ComposerStaticInita60c19786bec352cc4de2c61a77bef21
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita60c19786bec352cc4de2c61a77bef21::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita60c19786bec352cc4de2c61a77bef21::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInita60c19786bec352cc4de2c61a77bef21::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInita60c19786bec352cc4de2c61a77bef21::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInita60c19786bec352cc4de2c61a77bef21::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$classMap;
 
         }, null, ClassLoader::class);
     }

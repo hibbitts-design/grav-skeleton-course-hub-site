@@ -236,6 +236,7 @@ return array(
     'Grav\\Common\\User\\Group' => $baseDir . '/system/src/Grav/Common/User/Group.php',
     'Grav\\Common\\User\\User' => $baseDir . '/system/src/Grav/Common/User/User.php',
     'Grav\\Common\\Utils' => $baseDir . '/system/src/Grav/Common/Utils.php',
+    'Grav\\Common\\Yaml' => $baseDir . '/system/src/Grav/Common/Yaml.php',
     'Grav\\Console\\Cli\\BackupCommand' => $baseDir . '/system/src/Grav/Console/Cli/BackupCommand.php',
     'Grav\\Console\\Cli\\CleanCommand' => $baseDir . '/system/src/Grav/Console/Cli/CleanCommand.php',
     'Grav\\Console\\Cli\\ClearCacheCommand' => $baseDir . '/system/src/Grav/Console/Cli/ClearCacheCommand.php',
