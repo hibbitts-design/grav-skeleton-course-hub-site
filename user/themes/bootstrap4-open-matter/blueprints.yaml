@@ -1,5 +1,5 @@
 name: 'Bootstrap4 Open Matter'
-version: 0.9.77
+version: 0.9.80
 description: "A custom version of the Bootstrap4 theme for open blogs, course hubs and more. Includes Git Sync and 'chromeless' content embedding."
 icon: bold
 author:
@@ -243,6 +243,7 @@ form:
                             _parent: 'Open in the parent frame'
                             _top: 'Open in the full body of the window'
                             _self: 'Open in the same frame as clicked'
+
         bootstrap4_options:
           type: tab
           title: Bootstrap4  Options

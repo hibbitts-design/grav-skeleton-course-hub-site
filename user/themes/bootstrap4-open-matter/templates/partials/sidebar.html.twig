@@ -1,6 +1,9 @@
 {% set feed_url = blog.url == '/' or blog.url == base_url_relative ? (base_url_relative~'/'~blog.slug) : blog.url %}
 {% set new_base_url = blog.url == '/' ? '' : blog.url %}
 
+{% set sidebar_page = pages.find('/sidebar') %}
+{% set sidebar_page_content =  sidebar_page.content %}
+
 {% if config.plugins.simplesearch.enabled %}
 <div class="sidebar-content">
     <h5>{{ 'SIDEBAR.SIMPLE_SEARCH.HEADLINE'|t }}</h5>
@@ -8,11 +11,12 @@
 </div>
 {% endif %}
 
-{% set content = pages.find('/sidebar').content %}
-{% if content is not empty %}
-  <div class="sidebar-content">
-    {{ content }}
-  </div>
+{% if sidebar_page.header.position == 'top' or sidebar_page.header.position is empty %}
+  {% if sidebar_page_content is not empty %}
+    <div class="sidebar-content">
+      {{ sidebar_page_content }}
+    </div>
+  {% endif %}
 {% endif %}
 
 {% if config.plugins.relatedpages.enabled and related_pages|length > 0 %}
@@ -39,6 +43,14 @@
     <h5>{{ 'SIDEBAR.ARCHIVES.HEADLINE'|t }}</h5>
 	{% include 'partials/archives.html.twig' with {'base_url':new_base_url} %}
 </div>
+{% endif %}
+
+{% if sidebar_page.header.position == 'bottom' %}
+  {% if sidebar_page_content is not empty %}
+    <div class="sidebar-content">
+      {{ sidebar_page_content }}
+    </div>
+  {% endif %}
 {% endif %}
 
 {% if config.plugins.feed.enabled %}

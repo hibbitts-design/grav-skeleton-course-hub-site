@@ -43,7 +43,7 @@ form:
 
             openmatter1:
                 type: section
-                title: "List Appearance"
+                title: "Appearance"
                 underline: true
 
             header.show_sidebar:
