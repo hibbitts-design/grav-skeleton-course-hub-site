@@ -1,5 +1,4 @@
 navbar_style: navbar-dark
-navbar_bgcolor: '#651E49'
 navbar_position: top
 navbar_breakpoint: md
 git_sync.edit_theme_link_location: none
@@ -16,6 +15,7 @@ menu:
     text: Grav
     icon: arrow-circle-right
     url: 'http://getgrav.org/'
+navbar_bgcolor: '#651E49'
 chromeless:
   enabled: false
 display_of_git_sync_repo_link: menu
@@ -38,3 +38,6 @@ custommenu:
     icon: arrow-circle-right
     url: 'https://getgrav.org/'
     target: _blank
+theme_stylesheet: default
+navbar_bg: default
+navbar_bg_color: '#651e49'
