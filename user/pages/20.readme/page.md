@@ -4,7 +4,7 @@ published: true
 hide_page_title: true
 ---
 
-### Easily Publish, Share and Collaborate using Grav Open Course Hub!  
+### Easily Create, Publish, Share and Collaborate using Grav Open Course Hub!  
 
 1. Create a new [Git](https://git-scm.com/) repository (hosted on [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/), [Bitbucket](https://bitbucket.org/) or your own server) with at least one commit.
 2. Tap the 'SETUP GIT SYNC' link on the far-right of the site navigation bar of this page for step-by-step instructions.
