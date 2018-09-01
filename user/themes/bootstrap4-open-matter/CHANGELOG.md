@@ -1,3 +1,28 @@
+# v0.9.90
+## 09/02/2018
+
+1. [](#bugfix)
+    * Renamed blueprint for revised custom content list template name
+
+# v0.9.89
+## 09/01/2018
+
+1. [](#improved)
+    * Revised custom content type-related template names
+    * Updated example pages in theme '_demo' folder
+
+# v0.9.88
+## 09/01/2018
+
+1. [](#improved)
+    * Updated 'latest' page template to work with more page types
+
+# v0.9.87
+## 08/31/2018
+
+1. [](#improved)
+    * Added additional templates to handle possible Atom/RSS feed issues
+
 # v0.9.86
 ## 08/31/2018
 
