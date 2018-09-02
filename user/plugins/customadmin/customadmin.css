@@ -15,8 +15,9 @@ form input, form select, form textarea, form button, form .selectize-input {
     font-size: 1.1rem!important;
 }
 
-/* CSS to hide 'Normal/Expert' Admin Panel toggle button */
-
+/* CSS to hide 'Normal/Expert' Admin Panel toggle button (uncomment to enable) */
+/*
 #admin-topbar .switch-grav {
   display: none;
 }
+*/
