@@ -1,5 +1,5 @@
 ---
-title: 'Home in Canvas LMS'
+title: 'Home in LMS'
 show_sidebar: false
 cache_enable: false
 visible: false
@@ -16,5 +16,7 @@ protectEdit: true
 
 <hr>
 
-##### Web Pick of the Week
-[plugin:page-inject](/web-pick-of-the-week/)
+##### Paul's Web Pick of the Week
+[plugin:page-inject](/all-web-picks-of-the-week/latest)
+
+[View all of Paul's Web Picks of the Week](https://sso.canvaslms.com/courses/1413912/pages/all-web-picks-of-the-week)
