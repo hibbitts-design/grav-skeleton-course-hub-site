@@ -1,3 +1,24 @@
+# v1.0.3
+## 10/05/2018
+
+1. [](#improved)
+    * Restored the display of a Creative Commons License and Git Sync links on section-type pages
+
+# v1.0.2
+## 10/05/2018
+
+1. [](#new)
+    * Added page frontmatter option (`sections_nav_align`) to display sections nav on left or right side of page
+    * Updated example pages in theme '_demo' folder
+
+# v1.0.1
+## 10/04/2018
+
+1. [](#new)
+    * Added new 'section' and 'subsection' page templates
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+
 # v1.0.0
 ## 09/23/2018
 

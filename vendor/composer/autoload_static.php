@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5
+class ComposerStaticInit638db729ec23ca0e463741fea60d2231
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -467,6 +467,7 @@ class ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5
         'Grav\\Common\\Processors\\TasksProcessor' => __DIR__ . '/../..' . '/system/src/Grav/Common/Processors/TasksProcessor.php',
         'Grav\\Common\\Processors\\ThemesProcessor' => __DIR__ . '/../..' . '/system/src/Grav/Common/Processors/ThemesProcessor.php',
         'Grav\\Common\\Processors\\TwigProcessor' => __DIR__ . '/../..' . '/system/src/Grav/Common/Processors/TwigProcessor.php',
+        'Grav\\Common\\Security' => __DIR__ . '/../..' . '/system/src/Grav/Common/Security.php',
         'Grav\\Common\\Service\\AssetsServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/AssetsServiceProvider.php',
         'Grav\\Common\\Service\\ConfigServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/ConfigServiceProvider.php',
         'Grav\\Common\\Service\\ErrorServiceProvider' => __DIR__ . '/../..' . '/system/src/Grav/Common/Service/ErrorServiceProvider.php',
@@ -507,6 +508,7 @@ class ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5
         'Grav\\Console\\Cli\\InstallCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/InstallCommand.php',
         'Grav\\Console\\Cli\\NewProjectCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/NewProjectCommand.php',
         'Grav\\Console\\Cli\\SandboxCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/SandboxCommand.php',
+        'Grav\\Console\\Cli\\SecurityCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/SecurityCommand.php',
         'Grav\\Console\\ConsoleCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/ConsoleCommand.php',
         'Grav\\Console\\ConsoleTrait' => __DIR__ . '/../..' . '/system/src/Grav/Console/ConsoleTrait.php',
         'Grav\\Console\\Gpm\\DirectInstallCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Gpm/DirectInstallCommand.php',
@@ -1445,11 +1447,11 @@ class ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInite06b0f4c0ece9f0782a1eed117593fd5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit638db729ec23ca0e463741fea60d2231::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit638db729ec23ca0e463741fea60d2231::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit638db729ec23ca0e463741fea60d2231::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit638db729ec23ca0e463741fea60d2231::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit638db729ec23ca0e463741fea60d2231::$classMap;
 
         }, null, ClassLoader::class);
     }
