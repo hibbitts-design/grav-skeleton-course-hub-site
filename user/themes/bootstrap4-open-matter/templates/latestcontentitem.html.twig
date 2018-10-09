@@ -1,0 +1,5 @@
+{% block content %}
+{% set page = (page.find('/' ~ page.parent.slug).children.order('{page.parent.header.content.order.by}','desc').visible|first) %}
+{% set templatename = page.template ~ '.html.twig' %}
+{% include templatename with {'content' : page.content} %}
+{% endblock %}
