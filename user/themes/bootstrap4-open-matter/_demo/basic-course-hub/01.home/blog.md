@@ -10,7 +10,6 @@ content:
         by: date
         dir: desc
     pagination: '9'
-hide_sidebar: false
 hide_post_summary: true
 post_icon: calendar-o
 hide_post_date: true
@@ -26,4 +25,5 @@ feed:
     description: 'Grav CMS Open Matter Course Hub Description'
     limit: 10
 protectEdit: true
+hide_page_title: true
 ---

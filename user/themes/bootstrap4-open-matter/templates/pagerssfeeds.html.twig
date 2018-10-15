@@ -17,9 +17,9 @@
           <div class="col-md-12 blog-main">
         {% endif %}
         {% if not (page.header.hide_page_title) and not (grav.uri.param('hidepagetitle')) %}
-          <h3>{{page.title}}</h3>
+          <h1>{{page.title}}</h1>
         {% else %}
-          <h3 aria-label={{page.title}}></h3>
+          <h1 class="hidden">{{page.title}}</h1>
         {% endif %}
 
         {% if config.plugins['twigfeeds'].enabled %}
@@ -28,10 +28,12 @@
           {% set feed_items = [] %}
           {% for name, feed in twig_feeds %}
             {% for item in feed.items %}
-              {% set index = index + 1 %}
-              {% set item = item|merge({ 'retrievedTitle': feed.title }) %}
-              {% set item = item|merge({ 'sortDate': item.date.date }) %}
-              {% set feed_items = feed_items|merge({ (index): (item) }) %}
+              {% if (page.header.rss_feed_text_filter is defined) and (item.content|contains(page.header.rss_feed_text_filter)) or (page.header.rss_feed_text_filter is empty) %}
+                {% set index = index + 1 %}
+                {% set item = item|merge({ 'retrievedTitle': feed.title }) %}
+                {% set item = item|merge({ 'sortDate': item.date.date }) %}
+                {% set feed_items = feed_items|merge({ (index): (item) }) %}
+              {% endif %}
             {% endfor %}
           {% endfor %}
 
@@ -75,7 +77,7 @@
             {% endif %}
           {% endfor %}
 
-          {% if page.header.rss_feed_pagination %}
+          {% if page.header.rss_feed_pagination is defined %}
             {% set rssfeedpagination = page.header.rss_feed_pagination %}
           {% else %}
             {% set rssfeedpagination = true %}
@@ -126,8 +128,7 @@
 	      {% else %}
 		       {% set admin_panel_appearance_url = grav.base_url ~ '/admin/plugins/twigfeeds' %}
            <a class="newwindow external-link" href="{{ admin_panel_appearance_url }}" title="Enable Twig Feeds Plugin">
-           <i class="fa fa-cog" aria-hidden="true"></i>
-           Enable and configure Twig Feeds Plugin</a> to display RSS Feeds on this page.
+           <i class="fa fa-cog" aria-hidden="true"></i>Enable and configure Twig Feeds Plugin</a> to display RSS Feeds on this page.
         {% endif %}
 
         {# Creative Commons License -  hibbittsdesign.org #}
