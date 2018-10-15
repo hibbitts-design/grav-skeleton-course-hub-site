@@ -3,6 +3,7 @@
 namespace Grav\Plugin;
 
 use Grav\Common\Data\Data;
+use Grav\Common\Grav;
 use Grav\Common\Plugin;
 use Grav\Plugin\GitSync\AdminController;
 use Grav\Plugin\GitSync\GitSync;
@@ -25,10 +26,27 @@ class GitSyncPlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 1000],
-            'onPageInitialized'    => ['onPageInitialized', 0],
-            'onFormProcessed'      => ['onFormProcessed', 0]
+            'onPluginsInitialized'   => ['onPluginsInitialized', 1000],
+            'onPageInitialized'      => ['onPageInitialized', 0],
+            'onFormProcessed'        => ['onFormProcessed', 0],
+            'onSchedulerInitialized' => ['onSchedulerInitialized', 0]
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public static function generateWebhookSecret()
+    {
+        return bin2hex(openssl_random_pseudo_bytes(24));
+    }
+
+    /**
+     * @return string
+     */
+    public static function generateRandomWebhook()
+    {
+        return '/_git-sync-' . bin2hex(openssl_random_pseudo_bytes(6));
     }
 
     /**
@@ -55,21 +73,36 @@ class GitSyncPlugin extends Plugin
 
             return;
         } else {
-            $config  = $this->config->get('plugins.' . $this->name);
-            $route   = $this->grav['uri']->route();
+            $config = $this->config->get('plugins.' . $this->name);
+            $route = $this->grav['uri']->route();
             $webhook = isset($config['webhook']) ? $config['webhook'] : false;
+            $secret = isset($config['webhook_secret']) ? $config['webhook_secret'] : false;
+            $enabled = isset($config['webhook_enabled']) ? $config['webhook_enabled'] : false;
 
-            if ($route === $webhook) {
+            if ($route === $webhook && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                if ($secret && $enabled) {
+                    if (!$this->isRequestAuthorized($secret)) {
+                        http_response_code(401);
+                        header('Content-Type: application/json');
+                        echo json_encode([
+                            'status' => 'error',
+                            'message' => 'Unauthorized request'
+                        ]);
+                        exit;
+                    }
+                }
                 try {
                     $this->synchronize();
-
+                    header('Content-Type: application/json');
                     echo json_encode([
-                        'status'  => 'success',
+                        'status' => 'success',
                         'message' => 'GitSync completed the synchronization'
                     ]);
                 } catch (\Exception $e) {
+                    http_response_code(500);
+                    header('Content-Type: application/json');
                     echo json_encode([
-                        'status'  => 'error',
+                        'status' => 'error',
                         'message' => 'GitSync failed to synchronize'
                     ]);
                 }
@@ -78,20 +111,74 @@ class GitSyncPlugin extends Plugin
         }
     }
 
+    /**
+     * Returns true if the request contains a valid signature or token
+     * @param  string $secret local secret
+     * @return boolean         whether or not the request is authorized
+     */
+    public function isRequestAuthorized($secret)
+    {
+        if (isset($_SERVER['HTTP_X_HUB_SIGNATURE'])) {
+            $payload = file_get_contents('php://input');
+            return $this->isGithubSignatureValid($secret, $_SERVER['HTTP_X_HUB_SIGNATURE'], $payload);
+        } elseif (isset($_SERVER['HTTP_X_GITLAB_TOKEN'])) {
+            return $this->isGitlabTokenValid($secret, $_SERVER['HTTP_X_GITLAB_TOKEN']);
+        }
+
+        return false;
+    }
+
+    /**
+     * Hashes the webhook request body with the client secret and
+     * checks if it matches the webhook signature header
+     * @param  string $secret The webhook secret
+     * @param  string $signatureHeader The signature of the webhook request
+     * @param  string $payload The webhook request body
+     * @return boolean                 Whether the signature is valid or not
+     */
+    public function isGithubSignatureValid($secret, $signatureHeader, $payload)
+    {
+        list($algorigthm, $signature) = explode('=', $signatureHeader);
+
+        if ($signature === hash_hmac($algorigthm, $payload, $secret)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns true if given Gitlab token matches secret
+     * @param  string $secret local secret
+     * @param  string $token token received from Gitlab webhook request
+     * @return boolean        whether or not secret and token match
+     */
+    public function isGitlabTokenValid($secret, $token)
+    {
+        return $secret === $token;
+    }
+
     public function onAdminMenu()
     {
         $base = rtrim($this->grav['base_url'], '/') . '/' . trim($this->grav['admin']->base, '/');
         $options = [
-            //            'route' => $this->admin_route . '/plugins/tntsearch',
-            'hint' => 'Synchronize GitSync',
+            'hint' => Helper::isGitInitialized() ? 'Synchronize GitSync' : 'Configure GitSync',
             'class' => 'gitsync-sync',
-            'data'  => [
-                'gitsync-useraction' => 'sync',
-                'gitsync-uri' => $base . '/plugins/git-sync'
-            ],
+            'location' => 'pages',
+            'route' => Helper::isGitInitialized() ? 'admin' : 'admin/plugins/git-sync',
             'icon' => 'fa-' . $this->grav['plugins']->get('git-sync')->blueprints()->get('icon')
         ];
-        $this->grav['twig']->plugins_quick_tray['GitSync'] = $options;
+
+        if (Helper::isGitInstalled()) {
+            if (Helper::isGitInitialized()) {
+                $options['data'] = [
+                    'gitsync-useraction' => 'sync',
+                    'gitsync-uri' => $base . '/plugins/git-sync'
+                ];
+            }
+
+            $this->grav['twig']->plugins_quick_tray['GitSync'] = $options;
+        }
     }
 
     public function init()
@@ -115,8 +202,7 @@ class GitSyncPlugin extends Plugin
 
         $this->grav->fireEvent('onGitSyncBeforeSynchronize');
 
-        if (!$this->git->isWorkingCopyClean()) {
-            // commit any change
+        if ($this->git->hasChangesToCommit()) {
             $this->git->commit();
         }
 
@@ -126,6 +212,22 @@ class GitSyncPlugin extends Plugin
         $this->grav->fireEvent('onGitSyncAfterSynchronize');
 
         return true;
+    }
+
+    public function onSchedulerInitialized(Event $event)
+    {
+
+        /** @var Config $config */
+        $config = Grav::instance()['config'];
+        $run_at = $config->get('plugins.git-sync.sync.cron_at', '0 12,23 * * *');
+
+
+        if ($config->get('plugins.git-sync.sync.cron_enable', false)) {
+            /** @var Scheduler $scheduler */
+            $scheduler = $event['scheduler'];
+            $job = $scheduler->addFunction('Grav\Plugin\GitSync\Helper::synchronize', [], 'GitSync');
+            $job->at($run_at);
+        }
     }
 
     public function reset()
@@ -162,6 +264,12 @@ class GitSyncPlugin extends Plugin
             return false;
         }
 
+        $user = $this->grav['user'];
+
+        if (!$user->authenticated) {
+            return false;
+        }
+
         $settings = [
             'first_time'    => !Helper::isGitInitialized(),
             'git_installed' => Helper::isGitInstalled()
@@ -169,13 +277,16 @@ class GitSyncPlugin extends Plugin
 
         $this->grav['twig']->twig_vars['git_sync'] = $settings;
 
-        if ($this->grav['uri']->path() === '/admin/plugins/git-sync') {
+        $adminPath = trim($this->grav['admin']->base, '/');
+        if ($this->grav['uri']->path() === "/$adminPath/plugins/git-sync") {
             $this->grav['assets']->addCss('plugin://git-sync/css-compiled/git-sync.css');
         } else {
             $this->grav['assets']->addInlineJs('var GitSync = ' . json_encode($settings) . ';');
         }
 
+        $this->grav['assets']->addJs('plugin://git-sync/js/vendor.js', ['loading' => 'defer', 'priority' => 0]);
         $this->grav['assets']->addJs('plugin://git-sync/js/app.js', ['loading' => 'defer', 'priority' => 0]);
+        $this->grav['assets']->addCss('plugin://git-sync/css-compiled/git-sync-icon.css');
 
         return true;
     }
@@ -191,7 +302,8 @@ class GitSyncPlugin extends Plugin
     public function onAdminSave($event)
     {
         $obj           = $event['object'];
-        $isPluginRoute = $this->grav['uri']->path() == '/admin/plugins/' . $this->name;
+        $adminPath 	   = trim($this->grav['admin']->base, '/');
+        $isPluginRoute = $this->grav['uri']->path() == "/$adminPath/plugins/" . $this->name;
 
         if ($obj instanceof Data) {
             if (!$isPluginRoute || !Helper::isGitInstalled()) {
@@ -224,19 +336,21 @@ class GitSyncPlugin extends Plugin
         }
 
         $obj           = $event['object'];
-        $isPluginRoute = $this->grav['uri']->path() == '/admin/plugins/' . $this->name;
-
-        /*
-        $folders = $this->controller->git->getConfig('folders', []);
-        if (!$isPluginRoute && !in_array('config', $folders)) {
-            return true;
-        }
-        */
+        $adminPath	   = trim($this->grav['admin']->base, '/');
+        $uriPath       = $this->grav['uri']->path();
+        $isPluginRoute = $uriPath == "/$adminPath/plugins/" . $this->name;
 
         if ($obj instanceof Data) {
-            if (!$isPluginRoute || !Helper::isGitInstalled()) {
+            $folders = $this->controller->git->getConfig('folders', $event['object']->get('folders', []));
+            $data_type = preg_replace('#^/' . preg_quote($adminPath, '#') . '/#', '', $uriPath);
+            $data_type = explode('/', $data_type);
+            $data_type = array_shift($data_type);
+
+            if (!Helper::isGitInstalled() || (!$isPluginRoute && !in_array($this->getFolderMapping($data_type), $folders))) {
                 return true;
-            } else {
+            }
+
+            if ($isPluginRoute) {
                 $this->controller->git->setConfig($obj);
 
                 // initialize git if not done yet
@@ -286,6 +400,20 @@ class GitSyncPlugin extends Plugin
 
         if ($action == 'gitsync') {
             $this->synchronize();
+        }
+    }
+
+    public function getFolderMapping($data_type) {
+        switch ($data_type) {
+            case 'user':
+                return 'accounts';
+            case 'themes':
+                return 'config';
+            case 'config':
+            case 'data':
+            case 'plugins':
+            case 'pages':
+                return $data_type;
         }
     }
 }

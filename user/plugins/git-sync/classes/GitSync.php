@@ -18,11 +18,11 @@ class GitSync extends Git
 
     public function __construct(Plugin $plugin = null)
     {
-        parent::__construct(USER_DIR);
-        static::$instance = $this;
         $this->grav = Grav::instance();
         $this->config = $this->grav['config']->get('plugins.git-sync');
-        $this->repositoryPath = USER_DIR;
+        $this->repositoryPath = isset($this->config['local_repository']) && $this->config['local_repository'] ? $this->config['local_repository'] : USER_DIR;
+        parent::__construct($this->repositoryPath);
+        static::$instance = $this;
 
         $this->user = isset($this->config['user']) ? $this->config['user'] : null;
         $this->password = isset($this->config['password']) ? $this->config['password'] : null;
@@ -82,12 +82,16 @@ class GitSync extends Git
         return $this->execute("ls-remote \"${url}\"");
     }
 
-    public function initializeRepository($force = false)
+    public function initializeRepository()
     {
-        if ($force || !Helper::isGitInitialized()) {
+        if (!Helper::isGitInitialized()) {
+            $branch = $this->getRemote('branch', null);
+            $local_branch = $this->getConfig('branch', $branch);
             $this->execute('init');
-            return $this->enableSparseCheckout();
+            $this->execute('checkout ' . $local_branch, true);
         }
+
+        $this->enableSparseCheckout();
 
         return true;
     }
@@ -135,16 +139,32 @@ class GitSync extends Git
             $sparse[] = $folder . '/*';
         }
 
-        $file = File::instance(rtrim(USER_DIR, '/') . '/.git/info/sparse-checkout');
+        $file = File::instance(rtrim($this->repositoryPath, '/') . '/.git/info/sparse-checkout');
         $file->save(implode("\r\n", $sparse));
         $file->free();
 
         $ignore = ['/*'];
         foreach ($folders as $folder) {
-            $ignore[] = '!/' . $folder;
+            $folder = rtrim($folder,'/');
+            $nested = substr_count($folder, '/');
+
+            if ($nested) {
+                $subfolders = explode('/', $folder);
+                $nested_tracking = '';
+                foreach ($subfolders as $index => $subfolder) {
+                    $last = $index === (count($subfolders) - 1);
+                    $nested_tracking .= $subfolder . '/';
+                    if (!in_array('!/' . $nested_tracking, $ignore)) {
+                        $ignore[] = rtrim($nested_tracking . (!$last ? '*' : ''), '/');
+                        $ignore[] = rtrim('!/' . $nested_tracking, '/');
+                    }
+                }
+            } else {
+                $ignore[] = '!/' . $folder;
+            }
         }
 
-        $file = File::instance(rtrim(USER_DIR, '/') . '/.gitignore');
+        $file = File::instance(rtrim($this->repositoryPath, '/') . '/.gitignore');
         $file->save(implode("\r\n", $ignore));
         $file->free();
     }
@@ -168,13 +188,22 @@ class GitSync extends Git
     public function add()
     {
         $version = Helper::isGitInstalled(true);
-        $folders = $this->config['folders'];
-        $paths = [];
         $add = 'add';
 
+        // With the introduction of customizable paths,
+        // it appears that the add command should always
+        // add everything that is not committed to ensure
+        // there are no orphan changes left behind
+
+        /*
+        $folders = $this->config['folders'];
+        $paths = [];
         foreach ($folders as $folder) {
             $paths[] = $folder;
         }
+        */
+
+        $paths = ['.'];
 
         if (version_compare($version, '2.0', '<')) {
             $add .= ' --all';
@@ -193,20 +222,24 @@ class GitSync extends Git
         switch ($authorType) {
             case 'gitsync':
                 $user = $this->getConfig('git', null)['name'];
+                $email = $this->getConfig('git', null)['email'];
                 break;
             case 'gravuser':
                 $user = $this->grav['session']->user->username;
+                $email = $this->grav['session']->user->email;
                 break;
             case 'gravfull':
                 $user = $this->grav['session']->user->fullname;
+                $email = $this->grav['session']->user->email;
                 break;
             case 'gituser':
             default:
                 $user = $this->user;
+                $email = $this->getConfig('git', null)['email'];
                 break;
         }
 
-        $author = $user . ' <' . $this->getConfig('git', null)['email'] . '>';
+        $author = $user . ' <' . $email . '>';
         $author = '--author="' . $author . '"';
         $message .= ' from ' . $user;
         $this->add();
@@ -273,7 +306,23 @@ class GitSync extends Git
         return (substr($output[count($output)-1], 0, strlen($message)) === $message);
     }
 
-    public function execute($command)
+    public function hasChangesToCommit()
+    {
+        $folders = $this->config['folders'];
+        $paths = [];
+
+        foreach ($folders as $folder) {
+            $folder = explode('/', $folder);
+            $paths[] = is_array($folder) ? array_shift($folder) : $folder;
+        }
+
+        $message = 'nothing to commit';
+        $output = $this->execute('status ' . implode(' ', $paths));
+
+        return (substr($output[count($output)-1], 0, strlen($message)) !== $message);
+    }
+
+    public function execute($command, $quiet = false)
     {
         try {
             $bin = Helper::getGitBinary($this->getGitConfig('bin', 'git'));
@@ -304,7 +353,7 @@ class GitSync extends Git
                 exec($command, $output, $returnValue);
             }
 
-            if ($returnValue !== 0) {
+            if ($returnValue !== 0 && !$quiet) {
                 throw new \RuntimeException(implode("\r\n", $output));
             }
 

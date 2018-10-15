@@ -1,3 +1,36 @@
+# v2.0.0
+## 10/15/2018
+
+1. [](#new)
+    * Added support for new awesome Grav 1.6 Scheduler
+    * Added logic to display custom nested folders in wizard
+    * Other than `pages`, it is now possible to enable `config`, `data`, `plugins` and `themes` for synchronization. You can also add any custom folder you have in your `user` (#4, #21, #34, #58, #63, #83)
+    * Allow users with `admin.pages` permissions to synchronize through quick tray (#79, thanks @apfrod)
+    * When using Grav as committer, the user email will be now used for the commit (#81, thanks @apfrod)
+    * Added support for Webhook Secret (Bitbucket does not yet support them) (#72, #73, thanks @pathmissing)
+    * Added options to turn automatic synchronization on/off with page saves, delete and media changes (#105, thanks @AmauryCarrade)
+1. [](#improved)
+    * Fixed alignment of the git icon in the Wizard (#115)
+    * Prevent Wizard modal to get canceled when clicking on the overlay background (#115)
+    * Quick tray icon is now smarter. If GitSync has not been initialized yet, it will take you straight to wizard, otherwise it would perform a synchronization (#115)
+    * Rearranged blueprint order (thanks @paulhibbitts)
+    * GitLab: Updated wizard instructions to be inline with the new GitLab UI (#90)
+    * Tweaked alignment of links in the wizard (#57)
+    * Properly support local branches that aren't `master` (#56)
+    * Allow to specify custom local_repository (default, `USER_DIR`) (#95, thanks @Hydraner, also #54, #33, #25)
+    * Webhook URL is now more robust and secure, by default it is generated with a random value
+    * Git icon from Admin has been replaced to use the `git` text icon instead of the logo
+    * Prevent next step if Step 1 and Step 2 are not filled in (#92)
+    * Added notice in Step 2 explaning what GitSync expect from the repository structure (#92)
+1. [](#bugfix)
+    * Fixed issue where on first initialization the checkout process would error out
+    * Fixed issue with Pages save. 
+    * Fixed JS error in plugins list
+    * Fixed nested folders not synchronizing
+    * Fixed issue where Wizard wouldn't work in case the `admin` path was modified (#27, #94, #77, thanks @pathmissing)
+    * Fixed webhook generated URL when multi-lang active (#71)
+    * Resolved issue with untracked/uncommited files at the root of the `sync` folder. (#101, thanks @ScottHamper)
+
 # v1.0.4
 ## 08/16/2017
 
