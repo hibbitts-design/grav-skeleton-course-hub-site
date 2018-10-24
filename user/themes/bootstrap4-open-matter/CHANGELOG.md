@@ -1,3 +1,21 @@
+# v1.2.4
+## 10/22/2018
+
+1. [](#improved)
+    * Updated included CSS examples for use with Canvas LMS
+
+# v1.2.3
+## 10/21/2018
+
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+
+# v1.2.2
+## 10/19/2018
+
+1. [](#improved)
+    * Improved accessibility when displaying blog items in 'chromeless' mode and hiding page title
+
 # v1.2.1
 ## 10/17/2018
 
@@ -15,13 +33,13 @@
 # v1.1.9
 ## 10/16/2018
 
-1. [](#bugfix)
+1. [](#improved)
     * Updated example pages in theme '_demo' folder
 
 # v1.1.8
 ## 10/16/2018
 
-1. [](#bugfix)
+1. [](#improved)
     * Updated example pages in theme '_demo' folder
 
 # v1.1.7
