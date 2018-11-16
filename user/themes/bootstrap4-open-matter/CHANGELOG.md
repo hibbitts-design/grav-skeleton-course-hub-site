@@ -1,3 +1,44 @@
+# v1.4.6
+## 11/16/2018
+
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+
+# v1.4.5
+## 11/16/2018
+
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+
+# v1.4.4
+## 11/16/2018
+
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+
+# v1.4.3
+## 11/15/2018
+
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+
+# v1.4.2
+## 11/15/2018
+
+1. [](#new)
+    * Added support for global image header, sidebar, and footer
+1. [](#improved)
+    * Adjusted space between custom menu item icons and text labels
+    * Updated example pages in theme '_demo' folder
+
+# v1.4.1
+## 11/15/2018
+
+1. [](#improved)
+    * Revised page titles to better indicate current course
+1. [](#bugfix)
+    * Fixed ChangeLog format
+
 # v1.4.0
 ## 11/15/2018
 
@@ -81,6 +122,7 @@
 1. [](#bugfix)
     * Corrected filename for Grava11y (Accessibility for Grav) Plugin
 
+# v1.1.4
 ## 10/14/2018
 
 1. [](#new)
