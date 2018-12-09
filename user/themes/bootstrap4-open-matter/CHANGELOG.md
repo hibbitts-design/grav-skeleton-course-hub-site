@@ -1,3 +1,15 @@
+# v1.5.5
+## 12/09/2018
+
+1. [](#bugfix)
+    * Fixed display of expected site name for top-level site pages
+
+# v1.5.4
+## 12/08/2018
+
+1. [](#improved)
+    * Added help and descriptive text to 'MultiCourse' setting in theme blueprint
+
 # v1.5.3
 ## 12/06/2018
 
