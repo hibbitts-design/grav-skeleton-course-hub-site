@@ -1,6 +1,6 @@
 enabled: false
 built_in_css: true
-date_display_format: 'F jS Y'
+date_display_format: 'F Y'
 show_count: true
 limit: 12
 order:
@@ -8,8 +8,7 @@ order:
   dir: desc
 filter_combinator: and
 filters:
-  category: blog
-  0: documentation
+  - '@self'
 taxonomy_names:
   month: archives_month
   year: archives_year
