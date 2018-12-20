@@ -1,3 +1,17 @@
+# v1.6.2
+## 12/19/2018
+
+1. [](#improved)
+    * Added two column display of courses (using Bootstrap 4 Cards) on course list page
+
+# v1.6.1
+## 12/19/2018
+
+1. [](#new)
+    * Added courselist/course templates and blueprints to provide an auto-generated index of all courses within a MultiCourse Hub
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+
 # v1.6.0
 ## 12/16/2018
 
