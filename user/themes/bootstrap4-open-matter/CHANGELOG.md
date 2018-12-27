@@ -1,3 +1,37 @@
+# v1.6.7
+## 12/27/2018
+
+1. [](#new)
+    * Added the ability to hide courses from a course list page and set custom course home page
+1. [](#improved)
+    * Revised MultiCourse feature to be more robust and automatic detection is now supported (manual theme option will be soon removed once further testing is complete)
+    * Removed theme option to hide homepage in menubar (set the 'visible' option to 'false' on homepage for same functionality)
+    * Updated example pages in theme '_demo' folder
+
+# v1.6.6
+## 12/22/2018
+
+1. [](#new)
+    * Added menubar item template and blueprint for easier editing of course-specific menubar items (replaced 'menu_classes' with more specific 'menu_target' option)
+
+# v1.6.5
+## 12/22/2018
+
+1. [](#improved)
+    * Updated 'menu_class' page header option to 'menu_classes' to better match existing option names
+
+# v1.6.4
+## 12/21/2018
+
+1. [](#improved)
+    * Added 'menu_icon' and 'menu_class' to support menu icon and class for redirect-type pages
+
+# v1.6.3
+## 12/21/2018
+
+1. [](#improved)
+    * Updated CSS style of MultiCourse list cards
+
 # v1.6.2
 ## 12/19/2018
 
