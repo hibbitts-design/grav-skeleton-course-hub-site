@@ -1,3 +1,25 @@
+# v1.7.1
+## 01/05/2019
+
+1. [](#improved)
+    * Added optional course list title for courses
+    * Updated example pages in theme '_demo' folder
+
+# v1.7.0
+## 01/04/2019
+
+1. [](#improved)
+    * Updated example pages in theme '_demo' folder
+1. [](#bugfix)
+    * Fixed malformed link for MultiCourse home page
+
+# v1.6.9
+## 01/03/2019
+
+1. [](#improved)
+    * Course list cards can now display course page content
+    * Added check for page header 'published' for modular home page items
+
 # v1.6.8
 ## 12/28/2018
 
