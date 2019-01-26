@@ -1,3 +1,15 @@
+# v1.7.6
+## 01/25/2019
+
+1. [](#bugfix)
+    * Removed default custom menubar entry
+
+# v1.7.5
+## 01/21/2019
+
+1. [](#bugfix)
+    * Fixed check for theme 'chromeless' option and display of Next/Prev Post buttons
+
 # v1.7.4
 ## 01/14/2019
 
