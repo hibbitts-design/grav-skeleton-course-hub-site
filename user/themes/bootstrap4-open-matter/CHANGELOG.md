@@ -1,3 +1,17 @@
+# v1.7.8
+## 01/27/2019
+
+1. [](#improved)
+    * Adjusted display of optional link items for embedded iFrames
+
+# v1.7.7
+## 01/27/2019
+
+1. [](#improved)
+    * Added optional link items for each iFrame displayed
+1. [](#bugfix)
+    * Fixed check for site-wide 'chromeless' option for custom content lists
+
 # v1.7.6
 ## 01/25/2019
 
