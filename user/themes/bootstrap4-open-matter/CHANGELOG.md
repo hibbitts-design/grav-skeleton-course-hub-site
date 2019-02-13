@@ -1,3 +1,15 @@
+# v1.9.0
+## 02/13/2019
+
+1. [](#improved)
+    * For improved support of the Presentation Plugin, Markdown links with "=_target" are now handled better
+
+# v1.8.9
+## 02/09/2019
+
+1. [](#improved)
+    * Better support for flat lists of Section-type pages
+
 # v1.8.8
 ## 02/08/2019
 
@@ -40,7 +52,7 @@
 ## 02/03/2019
 
 1. [](#new)
-    * Added support for 'visible' option setting in Section-type pages
+    * Added support for 'visible' option setting in Section-type pages. For existing Section-type pages, ensure that any current 'visible: false' values are removed for those pages to be included.
 
 # v1.8.1
 ## 01/29/2019
