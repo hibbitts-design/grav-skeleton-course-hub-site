@@ -4,14 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06
+class ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '19cefe1485315b72c45605e5be32d866' => __DIR__ . '/..' . '/donatj/phpuseragentparser/Source/UserAgentParser.php',
+        'da5f6548f070d3d306f90eee42dd5de6' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgentParser.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         'a686abd6bcd0f7067184e090d1174003' => __DIR__ . '/../..' . '/system/defines.php',
@@ -1107,6 +1107,7 @@ class ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06
         'Twig\\Node\\BlockReferenceNode' => __DIR__ . '/..' . '/twig/twig/src/Node/BlockReferenceNode.php',
         'Twig\\Node\\BodyNode' => __DIR__ . '/..' . '/twig/twig/src/Node/BodyNode.php',
         'Twig\\Node\\CheckSecurityNode' => __DIR__ . '/..' . '/twig/twig/src/Node/CheckSecurityNode.php',
+        'Twig\\Node\\CheckToStringNode' => __DIR__ . '/..' . '/twig/twig/src/Node/CheckToStringNode.php',
         'Twig\\Node\\DeprecatedNode' => __DIR__ . '/..' . '/twig/twig/src/Node/DeprecatedNode.php',
         'Twig\\Node\\DoNode' => __DIR__ . '/..' . '/twig/twig/src/Node/DoNode.php',
         'Twig\\Node\\EmbedNode' => __DIR__ . '/..' . '/twig/twig/src/Node/EmbedNode.php',
@@ -1459,11 +1460,11 @@ class ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit83e6bad93487e7c85d3425ede4d10a06::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$classMap;
 
         }, null, ClassLoader::class);
     }

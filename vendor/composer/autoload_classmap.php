@@ -843,6 +843,7 @@ return array(
     'Twig\\Node\\BlockReferenceNode' => $vendorDir . '/twig/twig/src/Node/BlockReferenceNode.php',
     'Twig\\Node\\BodyNode' => $vendorDir . '/twig/twig/src/Node/BodyNode.php',
     'Twig\\Node\\CheckSecurityNode' => $vendorDir . '/twig/twig/src/Node/CheckSecurityNode.php',
+    'Twig\\Node\\CheckToStringNode' => $vendorDir . '/twig/twig/src/Node/CheckToStringNode.php',
     'Twig\\Node\\DeprecatedNode' => $vendorDir . '/twig/twig/src/Node/DeprecatedNode.php',
     'Twig\\Node\\DoNode' => $vendorDir . '/twig/twig/src/Node/DoNode.php',
     'Twig\\Node\\EmbedNode' => $vendorDir . '/twig/twig/src/Node/EmbedNode.php',
