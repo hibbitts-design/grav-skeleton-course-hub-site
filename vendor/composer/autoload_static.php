@@ -4,11 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e
+class ComposerStaticInit6be42a237d09ccd36b61fb06b93f9f7a
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'da5f6548f070d3d306f90eee42dd5de6' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgentParser.php',
@@ -56,6 +56,7 @@ class ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
+            'Phive\\Twig\\Extensions\\Deferred\\' => 31,
         ),
         'M' => 
         array (
@@ -179,6 +180,10 @@ class ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Phive\\Twig\\Extensions\\Deferred\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phive/twig-extensions-deferred/src',
         ),
         'Monolog\\' => 
         array (
@@ -814,6 +819,11 @@ class ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e
         'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
         'ParsedownExtra' => __DIR__ . '/..' . '/erusev/parsedown-extra/ParsedownExtra.php',
         'ParsedownExtraTest' => __DIR__ . '/..' . '/erusev/parsedown-extra/test/ParsedownExtraTest.php',
+        'Phive\\Twig\\Extensions\\Deferred\\DeferredBlockNode' => __DIR__ . '/..' . '/phive/twig-extensions-deferred/src/DeferredBlockNode.php',
+        'Phive\\Twig\\Extensions\\Deferred\\DeferredExtension' => __DIR__ . '/..' . '/phive/twig-extensions-deferred/src/DeferredExtension.php',
+        'Phive\\Twig\\Extensions\\Deferred\\DeferredNode' => __DIR__ . '/..' . '/phive/twig-extensions-deferred/src/DeferredNode.php',
+        'Phive\\Twig\\Extensions\\Deferred\\DeferredNodeVisitor' => __DIR__ . '/..' . '/phive/twig-extensions-deferred/src/DeferredNodeVisitor.php',
+        'Phive\\Twig\\Extensions\\Deferred\\DeferredTokenParser' => __DIR__ . '/..' . '/phive/twig-extensions-deferred/src/DeferredTokenParser.php',
         'Pimple\\Container' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Container.php',
         'Pimple\\Exception\\ExpectedInvokableException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/ExpectedInvokableException.php',
         'Pimple\\Exception\\FrozenServiceException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/FrozenServiceException.php',
@@ -1460,11 +1470,11 @@ class ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitb60d753144d9cd2f06c8320fca20c68e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6be42a237d09ccd36b61fb06b93f9f7a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6be42a237d09ccd36b61fb06b93f9f7a::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit6be42a237d09ccd36b61fb06b93f9f7a::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6be42a237d09ccd36b61fb06b93f9f7a::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit6be42a237d09ccd36b61fb06b93f9f7a::$classMap;
 
         }, null, ClassLoader::class);
     }

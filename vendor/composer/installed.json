@@ -998,6 +998,51 @@
         ]
     },
     {
+        "name": "phive/twig-extensions-deferred",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/rybakit/twig-deferred-extension.git",
+            "reference": "5a2426d622afa74034e754ca5ea1d1ff7887627f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/rybakit/twig-deferred-extension/zipball/5a2426d622afa74034e754ca5ea1d1ff7887627f",
+            "reference": "5a2426d622afa74034e754ca5ea1d1ff7887627f",
+            "shasum": ""
+        },
+        "require": {
+            "twig/twig": "~1.18"
+        },
+        "time": "2017-03-17T21:39:21+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phive\\Twig\\Extensions\\Deferred\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Eugene Leonovich",
+                "email": "gen.work@gmail.com"
+            }
+        ],
+        "description": "An extension for Twig that allows to defer block rendering",
+        "homepage": "https://github.com/rybakit/twig-extensions-deferred",
+        "keywords": [
+            "defer",
+            "extension",
+            "lazy",
+            "twig"
+        ]
+    },
+    {
         "name": "pimple/pimple",
         "version": "v3.2.3",
         "version_normalized": "3.2.3.0",
