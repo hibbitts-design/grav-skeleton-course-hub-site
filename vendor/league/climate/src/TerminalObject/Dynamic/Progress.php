@@ -2,6 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
+use League\CLImate\Exceptions\UnexpectedValueException;
+
 class Progress extends DynamicTerminalObject
 {
     /**
@@ -91,17 +93,19 @@ class Progress extends DynamicTerminalObject
      *
      * @param integer $current
      * @param mixed   $label
-     * @throws \Exception
+     *
+     * @return void
+     * @throws UnexpectedValueException
      */
     public function current($current, $label = null)
     {
         if ($this->total == 0) {
             // Avoid dividing by 0
-            throw new \Exception('The progress total must be greater than zero.');
+            throw new UnexpectedValueException('The progress total must be greater than zero.');
         }
 
         if ($current > $this->total) {
-            throw new \Exception('The current is greater than the total.');
+            throw new UnexpectedValueException('The current is greater than the total.');
         }
 
         $this->drawProgressBar($current, $label);

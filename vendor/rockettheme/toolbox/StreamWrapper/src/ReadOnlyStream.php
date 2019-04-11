@@ -19,9 +19,9 @@ class ReadOnlyStream extends Stream implements StreamInterface
 
     public function stream_open($uri, $mode, $options, &$opened_url)
     {
-        if (!in_array($mode, ['r', 'rb', 'rt'])) {
+        if (!\in_array($mode, ['r', 'rb', 'rt'], true)) {
             if ($options & STREAM_REPORT_ERRORS) {
-                trigger_error(sprintf('stream_open() write modes not supported for %s', $uri), E_USER_WARNING);
+                trigger_error(sprintf('stream_open() write modes not allowed for %s', $uri), E_USER_WARNING);
             }
 
             return false;
@@ -46,9 +46,9 @@ class ReadOnlyStream extends Stream implements StreamInterface
     public function stream_lock($operation)
     {
         // Disallow exclusive lock or non-blocking lock requests
-        if (!in_array($operation, [LOCK_SH, LOCK_UN, LOCK_SH | LOCK_NB], true)) {
+        if (!\in_array($operation, [LOCK_SH, LOCK_UN, LOCK_SH | LOCK_NB], true)) {
             trigger_error(
-                sprintf('stream_lock() exclusive lock operations not supported for %s', $this->uri),
+                sprintf('stream_lock() exclusive lock operations not allowed for %s', $this->uri),
                 E_USER_WARNING
             );
 
@@ -61,7 +61,7 @@ class ReadOnlyStream extends Stream implements StreamInterface
     public function stream_metadata($uri, $option, $value)
     {
         if ($option !== STREAM_META_TOUCH) {
-            throw new \BadMethodCallException(sprintf('stream_metadata() not supported for %s', $uri));
+            throw new \BadMethodCallException(sprintf('stream_metadata() not allowed for %s', $uri));
         }
 
         return parent::stream_metadata($uri, $option, $value);
@@ -69,26 +69,26 @@ class ReadOnlyStream extends Stream implements StreamInterface
 
     public function stream_write($data)
     {
-        throw new \BadMethodCallException(sprintf('stream_write() not supported for %s', $this->uri));
+        throw new \BadMethodCallException(sprintf('stream_write() not allowed for %s', $this->uri));
     }
 
     public function unlink($uri)
     {
-        throw new \BadMethodCallException(sprintf('unlink() not supported for %s', $uri));
+        throw new \BadMethodCallException(sprintf('unlink() not allowed for %s', $uri));
     }
 
     public function rename($from_uri, $to_uri)
     {
-        throw new \BadMethodCallException(sprintf('rename() not supported for %s', $from_uri));
+        throw new \BadMethodCallException(sprintf('rename() not allowed for %s', $from_uri));
     }
 
     public function mkdir($uri, $mode, $options)
     {
-        throw new \BadMethodCallException(sprintf('mkdir() not supported for %s', $uri));
+        throw new \BadMethodCallException(sprintf('mkdir() not allowed for %s', $uri));
     }
 
     public function rmdir($uri, $options)
     {
-        throw new \BadMethodCallException(sprintf('rmdir() not supported for %s', $uri));
+        throw new \BadMethodCallException(sprintf('rmdir() not allowed for %s', $uri));
     }
 }

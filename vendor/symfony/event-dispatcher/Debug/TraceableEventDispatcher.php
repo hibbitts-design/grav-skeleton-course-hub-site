@@ -32,6 +32,7 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     private $callStack;
     private $dispatcher;
     private $wrappedListeners;
+    private $orphanedEvents;
 
     public function __construct(EventDispatcherInterface $dispatcher, Stopwatch $stopwatch, LoggerInterface $logger = null)
     {
@@ -39,6 +40,7 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
         $this->stopwatch = $stopwatch;
         $this->logger = $logger;
         $this->wrappedListeners = [];
+        $this->orphanedEvents = [];
     }
 
     /**
@@ -219,9 +221,15 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
         return $notCalled;
     }
 
+    public function getOrphanedEvents(): array
+    {
+        return $this->orphanedEvents;
+    }
+
     public function reset()
     {
         $this->callStack = null;
+        $this->orphanedEvents = [];
     }
 
     /**
@@ -234,7 +242,7 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
      */
     public function __call($method, $arguments)
     {
-        return \call_user_func_array([$this->dispatcher, $method], $arguments);
+        return $this->dispatcher->{$method}(...$arguments);
     }
 
     /**
@@ -259,6 +267,12 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
 
     private function preProcess($eventName)
     {
+        if (!$this->dispatcher->hasListeners($eventName)) {
+            $this->orphanedEvents[] = $eventName;
+
+            return;
+        }
+
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
             $priority = $this->getListenerPriority($eventName, $listener);
             $wrappedListener = new WrappedListener($listener instanceof WrappedListener ? $listener->getWrappedListener() : $listener, null, $this->stopwatch, $this);

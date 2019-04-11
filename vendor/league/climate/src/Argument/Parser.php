@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Argument;
 
+use League\CLImate\Exceptions\InvalidArgumentException;
+
 class Parser
 {
     /**
@@ -42,8 +44,10 @@ class Parser
     /**
      * Parse command line arguments into CLImate arguments.
      *
-     * @throws \Exception if required arguments aren't defined.
      * @param array $argv
+     *
+     * @return void
+     * @throws InvalidArgumentException if required arguments aren't defined.
      */
     public function parse(array $argv = null)
     {
@@ -62,7 +66,7 @@ class Parser
         $missingArguments = $this->filter->missing();
 
         if (count($missingArguments) > 0) {
-            throw new \Exception(
+            throw new InvalidArgumentException(
                 'The following arguments are required: '
                 . $this->summary->short($missingArguments) . '.'
             );
@@ -229,14 +233,28 @@ class Parser
 
             // If the value wasn't previously defined in "key=value"
             // format then define it from the next command argument.
-            $argument->setValue($argv[++$key]);
-            unset($argv[$key]);
-            return $argv;
+            $nextArgvValue = $argv[$key + 1];
+            if ($this->isValidArgumentValue($nextArgvValue)) {
+                $argument->setValue($nextArgvValue);
+                unset($argv[$key + 1]);
+                return $argv;
+            }
         }
 
         $argument->setValue($value);
 
         return $argv;
+    }
+
+    /**
+     * Check if the value is considered a valid input value.
+     *
+     * @param $argumentValue
+     * @return bool
+     */
+    protected function isValidArgumentValue($argumentValue)
+    {
+        return empty($this->findPrefixedArgument($argumentValue));
     }
 
     /**

@@ -1,3 +1,33 @@
+# v1.4.6
+## 03/20/2019
+
+1. [](#bugfix)
+    * Fixed `File::writable()` returning true if an existing file is read-only with the folder being writable
+    * Fixed `File::save()` silently ignoring failures with read only streams
+    * Regresion: Fixed file saving when temporary file cannot be created to the current folder / stream
+
+# v1.4.5
+## 02/28/2019
+
+1. [](#bugfix)
+    * Regression: Fixed undefined variable in `BlueprintSchema`
+
+# v1.4.4
+## 02/28/2019
+
+1. [](#bugfix)
+    * Regression: Fixed issue with directory creation when saving non-existing file
+
+# v1.4.3
+## 02/26/2019
+
+1. [](#improved)
+    * Minor code optimizations
+    * Improved `File::save()` to use a temporary file if file isn't locked
+1. [](#bugfix)
+    * Fixed `Obtaining write lock failed on file...`
+    * Fixed `mkdir(...)` race condition
+
 # v1.4.2
 ## 08/08/2018
 

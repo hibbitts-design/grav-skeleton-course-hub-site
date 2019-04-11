@@ -2,6 +2,9 @@
 
 namespace League\CLImate\Argument;
 
+use League\CLImate\Exceptions\UnexpectedValueException;
+use function is_array;
+
 class Argument
 {
     /**
@@ -65,14 +68,14 @@ class Argument
      *
      * @var string
      */
-    protected $defaultValue;
+    protected $defaultValue = [];
 
     /**
      * An argument's value, after type casting.
      *
-     * @var string|int|float|bool
+     * @var string[]|int[]|float[]|bool[]
      */
-    protected $value;
+    protected $values = [];
 
     /**
      * Build a new command argument.
@@ -100,10 +103,6 @@ class Argument
         foreach ($params as $key => $value) {
             $method = 'set' . ucwords($key);
             $argument->{$method}($value);
-        }
-
-        if ($argument->defaultValue()) {
-            $argument->setValue($argument->defaultValue());
         }
 
         return $argument;
@@ -282,13 +281,15 @@ class Argument
      *
      * Valid data types are "string", "int", "float", and "bool".
      *
-     * @throws \Exception if $castTo is not a valid data type.
      * @param string $castTo
+     *
+     * @return void
+     * @throws UnexpectedValueException if $castTo is not a valid data type.
      */
     protected function setCastTo($castTo)
     {
         if (!in_array($castTo, ['string', 'int', 'float', 'bool'])) {
-            throw new \Exception(
+            throw new UnexpectedValueException(
                 "An argument may only be cast to the data type "
                 . "'string', 'int', 'float', or 'bool'."
             );
@@ -298,7 +299,7 @@ class Argument
     }
 
     /**
-     * Retrieve an argument's default value.
+     * Retrieve an argument's default values.
      *
      * @return string
      */
@@ -314,6 +315,9 @@ class Argument
      */
     public function setDefaultValue($defaultValue)
     {
+        if (!is_array($defaultValue)) {
+            $defaultValue = [$defaultValue];
+        }
         $this->defaultValue = $defaultValue;
     }
 
@@ -326,7 +330,35 @@ class Argument
      */
     public function value()
     {
-        return $this->value;
+        if ($this->values) {
+            return end($this->values);
+        }
+        $cast_method = 'castTo' . ucwords($this->castTo);
+        return $this->{$cast_method}(current($this->defaultValue()));
+    }
+
+    /**
+     * Retrieve an argument's values.
+     *
+     * Argument values are type cast based on the value of $castTo.
+     *
+     * @return string[]|int[]|float[]|bool[]
+     */
+    public function values()
+    {
+        if ($this->values) {
+            return $this->values;
+        }
+        $cast_method = 'castTo' . ucwords($this->castTo);
+        return array_map([$this, $cast_method], $this->defaultValue());
+    }
+
+    /**
+     * @deprecated use values() instead.
+     */
+    public function valueArray()
+    {
+        return $this->values();
     }
 
     /**
@@ -339,7 +371,7 @@ class Argument
     public function setValue($value)
     {
         $cast_method = 'castTo' . ucwords($this->castTo);
-        $this->value = $this->{$cast_method}($value);
+        $this->values[] = $this->{$cast_method}($value);
     }
 
     /**

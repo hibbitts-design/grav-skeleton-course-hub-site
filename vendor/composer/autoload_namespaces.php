@@ -13,5 +13,4 @@ return array(
     'PHPExif' => array($vendorDir . '/miljar/php-exif/lib'),
     'Gregwar\\Image' => array($vendorDir . '/gregwar/image'),
     'Gregwar\\Cache' => array($vendorDir . '/gregwar/cache'),
-    'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
 );
