@@ -10,8 +10,10 @@ content:
     items: '@self.children'
     limit: 0
 show_sidebar: true
-hide_git_sync_repo_link: true
 display_child_page_titles: true
-sidebar: true
-protectEdit: true
+display_child_page_titles_link: false
+display_content_title: false
+display_content_titles_link: false
+display_content_links: false
+hide_git_sync_repo_link: true
 ---

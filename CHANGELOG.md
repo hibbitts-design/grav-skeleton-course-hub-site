@@ -1,3 +1,19 @@
+# v1.6.3
+## 04/12/2019
+
+1. [](#new)
+    * Added `Blueprint::addDynamicHandler()` method to allow custom dynamic handlers, for example `custom-options@: getCustomOptions`
+1. [](#bugfix)
+    * Missed a `CacheCommand` reference in `bin/grav` [#2442](https://github.com/getgrav/grav/issues/2442)
+    * Fixed issue with `Utils::normalizePath` messing with external URLs [#2216](https://github.com/getgrav/grav/issues/2216)
+    * Fix for `vUndefined` versions when upgrading
+
+# v1.6.2
+## 04/11/2019
+
+1. [](#bugfix)
+    * Revert renaming of `ClearCacheCommand` to ensure CLI GPM upgrades go smoothly
+
 # v1.6.1
 ## 04/11/2019
 
@@ -5,7 +21,6 @@
     * Improved CSS for the bottom filter bar of DebugBar
 1. [](#bugfix)
     * Fixed issue with `@import` not being added to top of pipelined css [#2440](https://github.com/getgrav/grav/issues/2440)
-    * Fixed an error with `DebuggerAssetsProcess` on upgrade
 
 # v1.6.0
 ## 04/11/2019

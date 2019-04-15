@@ -2,7 +2,7 @@
 title: 'All Slides'
 published: true
 visible: false
-child_type: pdf
+child_type: iframe
 content:
     order:
         by: default
@@ -11,8 +11,9 @@ content:
     limit: 0
 show_sidebar: true
 display_child_page_titles: true
-display_content_titles: false
+display_child_page_titles_link: true
+display_content_title: false
+display_content_titles_link: false
 display_content_links: false
 hide_git_sync_repo_link: true
-sidebar: true
 ---

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be
+class ComposerStaticInitfd4a6be4e089d18689772fb27860fa0d
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -622,8 +622,8 @@ class ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be
         'Grav\\Common\\Utils' => __DIR__ . '/../..' . '/system/src/Grav/Common/Utils.php',
         'Grav\\Common\\Yaml' => __DIR__ . '/../..' . '/system/src/Grav/Common/Yaml.php',
         'Grav\\Console\\Cli\\BackupCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/BackupCommand.php',
-        'Grav\\Console\\Cli\\CacheCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/CacheCommand.php',
         'Grav\\Console\\Cli\\CleanCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/CleanCommand.php',
+        'Grav\\Console\\Cli\\ClearCacheCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/ClearCacheCommand.php',
         'Grav\\Console\\Cli\\ComposerCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/ComposerCommand.php',
         'Grav\\Console\\Cli\\InstallCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/InstallCommand.php',
         'Grav\\Console\\Cli\\LogViewerCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/LogViewerCommand.php',
@@ -1748,11 +1748,11 @@ class ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit9844977c2f1f85834f5b7ac01b81c9be::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfd4a6be4e089d18689772fb27860fa0d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfd4a6be4e089d18689772fb27860fa0d::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitfd4a6be4e089d18689772fb27860fa0d::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitfd4a6be4e089d18689772fb27860fa0d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitfd4a6be4e089d18689772fb27860fa0d::$classMap;
 
         }, null, ClassLoader::class);
     }
