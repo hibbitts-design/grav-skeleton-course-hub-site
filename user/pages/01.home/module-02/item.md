@@ -2,11 +2,12 @@
 title: 'Week 2 (May 16 - 22)'
 published: true
 date: '16-05-2018 00:00'
-hide_from_post_list: false
-hide_git_sync_repo_link: true
+header_image_alt_text: 'Information architecture'
 header_image_credit: 'CannedTuna, Flickr.com'
 header_image_creditlink: 'https://www.flickr.com/photos/cannedtuna/4853380320/'
-header_image_alt_text: 'Information architecture'
+hide_from_post_list: false
+continue_link: true
+hide_git_sync_repo_link: true
 ---
 
 ## What does a holistic user experience design process look like?
@@ -32,7 +33,7 @@ The Process of UX Design
 [Product Reaction Cards](https://sso.canvaslms.com/courses/1413912/files/folder/Handouts/Product%20Reaction%20Cards)  
 
 ### Quick Quiz
-[plugin:page-inject](/h5p/usability)
+[h5p id="213956"]
 
 ### Assignments
 [Course Reflection Log](https://sso.canvaslms.com/courses/1413912/assignments/9519528)  
