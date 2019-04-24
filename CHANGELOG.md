@@ -1,3 +1,42 @@
+# v1.6.8
+## 04/23/2019
+
+1. [](#new)
+    * Added `FlexCollection::filterBy()` method
+1. [](#bugfix)
+    * Revert `Use Null Coalesce Operator` [#2466](https://github.com/getgrav/grav/pull/2466)
+    * Fixed `FormTrait::render()` not providing config variable
+    * Updated `bin/grav clean` to clear `cache/compiled` and `user/config/security.yaml`
+
+# v1.6.7
+## 04/22/2019
+
+1. [](#new)
+    * Added a new `bin/grav yamllinter` CLI command to find YAML Linting issues [#2468](https://github.com/getgrav/grav/issues/2468#issuecomment-485151681)
+1. [](#improved)
+    * Improve `FormTrait` backwards compatibility with existing forms
+    * Added a new `Utils::getSubnet()` function for IPv4/IPv6 parsing [#2465](https://github.com/getgrav/grav/pull/2465)
+1. [](#bugfix)
+    * Remove disabled fields from the form schema
+    * Fix issue when excluding `inlineJs` and `inlineCss` from Assets pipeline [#2468](https://github.com/getgrav/grav/issues/2468)
+    * Fix for manually set position on external URLs [#2470](https://github.com/getgrav/grav/issues/2470)
+
+# v1.6.6
+## 04/17/2019
+
+1. [](#new)
+    * `FormInterface` now implements `RenderInterface` 
+    * Added new `FormInterface::getTask()` method which reads the task from `form.task` in the blueprint 
+1. [](#improved)
+    * Updated vendor libraries to latest
+1. [](#bugfix)
+    * Rollback `redirect_default_route` logic as it has issues with multi-lang [#2459](https://github.com/getgrav/grav/issues/2459)
+    * Fix potential issue with `|contains` Twig filter on PHP 7.3 
+    * Fixed bug in text field filtering: return empty string if value isn't a string or number [#2460](https://github.com/getgrav/grav/issues/2460)
+    * Force Asset `priority` to be an integer and not throw error if invalid string passed [#2461](https://github.com/getgrav/grav/issues/2461)
+    * Fixed bug in text field filtering: return empty string if value isn't a string or number
+    * Fixed `FlexForm` missing getter methods for defining form variables
+    
 # v1.6.5
 ## 04/15/2019
 

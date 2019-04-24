@@ -14,10 +14,15 @@ use Grav\Common\Data\Data;
 use Grav\Common\Data\ValidationException;
 use Grav\Common\Form\FormFlash;
 use Grav\Common\Grav;
+use Grav\Common\Twig\Twig;
 use Grav\Common\Utils;
+use Grav\Framework\ContentBlock\HtmlBlock;
 use Grav\Framework\Form\Interfaces\FormInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
+use Twig\Error\LoaderError;
+use Twig\Error\SyntaxError;
+use Twig\TemplateWrapper;
 
 /**
  * Trait FormTrait
@@ -26,6 +31,13 @@ use Psr\Http\Message\UploadedFileInterface;
 trait FormTrait
 {
     /** @var string */
+    public $status = 'success';
+    /** @var string */
+    public $message;
+    /** @var string[] */
+    public $messages = [];
+
+    /** @var string */
     private $name;
     /** @var string */
     private $id;
@@ -33,8 +45,6 @@ trait FormTrait
     private $uniqueid;
     /** @var bool */
     private $submitted;
-    /** @var string[] */
-    private $errors;
     /** @var Data|object|null */
     private $data;
     /** @var array|UploadedFileInterface[] */
@@ -92,6 +102,11 @@ trait FormTrait
     public function getAction(): string
     {
         return '';
+    }
+
+    public function getTask(): string
+    {
+        return $this->getBlueprint()->get('form/task') ?? '';
     }
 
     public function getData(string $name = null)
@@ -154,12 +169,24 @@ trait FormTrait
      */
     public function handleRequest(ServerRequestInterface $request): FormInterface
     {
+        // Set current form to be active.
+        $grav = Grav::instance();
+        $forms = $grav['forms'] ?? null;
+        if ($forms) {
+            $forms->setActiveForm($this);
+
+            /** @var Twig $twig */
+            $twig = $grav['twig'];
+            $twig->twig_vars['form'] = $this;
+
+        }
+
         try {
             [$data, $files] = $this->parseRequest($request);
 
             $this->submit($data, $files);
         } catch (\Exception $e) {
-            $this->errors[] = $e->getMessage();
+            $this->setError($e->getMessage());
         }
 
         return $this;
@@ -181,12 +208,17 @@ trait FormTrait
 
     public function isValid(): bool
     {
-        return !$this->errors;
+        return $this->status === 'success';
+    }
+
+    public function getError(): ?string
+    {
+        return !$this->isValid() ? $this->message : null;
     }
 
     public function getErrors(): array
     {
-        return $this->errors;
+        return !$this->isValid() ? $this->messages : [];
     }
 
     public function isSubmitted(): bool
@@ -196,7 +228,7 @@ trait FormTrait
 
     public function validate(): bool
     {
-        if ($this->errors) {
+        if (!$this->isValid()) {
             return false;
         }
 
@@ -204,19 +236,14 @@ trait FormTrait
             $this->validateData($this->data);
             $this->validateUploads($this->getFiles());
         } catch (ValidationException $e) {
-            $list = [];
-            foreach ($e->getMessages() as $field => $errors) {
-                $list[] = $errors;
-            }
-            $list = array_merge(...$list);
-            $this->errors = $list;
+            $this->setErrors($e->getMessages());
         }  catch (\Exception $e) {
-            $this->errors[] = $e->getMessage();
+            $this->setError($e->getMessage());
         }
 
         $this->filterData($this->data);
 
-        return empty($this->errors);
+        return $this->isValid();
     }
 
     /**
@@ -242,7 +269,7 @@ trait FormTrait
 
             $this->submitted = true;
         } catch (\Exception $e) {
-            $this->errors[] = $e->getMessage();
+            $this->setError($e->getMessage());
         }
 
         return $this;
@@ -255,7 +282,9 @@ trait FormTrait
 
         $this->data = null;
         $this->files = [];
-        $this->errors = [];
+        $this->status = 'success';
+        $this->message = null;
+        $this->messages = [];
         $this->submitted = false;
         $this->flash = null;
     }
@@ -300,7 +329,6 @@ trait FormTrait
     }
 
     /**
-
      * Get form flash object.
      *
      * @return FormFlash
@@ -337,19 +365,33 @@ trait FormTrait
         return $this->flash;
     }
 
+    /**
+     * {@inheritdoc}
+     * @see FormInterface::render()
+     */
+    public function render(string $layout = null, array $context = [])
+    {
+        if (null === $layout) {
+            $layout = 'default';
+        }
+
+        $grav = Grav::instance();
+
+        $block = HtmlBlock::create();
+        $block->disableCache();
+
+        $output = $this->getTemplate($layout)->render(
+            ['grav' => $grav, 'config' => $grav['config'], 'block' => $block, 'form' => $this, 'layout' => $layout] + $context
+        );
+
+        $block->setContent($output);
+
+        return $block;
+    }
+
     protected function unsetFlash(): void
     {
         $this->flash = null;
-    }
-
-    /**
-     * Set all errors.
-     *
-     * @param array $errors
-     */
-    protected function setErrors(array $errors): void
-    {
-        $this->errors = array_merge($this->errors, $errors);
     }
 
     /**
@@ -359,7 +401,40 @@ trait FormTrait
      */
     protected function setError(string $error): void
     {
-        $this->errors[] = $error;
+        $this->status = 'error';
+        $this->message = $error;
+    }
+
+    /**
+     * Set all errors.
+     *
+     * @param array $errors
+     */
+    protected function setErrors(array $errors): void
+    {
+        $this->status = 'error';
+        $this->messages = $errors;
+    }
+
+    /**
+     * @param string $layout
+     * @return TemplateWrapper
+     * @throws LoaderError
+     * @throws SyntaxError
+     */
+    protected function getTemplate($layout)
+    {
+        $grav = Grav::instance();
+
+        /** @var Twig $twig */
+        $twig = $grav['twig'];
+
+        return $twig->twig()->resolveTemplate(
+            [
+                "forms/{$layout}/form.html.twig",
+                'forms/default/form.html.twig'
+            ]
+        );
     }
 
     /**
@@ -508,7 +583,7 @@ trait FormTrait
                 $value = json_decode($value, true);
                 if ($value === null && json_last_error() !== JSON_ERROR_NONE) {
                     unset($data[$key]);
-                    $this->errors[] = "Badly encoded JSON data (for {$key}) was sent to the form";
+                    $this->setError("Badly encoded JSON data (for {$key}) was sent to the form");
                 }
             }
         }
@@ -528,7 +603,9 @@ trait FormTrait
             'id' => $this->id,
             'uniqueid' => $this->uniqueid,
             'submitted' => $this->submitted,
-            'errors' => $this->errors,
+            'status' => $this->status,
+            'message' => $this->message,
+            'messages' => $this->messages,
             'data' => $data,
             'files' => $this->files,
         ];
@@ -543,7 +620,9 @@ trait FormTrait
         $this->id = $data['id'];
         $this->uniqueid = $data['uniqueid'];
         $this->submitted = $data['submitted'] ?? false;
-        $this->errors = $data['errors'] ?? [];
+        $this->status = $data['status'] ?? 'success';
+        $this->message = $data['message'] ?? null;
+        $this->messages = $data['messages'] ?? [];
         $this->data = isset($data['data']) ? new Data($data['data'], $this->getBlueprint()) : null;
         $this->files = $data['files'] ?? [];
     }

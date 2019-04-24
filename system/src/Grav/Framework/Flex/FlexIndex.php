@@ -98,6 +98,16 @@ class FlexIndex extends ObjectIndex implements FlexCollectionInterface, FlexInde
         return $this->orderBy($orderings);
     }
 
+
+    /**
+     * {@inheritdoc}
+     * @see FlexCollectionInterface::filterBy()
+     */
+    public function filterBy(array $filters)
+    {
+        return $this->__call('filterBy', [$filters]);
+    }
+
     /**
      * {@inheritdoc}
      * @see FlexCollectionInterface::getFlexType()
@@ -384,10 +394,6 @@ class FlexIndex extends ObjectIndex implements FlexCollectionInterface, FlexInde
                         $cached = $result->getFlexDirectory()->getIndex($result->getKeys(), $this->getKeyField());
                     } else {
                         $cached = $result;
-                    }
-
-                    if ($cached === null) {
-                        throw new \RuntimeException('Flex: Internal error');
                     }
 
                     $cache->set($key, $cached);

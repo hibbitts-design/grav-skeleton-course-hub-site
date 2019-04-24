@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287
+class ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -506,6 +506,7 @@ class ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287
         'Grav\\Common\\Helpers\\Exif' => __DIR__ . '/../..' . '/system/src/Grav/Common/Helpers/Exif.php',
         'Grav\\Common\\Helpers\\LogViewer' => __DIR__ . '/../..' . '/system/src/Grav/Common/Helpers/LogViewer.php',
         'Grav\\Common\\Helpers\\Truncator' => __DIR__ . '/../..' . '/system/src/Grav/Common/Helpers/Truncator.php',
+        'Grav\\Common\\Helpers\\YamlLinter' => __DIR__ . '/../..' . '/system/src/Grav/Common/Helpers/YamlLinter.php',
         'Grav\\Common\\Inflector' => __DIR__ . '/../..' . '/system/src/Grav/Common/Inflector.php',
         'Grav\\Common\\Iterator' => __DIR__ . '/../..' . '/system/src/Grav/Common/Iterator.php',
         'Grav\\Common\\Language\\Language' => __DIR__ . '/../..' . '/system/src/Grav/Common/Language/Language.php',
@@ -631,6 +632,7 @@ class ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287
         'Grav\\Console\\Cli\\SandboxCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/SandboxCommand.php',
         'Grav\\Console\\Cli\\SchedulerCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/SchedulerCommand.php',
         'Grav\\Console\\Cli\\SecurityCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/SecurityCommand.php',
+        'Grav\\Console\\Cli\\YamlLinterCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/YamlLinterCommand.php',
         'Grav\\Console\\ConsoleCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/ConsoleCommand.php',
         'Grav\\Console\\ConsoleTrait' => __DIR__ . '/../..' . '/system/src/Grav/Console/ConsoleTrait.php',
         'Grav\\Console\\Gpm\\DirectInstallCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Gpm/DirectInstallCommand.php',
@@ -1436,6 +1438,7 @@ class ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287
         'Twig\\Node\\Expression\\Filter\\DefaultFilter' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Filter/DefaultFilter.php',
         'Twig\\Node\\Expression\\FunctionExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/FunctionExpression.php',
         'Twig\\Node\\Expression\\GetAttrExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/GetAttrExpression.php',
+        'Twig\\Node\\Expression\\InlinePrint' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/InlinePrint.php',
         'Twig\\Node\\Expression\\MethodCallExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/MethodCallExpression.php',
         'Twig\\Node\\Expression\\NameExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/NameExpression.php',
         'Twig\\Node\\Expression\\NullCoalesceExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/NullCoalesceExpression.php',
@@ -1748,11 +1751,11 @@ class ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3ccf9f2a4cc2c15de89650e5b898c287::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$classMap;
 
         }, null, ClassLoader::class);
     }

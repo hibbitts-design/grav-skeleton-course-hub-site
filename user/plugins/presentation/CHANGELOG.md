@@ -1,3 +1,16 @@
+# v1.6.6
+## 20-04-2019
+
+1. [](#new)
+   - Version
+# v1.6.5
+## 19-04-2019
+
+1. [](#new)
+   - Option to load all assets
+1. [](#improved)
+   - Background-image URL and search
+
 # v1.6.4
 ## 06-04-2019
 

@@ -1,3 +1,21 @@
+# v2.1.0
+## 04/24/2019
+
+1. [](#improved)
+    * Further improved taxonomy support for section-type pages
+
+# v2.0.9
+## 04/24/2019
+
+1. [](#new)
+    * Initial taxonomy support for section-type pages
+
+# v2.0.8
+## 04/23/2019
+
+1. [](#improved)
+    * Improved handling of Section Page Next/Prev buttons for previous Section with children pages
+
 # v2.0.7
 ## 04/18/2019
 
