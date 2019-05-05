@@ -1,3 +1,21 @@
+# v2.2.2
+## 05/04/2019
+
+1. [](#improved)
+    * Added default page collection frontmatter for new Sections and Presentations pages
+
+# v2.2.1
+## 05/04/2019
+
+1. [](#improved)
+    * Improved support for custom Git Sync Link text on individual pages
+
+# v2.2.0
+## 05/04/2019
+
+1. [](#bugfix)
+    * Fixed an incorrect references to site config setting (which should have been theme config)
+
 # v2.1.9
 ## 05/03/2019
 
