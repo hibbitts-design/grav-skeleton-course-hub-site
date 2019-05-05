@@ -1,8 +1,15 @@
+# v2.2.3
+## 05/05/2019
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
 # v2.2.2
 ## 05/04/2019
 
 1. [](#improved)
     * Added default page collection frontmatter for new Sections and Presentations pages
+    * Added sort options and order for Sections pages
 
 # v2.2.1
 ## 05/04/2019
