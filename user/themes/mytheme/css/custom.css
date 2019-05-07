@@ -4,10 +4,10 @@ Put your custom CSS in this file.
 ===============================================================================================================================
 */
 
-@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css'); /* Load of Font Awesome for use by Presentation Plug */
+/* Load of Font Awesome for use by Presentation Plugin */
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 
 /* CSS to style Presentation Plugin slides */
-
 .reveal .slides {
     text-align: left;
 }
