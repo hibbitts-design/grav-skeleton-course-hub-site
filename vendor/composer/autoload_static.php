@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3
+class ComposerStaticInit463bc033d69cbd0923030e24e8bd0137
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1502,6 +1502,7 @@ class ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3
         'Twig\\Test\\NodeTestCase' => __DIR__ . '/..' . '/twig/twig/src/Test/NodeTestCase.php',
         'Twig\\Token' => __DIR__ . '/..' . '/twig/twig/src/Token.php',
         'Twig\\TokenParser\\AbstractTokenParser' => __DIR__ . '/..' . '/twig/twig/src/TokenParser/AbstractTokenParser.php',
+        'Twig\\TokenParser\\ApplyTokenParser' => __DIR__ . '/..' . '/twig/twig/src/TokenParser/ApplyTokenParser.php',
         'Twig\\TokenParser\\AutoEscapeTokenParser' => __DIR__ . '/..' . '/twig/twig/src/TokenParser/AutoEscapeTokenParser.php',
         'Twig\\TokenParser\\BlockTokenParser' => __DIR__ . '/..' . '/twig/twig/src/TokenParser/BlockTokenParser.php',
         'Twig\\TokenParser\\DeprecatedTokenParser' => __DIR__ . '/..' . '/twig/twig/src/TokenParser/DeprecatedTokenParser.php',
@@ -1751,11 +1752,11 @@ class ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1ee48e9806e2f102670ee90c993d7cf3::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$classMap;
 
         }, null, ClassLoader::class);
     }

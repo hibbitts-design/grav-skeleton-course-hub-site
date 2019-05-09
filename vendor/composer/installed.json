@@ -1374,24 +1374,24 @@
     },
     {
         "name": "psr/http-factory",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-fig/http-factory.git",
-            "reference": "378bfe27931ecc54ff824a20d6f6bfc303bbd04c"
+            "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/http-factory/zipball/378bfe27931ecc54ff824a20d6f6bfc303bbd04c",
-            "reference": "378bfe27931ecc54ff824a20d6f6bfc303bbd04c",
+            "url": "https://api.github.com/repos/php-fig/http-factory/zipball/12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
+            "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
             "shasum": ""
         },
         "require": {
             "php": ">=7.0.0",
             "psr/http-message": "^1.0"
         },
-        "time": "2018-07-30T21:54:04+00:00",
+        "time": "2019-04-30T12:38:16+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1833,8 +1833,8 @@
     },
     {
         "name": "symfony/console",
-        "version": "v4.2.7",
-        "version_normalized": "4.2.7.0",
+        "version": "v4.2.8",
+        "version_normalized": "4.2.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
@@ -1977,8 +1977,8 @@
     },
     {
         "name": "symfony/event-dispatcher",
-        "version": "v4.2.7",
-        "version_normalized": "4.2.7.0",
+        "version": "v4.2.8",
+        "version_normalized": "4.2.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/event-dispatcher.git",
@@ -2342,8 +2342,8 @@
     },
     {
         "name": "symfony/process",
-        "version": "v4.2.7",
-        "version_normalized": "4.2.7.0",
+        "version": "v4.2.8",
+        "version_normalized": "4.2.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/process.git",
@@ -2393,17 +2393,17 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v4.2.7",
-        "version_normalized": "4.2.7.0",
+        "version": "v4.2.8",
+        "version_normalized": "4.2.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "e760a38e12b15032325e64be63f7ffc1817af617"
+            "reference": "3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e760a38e12b15032325e64be63f7ffc1817af617",
-            "reference": "e760a38e12b15032325e64be63f7ffc1817af617",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce",
+            "reference": "3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce",
             "shasum": ""
         },
         "require": {
@@ -2426,7 +2426,7 @@
             "ext-intl": "To show region name in time zone dump",
             "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
         },
-        "time": "2019-04-17T14:57:01+00:00",
+        "time": "2019-05-01T12:55:36+00:00",
         "bin": [
             "Resources/bin/var-dump-server"
         ],
@@ -2471,8 +2471,8 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v4.2.7",
-        "version_normalized": "4.2.7.0",
+        "version": "v4.2.8",
+        "version_normalized": "4.2.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
@@ -2532,17 +2532,17 @@
     },
     {
         "name": "twig/twig",
-        "version": "v1.39.1",
-        "version_normalized": "1.39.1.0",
+        "version": "v1.40.1",
+        "version_normalized": "1.40.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "23e7b6f0cfa1d7ba3de69f30d8e05cf957412fec"
+            "reference": "35889516bbd6bbe46a600c2c33b03515df4a076e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/23e7b6f0cfa1d7ba3de69f30d8e05cf957412fec",
-            "reference": "23e7b6f0cfa1d7ba3de69f30d8e05cf957412fec",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/35889516bbd6bbe46a600c2c33b03515df4a076e",
+            "reference": "35889516bbd6bbe46a600c2c33b03515df4a076e",
             "shasum": ""
         },
         "require": {
@@ -2554,11 +2554,11 @@
             "symfony/debug": "^2.7",
             "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
         },
-        "time": "2019-04-16T17:12:57+00:00",
+        "time": "2019-04-29T14:12:28+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.39-dev"
+                "dev-master": "1.40-dev"
             }
         },
         "installation-source": "dist",

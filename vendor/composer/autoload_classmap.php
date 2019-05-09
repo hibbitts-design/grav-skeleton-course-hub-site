@@ -1180,6 +1180,7 @@ return array(
     'Twig\\Test\\NodeTestCase' => $vendorDir . '/twig/twig/src/Test/NodeTestCase.php',
     'Twig\\Token' => $vendorDir . '/twig/twig/src/Token.php',
     'Twig\\TokenParser\\AbstractTokenParser' => $vendorDir . '/twig/twig/src/TokenParser/AbstractTokenParser.php',
+    'Twig\\TokenParser\\ApplyTokenParser' => $vendorDir . '/twig/twig/src/TokenParser/ApplyTokenParser.php',
     'Twig\\TokenParser\\AutoEscapeTokenParser' => $vendorDir . '/twig/twig/src/TokenParser/AutoEscapeTokenParser.php',
     'Twig\\TokenParser\\BlockTokenParser' => $vendorDir . '/twig/twig/src/TokenParser/BlockTokenParser.php',
     'Twig\\TokenParser\\DeprecatedTokenParser' => $vendorDir . '/twig/twig/src/TokenParser/DeprecatedTokenParser.php',

@@ -1,3 +1,16 @@
+* 1.40.1 (2019-04-29)
+
+* fixed regression in NodeTraverser
+
+* 1.40.0 (2019-04-28)
+
+ * allowed Twig\NodeVisitor\NodeVisitorInterface::leaveNode() to return "null" instead of "false" (same meaning)
+ * added the "apply" tag as a replacement for the "filter" tag
+ * allowed Twig\Loader\FilesystemLoader::findTemplate() to return "null" instead of "false" (same meaning)
+ * added support for "Twig\Markup" instances in the "in" test
+ * fixed Lexer when using custom options containing the # char
+ * fixed "import" when macros are stored in a template string
+
 * 1.39.1 (2019-04-16)
 
  * fixed EscaperNodeVisitor
