@@ -1,3 +1,16 @@
+# v2.2.7
+## 05/10/2019
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v2.2.6
+## 05/09/2019
+
+1. [](#improved)
+    * Additional support of the alias 'embedded' for 'chromeless'
+    * Updated demo pages in theme '_demo' folder
+
 # v2.2.5
 ## 05/08/2019
 
