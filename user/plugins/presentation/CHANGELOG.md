@@ -1,3 +1,118 @@
+# v1.7.3
+## 03-06-2019
+
+1. [](#new)
+   - Test GPM wickedness, take 2
+
+# v1.7.2
+## 03-06-2019
+
+1. [](#new)
+   - Test GPM wickedness
+
+# v1.7.1
+## 01-06-2019
+
+1. [](#new)
+   - Stable release of refactor
+
+# v1.7.1-beta.10
+## 31-05-2019
+
+1. [](#improved)
+   - Revert 'Initialize API earlier', do it indirectly
+
+# v1.7.1-beta.9
+## 31-05-2019
+
+1. [](#improved)
+   - Versions
+   - Deprecate 'v' from tags
+
+# v1.7.1-beta.8
+## 31-05-2019
+
+1. [](#improved)
+   - Initialize API earlier
+   - Refactor Parser->interpretShortcodes()
+   - Parse Shortcodes with Thunderer/Shortcode
+2. [](#new)
+   - Option for Shortcode Parser
+
+# v1.7.1-beta.7
+## 19-05-2019
+
+1. [](#bugfix)
+   - Test composer backport of Shortcode Code
+
+# v1.7.1-beta.6
+## 15-05-2019
+
+1. [](#bugfix)
+   - Page.find for Presentation-shortcode
+
+# v1.7.1-beta.5
+## 15-05-2019
+
+1. [](#improved)
+   - Pass Page to Presentation-shortcode template
+
+# v1.7.1-beta.4
+## 14-05-2019
+
+1. [](#new)
+   - README: Creating a shortcode or shortcode-alias
+   - README: Twig
+   - README: Contributing
+2. [](#improved)
+   - Split docs into parts
+   - Link Overlay method
+3. [](#bugfix)
+   - Image-scaling
+   - Autoloading
+
+# v1.7.1-beta.3
+## 13-05-2019
+
+1. [](#bugfix)
+   - Maximize image width
+
+# v1.7.1-beta.2
+## 13-05-2019
+
+1. [](#bugfix)
+   - Shortcode Core backfill for Packagist
+
+# v1.7.1-beta.1
+## 12-05-2019
+
+1. [](#new)
+   - Packagist-release
+   - Require Shortcode Core as a dependency
+   - Link Overlay shortcode
+   - Presentation shortcode: `presentation_base_url` replaced by `base_url`
+2. [](#improved)
+   - PSR-4 handling through Composer
+
+# v1.7.0-beta.1
+## 11-05-2019
+
+1. [](#bugfix)
+   - Shortcode-parameters
+2. [](#improved)
+   - Handle iFrame-interaction
+   - README: Backgrounds
+   - README: Shortcode-parameters
+
+# v1.6.8
+## 11-05-2019
+
+1. [](#bugfix)
+   - Admin-detection (#8)
+   - Slide-rendering (#9)
+2. [](#improved)
+   - Controls in slide-blueprint
+
 # v1.6.7
 ## 05-05-2019
 

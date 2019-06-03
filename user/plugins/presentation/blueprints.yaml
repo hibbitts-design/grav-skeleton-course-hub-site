@@ -1,5 +1,5 @@
 name: Presentation
-version: 1.6.7
+version: 1.7.3
 description: Responsive navigational slideshows with Reveal.js
 icon: arrows-alt
 author:
@@ -278,6 +278,14 @@ form:
               description: PLUGIN_PRESENTATION.ADMIN.ADVANCED.SHORTCODE_CLASSES.DESCRIPTION
               validate:
                 type: string
+            shortcode_parser:
+              type: select
+              label: PLUGIN_PRESENTATION.ADMIN.ADVANCED.SHORTCODE_PARSER.LABEL
+              description: PLUGIN_PRESENTATION.ADMIN.ADVANCED.SHORTCODE_PARSER.LABEL
+              options:
+                  RegularParser: PLUGIN_PRESENTATION.ADMIN.ADVANCED.SHORTCODE_PARSER.OPTIONS.REGULAR
+                  RegexParser: PLUGIN_PRESENTATION.ADMIN.ADVANCED.SHORTCODE_PARSER.OPTIONS.REGEX
+                  WordpressParser: PLUGIN_PRESENTATION.ADMIN.ADVANCED.SHORTCODE_PARSER.OPTIONS.WORDPRESS
             transition:
               type: toggle
               label: PLUGIN_PRESENTATION.ADMIN.ADVANCED.TRANSITION.LABEL

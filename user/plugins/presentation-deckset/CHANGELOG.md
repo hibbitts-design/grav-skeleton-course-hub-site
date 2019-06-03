@@ -1,3 +1,15 @@
+# v1.2.2
+## 03-06-2019
+
+1. [](#new)
+   - GPM fix
+
+# v1.2.1
+## 31-05-2019
+
+1. [](#new)
+   - Properties placeholder to align with API
+
 # v1.2.0
 ## 19-04-2019
 

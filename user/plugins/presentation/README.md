@@ -42,7 +42,7 @@ You should now have all the plugin files under
 
 ### Requirements
 
-**This plugin will only work with [Grav v1.6](https://github.com/getgrav/grav/tree/1.6) or higher, as it requires [PHP v7.1](http://php.net/manual/en/migration71.new-features.php) or higher.**
+**This plugin will only work with [Grav v1.6](https://github.com/getgrav/grav/tree/1.6) or higher, as it requires [PHP v7.1.3](http://php.net/manual/en/migration71.new-features.php) or higher.**
 
 ## Configuration
 
@@ -237,7 +237,7 @@ If configured with `shortcodes: true` any section or slide can use shortcodes to
 
 If the shortcode is found and applied, it is stripped from the further evaluated content. This method uses regular expressions for speed, and takes precedence over plugin- or page-defined `styles`.
 
-**Note**: The syntax is restricted to `[style-property=value]`. Quotes or other unexpected characters not conforming to alphanumerics or dashes will make the expression fail to pick up the shortcode. The `style-property` or `value` must basically conform to the [a-zA-Z0-9-]+ regular expression, separated by an equal-character (`=`) and wrapped in square brackets (`[]`). For testing, use [Regex101](https://regex101.com/r/GlH65o/3).
+**Note**: The syntax is restricted to `[style-property=value]`. Unexpected characters not conforming to alphanumerics or dashes can make the expression fail to pick up the shortcode. The `style-property` or `value` must basically conform to the [a-zA-Z0-9-]+ regular expression, separated by an equal-character (`=`) and wrapped in square brackets (`[]`). For testing, use [Regex101](https://regex101.com/r/GlH65o/3). **However, you may find it necessary to wrap the value in double quotes for the parser to understand it.**
 
 ##### Center content
 
@@ -250,9 +250,16 @@ style:
 
 Or the shortcode `[style-justify-content=center]` to an individual slide.
 
-#### Full background image or video with Reveal.js, through data-attributres
+#### Full background image, video, or website with Reveal.js, through data-attributres
 
-Reveal.js supports easy usage of background images or videos for slides, with their [Slide backgrounds](https://github.com/hakimel/reveal.js/#slide-backgrounds). As well as inline styles through shortcodes, any property that begins with `data` is passed as a data-attribute to the slide, so you can do things like add a background video:
+Reveal.js supports easy usage of background images, videos, or websites for slides, with their [Slide backgrounds](https://github.com/hakimel/reveal.js/#slide-backgrounds). As well as inline styles through shortcodes, any property that begins with `data` is passed as a data-attribute to the slide, so you can do things like add a background image:
+
+```
+[data-background-image=https://upload.wikimedia.org/wikipedia/commons/5/50/Sylvilagus_bachmani_01035t.JPG]
+[data-background-size=contain]
+```
+
+Background video:
 
 ```
 [data-background-video=https://dl3.webmfiles.org/big-buck-bunny_trailer.webm]
@@ -261,43 +268,26 @@ Reveal.js supports easy usage of background images or videos for slides, with th
 [data-background-size=contain]
 ```
 
-### Injecting Twig
-
-Using the `footer`-setting you can append a Twig-template to each section globally, or a specific page's section. For example, `footer: "partials/presentation_footer.html.twig"` will render the theme's `partials/presentation_footer.html.twig`-template and append it to the section(s). If the element was constructed like this: `<div class="footer">My footer</div>`, you could style it like this:
-
-```css
-.reveal .slides .footer {
-  display: block;
-  position: absolute;
-  bottom: 2em;
-}
-```
-
-You can also arbitrarily execute Twig within a page's Markdown by enabling it in the FrontMatter with:
-
-```yaml
-twig_first: true
-process:
-  twig: true
-```
-
-For example, `<p>{{ site.author.name }}</p>` will render the name of the author defined in site.yaml.
-
-### Creating a menu
-
-The plugin makes a `presentation_menu`-variable available through Twig on pages which use the fullscreen-template, which can be used to construct an overall menu of pages. It is an array with anchors and titles for each page, and a list of them with links to sections can be constructed like this:
+Background website:
 
 ```
-<ul id="menu" class="menu">
-{% for anchor, title in presentation_menu %}
-  <li>
-    <a href="#{{ anchor }}">{{ title }}</a>
-  </li>
-{% endfor %}
-</ul>
+[data-background-iframe=https://en.wikipedia.org/wiki/Rabbit]
 ```
 
-Each slide is assigned an `id`-attribute based on the page's slug and its index, as well as a `data-title`-attribute containing the title of the page. A menu could also be made using this data with JavaScript: `document.getElementById('presentation').querySelectorAll('*[id]')`.
+Foreground (interactive) website:
+
+```
+[data-background-iframe=https://en.wikipedia.org/wiki/Rabbit]
+[data-background-interactive]
+```
+
+When using `data-background-interactive`, the iFrame can be interacted with. Therefore you must manually click the control arrows of the presentation to navigate away from this slide. Slides with background iFrames always use the full width and height of the browser window.
+
+**Note**: It may be necessary to wrap the value/parameter of the shortcode in double quotes, like `[data-background-iframe="https://en.wikipedia.org/wiki/Rabbit"]`, for it to work properly.
+
+##### A big anchor overlaying the slide
+
+A `link-overlay`-shortcode is available for creating a link that overlays the slide, apt for use with backgrounds. For example: `[link-overlay="https://google.com/"]`.
 
 ### Notes
 
@@ -313,35 +303,9 @@ Each slide can have notes associated with it, like a PowerPoint-presentation wou
 [/notes]
 ```
 
-### Presenting
+## [Advanced Usage](https://github.com/OleVik/grav-plugin-presentation/blob/master/ADVANCED.md)
 
-The plugin, like the Reveal.js-library, makes available a Presenter-mode. There are two modes available for using this: Locally, with `sync: 'browser'`, or remotely, with `sync: 'poll'`. When running locally, you need to access your presentation with a special URL -- `http://yourgrav.tld/book?admin=yes&showNotes=true` -- **and in a new window from the same browser** open the same URL without these parameters -- `http://yourgrav.tld/book`.
-
-The synchronization between Presenter-mode and the Presentation happens by sending data from one browser-window to the other, requiring JavaScript. When running remotely, the synchronization happens by polling and checking if the presentation has changed.
-
-**Note:** The polling approach needs a stable server to work, more so than Grav itself. It has been tested extensively with PHP 7.1 and 7.2, running on Caddy Server and with PHP's built-in server, with a fairly standard production-setup of PHP. If your server-connection crashes with a 502 error -- usually with the error "No connection could be made because the target machine actively refused it.", it is because PHP is set up to forcibly time out despite being long-polled.
-
-### Embedding
-
-A Presentation-shortcode is available for embedding a presentation in another Page; `[presentation="./route/to/presentation"]`. This creates an iFrame with the presentation in it. You can also add your own classes to the iFrame with the `class`-parameter: `[presentation "introduction-to-ux/chromeless:true" class="class-one class-two"]`, or default classes with the `shortcode_classes`-option.
-
-## Contributing
-
-### PHP Code Standards
-
-This plugin follows PSR-1, PSR-2, and PEAR coding standards (use CodeSniffer), as well as PSR-4.
-
-### Style-compilation
-
-Use a SCSS-compiler, like [LibSass](https://github.com/sass/libsass), eg. [node-sass](https://github.com/sass/node-sass) and compiled `scss/presentation.scss` to `css/presentation.css` in the theme-folder. For example: `node-sass --watch --source-map true --output-style compressed scss/presentation.scss css/presentation.css`. Requires Node-modules to be installed first.
-
-### Extending
-
-As demonstrated by the `content`, `parser`, and `transport` options above, you can fairly easily extend the behavior of the plugin. For example, if you install the [Presentation Deckset Plugin](https://github.com/OleVik/grav-plugin-presentation-deckset/), you could set this to `parser: 'DecksetParser'` to use the [Deckset](https://www.deckset.com/)-syntax. Addons written this way must implement the correspond interface, and extend the base class provided by the plugin. Eg., `class DecksetParser extends Parser implements ParserInterface`.
-
-#### Customizing the blueprints
-
-The plugin searches for `presentation.yaml` and `slide.yaml` in the current theme's blueprints-folder, and then user's blueprints-folder, to override the Plugin's own Page-blueprints. With you can use your Theme or Skeleton to create custom blueprints for this Page Types.
+## [Contributing and Development](https://github.com/OleVik/grav-plugin-presentation/blob/master/CONTRIBUTING.md)
 
 ## Credits
 

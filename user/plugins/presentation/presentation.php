@@ -45,24 +45,30 @@ class PresentationPlugin extends Plugin
 {
 
     /**
-     * Grav cache setting
+     * Protected variables
      *
-     * @var bool
+     * @var bool      $cache     Grav cache setting
+     * @var Transport $transport Transport API
+     * @var Parser    $parser    Parser API
+     * @var Content   $content   Content API
      */
     protected $cache;
+    protected $transport;
+    protected $parser;
+    protected $content;
 
     /**
-     * Register intial event
+     * Register intial event and libraries
      *
      * @return array
      */
     public static function getSubscribedEvents()
     {
+        include __DIR__ . '/vendor/autoload.php';
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 0]
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
         ];
     }
-
 
     /**
      * Initialize the plugin and events
@@ -71,17 +77,14 @@ class PresentationPlugin extends Plugin
      */
     public function onPluginsInitialized()
     {
+        if ($this->config->get('plugins')['presentation']['enabled'] != true) {
+            return;
+        }
+        $config = $this->config->get('plugins')['presentation'];
         if ($this->config->get('system')['debugger']['enabled']) {
             $this->grav['debugger']->startTimer('presentation', 'Presentation');
         }
-        include_once __DIR__ . '/API/ContentInterface.php';
-        include_once __DIR__ . '/API/Content.php';
-        include_once __DIR__ . '/API/ParserInterface.php';
-        include_once __DIR__ . '/API/Parser.php';
-        include_once __DIR__ . '/API/TransportInterface.php';
-        include_once __DIR__ . '/API/Transport.php';
-        include_once __DIR__ . '/Utilities.php';
-        if ($this->isAdmin()) {
+        if ($this->isAdmin() && $this->config->get('plugins.admin')) {
             $this->enable(
                 [
                     'onPagesInitialized' => ['handleAPI', 0],
@@ -94,7 +97,7 @@ class PresentationPlugin extends Plugin
         $this->grav['config']->set('system.cache.enabled', false);
         $this->enable(
             [
-                'onPageContentRaw' => ['processPresentationShortcode', 0],
+                'onShortcodeHandlers' => ['onShortcodeHandlers', 0],
                 'onPageContentProcessed' => ['pageIteration', 0],
                 'onTwigExtensions' => ['onTwigExtensions', 0],
                 'onTwigTemplatePaths' => ['templates', 0],
@@ -116,13 +119,11 @@ class PresentationPlugin extends Plugin
      */
     public function config()
     {
-        $pluginsobject = (array) $this->config->get('plugins');
-        if (isset($pluginsobject) && $pluginsobject['presentation']['enabled']) {
-            $config = $pluginsobject['presentation'];
-        } else {
-            return;
+        $plugins = (array) $this->config->get('plugins');
+        if (isset($plugins) && $plugins['presentation']['enabled']) {
+            return $plugins['presentation'];
         }
-        return $config;
+        return false;
     }
 
     /**
@@ -134,9 +135,12 @@ class PresentationPlugin extends Plugin
     {
         $grav = $this->grav;
         $config = $this->config();
-        if ($config['enabled'] && $grav['page']->template() == 'presentation') {
+        if (!$config['enabled']) {
+            return;
+        }
+        if ($grav['page']->template() == 'presentation' || $grav['page']->template() == 'slide') {
             if (!isset($this->grav['twig']->twig_vars['reveal_init'])) {
-                $config['base_url'] = $this->grav['uri']->rootUrl(true);
+                $baseUrl = $this->grav['uri']->rootUrl(true);
                 $header = (array) $grav['page']->header();
                 if (isset($header['presentation'])) {
                     $config = Utils::arrayMergeRecursiveUnique(
@@ -144,18 +148,30 @@ class PresentationPlugin extends Plugin
                         $header['presentation']
                     );
                 }
-                $transport = $this->getAPIInstance($config['transport']);
-                $parser = $this->getAPIInstance($config['parser'], $config, $transport);
-                $content = $this->getAPIInstance($config['content'], $grav, $config, $parser, $transport);
+                $this->transport = $this->getAPIInstance(
+                    $config['transport']
+                );
+                $this->parser = $this->getAPIInstance(
+                    $config['parser'],
+                    $config,
+                    $this->transport
+                );
+                $this->content = $this->getAPIInstance(
+                    $config['content'],
+                    $this->grav,
+                    $config,
+                    $this->parser,
+                    $this->transport
+                );
                 if (isset($config['style']) && !empty($config['style'])) {
-                    $processed = $parser->processStylesData($config['style'], '/', 'presentation');
+                    $processed = $this->parser->processStylesData($config['style'], '/', 'presentation', $baseUrl);
                     $style = $processed['style'];
-                    $transport->setStyle('presentation', "{\n$style\n}");
+                    $this->transport->setStyle('presentation', "{\n$style\n}");
                 }
-                $tree = $content->buildTree($grav['page']->route());
-                $slides = $content->buildContent($tree);
+                $tree = $this->content->buildTree($grav['page']->route());
+                $slides = $this->content->buildContent($tree);
                 $grav['page']->setRawContent($slides);
-                $menu = $content->buildMenu($tree);
+                $menu = $this->content->buildMenu($tree);
                 $menu = Utilities::flattenArray($menu, 1);
                 $options = Utilities::parseAmbiguousArrayValues($config['options']);
                 $options = json_encode($options, JSON_PRETTY_PRINT);
@@ -163,7 +179,7 @@ class PresentationPlugin extends Plugin
                 $this->grav['twig']->twig_vars['reveal_init'] = $options;
                 $this->grav['twig']->twig_vars['presentation_menu'] = $menu;
                 $this->grav['twig']->twig_vars['presentation_breakpoints'] = $breakpoints;
-                $grav['assets']->addInlineCss($transport->getStyles(), null, 'presentation');
+                $grav['assets']->addInlineCss($this->transport->getStyles(), null, 'presentation');
             }
         }
     }
@@ -175,18 +191,21 @@ class PresentationPlugin extends Plugin
      */
     public function handleAPI()
     {
-        $adminRoute = $this->config->get('plugins')['admin']['route'];
         $uri = $this->grav['uri'];
         $page = $this->grav['page'];
         $config = $this->config();
+        $plugins = $this->config->get('plugins');
         if ($uri->path() == '/' . $config['api_route']) {
             if ($_GET['action'] == 'poll') {
                 $this->handlePollAPI($uri, $page, $config);
             }
         }
-        if ($uri->path() == $adminRoute . '/' . $config['api_route']) {
-            if ($_GET['action'] == 'save') {
-                $this->handleSaveAPI();
+        if (isset($plugins['admin']) && $plugins['admin']['enabled'] == true) {
+            $adminRoute = $this->config->get('plugins')['admin']['route'];
+            if ($uri->path() == $adminRoute . '/' . $config['api_route']) {
+                if ($_GET['action'] == 'save') {
+                    $this->handleSaveAPI();
+                }
             }
         }
     }
@@ -405,7 +424,6 @@ class PresentationPlugin extends Plugin
      */
     public static function getClassNamesBlueprintOptions(string $key)
     {
-        $inflector = new Inflector();
         $regex = '/Grav\\\\Plugin\\\\PresentationPlugin\\\\API\\\\(?<api>.*)/i';
         $classes = preg_grep($regex, get_declared_classes());
         $matches = preg_grep('/' . $key . '/i', $classes);
@@ -424,9 +442,9 @@ class PresentationPlugin extends Plugin
      */
     public static function getRevealThemes()
     {
+        include __DIR__ . '/vendor/autoload.php';
         $inflector = new Inflector();
         $themes = array('none' => 'None');
-        include_once 'Utilities.php';
         $path = 'user://plugins/presentation/node_modules/reveal.js/css/theme';
         $location = Grav::instance()['locator']->findResource($path, true);
         $files = Utilities::filesFinder($location, ['css']);
@@ -438,37 +456,13 @@ class PresentationPlugin extends Plugin
     }
 
     /**
-     * Process Presentation Shortcode
-     *
-     * @param Event $event RocketTheme\Toolbox\Event\Event
+     * Initialize shortcodes
      *
      * @return void
      */
-    public function processPresentationShortcode(Event $event)
+    public function onShortcodeHandlers()
     {
-        $page = $event['page'];
-        $uri = $this->grav['uri'];
-        $twig = $this->grav['twig'];
-        $config = $this->config();
-        $config = $this->mergeConfig($page, true);
-        $raw = $page->getRawContent();
-        $classes = $config['shortcode_classes'];
-        $regex = '/\[presentation(?:=| )"(?<src>.*)"( class="(?<class>.*)")?\]/imU';
-        preg_match_all($regex, $raw, $shortcodes, PREG_SET_ORDER, 0);
-        if (!empty($shortcodes)) {
-            foreach ($shortcodes as $shortcode) {
-                $replace = $twig->processTemplate(
-                    'partials/presentation_iframe.html.twig',
-                    [
-                        'src' => trim($shortcode['src'], '/'),
-                        'presentation_base_url' => $uri->rootUrl(true),
-                        'class' => isset($shortcode['class']) ? $classes . ' ' . $shortcode['class'] : $classes
-                    ]
-                );
-                $raw = str_replace($shortcode[0], $replace, $raw);
-            }
-            $page->setRawContent($raw);
-        }
+        $this->grav['shortcode']->registerAllShortcodes(__DIR__ . '/shortcodes');
     }
 
     /**

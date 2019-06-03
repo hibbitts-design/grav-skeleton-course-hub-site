@@ -1,3 +1,79 @@
+# v2.3.8
+## 06/03/2019
+
+1. [](#new)
+    * Added option to hide Presentation title
+1. [](#improved)
+    * Restored default for new Presentations to not automatically display Git Sync link when embedded
+    * Updated demo pages in theme '_demo' folder
+
+# v2.3.7
+## 06/01/2019
+
+1. [](#improved)
+    * Changed default for new Presentations to not automatically display Git Sync link when embedded
+    * Updated demo pages in theme '_demo' folder
+
+# v2.3.6
+## 05/31/2019
+
+1. [](#improved)
+    * Improved display of iFrame template items with associated text labels
+
+# v2.3.5
+## 05/31/2019
+
+1. [](#improved)
+    * Made iFrame Shortcode more compatible with Markdown Extra
+
+# v2.3.4
+## 05/31/2019
+
+1. [](#bugfix)
+    * Corrected path to theme Shortcodes
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v2.3.3
+## 05/18/2019
+
+1. [](#improved)
+    * Additional support for Alt tag on blog post header images (no longer requires image credit link)
+
+# v2.3.2
+## 05/16/2019
+
+1. [](#bugfix)
+    * Display of custom git sync text fixed to work with "View Git Repository" functionality
+
+# v2.3.1
+## 05/16/2019
+
+1. [](#improved)
+    * Updated page blueprints with custom Git Sync URLs
+
+# v2.3.0
+## 05/15/2019
+
+1. [](#bugfix)
+    * Fixed the handling of custom Git Sync URLs on pages
+
+# v2.2.9
+## 05/15/2019
+
+1. [](#new)
+    * Added additional Presentation templates to only display title or title + link of Presentation
+    * Added automatic Git Sync Link support for embedded Presentations
+1. [](#improved)
+    * Links of embedded background images in Presentations are automatically opened in a new Browser window
+    * Updated demo pages in theme '_demo' folder
+
+# v2.2.8
+## 05/14/2019
+
+1. [](#improved)
+    * Improved presentation of a single iFrame template link
+
 # v2.2.7
 ## 05/10/2019
 

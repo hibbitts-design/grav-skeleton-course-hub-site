@@ -219,11 +219,13 @@ $breakpoints: (
         canvas {
           display: block;
           object-fit: initial;
-          width: auto;
+          width: 100%;
           height: auto;
           max-width: 100%;
+          max-width: 100vh;
           max-height: 100%;
-          margin: auto 0;
+          max-height: 100vw;
+          margin: auto;
         }
 
         blockquote {
@@ -235,6 +237,17 @@ $breakpoints: (
         object {
           width: 100%;
           height: 100%;
+        }
+
+        iframe {
+          width: 100%;
+          width: -moz-available;
+          width: -webkit-fill-available;
+          width: fill-available;
+          height: 100%;
+          height: -moz-available;
+          height: -webkit-fill-available;
+          height: fill-available;
         }
 
         p {
@@ -261,6 +274,16 @@ $breakpoints: (
 
         .fa {
           width: auto;
+        }
+
+        .link-overlay {
+          display: block;
+          height: 100%;
+          width: 100%;
+          &:focus,
+          &:hover {
+            outline: solid;
+          }
         }
       }
 
