@@ -1,12 +1,12 @@
 ---
-title: Placeholder Slide
+title: Placeholder Slides Title
 ---
 
 [.text: alignment(center)]
 
-# CPT 363
+# CPT 364
 
-### Slides Placeholder
+### Placeholder Slides
 
 > “A work in progress. And the possibilities are endless.”
 -- Elizabeth Eulberg
@@ -23,6 +23,9 @@ title: Placeholder Slide
 
 ---
 
+[.background-color: #618B25]
+[.build-lists: true]
+
 # Topics to Explore
 1. Topic One  
 2. Topic Two   
@@ -30,23 +33,31 @@ title: Placeholder Slide
 
 ---
 
-# Slides Placeholder
-
-### Topic One
-
----
+[.background-color: #611036]
 
 # Slides Placeholder
 
-### Topic Two
+### [fa=fa-rocket] Topic One
 
 ---
+
+[.background-color: #611036]
 
 # Slides Placeholder
 
-### Topic Three
+### [fa=fa-rocket] Topic Two
 
 ---
+
+[.background-color: #611036]
+
+# Slides Placeholder
+
+### [fa=fa-rocket] Topic Three
+
+---
+
+[.background-color: #618B25]
 
 # Summary
 1. Topic One  
