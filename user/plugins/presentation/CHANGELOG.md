@@ -1,3 +1,25 @@
+# v2.0.1
+## 10-06-2019
+
+1. [](#bugfix)
+   - API-interface alignment
+
+# v2.0.0
+## 10-06-2019
+
+1. [](#new)
+   - Backward-incompatible API-changes
+   - Simplified shortcode-processing
+2. [](#improved)
+   - Prevent Twig-caching
+   - Fragment-parsing
+   - Shortcode-handling through Transport
+   - Styles-handling through Parser
+   - API-selection in blueprints
+   - Default textsizing-scale and breakpoint-check
+3. [](#bugfix)
+   - Data-shortcode handling
+
 # v1.7.4
 ## 03-06-2019
 

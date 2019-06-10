@@ -1,3 +1,18 @@
+# v1.3.1
+## 10-06-2019
+
+1. [](#bugfix)
+   - API-interface alignment
+
+# v1.3.0
+## 10-06-2019
+
+1. [](#new)
+   - API-alignment with parent
+   - Change /API to /classes
+2. [](#improved)
+   - Remove Admin dependency
+
 # v1.2.3
 ## 05-06-2019
 
