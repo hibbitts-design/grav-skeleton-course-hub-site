@@ -1,8 +1,22 @@
+# v2.5.1
+## 06/15/2019
+
+1. [](#improved)
+    * Updated theme blueprints YAML for Grav 1.7x YAML Linter
+    * Updated demo pages in theme '_demo' folder
+
+# v2.5.0
+## 06/13/2019
+
+1. [](#improved)
+    * Support for direct link to Presentation Markdown file when Presentation images are stored in a child folder
+    * Added custom Git Sync Link Text specific to embedded Presentations
+
 # v2.4.9
 ## 06/12/2019
 
 1. [](#improved)
-    * Removed Markdown Fontawesome Plugin dependency
+    * Removed Markdown Font Awesome Plugin dependency
     * Updated demo pages in theme '_demo' folder
 
 # v2.4.8

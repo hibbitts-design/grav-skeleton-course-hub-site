@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit463bc033d69cbd0923030e24e8bd0137
+class ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -525,6 +525,7 @@ class ComposerStaticInit463bc033d69cbd0923030e24e8bd0137
         'Grav\\Common\\Page\\Interfaces\\PageLegacyInterface' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Interfaces/PageLegacyInterface.php',
         'Grav\\Common\\Page\\Interfaces\\PageRoutableInterface' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Interfaces/PageRoutableInterface.php',
         'Grav\\Common\\Page\\Interfaces\\PageTranslateInterface' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Interfaces/PageTranslateInterface.php',
+        'Grav\\Common\\Page\\Markdown\\Excerpts' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Markdown/Excerpts.php',
         'Grav\\Common\\Page\\Media' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Media.php',
         'Grav\\Common\\Page\\Medium\\AbstractMedia' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/AbstractMedia.php',
         'Grav\\Common\\Page\\Medium\\AudioMedium' => __DIR__ . '/../..' . '/system/src/Grav/Common/Page/Medium/AudioMedium.php',
@@ -1333,8 +1334,23 @@ class ComposerStaticInit463bc033d69cbd0923030e24e8bd0137
         'Symfony\\Contracts\\Cache\\CallbackInterface' => __DIR__ . '/..' . '/symfony/contracts/Cache/CallbackInterface.php',
         'Symfony\\Contracts\\Cache\\ItemInterface' => __DIR__ . '/..' . '/symfony/contracts/Cache/ItemInterface.php',
         'Symfony\\Contracts\\Cache\\TagAwareCacheInterface' => __DIR__ . '/..' . '/symfony/contracts/Cache/TagAwareCacheInterface.php',
+        'Symfony\\Contracts\\EventDispatcher\\Event' => __DIR__ . '/..' . '/symfony/contracts/EventDispatcher/Event.php',
+        'Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/contracts/EventDispatcher/EventDispatcherInterface.php',
+        'Symfony\\Contracts\\HttpClient\\ChunkInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/ChunkInterface.php',
+        'Symfony\\Contracts\\HttpClient\\Exception\\ClientExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/ClientExceptionInterface.php',
+        'Symfony\\Contracts\\HttpClient\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/ExceptionInterface.php',
+        'Symfony\\Contracts\\HttpClient\\Exception\\HttpExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/HttpExceptionInterface.php',
+        'Symfony\\Contracts\\HttpClient\\Exception\\RedirectionExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/RedirectionExceptionInterface.php',
+        'Symfony\\Contracts\\HttpClient\\Exception\\ServerExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/ServerExceptionInterface.php',
+        'Symfony\\Contracts\\HttpClient\\Exception\\TransportExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/TransportExceptionInterface.php',
+        'Symfony\\Contracts\\HttpClient\\HttpClientInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/HttpClientInterface.php',
+        'Symfony\\Contracts\\HttpClient\\ResponseInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/ResponseInterface.php',
+        'Symfony\\Contracts\\HttpClient\\ResponseStreamInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/ResponseStreamInterface.php',
+        'Symfony\\Contracts\\HttpClient\\Test\\HttpClientTestCase' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Test/HttpClientTestCase.php',
+        'Symfony\\Contracts\\HttpClient\\Test\\TestHttpServer' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Test/TestHttpServer.php',
         'Symfony\\Contracts\\Service\\ResetInterface' => __DIR__ . '/..' . '/symfony/contracts/Service/ResetInterface.php',
         'Symfony\\Contracts\\Service\\ServiceLocatorTrait' => __DIR__ . '/..' . '/symfony/contracts/Service/ServiceLocatorTrait.php',
+        'Symfony\\Contracts\\Service\\ServiceProviderInterface' => __DIR__ . '/..' . '/symfony/contracts/Service/ServiceProviderInterface.php',
         'Symfony\\Contracts\\Service\\ServiceSubscriberInterface' => __DIR__ . '/..' . '/symfony/contracts/Service/ServiceSubscriberInterface.php',
         'Symfony\\Contracts\\Service\\ServiceSubscriberTrait' => __DIR__ . '/..' . '/symfony/contracts/Service/ServiceSubscriberTrait.php',
         'Symfony\\Contracts\\Tests\\Cache\\CacheTraitTest' => __DIR__ . '/..' . '/symfony/contracts/Tests/Cache/CacheTraitTest.php',
@@ -1403,6 +1419,7 @@ class ComposerStaticInit463bc033d69cbd0923030e24e8bd0137
         'Twig\\Node\\EmbedNode' => __DIR__ . '/..' . '/twig/twig/src/Node/EmbedNode.php',
         'Twig\\Node\\Expression\\AbstractExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/AbstractExpression.php',
         'Twig\\Node\\Expression\\ArrayExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/ArrayExpression.php',
+        'Twig\\Node\\Expression\\ArrowFunctionExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/ArrowFunctionExpression.php',
         'Twig\\Node\\Expression\\AssignNameExpression' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/AssignNameExpression.php',
         'Twig\\Node\\Expression\\Binary\\AbstractBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/AbstractBinary.php',
         'Twig\\Node\\Expression\\Binary\\AddBinary' => __DIR__ . '/..' . '/twig/twig/src/Node/Expression/Binary/AddBinary.php',
@@ -1752,11 +1769,11 @@ class ComposerStaticInit463bc033d69cbd0923030e24e8bd0137
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit463bc033d69cbd0923030e24e8bd0137::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$classMap;
 
         }, null, ClassLoader::class);
     }
