@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b
+class ComposerStaticInit1e062ef6558664a97b8e0abb682821bb
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -709,6 +709,7 @@ class ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b
         'Grav\\Framework\\Form\\FormFlash' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Form/FormFlash.php',
         'Grav\\Framework\\Form\\FormFlashFile' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Form/FormFlashFile.php',
         'Grav\\Framework\\Form\\Interfaces\\FormFactoryInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Form/Interfaces/FormFactoryInterface.php',
+        'Grav\\Framework\\Form\\Interfaces\\FormFlashInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Form/Interfaces/FormFlashInterface.php',
         'Grav\\Framework\\Form\\Interfaces\\FormInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Form/Interfaces/FormInterface.php',
         'Grav\\Framework\\Form\\Traits\\FormTrait' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Form/Traits/FormTrait.php',
         'Grav\\Framework\\Interfaces\\RenderInterface' => __DIR__ . '/../..' . '/system/src/Grav/Framework/Interfaces/RenderInterface.php',
@@ -1769,11 +1770,11 @@ class ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit777e6285ba400c3d0f94fdf6a73fd64b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1e062ef6558664a97b8e0abb682821bb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1e062ef6558664a97b8e0abb682821bb::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit1e062ef6558664a97b8e0abb682821bb::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1e062ef6558664a97b8e0abb682821bb::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1e062ef6558664a97b8e0abb682821bb::$classMap;
 
         }, null, ClassLoader::class);
     }

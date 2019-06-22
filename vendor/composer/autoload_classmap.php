@@ -387,6 +387,7 @@ return array(
     'Grav\\Framework\\Form\\FormFlash' => $baseDir . '/system/src/Grav/Framework/Form/FormFlash.php',
     'Grav\\Framework\\Form\\FormFlashFile' => $baseDir . '/system/src/Grav/Framework/Form/FormFlashFile.php',
     'Grav\\Framework\\Form\\Interfaces\\FormFactoryInterface' => $baseDir . '/system/src/Grav/Framework/Form/Interfaces/FormFactoryInterface.php',
+    'Grav\\Framework\\Form\\Interfaces\\FormFlashInterface' => $baseDir . '/system/src/Grav/Framework/Form/Interfaces/FormFlashInterface.php',
     'Grav\\Framework\\Form\\Interfaces\\FormInterface' => $baseDir . '/system/src/Grav/Framework/Form/Interfaces/FormInterface.php',
     'Grav\\Framework\\Form\\Traits\\FormTrait' => $baseDir . '/system/src/Grav/Framework/Form/Traits/FormTrait.php',
     'Grav\\Framework\\Interfaces\\RenderInterface' => $baseDir . '/system/src/Grav/Framework/Interfaces/RenderInterface.php',
