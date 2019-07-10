@@ -1,3 +1,21 @@
+# v2.5.5
+## 07/05/2019
+
+1. [](#bugfix)
+    * Updated Taxonomy List template to support only including child page taxonomy items
+
+# v2.5.4
+## 07/02/2019
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v2.5.3
+## 06/29/2019
+
+1. [](#bugfix)
+    * Sidebar Taxonomy List only includes child page taxonomy items
+
 # v2.5.2
 ## 06/21/2019
 

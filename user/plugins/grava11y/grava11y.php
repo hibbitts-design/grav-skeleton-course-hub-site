@@ -72,7 +72,7 @@ class Grava11yPlugin extends Plugin
             ];
 
             $siter = $this->config->get('plugins.grava11y.offsite');
-            $siter = (0) ? array_push($a11ystack, 'https://rawgit.com/Khan/tota11y/master/build/tota11y.min.js') :  array_push($a11ystack, 'plugin://grava11y/js/tota11y.min.js');
+            $siter = (0) ? array_push($a11ystack, 'https://unpkg.com/@khanacademy/tota11y@0.2.0/dist/tota11y.min.js') :  array_push($a11ystack, 'plugin://grava11y/js/tota11y.min.js');
             // register and add assets
             $assets = $this->grav['assets'];
             $assets->registerCollection('grava11y', $a11ystack);
