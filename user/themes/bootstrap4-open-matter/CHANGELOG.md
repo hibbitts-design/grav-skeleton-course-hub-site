@@ -1,3 +1,33 @@
+# v2.6.0
+## 08/01/2019
+
+1. [](#bugfix)
+    * Restored missing square brackets on example Schedule pages
+
+# v2.5.9
+## 07/31/2019
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v2.5.8
+## 07/28/2019
+
+1. [](#new)
+    * Added Link template and blueprint
+
+# v2.5.7
+## 07/24/2019
+
+1. [](#bugfix)
+    * Support option to hide Git Sync Link for emebedded Presentations
+
+# v2.5.6
+## 07/24/2019
+
+1. [](#improved)
+    * Improved Git Sync Link appearance for emebedded Presentations
+
 # v2.5.5
 ## 07/05/2019
 
