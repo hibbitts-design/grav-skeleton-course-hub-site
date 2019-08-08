@@ -2,26 +2,26 @@
 title: Sidebar
 routable: false
 visible: false
-cache_enable: false
 ---
 
-### Getting Started
+### 🚀Getting Started
 
 #### Want to create a new Presentation?
 
 1. Go to the Admin [**Pages**](/admin/pages) page
 2. Tap the **New Presentation** button
-3. Name your new Page
-4. Edit the default page Markdown
-5. Tap **Save**` and then view your page
+3. Name your new Page and tap **Continue**
+5. Tap **Save** and then view your page
 
-!!! In addition to standard Markdown, [Deckset Syntax](https://docs.deckset.com/English.lproj/) commands are available with the pre-installed [Deckset Presentation Plug](https://github.com/OleVik/grav-plugin-presentation-deckset).
+To help get you going, the Markdown for a two-slide presentation is included in the new page.
+
+!!! In addition to [Grav Markdown](https://learn.getgrav.org/16/content/markdown) and standard [Presentation Plugin usage](https://github.com/OleVik/grav-plugin-presentation#usage), [Deckset Syntax](https://docs.deckset.com/English.lproj/) commands are available with the pre-installed [Deckset Presentation Plugin](https://github.com/OleVik/grav-plugin-presentation-deckset).
 
 #### Want to create a new list of Presentations?
 
 1. Go to the Admin [**Pages**](/admin/pages) page
 2. Tap the **New Presentation List** button
-3. Name your new list of Presentations
+3. Name your new list of Presentations and tap **Continue**
 4. Tap **Save** and then view your page
 
 To create a Presentation slide deck on your new list of Presentations page choose the name of that page as the **Parent Page** once you tap the **New Presentation** button.
@@ -41,3 +41,9 @@ Depending on the specifics of the destination Website, a [class](https://www.w3s
 [prism classes="language-html"]
 <div class="embed-responsive embed-responsive-4by3"><iframe src="https://demo.hibbittsdesign.org/grav-open-matter-course-hub/presentations/placeholder-slides" width="800" height="640" allowfullscreen="allowfullscreen"></iframe></div>
 [/prism]
+
+#### Want to embed a Presentation into a Page on this Website?
+
+Use the enhanced Presentation Shortcode, to not only embed a Presentation but also automatically provide a link to view the Presentation fullscreen and, if configured, Git Sync Link (i.e. GitHub, GitLab, Gitea, etc.).
+
+For example, like this: [&#112;&#114;&#101;&#115;&#101;&#110;&#116;&#097;&#116;&#105;&#111;&#110;="/&#112;&#114;&#101;&#115;&#101;&#110;&#116;&#097;&#116;&#105;&#111;&#110;&#115;/&#112;&#108;&#097;&#099;&#101;&#104;&#111;&#108;&#100;&#101;&#114;&#045;&#115;&#108;&#105;&#100;&#101;&#115;"]
