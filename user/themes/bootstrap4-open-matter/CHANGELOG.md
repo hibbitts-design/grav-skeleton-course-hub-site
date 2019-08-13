@@ -1,3 +1,36 @@
+# v2.6.9
+## 08/12/2019
+
+1. [](#improved)
+    * Restored support for dropdown (i.e. child page) menu items with current page highlight
+1. [](#bugfix)
+    * Removed ShortCode Core Plugin 4.1.2 as a dependency (not needed after Shortcode Core 4.14 update)
+
+# v2.6.8
+## 08/11/2019
+
+1. [](#bugfix)
+    * Set ShortCode Core Plugin 4.1.2 as a dependency (changed blueprint syntax)
+
+# v2.6.7
+## 08/11/2019
+
+1. [](#bugfix)
+    * Set ShortCode Core Plugin 4.1.2 as a dependency to avoid issues with 4.1.3 updated
+
+# v2.6.6
+## 08/10/2019
+
+1. [](#improved)
+    * Added support to hide Git Sync Link for each embedded Presentation
+    * Updated Presentation blueprint Git Sync options
+
+# v2.6.5
+## 08/09/2019
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
 # v2.6.4
 ## 08/08/2019
 
@@ -27,7 +60,7 @@
 1. [](#new)
     * Added example Presentation Hub site pages in theme '_demo' folder
 1. [](#improved)
-    * Adjusted display of Git Sync Link display with embedded Presentatations
+    * Adjusted display of Git Sync Link display with embedded Presentations
 
 # v2.6.0
 ## 08/01/2019
