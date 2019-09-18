@@ -18,6 +18,9 @@
             {% set image_basename = image_parts.basename %}
             {% set image_page = image_parts.dirname == '.' ? page : page.find(image_parts.dirname) %}
             {% set header_image_media = image_page.media[image_basename] %}
+            {% if not header_image_media %}
+              {% set header_image_media = page.find(header_image_file).media.images|first %}
+            {% endif %}
           {% else %}
             {% set header_image_media = page.media.images|first %}
           {% endif %}
