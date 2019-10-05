@@ -12,7 +12,7 @@ object:
       enabled: true
       timeout: 60
     object:
-      enabled: false
+      enabled: true
       timeout: 60
     render:
       enabled: true
