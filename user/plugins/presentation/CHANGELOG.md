@@ -1,3 +1,21 @@
+# v3.0.2
+## 01-10-2019
+
+1. [](#bugfix)
+   - Testing-parameter is useless, let me have Semantic Versioning!
+
+# v3.0.1
+## 01-10-2019
+
+1. [](#new)
+   - Release 3.0.1
+
+# v3.0.0-beta.1
+## 15-09-2019
+
+1. [](#improved)
+   - Align content processing with Shortcode Core (https://github.com/getgrav/grav-plugin-shortcode-core/issues/75#issuecomment-531596152)
+
 # v2.1.0
 ## 09-08-2019
 
