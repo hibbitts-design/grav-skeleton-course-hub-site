@@ -18,7 +18,7 @@ user/localhost/config/security.yaml
 
 # OS Generated
 .DS_Store*
-ehthumbs.db
+thumbs.db
 Icon?
 Thumbs.db
 *.swp
