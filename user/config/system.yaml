@@ -87,7 +87,7 @@ cache:
   gzip: false
   allow_webserver_gzip: false
 twig:
-  cache: false
+  cache: true
   debug: true
   auto_reload: true
   autoescape: false
@@ -109,7 +109,7 @@ assets:
   collections:
     jquery: 'system://assets/jquery/jquery-2.1.4.min.js'
 errors:
-  display: 1
+  display: 0
   log: true
 log:
   handler: file

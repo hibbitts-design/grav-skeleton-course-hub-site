@@ -302,7 +302,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'https://api.getgrav.com:4040',
             'extension' => null,
             'addNonce' => 'https://username:password@api.getgrav.com:4040/v1/post/128/page:x/nonce:{{nonce}}?all=1',
-            '__toString' => 'https://username:password@api.getgrav.com:4040/v1/post/128/page:x?all=1'
+            'toOriginalString' => 'https://username:password@api.getgrav.com:4040/v1/post/128/page:x?all=1'
         ],
         'https://google.com:443/' => [
             'scheme' => 'https://',
@@ -392,7 +392,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => null,
             'addNonce' => 'http://localhost/this%20is%20the%20path/my%20page/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/this%20is%20the%20path/my%20page'
+            'toOriginalString' => 'http://localhost/this%20is%20the%20path/my%20page'
         ],
         'http://localhost/pölöpölö/päläpälä' => [
             'scheme' => 'http://',
@@ -415,7 +415,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => null,
             'addNonce' => 'http://localhost/p%C3%B6l%C3%B6p%C3%B6l%C3%B6/p%C3%A4l%C3%A4p%C3%A4l%C3%A4/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/p%C3%B6l%C3%B6p%C3%B6l%C3%B6/p%C3%A4l%C3%A4p%C3%A4l%C3%A4'
+            'toOriginalString' => 'http://localhost/p%C3%B6l%C3%B6p%C3%B6l%C3%B6/p%C3%A4l%C3%A4p%C3%A4l%C3%A4'
         ],
         // Query params tests.
         'http://localhost:8080/grav/it/ueper?test=x&test2=y' => [
@@ -573,7 +573,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => 'html',
             'addNonce' => 'http://localhost/a-page.html/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/a-page', // FIXME <-
+            'toOriginalString' => 'http://localhost/a-page.html',
         ],
         'http://localhost/a-page.json' => [
             'scheme' => 'http://',
@@ -596,7 +596,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => 'json',
             'addNonce' => 'http://localhost/a-page.json/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/a-page', // FIX ME <-
+            'toOriginalString' => 'http://localhost/a-page.json',
         ],
         'http://localhost/admin/ajax.json/task:getnewsfeed' => [
             'scheme' => 'http://',
@@ -619,7 +619,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => 'json',
             'addNonce' => 'http://localhost/admin/ajax.json/task:getnewsfeed/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/admin/ajax/task:getnewsfeed',
+            'toOriginalString' => 'http://localhost/admin/ajax.json/task:getnewsfeed',
         ],
         'http://localhost/grav/admin/media.json/route:L1VzZXJzL3JodWsvd29ya3NwYWNlL2dyYXYtZGVtby1zYW1wbGVyL3VzZXIvYXNzZXRzL3FRMXB4Vk1ERTNJZzh5Ni5qcGc=/task:removeFileFromBlueprint/proute:/blueprint:Y29uZmlnL2RldGFpbHM=/type:config/field:deep.nested.custom_file/path:dXNlci9hc3NldHMvcVExcHhWTURFM0lnOHk2LmpwZw==' => [
             'scheme' => 'http://',
@@ -642,7 +642,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => 'json',
             'addNonce' => 'http://localhost/grav/admin/media.json/route:L1VzZXJzL3JodWsvd29ya3NwYWNlL2dyYXYtZGVtby1zYW1wbGVyL3VzZXIvYXNzZXRzL3FRMXB4Vk1ERTNJZzh5Ni5qcGc=/task:removeFileFromBlueprint/proute:/blueprint:Y29uZmlnL2RldGFpbHM=/type:config/field:deep.nested.custom_file/path:dXNlci9hc3NldHMvcVExcHhWTURFM0lnOHk2LmpwZw==/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/grav/admin/media/route:L1VzZXJzL3JodWsvd29ya3NwYWNlL2dyYXYtZGVtby1zYW1wbGVyL3VzZXIvYXNzZXRzL3FRMXB4Vk1ERTNJZzh5Ni5qcGc=/task:removeFileFromBlueprint/proute:/blueprint:Y29uZmlnL2RldGFpbHM=/type:config/field:deep.nested.custom_file/path:dXNlci9hc3NldHMvcVExcHhWTURFM0lnOHk2LmpwZw==', // FIXME <-
+            'toOriginalString' => 'http://localhost/grav/admin/media.json/route:L1VzZXJzL3JodWsvd29ya3NwYWNlL2dyYXYtZGVtby1zYW1wbGVyL3VzZXIvYXNzZXRzL3FRMXB4Vk1ERTNJZzh5Ni5qcGc=/task:removeFileFromBlueprint/proute:/blueprint:Y29uZmlnL2RldGFpbHM=/type:config/field:deep.nested.custom_file/path:dXNlci9hc3NldHMvcVExcHhWTURFM0lnOHk2LmpwZw==',
         ],
         'http://localhost/a-page.foo' => [
             'scheme' => 'http://',
@@ -665,7 +665,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => 'foo',
             'addNonce' => 'http://localhost/a-page.foo/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/a-page.foo'
+            'toOriginalString' => 'http://localhost/a-page.foo'
         ],
         // Fragment tests.
         'http://localhost:8080/a/b/c#my-fragment' => [
@@ -712,7 +712,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => '',
             'extension' => null,
             //'addNonce' => '%22%3E%3Cscript%3Ealert%3C/localhost/script%3E:/nonce:{{nonce}}', // FIXME <-
-            '__toString' => '%22%3E%3Cscript%3Ealert%3C/localhost/script%3E:' // FIXME <-
+            'toOriginalString' => '%22%3E%3Cscript%3Ealert%3C/localhost/script%3E:' // FIXME <-
         ],
         'http://"><script>alert</script>' => [
             'scheme' => 'http://',
@@ -735,7 +735,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://unknown',
             'extension' => null,
             'addNonce' => 'http://unknown/script%3E/nonce:{{nonce}}',
-            '__toString' => 'http://unknown/script%3E'
+            'toOriginalString' => 'http://unknown/script%3E'
         ],
         'http://localhost/"><script>alert</script>' => [
             'scheme' => 'http://',
@@ -758,7 +758,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => null,
             'addNonce' => 'http://localhost/%22%3E%3Cscript%3Ealert%3C/script%3E/nonce:{{nonce}}',
-            '__toString' => 'http://localhost/%22%3E%3Cscript%3Ealert%3C/script%3E'
+            'toOriginalString' => 'http://localhost/%22%3E%3Cscript%3Ealert%3C/script%3E'
         ],
         'http://localhost/something/p1:foo/p2:"><script>alert</script>' => [
             'scheme' => 'http://',
@@ -781,7 +781,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => null,
             //'addNonce' => 'http://localhost/something/script%3E/p1:foo/p2:%22%3E%3Cscript%3Ealert%3C/nonce:{{nonce}}', // FIXME <-
-            '__toString' => 'http://localhost/something/script%3E/p1:foo/p2:%22%3E%3Cscript%3Ealert%3C'
+            'toOriginalString' => 'http://localhost/something/script%3E/p1:foo/p2:%22%3E%3Cscript%3Ealert%3C'
         ],
         'http://localhost/something?p="><script>alert</script>' => [
             'scheme' => 'http://',
@@ -804,7 +804,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => null,
             'addNonce' => 'http://localhost/something/nonce:{{nonce}}?p=%22%3E%3Cscript%3Ealert%3C/script%3E',
-            '__toString' => 'http://localhost/something?p=%22%3E%3Cscript%3Ealert%3C/script%3E'
+            'toOriginalString' => 'http://localhost/something?p=%22%3E%3Cscript%3Ealert%3C/script%3E'
         ],
         'http://localhost/something#"><script>alert</script>' => [
             'scheme' => 'http://',
@@ -827,7 +827,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'http://localhost',
             'extension' => null,
             'addNonce' => 'http://localhost/something/nonce:{{nonce}}#%22%3E%3Cscript%3Ealert%3C/script%3E',
-            '__toString' => 'http://localhost/something#%22%3E%3Cscript%3Ealert%3C/script%3E'
+            'toOriginalString' => 'http://localhost/something#%22%3E%3Cscript%3Ealert%3C/script%3E'
         ],
         'https://www.getgrav.org/something/"><script>eval(atob("aGlzdG9yeS5wdXNoU3RhdGUoJycsJycsJy8nKTskKCdoZWFkLGJvZHknKS5odG1sKCcnKS5sb2FkKCcvJyk7JC5wb3N0KCcvYWRtaW4nLGZ1bmN0aW9uKGRhdGEpeyQucG9zdCgkKGRhdGEpLmZpbmQoJ1tpZD1hZG1pbi11c2VyLWRldGFpbHNdIGEnKS5hdHRyKCdocmVmJykseydhZG1pbi1ub25jZSc6JChkYXRhKS5maW5kKCdbZGF0YS1jbGVhci1jYWNoZV0nKS5hdHRyKCdkYXRhLWNsZWFyLWNhY2hlJykuc3BsaXQoJzonKS5wb3AoKS50cmltKCksJ2RhdGFbcGFzc3dvcmRdJzonSW0zdjFsaDR4eDByJywndGFzayc6J3NhdmUnfSl9KQ=="))</script><' => [
             'scheme' => 'https://',
@@ -850,7 +850,7 @@ class UriTest extends \Codeception\TestCase\Test
             'rootUrl' => 'https://www.getgrav.org',
             'extension' => null,
             'addNonce' => 'https://www.getgrav.org/something/%22%3E%3Cscript%3Eeval%28atob%28%22aGlzdG9yeS5wdXNoU3RhdGUoJycsJycsJy8nKTskKCdoZWFkLGJvZHknKS5odG1sKCcnKS5sb2FkKCcvJyk7JC5wb3N0KCcvYWRtaW4nLGZ1bmN0aW9uKGRhdGEpeyQucG9zdCgkKGRhdGEpLmZpbmQoJ1tpZD1hZG1pbi11c2VyLWRldGFpbHNdIGEnKS5hdHRyKCdocmVmJykseydhZG1pbi1ub25jZSc6JChkYXRhKS5maW5kKCdbZGF0YS1jbGVhci1jYWNoZV0nKS5hdHRyKCdkYXRhLWNsZWFyLWNhY2hlJykuc3BsaXQoJzonKS5wb3AoKS50cmltKCksJ2RhdGFbcGFzc3dvcmRdJzonSW0zdjFsaDR4eDByJywndGFzayc6J3NhdmUnfSl9KQ==%22%29%29%3C/script%3E%3C/nonce:{{nonce}}',
-            '__toString' => 'https://www.getgrav.org/something/%22%3E%3Cscript%3Eeval%28atob%28%22aGlzdG9yeS5wdXNoU3RhdGUoJycsJycsJy8nKTskKCdoZWFkLGJvZHknKS5odG1sKCcnKS5sb2FkKCcvJyk7JC5wb3N0KCcvYWRtaW4nLGZ1bmN0aW9uKGRhdGEpeyQucG9zdCgkKGRhdGEpLmZpbmQoJ1tpZD1hZG1pbi11c2VyLWRldGFpbHNdIGEnKS5hdHRyKCdocmVmJykseydhZG1pbi1ub25jZSc6JChkYXRhKS5maW5kKCdbZGF0YS1jbGVhci1jYWNoZV0nKS5hdHRyKCdkYXRhLWNsZWFyLWNhY2hlJykuc3BsaXQoJzonKS5wb3AoKS50cmltKCksJ2RhdGFbcGFzc3dvcmRdJzonSW0zdjFsaDR4eDByJywndGFzayc6J3NhdmUnfSl9KQ==%22%29%29%3C/script%3E%3C'
+            'toOriginalString' => 'https://www.getgrav.org/something/%22%3E%3Cscript%3Eeval%28atob%28%22aGlzdG9yeS5wdXNoU3RhdGUoJycsJycsJy8nKTskKCdoZWFkLGJvZHknKS5odG1sKCcnKS5sb2FkKCcvJyk7JC5wb3N0KCcvYWRtaW4nLGZ1bmN0aW9uKGRhdGEpeyQucG9zdCgkKGRhdGEpLmZpbmQoJ1tpZD1hZG1pbi11c2VyLWRldGFpbHNdIGEnKS5hdHRyKCdocmVmJykseydhZG1pbi1ub25jZSc6JChkYXRhKS5maW5kKCdbZGF0YS1jbGVhci1jYWNoZV0nKS5hdHRyKCdkYXRhLWNsZWFyLWNhY2hlJykuc3BsaXQoJzonKS5wb3AoKS50cmltKCksJ2RhdGFbcGFzc3dvcmRdJzonSW0zdjFsaDR4eDByJywndGFzayc6J3NhdmUnfSl9KQ==%22%29%29%3C/script%3E%3C'
         ],
     ];
 
@@ -868,7 +868,7 @@ class UriTest extends \Codeception\TestCase\Test
     protected function runTestSet(array $tests, $method, $params = [])
     {
         foreach ($tests as $url => $candidates) {
-            if (!array_key_exists($method, $candidates) && $method !== '__toString') {
+            if (!array_key_exists($method, $candidates) && $method !== 'toOriginalString') {
                 continue;
             }
             if ($method === 'addNonce') {
@@ -881,7 +881,7 @@ class UriTest extends \Codeception\TestCase\Test
             }
 
             $this->uri->initializeWithURL($url)->init();
-            if ($method === '__toString' && !isset($candidates[$method])) {
+            if ($method === 'toOriginalString' && !isset($candidates[$method])) {
                 $expected = $url;
             } else {
                 $expected = $candidates[$method];
@@ -900,28 +900,28 @@ class UriTest extends \Codeception\TestCase\Test
                 foreach ($queryParams as $key => $value) {
                     $this->assertSame($value, $this->uri->{$method}($key), "Test \$url->{$method}('{$key}') for {$url}");
                 }
-                $this->assertSame(null, $this->uri->{$method}('non-existing'), "Test \$url->{$method}('non-existing') for {$url}");
+                $this->assertNull($this->uri->{$method}('non-existing'), "Test \$url->{$method}('non-existing') for {$url}");
             }
         }
     }
 
     public function testValidatingHostname()
     {
-        $this->assertSame(true, $this->uri->validateHostname('localhost'));
-        $this->assertSame(true, $this->uri->validateHostname('google.com'));
-        $this->assertSame(true, $this->uri->validateHostname('google.it'));
-        $this->assertSame(true, $this->uri->validateHostname('goog.le'));
-        $this->assertSame(true, $this->uri->validateHostname('goog.wine'));
-        $this->assertSame(true, $this->uri->validateHostname('goog.localhost'));
+        $this->assertTrue($this->uri->validateHostname('localhost'));
+        $this->assertTrue($this->uri->validateHostname('google.com'));
+        $this->assertTrue($this->uri->validateHostname('google.it'));
+        $this->assertTrue($this->uri->validateHostname('goog.le'));
+        $this->assertTrue($this->uri->validateHostname('goog.wine'));
+        $this->assertTrue($this->uri->validateHostname('goog.localhost'));
 
-        $this->assertSame(false, $this->uri->validateHostname('localhost:80') );
-        $this->assertSame(false, $this->uri->validateHostname('http://localhost'));
-        $this->assertSame(false, $this->uri->validateHostname('localhost!'));
+        $this->assertFalse($this->uri->validateHostname('localhost:80') );
+        $this->assertFalse($this->uri->validateHostname('http://localhost'));
+        $this->assertFalse($this->uri->validateHostname('localhost!'));
     }
 
     public function testToString()
     {
-        $this->runTestSet($this->tests, '__toString');
+        $this->runTestSet($this->tests, 'toOriginalString');
     }
 
     public function testScheme()
@@ -999,23 +999,23 @@ class UriTest extends \Codeception\TestCase\Test
         $this->assertSame('/ueper:xxx++', $this->uri->params('ueper'));
         $this->assertSame('/test:yyy', $this->uri->params('test'));
         $this->uri->initializeWithURL('http://localhost:8080/grav/it/ueper?test=x')->init();
-        $this->assertSame(null, $this->uri->params());
-        $this->assertSame(null, $this->uri->params('ueper'));
+        $this->assertNull($this->uri->params());
+        $this->assertNull($this->uri->params('ueper'));
         $this->uri->initializeWithURL('http://localhost:8080/grav/it/ueper?test=x&test2=y')->init();
-        $this->assertSame(null, $this->uri->params());
-        $this->assertSame(null, $this->uri->params('ueper'));
+        $this->assertNull($this->uri->params());
+        $this->assertNull($this->uri->params('ueper'));
         $this->uri->initializeWithURL('http://localhost:8080/grav/it/ueper?test=x&test2=y&test3=x&test4=y')->init();
-        $this->assertSame(null, $this->uri->params());
-        $this->assertSame(null, $this->uri->params('ueper'));
+        $this->assertNull($this->uri->params());
+        $this->assertNull($this->uri->params('ueper'));
         $this->uri->initializeWithURL('http://localhost:8080/grav/it/ueper?test=x&test2=y&test3=x&test4=y/test')->init();
-        $this->assertSame(null, $this->uri->params());
-        $this->assertSame(null, $this->uri->params('ueper'));
+        $this->assertNull($this->uri->params());
+        $this->assertNull($this->uri->params('ueper'));
         $this->uri->initializeWithURL('http://localhost:8080/a/b/c/d')->init();
-        $this->assertSame(null, $this->uri->params());
-        $this->assertSame(null, $this->uri->params('ueper'));
+        $this->assertNull($this->uri->params());
+        $this->assertNull($this->uri->params('ueper'));
         $this->uri->initializeWithURL('http://localhost:8080/a/b/c/d/e/f/a/b/c/d/e/f/a/b/c/d/e/f')->init();
-        $this->assertSame(null, $this->uri->params());
-        $this->assertSame(null, $this->uri->params('ueper'));
+        $this->assertNull($this->uri->params());
+        $this->assertNull($this->uri->params('ueper'));
     }
 
     public function testParam()
@@ -1121,6 +1121,24 @@ class UriTest extends \Codeception\TestCase\Test
         ];
 
         $this->assertSame('http://foo:bar@localhost:8080/test?x=2#xxx', Uri::buildUrl($parsed_url));
+
+        /** @var Uri $uri */
+        $uri = Grav::instance()['uri'];
+
+        $uri->initializeWithUrlAndRootPath('https://testing.dev/subdir/path1/path2/file.html', '/subdir')->init();
+        $this->assertSame('https://testing.dev/subdir/path1/path2/file.html', Uri::buildUrl($uri->toArray(true)));
+
+        $uri->initializeWithUrlAndRootPath('https://testing.dev/subdir/path1/path2/file.foo', '/subdir')->init();
+        $this->assertSame('https://testing.dev/subdir/path1/path2/file.foo', Uri::buildUrl($uri->toArray(true)));
+
+        $uri->initializeWithUrlAndRootPath('https://testing.dev/subdir/path1/path2/file.html', '/subdir/path1')->init();
+        $this->assertSame('https://testing.dev/subdir/path1/path2/file.html', Uri::buildUrl($uri->toArray(true)));
+
+        $uri->initializeWithUrlAndRootPath('https://testing.dev/subdir/path1/path2/file.html/foo:blah/bang:boom', '/subdir')->init();
+        $this->assertSame('https://testing.dev/subdir/path1/path2/file.html/foo:blah/bang:boom', Uri::buildUrl($uri->toArray(true)));
+
+        $uri->initializeWithUrlAndRootPath('https://testing.dev/subdir/path1/path2/file.html/foo:blah/bang:boom?fig=something', '/subdir')->init();
+        $this->assertSame('https://testing.dev/subdir/path1/path2/file.html/foo:blah/bang:boom?fig=something', Uri::buildUrl($uri->toArray(true)));
     }
 
     public function testConvertUrl()

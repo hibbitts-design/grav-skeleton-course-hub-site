@@ -68,8 +68,15 @@ form:
             custom_git_sync_repo_link_text:
                 type: input.text
                 size: medium
-                label: 'Custom Git Sync Link Text'
-                description: 'Link text, e.g. ''View Page in GitHub''.'
+                label: Custom Git Sync Link Text
+                description: Link text, e.g. 'View Page in GitHub' or 'View Page as Markdown'.
+                validate:
+                    type: text
+            custom_git_sync_repo_presentation_link_text:
+                type: input.text
+                size: medium
+                label: Custom Git Sync Presentation Link Text
+                description: Link text, e.g. 'View Slides in GitHub' or 'View Slides as Markdown'.
                 validate:
                     type: text
             git_sync_repo_link:
