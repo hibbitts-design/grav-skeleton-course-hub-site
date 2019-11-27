@@ -1,3 +1,27 @@
+# v4.0.1
+## 16-10-2019
+
+1. [](#bugfix)
+    * Wrong variable in Parser
+
+# v4.0.0
+## 13-10-2019
+
+1. [](#new)
+    * Stable release of 4.0.0 refactor
+
+# v4.0.0-beta.1
+## 01-10-2019
+
+1. [](#new)
+    * Refactor: Replaced PicoFeed with FeedIO
+    * The `extra_tags` option has been deprecated
+    * A `request_options` option has been added
+2. [](#improved)
+    * Error-handling
+    - Use PSR-4 for autoloading
+    - Blueprints, Translations
+
 # v3.3.4
 ## 16-01-2019
 

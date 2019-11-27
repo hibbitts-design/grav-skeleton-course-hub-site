@@ -1,4 +1,4 @@
 @ECHO OFF
 setlocal DISABLEDELAYEDEXPANSION
-SET BIN_TARGET=%~dp0/../fguillot/picofeed/picofeed
+SET BIN_TARGET=%~dp0/../nicolus/picofeed/picofeed
 php "%BIN_TARGET%" %*

@@ -1,3 +1,56 @@
+# v2.8.3
+## 11/22/2019
+
+1. [](#improved)
+    * Updated experimental Markdown file Shortcode ([markdownfile url=""]) to support displaying Grav Markdown pages (frontmatter is removed)
+
+# v2.8.2
+## 11/21/2019
+
+1. [](#new)
+    * Added links blueprint
+
+# v2.8.1
+## 11/18/2019
+
+1. [](#bugfix)
+    * Updated Alert modular template to only use checkmarks for unordered lists
+
+# v2.8.0
+## 11/08/2019
+
+1. [](#new)
+    * Added experimental Markdown file Shortcode ([markdownfile url=""]) to embed external Markdown files (thanks to @OleVik for help along the way)
+
+# v2.7.9
+## 10/21/2019
+
+1. [](#new)
+    * Included experimental Web Components ShortCode 'StopNote' ([stopnote title="" message=""]), which is made possible by the Web Components Plugin by @btopro.
+    * Included experimental Web Components template and blueprint 'StopNote', which is made possible by the Web Components Plugin by @btopro.
+
+# v2.7.8
+## 10/17/2019
+
+1. [](#improved)
+    * Updated PageRSSFeeds template for TwigFeeds 4.0 Beta
+    * Updated demo pages in theme '_demo' folder
+1. [](#bugfix)
+    * MultiCourse home page link now works with root install of Grav
+
+# v2.7.8-beta.2
+## 10/16/2019
+
+1. [](#bugfix)
+    * MultiCourse home page link now works with root install of Grav
+
+# v2.7.8-beta.1
+## 10/06/2019
+
+1. [](#improved)
+    * Updated PageRSSFeeds template for TwigFeeds 4.0 Beta
+    * Updated demo pages in theme '_demo' folder
+
 # v2.7.7
 ## 09/30/2019
 

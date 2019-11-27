@@ -12,9 +12,10 @@ use Naneau\SemVer\Compare as SemVerCompare;
  * TwigFeeds Helper Utilities
  *
  * Class Utilities
- * @package Grav\Plugin\TwigFeedsPlugin
- * @license MIT License by Ole Vik
- * @since v3.0.0
+ * @package    Grav\Plugin\TwigFeedsPlugin
+ * @license    MIT License by Ole Vik
+ * @since      v3.0.0
+ * @deprecated v4.0.0
  */
 class Utilities
 {

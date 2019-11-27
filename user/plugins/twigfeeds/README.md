@@ -13,6 +13,18 @@ You should now have all the plugin files under
 
 The plugin is enabled by default, and can be disabled by copying `user/plugins/twigfeeds/twigfeeds.yaml` into `user/config/plugins/twigfeeds.yaml` and setting `enabled: false`.
 
+## Changes in v4.0.0
+
+PicoFeed was deprecated long ago, and hasn't been properly maintained in most forks. This caused some errors to be persistent, that could not be resolved without forking and patching the library, which the creator of this plugin was unwilling to do. Thus, though the API in PHP remains largely intact, it has changed in Twig.
+
+**You will need to revise your templates to make sure everything works as expected, some properties will have different names than before.** To get an idea of what the data looks like, use `{{ dump(twig_feeds) }}` in a Twig-template and inspect the debugger. Most notably, `item.url` is now `item.link`, `item.content` is `item.description`, and `item.date.date` is `item.lastModified`. The change is not backwards-compatible, so update your templates as needed.
+
+More details on the specification the new library, FeedIo, uses [is available here](https://github.com/alexdebril/feed-io/blob/master/doc/specifications-support.md). Changes to options:
+
+- The `extra_tags` option has been deprecated, all tags are now included by default
+- A `request_options` option has been added, which allows you to [pass options to the Guzzle Client](http://docs.guzzlephp.org/en/stable/request-options.html)
+- The plugin now uses PSR-4 for autoloading
+
 ### Settings and Usage
 
 | Variable | Default | Options | Note |
@@ -23,7 +35,8 @@ The plugin is enabled by default, and can be disabled by copying `user/plugins/t
 | `debug` | `false` | `true` or `false` | Enables or disables debug-mode. |
 | `cache_time` | 900 | integer | Default time, in seconds, to wait before caching data again. |
 | `pass_headers` | `false` | `true` or `false` | Enables or disables passing ETag and Last Modified headers. |
-| `twig_feeds` | List | List: `source`, `name`, `start`, `end`, `cache_time`, `extra_tags` | `source`: URL for a RSS or Atom feed; `name`: Custom title of feed; `start`: Item to start the results from; `end`: Item to end the results with; `cache_time`: Time, in seconds, to wait before caching data again.; `extra_tags`: List of additional tags to include from the feed. |
+| `request_options` | List:  `allow_redirects: true`  `connect_timeout: 30`  `timeout: 30`  `http_errors: false` | List:  `allow_redirects`  `connect_timeout`  `timeout`  `http_errors` | Options to use with the Guzzle Client, see [their docs](http://docs.guzzlephp.org/en/stable/request-options.html). |
+| `twig_feeds` | List: ... | List:  `source`  `name`  `start`  `end`  `cache_time` | `source`: URL for a RSS or Atom feed; `name`: Custom title of feed; `start`: Item to start the results from; `end`: Item to end the results with; `cache_time`: Time, in seconds, to wait before caching data again. |
 
 In addition to `enabled`, there is also a `cache`-option which enables the caching-mechanism. The `static_cache`-option changes the cache-location to /user/data, which makes feed-data persist beyond Grav's cache, and requires `cache: true`. This means that `bin/grav clearcache -all` does not invalidate the data, but it is still updated if Grav's cache is disabled and the plugin runs. The `debug`-option logs the execution of the plugin to Grav's Debugger and in /logs/grav.log.
 
@@ -35,32 +48,9 @@ For example, starting at 0 and ending at 10 would return a total of 10 items fro
 
 **Note:** If you use a feed that is secured with HTTPS, then your server setup must be able to connect with this through Curl. Otherwise you'll get an error like this `curl: (60) SSL certificate problem: unable to get local issuer certificate`. A quick [how-to](https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/). Further, your feed's encoding must match the encoding your server returns, or the PicoFeed-library's parser may fail.
 
-Since v3.2.0 you can pass `extra_tags` to include non-standard tags, for example:
-
-```
-twig_feeds:
-  - source: https://wtfpod.libsyn.com/rss
-    end: 2
-    extra_tags:
-      - "itunes:duration"
-      - "itunes:image":
-        - href
-```
-
-This requires special handling in Twig: The returned tag can be a single array-item or contain multiple items, and if the tag contains a colon (`:`) you must treat this using Twig's `attribute()`. For example:
+Since v4.0.0 all tags, including non-standard ones, are retrieved. Eg., `itunes:duration` can be found in the `elements`-array of a feed item that has it, and could return `01:21:43`. Depending on how the feed sets the data in non-standard tags, it may require special handling in Twig: The returned tag can be a single array-item or contain multiple items, and if the tag contains a colon (`:`) you must treat this using Twig's `attribute()`. For example:
 
 `{{ attribute(item, 'itunes:subtitle')|first }}`
-
-This prints the first item of the `itunes:subtitle` tag, when placed within a regular loop of the feed's items. Further, since v3.2.2, you can pass any tag in `extra_tags` as a list with nested attributes. In the example above, the `href`-attribute of `itunes:image` will be retrieved, and the example returns:
-
-    "itunes:duration" => array:1 [
-      0 => "01:38:53"
-    ]
-    "itunes:image" => array:1 [
-      "href" => array:1 [
-        0 => "https://ssl-static.libsyn.com/p/assets/9/8/3/2/983246828eea14c6/WTF_-_new_larger_cover.jpg"
-      ]
-    ]
 
 #### Caching
 
@@ -83,7 +73,7 @@ If the `name`-property is set, this is used for this name. If not, it defaults t
 
 #### Command Line Interface
 
-As of version 3 the plugin supports CLI-usage, which means that you can clear or build the cache from settings independently of running it on a site. Two methods are available: `bin/plugin twigfeeds clearcache` and `bin/plugin twigfeeds buildcache`. The `clearcache`-command deletes cached files from the active cache location, using the plugin's settings to determine whether the cache is in `/cache` or `/user/data`.
+The plugin supports CLI-usage, which means that you can clear or build the cache from settings independently of running it on a site. Two methods are available: `bin/plugin twigfeeds clearcache` and `bin/plugin twigfeeds buildcache`. The `clearcache`-command deletes cached files from the active cache location, using the plugin's settings to determine whether the cache is in `/cache` or `/user/data`.
 
 The `buildcache`-command builds the cache, by default to the active cache location, which allows you to precache the feeds-data. It also uses the plugin's settings to determine the cache-location. You can also pass `--cache` to build the feeds to `/cache` or `--data` to build to `/user/data`.
 
@@ -91,7 +81,7 @@ The `buildcache`-command builds the cache, by default to the active cache locati
 
 Consider the following settings in `user/config/plugins/twigfeeds.yaml`:
 
-```
+```yaml
 enabled: true
 twig_feeds:
   - source: http://rss.nytimes.com/services/xml/rss/nyt/World.xml
@@ -104,16 +94,16 @@ twig_feeds:
 
 This retrieves World News from The New York Times and UK News from the BBC, which we can use in any Twig-template like this:
 
-```
+```html
 {% for name, feed in twig_feeds %}
     <h4>Feed name: {{ name }}</h4>
     <small>Retrieved title: <a href="{{ feed.source }}">{{ feed.title }}</a>, {{ feed.amount }} item(s)</small>
     {% for item in feed.items %}
         <h5>
-            <a href="{{ item.url }}">{{ item.title }}</a>
+            <a href="{{ item.link }}">{{ item.title }}</a>
         </h5>
-        <time>{{ item.date.date }}</time>
-        <p>{{ item.content }}</p>
+        <time>{{ item.lastModified }}</time>
+        <p>{{ item.description }}</p>
     {% endfor %}
 {% endfor %}
 ```
@@ -122,23 +112,23 @@ This will iterate over each feed and output the name, retrieved title (as a link
 
 We can also access any feed by its defined name:
 
-```
+```html
 {% for name, feed in twig_feeds if name == 'NY Times' %}
     <h4>Feed name: {{ name }}</h4>
     <small>Retrieved title: <a href="{{ feed.source }}">{{ feed.title }}</a>, {{ feed.amount }} item(s)</small>
     {% for item in feed.items %}
         <h5>
-            <a href="{{ item.url }}">{{ item.title }}</a>
+            <a href="{{ item.link }}">{{ item.title }}</a>
         </h5>
-        <time>{{ item.date.date }}</time>
-        <p>{{ item.content }}</p>
+        <time>{{ item.lastModified }}</time>
+        <p>{{ item.description }}</p>
     {% endfor %}
 {% endfor %}
 ```
 
 Or if you want to aggregate a bunch of feeds, you could do:
 
-```
+```html
 {% set feed_items = [] %}
 {% for name, feed in twig_feeds %}
     {% set feed_items = feed_items|merge(feed.items) %}
@@ -147,14 +137,14 @@ Or if you want to aggregate a bunch of feeds, you could do:
 
 Further, you could paginate many items like this:
 
-```
+```html
 {% set index = 1 %}
 {% set feed_items = [] %}
 {% for name, feed in twig_feeds %}
     {% for item in feed.items %}
         {% set index = index + 1 %}
         {% set item = item|merge({ 'retrievedTitle': feed.title }) %}
-        {% set item = item|merge({ 'sortDate': item.date.date }) %}
+        {% set item = item|merge({ 'sortDate': item.lastModified }) %}
         {% set feed_items = feed_items|merge({ (index): (item) }) %}
     {% endfor %}
 {% endfor %}
@@ -170,18 +160,18 @@ Further, you could paginate many items like this:
 
 {% for index, item in feed_items|sort_by_key('sortDate')|reverse|slice(start, perPage) %}
     <h5>
-        <a href="{{ item.url }}">{{ item.retrievedTitle }} - {{ item.title }}</a>
+        <a href="{{ item.link }}">{{ item.retrievedTitle }} - {{ item.title }}</a>
     </h5>
-    <time>{{ item.date.date }}</time>
+    <time>{{ item.lastModified }}</time>
 {% endfor %}
 
 {% if totalPages > 1 %}
     <ul class="pagination">
         <li class="page-item {% if currentPage <= 1 %}disabled{% endif %}">
-            <a href="{{ page.url }}/page:{{ 1 }}">First</a>
+            <a href="{{ page.url(true) }}/page:{{ 1 }}">First</a>
         </li>
         <li class="page-item {% if currentPage <= 1 %}disabled{% endif %}">
-            <a href="{{ page.url }}/page:{{ currentPage - 1 }}">Previous</a>
+            <a href="{{ page.url(true) }}/page:{{ currentPage - 1 }}">Previous</a>
         </li>
         {% for i in 1..totalPages %}
             {% if (currentPage - paginationLimit) - loop.index == 0 %}
@@ -196,15 +186,15 @@ Further, you could paginate many items like this:
             {% elseif (currentPage + paginationLimit) - loop.index < 0 %}
             {% else %}
                 <li class="page-item {% if currentPage == loop.index  %} active{% endif %}">
-                    <a href="{{ page.url }}/page:{{ loop.index }}">{{ loop.index }}</a>
+                    <a href="{{ page.url(true) }}/page:{{ loop.index }}">{{ loop.index }}</a>
                 </li>
             {% endif %}
         {% endfor %}
         <li class="page-item {% if currentPage >= totalPages %}disabled{% endif %}">
-            <a href="{{ page.url }}/page:{{ currentPage + 1 }}">Next</a>
+            <a href="{{ page.url(true) }}/page:{{ currentPage + 1 }}">Next</a>
         </li>
         <li class="page-item {% if currentPage >= totalPages %}disabled{% endif %}">
-            <a href="{{ page.url }}/page:{{ totalPages }}">Last</a>
+            <a href="{{ page.url(true) }}/page:{{ totalPages }}">Last</a>
         </li>
     </ul>
 {% endif %}
@@ -212,4 +202,7 @@ Further, you could paginate many items like this:
 
 This last example is based on [this Gist](https://gist.github.com/maxpou/612359ed4af4cc5c4f06), tested with Grav v1.4.0-rc.1, plugin v3.3.0. Pages are indexed in the format `http://domain.tld/page:1`, where the `page`-parameter increases for each consecutive page.
 
-MIT License 2017 by [Ole Vik](http://github.com/olevik).
+MIT License 2019 by [Ole Vik](http://github.com/olevik).
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOleVik%2Fgrav-plugin-twigfeeds.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOleVik%2Fgrav-plugin-twigfeeds?ref=badge_large)

@@ -11,9 +11,10 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
  * TwigFeeds Manifest
  *
  * Class Parser
- * @package Grav\Plugin\TwigFeedsPlugin
- * @license MIT License by Ole Vik
- * @since v3.0.0
+ * @package    Grav\Plugin\TwigFeedsPlugin
+ * @license    MIT License by Ole Vik
+ * @since      v3.0.0
+ * @deprecated v4.0.0
  */
 class Manifest
 {
