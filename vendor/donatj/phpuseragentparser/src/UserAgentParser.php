@@ -3,20 +3,24 @@
 /**
  * Parses a user agent string into its important parts
  *
- * @author Jesse G. Donat <donatj@gmail.com>
- * @link https://github.com/donatj/PhpUserAgent
- * @link http://donatstudios.com/PHP-Parser-HTTP_USER_AGENT
  * @param string|null $u_agent User agent string to parse or null. Uses $_SERVER['HTTP_USER_AGENT'] on NULL
- * @throws \InvalidArgumentException on not having a proper user agent to parse.
  * @return string[] an array with browser, version and platform keys
+ * @throws \InvalidArgumentException on not having a proper user agent to parse.
+ *
+ * @author Jesse G. Donat <donatj@gmail.com>
+ *
+ * @link https://donatstudios.com/PHP-Parser-HTTP_USER_AGENT
+ * @link https://github.com/donatj/PhpUserAgent
+ *
+ * @license MIT
  */
 function parse_user_agent( $u_agent = null ) {
+	if( $u_agent === null && isset($_SERVER['HTTP_USER_AGENT']) ) {
+		$u_agent = $_SERVER['HTTP_USER_AGENT'];
+	}
+
 	if( $u_agent === null ) {
-		if( isset($_SERVER['HTTP_USER_AGENT']) ) {
-			$u_agent = $_SERVER['HTTP_USER_AGENT'];
-		} else {
-			throw new \InvalidArgumentException('parse_user_agent requires a user agent');
-		}
+		throw new \InvalidArgumentException('parse_user_agent requires a user agent');
 	}
 
 	$platform = null;
@@ -55,7 +59,7 @@ function parse_user_agent( $u_agent = null ) {
 	}
 
 	preg_match_all('%(?P<browser>Camino|Kindle(\ Fire)?|Firefox|Iceweasel|IceCat|Safari|MSIE|Trident|AppleWebKit|
-				TizenBrowser|(?:Headless)?Chrome|YaBrowser|Vivaldi|IEMobile|Opera|OPR|Silk|Midori|Edge|CriOS|UCBrowser|Puffin|OculusBrowser|SamsungBrowser|
+				TizenBrowser|(?:Headless)?Chrome|YaBrowser|Vivaldi|IEMobile|Opera|OPR|Silk|Midori|Edge|Edg|CriOS|UCBrowser|Puffin|OculusBrowser|SamsungBrowser|
 				Baiduspider|Googlebot|YandexBot|bingbot|Lynx|Version|Wget|curl|
 				Valve\ Steam\ Tenfoot|
 				NintendoBrowser|PLAYSTATION\ (\d|Vita)+)
@@ -138,7 +142,10 @@ function parse_user_agent( $u_agent = null ) {
 	} elseif( $find('YaBrowser', $key, $browser) ) {
 		$browser = 'Yandex';
 		$version = $result['version'][$key];
-	} elseif( $find(array( 'IEMobile', 'Edge', 'Midori', 'Vivaldi', 'OculusBrowser', 'SamsungBrowser', 'Valve Steam Tenfoot', 'Chrome', 'HeadlessChrome' ), $key, $browser) ) {
+	} elseif( $find(array( 'Edge', 'Edg' ), $key, $browser) ) {
+		$browser = 'Edge';
+		$version = $result['version'][$key];
+	} elseif( $find(array( 'IEMobile', 'Midori', 'Vivaldi', 'OculusBrowser', 'SamsungBrowser', 'Valve Steam Tenfoot', 'Chrome', 'HeadlessChrome' ), $key, $browser) ) {
 		$version = $result['version'][$key];
 	} elseif( $rv_result && $find('Trident', $key) ) {
 		$browser = 'MSIE';
@@ -151,7 +158,6 @@ function parse_user_agent( $u_agent = null ) {
 		$version = $result['version'][$key];
 	} elseif( $browser == 'AppleWebKit' ) {
 		if( $platform == 'Android' ) {
-			// $key = 0;
 			$browser = 'Android Browser';
 		} elseif( strpos($platform, 'BB') === 0 ) {
 			$browser  = 'BlackBerry Browser';
@@ -164,7 +170,7 @@ function parse_user_agent( $u_agent = null ) {
 
 		$find('Version', $key);
 		$version = $result['version'][$key];
-	} elseif( $pKey = preg_grep('/playstation \d/', array_map('strtolower', $result['browser'])) ) {
+	} elseif( $pKey = preg_grep('/playstation \d/i', $result['browser']) ) {
 		$pKey = reset($pKey);
 
 		$platform = 'PlayStation ' . preg_replace('/\D/', '', $pKey);
