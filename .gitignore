@@ -14,8 +14,8 @@ images/*
 !images/.*
 user/accounts/*
 !user/accounts/.*
-user/data/*
-!user/data/.*
+user/data/notifications/*
+!user/data/notifications/.*
 user/localhost/config/security.yaml
 
 # OS Generated
