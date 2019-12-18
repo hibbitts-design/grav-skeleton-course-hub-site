@@ -1,3 +1,21 @@
+# v3.1.1
+## 12/17/2019
+
+1. [](#improved)
+    * Moved 'Add Presentation' command to Admin Panel 'Add' dropdown menu
+
+# v3.1.0
+## 11/29/2019
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.0.9
+## 10/06/2019
+
+1. [](#improved)
+    * Grav 1.7 Flex Pages ready
+
 # v3.0.8
 ## 08/05/2019
 
