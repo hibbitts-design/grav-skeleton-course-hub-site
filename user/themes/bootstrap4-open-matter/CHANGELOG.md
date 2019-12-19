@@ -1,3 +1,24 @@
+# v2.9.2
+## 12/19/2019
+
+1. [](#improved)
+  * Improved handling of Favicons for MultiCourse Hubs.
+
+# v2.9.1
+## 12/19/2019
+
+1. [](#new)
+  * Experimental support for a custom Favicon per course (thanks to @drbfraser for the initial suggestion)
+1. [](#improved)
+  * Added 'wc' prefix to example Web Component shortcode, template, and blueprint
+  * Updated demo pages in theme '_demo' folder
+
+# v2.9.0
+## 12/18/2019
+
+1. [](#new)
+  * Support for custom links (e.g. PDFs) with embedded Presentations
+
 # v2.8.9
 ## 12/17/2019
 
