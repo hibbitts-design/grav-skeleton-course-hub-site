@@ -1,3 +1,10 @@
+# v2.9.6
+## 01/07/2020
+
+1. [](#improved)
+  * Updated demo pages in theme '_demo' folder
+  * Reduced plugin dependencies (removed automatic installation of Anchors, Archives, Breadcrumbs, Feed and TaxonomyList)
+
 # v2.9.5
 ## 01/07/2020
 
