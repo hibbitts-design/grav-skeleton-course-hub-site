@@ -1,3 +1,23 @@
+# v1.3.4
+## 20-12-2019
+
+1. [](#bugfix)
+   - Revert v1.3.3, add in simpler checks
+2. [](#new)
+   - Bump Presentation-version dependency
+
+# v1.3.3
+## 20-12-2019
+
+1. [](#new)
+   - Stable release of v1.3.2-beta.1
+
+# v1.3.2-beta.1
+## 20-12-2019
+
+1. [](#bugfix)
+   - Test whether parent exists
+
 # v1.3.1
 ## 10-06-2019
 

@@ -1,3 +1,21 @@
+# v2.9.5
+## 01/07/2020
+
+1. [](#bugfix)
+  * Single course home page link now fully works with root install of Grav
+
+# v2.9.4
+## 01/06/2020
+
+1. [](#improved)
+  * Changed default demo content from Blog to Basic Course Hub site
+
+# v2.9.3
+## 01/02/2020
+
+1. [](#improved)
+  * Updated CSS for left/right image alignment (thanks to @OleVik)
+
 # v2.9.2
 ## 12/19/2019
 
