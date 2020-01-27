@@ -1,3 +1,37 @@
+# v3.0.3
+## 01/27/2020
+
+1. [](#improved)
+  * Updated demo pages in theme '_demo' folder
+
+# v3.0.2
+## 01/26/2020
+
+1. [](#improved)
+  * Updated demo pages in theme '_demo' folder
+
+# v3.0.1
+## 01/26/2020
+
+1. [](#improved)
+  * Updated demo pages in theme '_demo' folder
+  * Updated customized template for embedded Presentations with most recent Presentation Plugin release
+
+# v3.0.0
+## 01/24/2020
+
+1. [](#improved)
+  * Improved placement of CC License and Git Sync Links within pages
+  * Updated demo pages in theme '_demo' folder
+
+# v2.9.9
+## 01/24/2020
+
+1. [](#improved)
+  * Added ordering and direction options for subsite list pages
+  * Added support for CC License display for subsite list pages
+  * Updated demo pages in theme '_demo' folder
+
 # v2.9.8
 ## 01/23/2020
 
@@ -302,13 +336,13 @@
 ## 07/24/2019
 
 1. [](#bugfix)
-    * Support option to hide Git Sync Link for emebedded Presentations
+    * Support option to hide Git Sync Link for embedded Presentations
 
 # v2.5.6
 ## 07/24/2019
 
 1. [](#improved)
-    * Improved Git Sync Link appearance for emebedded Presentations
+    * Improved Git Sync Link appearance for embedded Presentations
 
 # v2.5.5
 ## 07/05/2019
