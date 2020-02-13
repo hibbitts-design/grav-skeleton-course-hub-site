@@ -1,3 +1,23 @@
+# v3.1.2
+## 10-02-2020
+
+1. [](#bugfix)
+   - Reduce reliance on config()
+
+# v3.1.1
+## 09-02-2020
+
+1. [](#bugfix)
+   - Handle null-values saved by Admin
+
+# v3.1.0
+## 09-02-2020
+
+1. [](#new)
+   - Enable ParsedownExtra when set in system.yaml
+2. [](#bugfix)
+   - Variable in blueprints.yaml and languages.yaml
+
 # v3.0.2
 ## 01-10-2019
 

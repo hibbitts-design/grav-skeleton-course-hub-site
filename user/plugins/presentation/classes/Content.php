@@ -50,7 +50,11 @@ class Content implements ContentInterface
         $this->config = $config;
         $this->parser = $parser;
         $this->transport = $transport;
-        $this->parsedown = new \Parsedown();
+        if ($this->grav['config']->get('system.pages.markdown.extra')) {
+            $this->parsedown = new \ParsedownExtra();
+        } else {
+            $this->parsedown = new \Parsedown();
+        }
     }
 
     /**
@@ -228,11 +232,13 @@ class Content implements ContentInterface
                 if (isset($page['header']->textsize['modifier'])) {
                     $modifier = (float) $page['header']->textsize['modifier'];
                 }
-                $this->parser->setModularScale(
-                    $config['id'],
-                    $scale ?? 1.25,
-                    $modifier ?? 1
-                );
+                if (!empty($scale) && !empty($modifier)) {
+                    $this->parser->setModularScale(
+                        $config['id'],
+                        $scale ?? 1.25,
+                        $modifier ?? 1
+                    );
+                }
             }
             if (isset($page['header']->class) && !empty($page['header']->class)) {
                 foreach ($page['header']->class as $item) {
