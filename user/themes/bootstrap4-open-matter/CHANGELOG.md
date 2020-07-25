@@ -1,3 +1,123 @@
+# v3.3.3
+## 07/24/2020
+
+1. [](#improved)
+    * Adjusted visual appearance of badges for link page types
+
+# v3.3.2
+## 07/24/2020
+
+1. [](#improved)
+    * Added support of link `url` to badges
+    * Adjusted visual appearance of badges
+
+# v3.3.1
+## 07/22/2020
+
+1. [](#bugfix)
+    * Updated templates for latest RC build (v.15)
+
+# v3.3.0
+## 07/22/2020
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.2.9
+## 07/19/2020
+
+1. [](#bugfix)
+    * Fixed Presentation blueprint error (thanks @SteveDaulton)
+    * Fixed Section and Subsection blueprint error
+
+# v3.2.8
+## 07/12/2020
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.2.7
+## 07/10/2020
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.2.6
+## 07/08/2020
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.2.5
+## 07/03/2020
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.2.4
+## 07/03/2020
+
+1. [](#new)
+    * Added GoogleSlides Shortcode ([googleslides url=""]) to display embedded Google Slides
+
+# v3.2.3
+## 06/09/2020
+
+1. [](#improved)
+    * Updated Divs for use with the ShowIfEmbedded and HideIfEmbedded Shortcodes
+
+# v3.2.2
+## 06/08/2020
+
+1. [](#bugfix)
+    * Fixed improperly closed Div within ShowIfEmbedded and HideIfEmbedded Shortcodes
+
+# v3.2.1
+## 06/06/2020
+
+1. [](#new)
+    * Added ShowIfEmbedded and HideIfEmbedded Shortcodes to only show content when embedded (i.e. chromeless) or not
+
+# v3.2.0
+## 06/04/2020
+
+1. [](#new)
+    * Added CSS classes to only show content when chromeless or not chromeless (e.g. '[div class="chromeless-show"]' and [div class="chromeless-hide"]) (thanks @ricardo118)
+    * Added CSS class to force column content to keep together (e.g. '[div class="keeptogether"]'), for use with the Columns Shortcode
+
+# v3.1.9
+## 05/26/2020
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.1.8
+## 05/23/2020
+
+1. [](#improved)
+    * Updated inherited theme file paths for multisite compatibility
+
+# v3.1.7
+## 04/30/2020
+
+1. [](#bugfix)
+    * Restored list item indent within Important Reminders area for correct display of associated badges
+
+# v3.1.6
+## 04/28/2020
+
+1. [](#new)
+    * Added `badge` shortcode for display of badges
+
+# v3.1.5
+## 04/26/2020
+
+1. [](#new)
+    * Added `linktextonly` template for text only display of link items
+    * Added checking for URL value when displaying `link` page types
+1. [](#improved)
+    * Added support for optional display of title links for `embedlycard` page types
+
 # v3.1.4
 ## 03/09/2020
 

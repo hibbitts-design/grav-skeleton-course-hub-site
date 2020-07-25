@@ -10,9 +10,9 @@ header_image_alt_text: 'iOS family of devices pile (2015)'
 ---
 
 ## How to design for mobile and multi-device usage?
-['Mobile' Design Principles](../../presentations/module-07#/module-07-4?target=_blank)  
-[Touch Interaction Design](../../presentations/module-07#/module-07-4?target=_blank)  
-[Responsive Web Design (RWD)](../../presentations/module-07#/module-07-4?target=_blank)  
+['Mobile' Design Principles](../../presentations/module-07#/module-07-4)  
+[Touch Interaction Design](../../presentations/module-07#/module-07-4)  
+[Responsive Web Design (RWD)](../../presentations/module-07#/module-07-4)  
 
 ===
 
@@ -25,7 +25,7 @@ header_image_alt_text: 'iOS family of devices pile (2015)'
 [presentation="presentations/module-07"]
 
 ### Handouts
-[One-Page Touch Interaction Design Checklist](https://sso.canvaslms.com/courses/1413912/files/folder/Handouts/Touch%20Interaction%20Checklist)  
+[One-Page Touch Interaction Design Checklist]((https://canvas.sfu.ca/courses/55288/files)  
 [Responsive Web Design Sketch Sheets](http://jeremypalford.com/wp-content/uploads/2013/07/JPA-Responsive-Web-Design-Sketch-Sheets.zip)  
 
 ### Required Reading  

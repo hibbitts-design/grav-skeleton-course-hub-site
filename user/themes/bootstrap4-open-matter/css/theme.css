@@ -227,7 +227,6 @@ ol.breadcrumb {
 
 .listbullet ul li {
   padding-left: 1em;
-  text-indent: -1em;
 }
 
 .listbullet ul li:before {
@@ -394,4 +393,17 @@ body.chromeless {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
     background: #666666;
+}
+
+div.keeptogether {
+   display: inline-block;
+   width: 100%;
+}
+
+.chromeless-show {
+    display: none;
+}
+
+.chromeless-hide {
+    display: block;
 }
