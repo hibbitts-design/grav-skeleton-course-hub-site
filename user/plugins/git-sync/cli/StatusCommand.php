@@ -70,9 +70,8 @@ EOF
             throw new RuntimeException('git root and repositoryPath do not match', 50);
         }
 
-        // needed to prevent out put in logs:
-        $password = Helper::decrypt($plugin->getPassword());
-
+        // needed to prevent output in logs:
+        $password = Helper::decrypt($plugin->getPassword() ?? '');
 
         $this->console_header('local git config:');
         $this->console_log(
@@ -89,7 +88,7 @@ EOF
         }
         $testRepository = $plugin->testRepository(
             Helper::prepareRepository(
-              $plugin->getUser(),
+              $plugin->getUser() ?? '',
               $password,
               $repository)
         );

@@ -112,18 +112,25 @@ class Content implements ContentInterface
                     ['page' => $page]
                 );
             }
-            if (isset($page->header()->styles)) {
-                $paths[$route]['style'] = $page->header()->styles;
-            } elseif (isset($config['style'])) {
-                $paths[$route]['style'] = $config['style'];
+            if (isset($this->config['process']) && $this->config['process'] == "markdown") {
+                $paths[$route]['content'] = $page->rawMarkdown();
+            } else {
+                $paths[$route]['content'] = $page->content();
             }
-            $paths[$route]['content'] = $page->content();
-
             if (!empty($paths[$route])) {
                 $children = $this->buildTree($route, $mode, $depth);
                 if (!empty($children)) {
                     $paths[$route]['children'] = $children;
                 }
+            }
+        }
+        
+        if (isset($config['styles'])
+            && is_array($config['styles'])
+            && !empty($config['styles'])
+        ) {
+            foreach ($config['styles'] as $property => $value) {
+                $this->parser->styleProcessor($page->slug(), $property, $value);
             }
         }
         if (!empty($paths)) {
@@ -154,7 +161,9 @@ class Content implements ContentInterface
             if (preg_match(self::REGEX_FRAGMENT_SHORTCODE, $content)) {
                 $content = $this->processFragments($content);
             }
-            $content = $this->parsedown->text($content);
+            if (isset($this->config['process']) && $this->config['process'] == "markdown") {
+                $content = $this->parsedown->text($content);
+            }
             $breaks = explode('<hr />', $content);
             if (count($breaks) > 0) {
                 $this->breakContent($page, $config, $breaks);
@@ -272,6 +281,16 @@ class Content implements ContentInterface
      */
     public function buildSlide(array $page, array $config, string $break)
     {
+        $styles = $page['header']->style ??
+            $page['header']->styles ??
+            $page['header']->presentation['style'] ??
+            $page['header']->presentation['styles'] ??
+            [];
+        if (!empty($styles) && is_array($styles) && Utils::arrayIsAssociative($styles)) {
+            foreach ($styles as $property => $value) {
+                $this->parser->styleProcessor($config['id'], $property, $value, $page);
+            }
+        }
         if ($config['shortcodes']) {
             $break = self::pushNotes($break);
             $shortcodes = $this->parser->processShortcodes($break, $config['id'], $page);

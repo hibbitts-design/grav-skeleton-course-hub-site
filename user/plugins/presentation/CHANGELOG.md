@@ -1,3 +1,44 @@
+# v4.0.1
+## 19-07-2020
+
+1. [](#bugfix)
+   - Language-string for advanced options
+
+# v4.0.0
+## 15-07-2020
+
+1. [](#new)
+   - Stable release of 4.0.0
+
+# v4.0.0-beta.2
+## 15-07-2020
+
+1. [](#improved)
+   - Twig-extensions namespacing
+
+# v4.0.0-beta.1
+## 12-07-2020
+
+1. [](#bugfix)
+   - Re-processing content with Parsedown broke slides
+2. [](#new)
+   - `process`-option
+
+# v3.1.4-beta.1
+## 12-07-2020
+
+1. [](#bugfix)
+   - Flexibility in declaring styles from config and FrontMatter
+   - Reinstate `reveal_init` initialization
+2. [](#improved)
+   - Stricter type-checking on styles
+
+# v3.1.3
+## 23-05-2020
+
+1. [](#bugfix)
+   - Fix transport for styles
+
 # v3.1.2
 ## 10-02-2020
 

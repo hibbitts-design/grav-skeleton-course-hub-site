@@ -16,4 +16,5 @@ return array(
     'def43f6c87e4f8dfd0c9e1b1bab14fe8' => $vendorDir . '/symfony/polyfill-iconv/bootstrap.php',
     '0d59ee240a4cd96ddbb4ff164fccea4d' => $vendorDir . '/symfony/polyfill-php73/bootstrap.php',
     'a686abd6bcd0f7067184e090d1174003' => $baseDir . '/system/defines.php',
+    '4daf90f1654433646e3b7bf46d928469' => $baseDir . '/system/aliases.php',
 );
