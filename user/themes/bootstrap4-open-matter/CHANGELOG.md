@@ -1,3 +1,33 @@
+# v3.3.9
+## 09/06/2020
+
+1. [](#improved)
+    * Added support for External Links Plugin target with badge shortcode target
+
+# v3.3.8
+## 09/04/2020
+
+1. [](#bugfix)
+    * Corrected CSS styling for button, badge, and navbar-branding elements
+
+# v3.3.7
+## 09/04/2020
+
+1. [](#improved)
+    * Updated Link page blueprint to include badge label, type and url
+
+# v3.3.6
+## 09/03/2020
+
+1. [](#improved)
+    * Added support for badge types and urls in link page types
+
+# v3.3.5
+## 09/03/2020
+
+1. [](#improved)
+    * Added `target` attribute to badge shortcode
+
 # v3.3.4
 ## 08/16/2020
 
