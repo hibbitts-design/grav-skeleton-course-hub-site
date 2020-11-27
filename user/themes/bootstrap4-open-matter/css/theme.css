@@ -51,7 +51,7 @@ a:hover:not(btn), a:focus:not(btn) {
 
 .page-item.active .page-link {
     z-index: 1;
-    color: #fff;
+    color: #fff!important;
     background-color: #1b6ec2;
     border-color: #1b6ec2;
 }
