@@ -10,9 +10,9 @@ header_image_alt_text: 'Information architecture'
 ---
 
 ## What does a holistic user experience design process look like?
-[Software Development Processes](https://www.google.ca/slides/about/)  
-[User Experience Design Processes](https://www.google.ca/slides/about/)  
-[Our Design Process (aka Toolkit)](https://www.google.ca/slides/about/)  
+[Software Development Processes](../../presentations/module-02#/module-02-4)    
+[User Experience Design Processes](../../presentations/module-02#/module-02-5)    
+[Our Design Process (aka Toolkit)](../../presentations/module-02#/module-02-6)    
 
 ===
 
@@ -22,15 +22,13 @@ header_image_alt_text: 'Information architecture'
 [May 16th Class One-minute Summaries](https://canvas.sfu.ca/courses/55288/assignments)
 
 ### Presented Slides  
-[Placeholder Slides](https://docs.google.com/presentation/d/e/2PACX-1vSPiOUzmRG4EB6ng8KQgOwZEbVuN2u1d5tGVTiAyzlVuO_o4Zjyli3oAf_U_CqXml_6GMUBR9nUyEYb/pub?start=false&loop=false&delayms=3000)
-
-[googleslides url="https://docs.google.com/presentation/d/e/2PACX-1vSPiOUzmRG4EB6ng8KQgOwZEbVuN2u1d5tGVTiAyzlVuO_o4Zjyli3oAf_U_CqXml_6GMUBR9nUyEYb/embed?start=false&loop=false&delayms=3000"]
+[presentation="presentations/module-02"]
 
 ### CPT-363 UX Design Process/Toolkit
 ![CPT-363 UX Design Process/Toolkit Diagram](ux-design-process-v4.png)
 
 ### Handouts
-[Product Reaction Cards](https://canvas.sfu.ca/courses/55288/files)  
+[Product Reaction Cards]((https://canvas.sfu.ca/courses/55288/files)  
 
 ### Quick Quiz
 [h5p id="213956"]
@@ -39,4 +37,4 @@ header_image_alt_text: 'Information architecture'
 [Course Reflection Log](https://canvas.sfu.ca/courses/55288/assignments)  
 
 ### Recommended Reading  
-[embedly url="https://uxplanet.org/the-evolution-of-ux-process-methodology-47f52557178b"]
+[embedly]https://uxplanet.org/the-evolution-of-ux-process-methodology-47f52557178b[/embedly]

@@ -1,0 +1,43 @@
+includes:
+    #- '../../vendor/phpstan/phpstan-strict-rules/rules.neon'
+    - '../../vendor/phpstan/phpstan-deprecation-rules/rules.neon'
+parameters:
+    bootstrap: phpstan-bootstrap.php
+    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: false
+
+    # These checks are new for phpstan 0.12, ignore them for now.
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+
+    fileExtensions:
+        - php
+    excludes_analyse:
+        - **/tests/**
+        - */vendor/**
+        - */Compat/**
+        - */Config/**
+        - */Data/**
+        - */Filesystem/**
+        - */Rules/**
+    ignoreErrors:
+        - '#Unsafe usage of new static\(\)#'
+        -
+            message: '#Trying to invoke string but it might not be a callable#'
+            path: '*/Blueprints/src/BlueprintSchema.php'
+
+        # Deprecated event classes
+        -
+            message: '#deprecated#'
+            path: '*/Event/src/Event.php'
+        -
+           message: '#(deprecated|compatible|expects|returns)#'
+           path: '*/Event/src/EventDispatcher.php'
+
+        # File class hacks
+        -
+            message: '#RocketTheme\\Toolbox\\File\\[^:]+::content\(\) should be compatible#'
+            path: '*/File/src/*.php'
+        -
+            message: '#RocketTheme\\Toolbox\\File\\[^:]+::content\(\) expects#'
+            path: '*/File/src/*.php'

@@ -1,3 +1,21 @@
+# v1.4.3
+## 01/15/2021
+
+1. [](#improved)
+   * NextGen Editor: Updated upcast/downcast syntax to support latest version
+
+# v1.4.2
+## 12/20/2020
+
+1. [](#bugfix)
+    * Fixed `undefined` value when inserting a new Page-Inject shortcode, preventing Page picker to load
+
+# v1.4.1
+## 12/18/2020
+
+1. [](#improved)
+    * NextGen Editor: Properly restore the initial stored path when loading the Page Picker
+
 # v1.4.0
 ## 12/02/2020
 

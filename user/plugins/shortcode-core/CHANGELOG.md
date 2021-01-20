@@ -1,3 +1,17 @@
+# v5.0.3
+## 01/15/2021
+
+1. [](#improved)
+   * NextGen Editor: Update to support latest version
+
+# v5.0.2
+## 12/18/2020
+
+1. [](#improved)
+    * NexGen Editor: Added optional `shorthand` to force attributes to full declaration
+1. [](#bugfix)
+    * NextGen Editor: Fixed regexp preventing attributes with `/` in the value from being captured
+
 # v5.0.1
 ## 12/02/2020
 

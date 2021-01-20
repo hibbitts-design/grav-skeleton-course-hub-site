@@ -1,4 +1,4 @@
-title: CPT-363
+title: 'Open Course Hub'
 default_lang: en
 author:
   name: 'Site Author'
@@ -7,9 +7,8 @@ taxonomies:
   - category
   - tag
   - author
-  - filter
 metadata:
-  description: 'A short description of your course would go here'
+  description: 'A short description of your multicourse hub would go here'
 summary:
   enabled: true
   format: short

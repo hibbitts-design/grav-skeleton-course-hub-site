@@ -19,13 +19,13 @@ window.nextgenEditor.addHook('hookInit', () => {
 
   window.nextgenEditor.addButton('page-inject-page', {
     group: 'page-inject',
-    command: { name: 'page-inject', params: { type: 'page' } },
+    command: { name: 'page-inject', params: { type: 'page', value: '' } },
     label: 'Page Injection',
   });
 
   window.nextgenEditor.addButton('page-inject-content', {
     group: 'page-inject',
-    command: { name: 'page-inject', params: { type: 'content' } },
+    command: { name: 'page-inject', params: { type: 'content', value: '' } },
     label: 'Content Injection',
   });
 });
@@ -150,7 +150,7 @@ window.nextgenEditor.addHook('hookHTMLtoMarkdown', {
 
 class GravPageInjectCommand extends Command {
   execute(params) {
-    showPagePicker((page) => {
+    showPagePicker(params.value, (page) => {
       const dataPageInject = uncollapse(`<page-inject type="${params.type}" title="${page.name}" route="${page.value}" template=""></page-inject>`);
       const viewPageInject = this.editor.data.processor.toView(dataPageInject).getChild(0);
       const modelPageInject = this.editor.data.toModel(viewPageInject).getChild(0);
@@ -193,23 +193,23 @@ window.nextgenEditor.addPlugin('GravPageInject', {
 
     this.editor.conversion.for('upcast').elementToElement({
       view: 'page-inject',
-      model(viewElement, modelWriter) {
-        return modelWriter.createElement('page-inject', viewElement.getAttributes());
+      model(viewElement, { writer }) {
+        return writer.createElement('page-inject', viewElement.getAttributes());
       },
     });
 
     this.editor.conversion.for('dataDowncast').elementToElement({
       model: 'page-inject',
-      view(modelElement, viewWriter) {
-        return viewWriter.createContainerElement('page-inject', modelElement.getAttributes());
+      view(modelElement, { writer }) {
+        return writer.createContainerElement('page-inject', modelElement.getAttributes());
       },
     });
 
     this.editor.conversion.for('editingDowncast').elementToElement({
       model: 'page-inject',
-      view(modelElement, viewWriter) {
-        const container = viewWriter.createContainerElement('page-inject', modelElement.getAttributes());
-        return toWidget(container, viewWriter);
+      view(modelElement, { writer }) {
+        const container = writer.createContainerElement('page-inject', modelElement.getAttributes());
+        return toWidget(container, writer);
       },
     });
   },
@@ -221,9 +221,10 @@ window.pageInjectRouteSettings = function pageInjectRouteSettings() {
   const domPageInject = this.closest('page-inject');
   const viewPageInject = editor.editing.view.domConverter.mapDomToView(domPageInject);
   const modelPageInject = editor.editing.mapper.toModelElement(viewPageInject);
+  const route = modelPageInject.getAttribute('route');
 
-  showPagePicker((page) => {
-    if (page.value === modelPageInject.getAttribute('route')) {
+  showPagePicker(route, (page) => {
+    if (page.value === route) {
       return;
     }
 

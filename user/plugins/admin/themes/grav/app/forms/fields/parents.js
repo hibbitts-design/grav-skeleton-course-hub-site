@@ -5,7 +5,7 @@ import { config as gravConfig } from 'grav-config';
 let XHRUUID = 0;
 export const Instances = {};
 
-export class Parents {
+export default class Parents {
     constructor(container, field, data) {
         this.container = $(container);
         this.fieldName = field.attr('name');
@@ -128,7 +128,8 @@ export class Parents {
             data: Object.assign({}, getExtraFormData(this.container), {
                 route: b64_encode_unicode(parent.value),
                 field: this.field.data('fieldName'),
-                action: 'getLevelListing'
+                action: 'getLevelListing',
+                'admin-nonce': gravConfig.admin_nonce
             }),
             success: (response) => {
                 this.stopLoader();
@@ -216,6 +217,7 @@ $(document).on('click', '[data-parents]', (event) => {
             route: b64_encode_unicode(field.val()),
             field: field.data('fieldName'),
             action: 'getLevelListing',
+            'admin-nonce': gravConfig.admin_nonce,
             initial: true
         }),
         success(response) {

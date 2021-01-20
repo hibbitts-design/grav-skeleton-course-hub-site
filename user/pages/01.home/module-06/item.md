@@ -10,9 +10,9 @@ header_image_alt_text: 'The Pay and Go box at the new North Oshawa medical clini
 ---
 
 ## How to conduct a usability inspection?   
-[Cognitive Walkthroughs](https://www.google.ca/slides/about/)  
-[Conducting Heuristic Evaluations](https://www.google.ca/slides/about/)  
-[Nielsen’s Heuristics](https://www.google.ca/slides/about/)  
+[Cognitive Walkthroughs](../../presentations/module-06#/module-06-4)  
+[Conducting Heuristic Evaluations](../../presentations/module-06#/module-02-5)  
+[Nielsen’s Heuristics](../../presentations/module-06#/module-06-6)
 
 ===
 
@@ -22,9 +22,7 @@ header_image_alt_text: 'The Pay and Go box at the new North Oshawa medical clini
 [Jun 13th Class One-minute Summaries](https://canvas.sfu.ca/courses/55288/assignments)
 
 ### Presented Slides  
-[Placeholder Slides](https://docs.google.com/presentation/d/e/2PACX-1vSPiOUzmRG4EB6ng8KQgOwZEbVuN2u1d5tGVTiAyzlVuO_o4Zjyli3oAf_U_CqXml_6GMUBR9nUyEYb/pub?start=false&loop=false&delayms=3000)
-
-[googleslides url="https://docs.google.com/presentation/d/e/2PACX-1vSPiOUzmRG4EB6ng8KQgOwZEbVuN2u1d5tGVTiAyzlVuO_o4Zjyli3oAf_U_CqXml_6GMUBR9nUyEYb/embed?start=false&loop=false&delayms=3000"]
+[presentation="presentations/module-06"]
 
 ### Supplemental Materials  
 [Design Heuristics Lecture with Scott Klemmer](https://www.youtube.com/playlist?list=PLVtu1bDQijari7LfHOoSTdcpbWIkwZWIA)  
@@ -32,7 +30,7 @@ header_image_alt_text: 'The Pay and Go box at the new North Oshawa medical clini
 
 ### Assignments
 [Usability Inspection](https://canvas.sfu.ca/courses/55288/assignments)   
-[Usability Inspection Report Template](https://canvas.sfu.ca/courses/55288/files)
+[Usability Inspection Report Template]((https://canvas.sfu.ca/courses/55288/files)
 
 ### Required Reading  
-[embedly url="https://www.uxmatters.com/mt/archives/2014/06/an-overview-of-expert-heuristic-evaluations.php"]
+[embedly]https://www.uxmatters.com/mt/archives/2014/06/an-overview-of-expert-heuristic-evaluations.php[/embedly]

@@ -13,5 +13,7 @@ hide_git_sync_repo_link: true
 
 <hr>
 
-## Web Pick of the Week
-[plugin:page-inject](../web-pick-of-the-week/)
+## Paul's Web Pick of the Week
+[plugin:page-inject](/all-web-picks-of-the-week/latest)
+
+[View all of Paul's Web Picks of the Week](https://canvas.sfu.ca/courses/55288/pages/all-web-picks-of-the-week)

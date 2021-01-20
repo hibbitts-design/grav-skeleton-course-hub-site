@@ -30,7 +30,7 @@ $grav['config']->init();
 /** @var UniformResourceLocator $locator */
 $locator = Grav::instance()['locator'];
 $iterator = $locator->getIterator('plugins://');
-foreach($iterator as $directory) {
+foreach ($iterator as $directory) {
     if (!$directory->isDir()) {
         continue;
     }
@@ -39,3 +39,11 @@ foreach($iterator as $directory) {
         require $autoloader;
     }
 }
+
+define('GANTRY_DEBUGGER', true);
+define('GANTRY5_DEBUG', true);
+define('GANTRY5_PLATFORM', 'grav');
+define('GANTRY5_ROOT', rtrim(ROOT_DIR, '/'));
+define('GANTRY5_VERSION', '@version@');
+define('GANTRY5_VERSION_DATE', '@versiondate@');
+define('GANTRYADMIN_PATH', '');
