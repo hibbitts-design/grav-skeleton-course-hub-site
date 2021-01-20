@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '916b7cfc44d4d1e153cf5752c908124abe3167ef',
+    'reference' => '42f976c82ad5a6627838ffe83b94fd18efa76c91',
     'name' => 'getgrav/grav',
   ),
   'versions' => 
@@ -108,7 +108,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '916b7cfc44d4d1e153cf5752c908124abe3167ef',
+      'reference' => '42f976c82ad5a6627838ffe83b94fd18efa76c91',
     ),
     'gregwar/cache' => 
     array (
