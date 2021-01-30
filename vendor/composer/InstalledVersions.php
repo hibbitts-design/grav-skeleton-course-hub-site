@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '42f976c82ad5a6627838ffe83b94fd18efa76c91',
+    'reference' => '1b6e4d4300b762cb041f7a2c51f8190650907e31',
     'name' => 'getgrav/grav',
   ),
   'versions' => 
@@ -131,7 +131,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '42f976c82ad5a6627838ffe83b94fd18efa76c91',
+      'reference' => '1b6e4d4300b762cb041f7a2c51f8190650907e31',
     ),
     'gregwar/cache' => 
     array (

@@ -5,7 +5,8 @@ use Grav\Installer\VersionUpdate;
 use Grav\Installer\YamlUpdater;
 
 return [
-    'preflight' =>
+    'preflight' => null,
+    'postflight' =>
         function () {
             /** @var VersionUpdate $this */
             try {
@@ -19,6 +20,5 @@ return [
             } catch (\Exception $e) {
                 throw new InstallException('Could not update system configuration to maintain backwards compatibility', $e);
             }
-        },
-    'postflight' => null
+        }
 ];

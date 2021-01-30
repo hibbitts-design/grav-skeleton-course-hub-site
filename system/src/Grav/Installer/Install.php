@@ -218,20 +218,15 @@ ERR;
             throw new RuntimeException('Grav has already been installed here!', 400);
         }
 
-        // Make sure that none of the Grav\Installer classes have been loaded, otherwise installation may fail!
+        // Load the installer classes.
         foreach ($this->classMap as $class_name => $path) {
+            // Make sure that none of the Grav\Installer classes have been loaded, otherwise installation may fail!
             if (class_exists($class_name, false)) {
                 throw new RuntimeException(sprintf('Cannot update Grav, class %s has already been loaded!', $class_name), 500);
             }
+
+            require $path;
         }
-
-        $grav = Grav::instance();
-
-        /** @var ClassLoader $loader */
-        $loader = $grav['loader'];
-
-        // Override Grav\Installer classes by using this version of Grav.
-        $loader->addClassMap($this->classMap);
 
         $this->legacySupport();
 
@@ -283,6 +278,13 @@ ERR;
      */
     public function finalize(): void
     {
+        // Finalize can be run without installing Grav first.
+        if (!$this->updater) {
+            $versions = Versions::instance(GRAV_ROOT . '/user/config/versions.yaml');
+            $this->updater = new VersionUpdater('core/grav', __DIR__ . '/updates', GRAV_VERSION, $versions);
+            $this->updater->install();
+        }
+
         $this->updater->postflight();
 
         Cache::clearCache('all');

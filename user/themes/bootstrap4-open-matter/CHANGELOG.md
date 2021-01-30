@@ -1,3 +1,21 @@
+# v3.5.1
+## 01/28/2021
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.5.0
+## 01/26/2021
+
+1. [](#improved)
+    * Updated theme blueprints for Grav 1.7
+
+# v3.4.9
+## 01/25/2021
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
 # v3.4.8
 ## 01/15/2021
 
