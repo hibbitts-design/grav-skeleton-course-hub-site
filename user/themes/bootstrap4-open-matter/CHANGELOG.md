@@ -1,3 +1,23 @@
+# v3.5.4
+## 01/31/2021
+
+1. [](#improved)
+    * Set Course Subsite page blueprint default folder ('home')
+
+# v3.5.3
+## 01/30/2021
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder (numeric prefixes used for home page modular content ordering, thanks to @ricardo118)
+
+# v3.5.2
+## 01/29/2021
+
+1. [](#bugfix)
+    * Removed unneeded <br> tags in Partial templates
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
 # v3.5.1
 ## 01/28/2021
 

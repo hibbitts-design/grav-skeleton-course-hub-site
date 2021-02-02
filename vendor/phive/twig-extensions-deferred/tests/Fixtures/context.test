@@ -1,9 +1,0 @@
---TEST--
-deferred tag
---TEMPLATE--
-{% block foo deferred %}{{ bar }}{% endblock %}
-{% set bar = 'bar' %}
---DATA--
-return array()
---EXPECT--
-bar
