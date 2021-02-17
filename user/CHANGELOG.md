@@ -1,3 +1,121 @@
+# v3.3.0
+## 02/16/2021
+
+1. [](#bugfix)
+    * Updated new Subsite pages to be visible by default
+
+# v3.2.9
+## 01/31/2021
+
+1. [](#improved)
+    * Updated Admin Panel blueprints for Grav 1.7
+    * Updated Admin Panel bar dropdown menu items
+
+# v3.2.8
+## 01/30/2021
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.2.7
+## 01/20/2021
+
+1. [](#improved)
+    * Updated to Grav 1.7.1
+
+# v3.2.6
+## 12/20/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.2.5
+## 12/20/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.2.4
+## 11/29/2020
+
+1. [](#improved)
+    * Updated skeleton screenshot
+
+# v3.2.3
+## 11/28/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.2.2
+## 07/12/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.2.1
+## 07/10/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.2.0
+## 07/08/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.1.9
+## 07/03/2020
+
+1. [](#improved)
+    * Updated default demo pages
+1. [](#bugfix)
+    * Removed old Google font option for Grav 1.7 upgrade compatibility
+
+# v3.1.8
+## 05/27/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.1.7
+## 03/06/2020
+
+1. [](#improved)
+    * Updated page types hidden by default in Admin Panel
+
+# v3.1.6
+## 02/19/2020
+
+1. [](#bugfix)
+    * Removed deprecated GitSync config variable
+
+# v3.1.5
+## 02/13/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
+# v3.1.4
+## 01/27/2020
+
+1. [](#new)
+    * Added 'Add Subsite' command to Admin Panel 'Add' dropdown menu
+
+# v3.1.3
+## 01/21/2020
+
+1. [](#improved)
+    * Added new `filter` taxonomy item to site config
+    * Updated example demo pages
+
+# v3.1.2
+## 01/07/2020
+
+1. [](#improved)
+    * Updated default demo pages
+
 # v3.1.1
 ## 12/17/2019
 
