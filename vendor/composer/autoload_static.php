@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit91dc3000526e143ea598fb136ba6f289
+class ComposerStaticInitcb0caf4added1e3e06c812875c20c1e6
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -603,6 +603,9 @@ class ComposerStaticInit91dc3000526e143ea598fb136ba6f289
         'Grav\\Common\\Filesystem\\RecursiveDirectoryFilterIterator' => __DIR__ . '/../..' . '/system/src/Grav/Common/Filesystem/RecursiveDirectoryFilterIterator.php',
         'Grav\\Common\\Filesystem\\RecursiveFolderFilterIterator' => __DIR__ . '/../..' . '/system/src/Grav/Common/Filesystem/RecursiveFolderFilterIterator.php',
         'Grav\\Common\\Filesystem\\ZipArchiver' => __DIR__ . '/../..' . '/system/src/Grav/Common/Filesystem/ZipArchiver.php',
+        'Grav\\Common\\Flex\\FlexCollection' => __DIR__ . '/../..' . '/system/src/Grav/Common/Flex/FlexCollection.php',
+        'Grav\\Common\\Flex\\FlexIndex' => __DIR__ . '/../..' . '/system/src/Grav/Common/Flex/FlexIndex.php',
+        'Grav\\Common\\Flex\\FlexObject' => __DIR__ . '/../..' . '/system/src/Grav/Common/Flex/FlexObject.php',
         'Grav\\Common\\Flex\\Traits\\FlexCollectionTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Flex/Traits/FlexCollectionTrait.php',
         'Grav\\Common\\Flex\\Traits\\FlexCommonTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Flex/Traits/FlexCommonTrait.php',
         'Grav\\Common\\Flex\\Traits\\FlexGravTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Flex/Traits/FlexGravTrait.php',
@@ -2066,11 +2069,11 @@ class ComposerStaticInit91dc3000526e143ea598fb136ba6f289
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit91dc3000526e143ea598fb136ba6f289::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit91dc3000526e143ea598fb136ba6f289::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit91dc3000526e143ea598fb136ba6f289::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit91dc3000526e143ea598fb136ba6f289::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit91dc3000526e143ea598fb136ba6f289::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcb0caf4added1e3e06c812875c20c1e6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcb0caf4added1e3e06c812875c20c1e6::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitcb0caf4added1e3e06c812875c20c1e6::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitcb0caf4added1e3e06c812875c20c1e6::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitcb0caf4added1e3e06c812875c20c1e6::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -858,6 +858,9 @@ class AdminPlugin extends Plugin
             'authorize' => [
                 'admin.configuration.system',
                 'admin.configuration.site',
+                'admin.configuration.media',
+                'admin.configuration.security',
+                'admin.configuration.info',
                 'admin.super'],
             'priority' => 9
         ];
@@ -1064,6 +1067,9 @@ class AdminPlugin extends Plugin
         // Double check we have system.yaml, site.yaml etc
         $config_path = $this->grav['locator']->findResource('user://config');
         foreach ($this->admin::configurations() as $config_file) {
+            if ($config_file === 'info') {
+                continue;
+            }
             $config_file = "{$config_path}/{$config_file}.yaml";
             if (!file_exists($config_file)) {
                 touch($config_file);

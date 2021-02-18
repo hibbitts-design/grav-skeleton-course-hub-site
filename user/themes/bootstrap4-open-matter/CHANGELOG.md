@@ -1,3 +1,46 @@
+# v3.6.3
+## 02/18/2021
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.6.2
+## 02/18/2021
+
+1. [](#improved)
+    * Changed default sort order for Course Subsites List
+
+# v3.6.1
+## 02/18/2021
+
+1. [](#improved)
+    * Changed default for Course Subsites List to 2 cards per row
+
+# v3.6.0
+## 02/17/2021
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
+# v3.5.9
+## 02/17/2021
+
+1. [](#bugfix)
+    * Fixed several display format issues with iFrame template and blueprint
+    * Fixed incorrect variable name in iFrame template
+
+# v3.5.8
+## 02/16/2021
+
+1. [](#improved)
+    * Updated Default Editor PDF and H5P shortcode syntax to be compatible with NextGen shortcode previews
+
+# v3.5.7
+## 02/15/2021
+
+1. [](#improved)
+    * Updated GoogleSlides shortcode formatting to use Bootstrap responsive embed class
+
 # v3.5.6
 ## 02/03/2021
 

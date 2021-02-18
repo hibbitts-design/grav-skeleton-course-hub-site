@@ -25,7 +25,7 @@ form:
                 header.card_width:
                     type: select
                     label: 'Subsite List Card Width (in columns)'
-                    default: none
+                    default: 5
                     size: medium
                     options:
                         3: 3 Cards per Row (without Sidebar)
@@ -35,7 +35,7 @@ form:
                 header.content.order.by:
                   type: select
                   label: Order By
-                  default: date
+                  default: folder
                   size: small
                   options:
                     folder: Folder
