@@ -1,3 +1,40 @@
+# v3.6.9
+## 03/01/2021
+
+1. [](#bugfix)
+    * Fixed incorrect appearance of hover and focus on some elements
+
+# v3.6.8
+## 03/01/2021
+
+1. [](#improved)
+    * Removed Breadcrumbs plugin as dependency
+
+# v3.6.7
+## 03/01/2021
+
+1. [](#improved)
+    * Removed Feed plugin as dependency
+
+# v3.6.6
+## 02/28/2021
+
+1. [](#bugfix)
+    * Removed unneeded dependencies of Archives, TaxonomyList and SimpleSearch plugins
+
+# v3.6.5
+## 02/28/2021
+
+1. [](#improved)
+    * Updated Bootstrap to v4.6
+    * Updated Bootswatch to v4.6
+
+# v3.6.4
+## 02/28/2021
+
+1. [](#improved)
+    * Reduced plugin dependencies, thanks to the new Grav Skeleton build process
+
 # v3.6.3
 ## 02/18/2021
 
