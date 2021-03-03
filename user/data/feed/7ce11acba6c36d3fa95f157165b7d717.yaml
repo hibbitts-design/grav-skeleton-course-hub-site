@@ -1,10 +1,10 @@
-last_checked: 1614624944
+last_checked: 1614793644
 data:
   -
     title: 'Skeleton Build Automation'
     url: 'https://getgrav.org/blog/skeletons-build-automation'
     date: 1614347940
-    nicetime: '3 days ago'
+    nicetime: '5 days ago'
   -
     title: 'Using Grav''s new built-in Web Server'
     url: 'https://getgrav.org/blog/using-builtin-webserver'
@@ -24,7 +24,7 @@ data:
     title: 'Grav Premium Focus: NextGen Editor'
     url: 'https://getgrav.org/blog/premium-focus-nextgen-editor'
     date: 1610713140
-    nicetime: '1 months ago'
+    nicetime: '2 months ago'
   -
     title: 'Grav 1.7 Stable Release - One week away!'
     url: 'https://getgrav.org/blog/grav-17-stable-imminent'
