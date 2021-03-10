@@ -1,8 +1,9 @@
-enabled: true
+enabled: false
 theme: black
 order:
   by: folder
   dir: asc
+all_assets: false
 theme_css: true
 builtin_css: true
 builtin_js: true
@@ -17,13 +18,16 @@ token_auth: false
 token: Hd4HFdPvbpKzTqz
 admin_async_save: false
 admin_async_save_typing: false
+footer: ''
 transition: true
+process: html
 shortcodes: true
 shortcode_classes: presentation-iframe
 unwrap_images: true
 content: Content
 parser: DecksetParser
 transport: Transport
+shortcode_parser: RegularParser
 breakpoints:
   240: '8'
   320: '10'
