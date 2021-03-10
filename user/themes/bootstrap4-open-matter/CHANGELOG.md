@@ -1,3 +1,17 @@
+# v3.7.2
+## 03/10/2021
+
+1. [](#bugfix)
+    * Fixed incorrect appearance of hover and focus on dropdown menu items
+
+# v3.7.1
+## 03/08/2021
+
+1. [](#bugfix)
+    * Included loading of v4.6 bootstrap.min.js by default
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
 # v3.7.0
 ## 03/02/2021
 
