@@ -40,7 +40,7 @@ return array(
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'Phive\\Twig\\Extensions\\Deferred\\' => array($vendorDir . '/phive/twig-extensions-deferred/src'),
     'Nyholm\\Psr7\\' => array($vendorDir . '/nyholm/psr7/src'),
-    'Nyholm\\Psr7Server\\' => array($vendorDir . '/kodus/psr7-server/src'),
+    'Nyholm\\Psr7Server\\' => array($vendorDir . '/nyholm/psr7-server/src'),
     'Negotiation\\' => array($vendorDir . '/willdurand/negotiation/src/Negotiation'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'MatthiasMullie\\PathConverter\\' => array($vendorDir . '/matthiasmullie/path-converter/src'),

@@ -390,17 +390,17 @@
         },
         {
             "name": "donatj/phpuseragentparser",
-            "version": "v1.2.0",
-            "version_normalized": "1.2.0.0",
+            "version": "v1.4.0",
+            "version_normalized": "1.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/donatj/PhpUserAgent.git",
-                "reference": "978e66786bc392a09b24b152a8a695dadd230e60"
+                "reference": "246c1cf0a44f07168c702203bf30d5f48f17bab0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/978e66786bc392a09b24b152a8a695dadd230e60",
-                "reference": "978e66786bc392a09b24b152a8a695dadd230e60",
+                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/246c1cf0a44f07168c702203bf30d5f48f17bab0",
+                "reference": "246c1cf0a44f07168c702203bf30d5f48f17bab0",
                 "shasum": ""
             },
             "require": {
@@ -411,7 +411,7 @@
                 "donatj/drop": "*",
                 "phpunit/phpunit": "~4.8|~9"
             },
-            "time": "2020-12-29T05:36:08+00:00",
+            "time": "2021-03-16T16:25:14+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -445,11 +445,11 @@
             ],
             "support": {
                 "issues": "https://github.com/donatj/PhpUserAgent/issues",
-                "source": "https://github.com/donatj/PhpUserAgent/tree/v1.2.0"
+                "source": "https://github.com/donatj/PhpUserAgent/tree/v1.4.0"
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.me/donatj/15",
+                    "url": "https://www.paypal.me/donatj/5",
                     "type": "custom"
                 },
                 {
@@ -666,17 +666,17 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.9.2",
-            "version_normalized": "2.9.2.0",
+            "version": "2.10.0",
+            "version_normalized": "2.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536"
+                "reference": "6ecda5217bf048088b891f7403b262906be5a957"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/df7933820090489623ce0be5e85c7e693638e536",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/6ecda5217bf048088b891f7403b262906be5a957",
+                "reference": "6ecda5217bf048088b891f7403b262906be5a957",
                 "shasum": ""
             },
             "require": {
@@ -692,7 +692,7 @@
                 "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
                 "whoops/soap": "Formats errors as SOAP responses"
             },
-            "time": "2021-01-24T12:00:00+00:00",
+            "time": "2021-03-16T12:00:00+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -728,7 +728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.9.2"
+                "source": "https://github.com/filp/whoops/tree/2.10.0"
             },
             "funding": [
                 {
@@ -794,18 +794,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getgrav/Image.git",
-                "reference": "70afaa75ea19856813124142c51f5fb2e9f1a285"
+                "reference": "ea23859700f32447a85e79d96f331e3d6c8897a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getgrav/Image/zipball/70afaa75ea19856813124142c51f5fb2e9f1a285",
-                "reference": "70afaa75ea19856813124142c51f5fb2e9f1a285",
+                "url": "https://api.github.com/repos/getgrav/Image/zipball/ea23859700f32447a85e79d96f331e3d6c8897a8",
+                "reference": "ea23859700f32447a85e79d96f331e3d6c8897a8",
                 "shasum": ""
             },
             "require": {
                 "ext-gd": "*",
                 "gregwar/cache": "dev-php8",
-                "php": "^5.3 || ^7.0 || ^8.0"
+                "php": "^5.6 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "sllh/php-cs-fixer-styleci-bridge": "~1.0",
@@ -814,7 +814,7 @@
             "suggest": {
                 "behat/transliterator": "Transliterator provides ability to set non-latin1 pretty names"
             },
-            "time": "2020-12-02T14:04:28+00:00",
+            "time": "2021-03-15T17:03:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -923,17 +923,17 @@
         },
         {
             "name": "itsgoingd/clockwork",
-            "version": "v5.0.6",
-            "version_normalized": "5.0.6.0",
+            "version": "v5.0.7",
+            "version_normalized": "5.0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itsgoingd/clockwork.git",
-                "reference": "1de3f9f9fc22217aa024f79ecbdf0fde418fc0a1"
+                "reference": "e41ee368ff4dcc30d3f4563fe8bd80ed72b293b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/1de3f9f9fc22217aa024f79ecbdf0fde418fc0a1",
-                "reference": "1de3f9f9fc22217aa024f79ecbdf0fde418fc0a1",
+                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/e41ee368ff4dcc30d3f4563fe8bd80ed72b293b4",
+                "reference": "e41ee368ff4dcc30d3f4563fe8bd80ed72b293b4",
                 "shasum": ""
             },
             "require": {
@@ -941,7 +941,7 @@
                 "php": ">=5.6",
                 "psr/log": "1.*"
             },
-            "time": "2020-12-27T00:18:25+00:00",
+            "time": "2021-03-14T16:29:40+00:00",
             "type": "library",
             "extra": {
                 "laravel": {
@@ -983,7 +983,7 @@
             ],
             "support": {
                 "issues": "https://github.com/itsgoingd/clockwork/issues",
-                "source": "https://github.com/itsgoingd/clockwork/tree/v5.0.6"
+                "source": "https://github.com/itsgoingd/clockwork/tree/v5.0.7"
             },
             "funding": [
                 {
@@ -992,67 +992,6 @@
                 }
             ],
             "install-path": "../itsgoingd/clockwork"
-        },
-        {
-            "name": "kodus/psr7-server",
-            "version": "1.0.1",
-            "version_normalized": "1.0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kodus/psr7-server.git",
-                "reference": "dcfd0116451b0f0e7c6b23b831757ed288347278"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kodus/psr7-server/zipball/dcfd0116451b0f0e7c6b23b831757ed288347278",
-                "reference": "dcfd0116451b0f0e7c6b23b831757ed288347278",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1",
-                "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0"
-            },
-            "replace": {
-                "nyholm/psr7-server": "^0.3"
-            },
-            "require-dev": {
-                "nyholm/nsa": "^1.1",
-                "nyholm/psr7": "^1.0",
-                "phpunit/phpunit": "^7.0"
-            },
-            "time": "2019-06-17T10:48:13+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Nyholm\\Psr7Server\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tobias Nyholm",
-                    "email": "tobias.nyholm@gmail.com"
-                },
-                {
-                    "name": "Martijn van der Ven",
-                    "email": "martijn@vanderven.se"
-                }
-            ],
-            "description": "Helper classes to handle PSR-7 server requests",
-            "homepage": "http://tnyholm.se",
-            "keywords": [
-                "psr-17",
-                "psr-7"
-            ],
-            "support": {
-                "source": "https://github.com/kodus/psr7-server/tree/master"
-            },
-            "install-path": "../kodus/psr7-server"
         },
         {
             "name": "league/climate",
@@ -1481,17 +1420,17 @@
         },
         {
             "name": "nyholm/psr7",
-            "version": "1.3.2",
-            "version_normalized": "1.3.2.0",
+            "version": "1.4.0",
+            "version_normalized": "1.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Nyholm/psr7.git",
-                "reference": "a272953743c454ac4af9626634daaf5ab3ce1173"
+                "reference": "23ae1f00fbc6a886cbe3062ca682391b9cc7c37b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Nyholm/psr7/zipball/a272953743c454ac4af9626634daaf5ab3ce1173",
-                "reference": "a272953743c454ac4af9626634daaf5ab3ce1173",
+                "url": "https://api.github.com/repos/Nyholm/psr7/zipball/23ae1f00fbc6a886cbe3062ca682391b9cc7c37b",
+                "reference": "23ae1f00fbc6a886cbe3062ca682391b9cc7c37b",
                 "shasum": ""
             },
             "require": {
@@ -1510,11 +1449,11 @@
                 "phpunit/phpunit": "^7.5 || 8.5 || 9.4",
                 "symfony/error-handler": "^4.4"
             },
-            "time": "2020-11-14T17:35:34+00:00",
+            "time": "2021-02-18T15:41:32+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -1545,7 +1484,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Nyholm/psr7/issues",
-                "source": "https://github.com/Nyholm/psr7/tree/1.3.2"
+                "source": "https://github.com/Nyholm/psr7/tree/1.4.0"
             },
             "funding": [
                 {
@@ -1558,6 +1497,75 @@
                 }
             ],
             "install-path": "../nyholm/psr7"
+        },
+        {
+            "name": "nyholm/psr7-server",
+            "version": "1.0.1",
+            "version_normalized": "1.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nyholm/psr7-server.git",
+                "reference": "5c134aeb5dd6521c7978798663470dabf0528c96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nyholm/psr7-server/zipball/5c134aeb5dd6521c7978798663470dabf0528c96",
+                "reference": "5c134aeb5dd6521c7978798663470dabf0528c96",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "nyholm/nsa": "^1.1",
+                "nyholm/psr7": "^1.3",
+                "phpunit/phpunit": "^7.0 || ^8.5 || ^9.3"
+            },
+            "time": "2020-11-15T15:26:20+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Nyholm\\Psr7Server\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                },
+                {
+                    "name": "Martijn van der Ven",
+                    "email": "martijn@vanderven.se"
+                }
+            ],
+            "description": "Helper classes to handle PSR-7 server requests",
+            "homepage": "http://tnyholm.se",
+            "keywords": [
+                "psr-17",
+                "psr-7"
+            ],
+            "support": {
+                "issues": "https://github.com/Nyholm/psr7-server/issues",
+                "source": "https://github.com/Nyholm/psr7-server/tree/1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Zegnat",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../nyholm/psr7-server"
         },
         {
             "name": "phive/twig-extensions-deferred",
@@ -2343,17 +2351,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.19",
-            "version_normalized": "4.4.19.0",
+            "version": "v4.4.20",
+            "version_normalized": "4.4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "24026c44fc37099fa145707fecd43672831b837a"
+                "reference": "c98349bda966c70d6c08b4cd8658377c94166492"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/24026c44fc37099fa145707fecd43672831b837a",
-                "reference": "24026c44fc37099fa145707fecd43672831b837a",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c98349bda966c70d6c08b4cd8658377c94166492",
+                "reference": "c98349bda966c70d6c08b4cd8658377c94166492",
                 "shasum": ""
             },
             "require": {
@@ -2387,7 +2395,7 @@
                 "symfony/lock": "",
                 "symfony/process": ""
             },
-            "time": "2021-01-27T09:09:26+00:00",
+            "time": "2021-02-22T18:44:15+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2415,7 +2423,7 @@
             "description": "Eases the creation of beautiful and testable command line interfaces",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/console/tree/v4.4.19"
+                "source": "https://github.com/symfony/console/tree/v4.4.20"
             },
             "funding": [
                 {
@@ -2532,8 +2540,8 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.4.19",
-            "version_normalized": "4.4.19.0",
+            "version": "v4.4.20",
+            "version_normalized": "4.4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -2598,7 +2606,7 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher/tree/v4.4.19"
+                "source": "https://github.com/symfony/event-dispatcher/tree/v4.4.20"
             },
             "funding": [
                 {
@@ -2618,17 +2626,17 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v4.4.19",
-            "version_normalized": "4.4.19.0",
+            "version": "v4.4.20",
+            "version_normalized": "4.4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "d8df50fe9229576b254c6822eb5cfff36c02c967"
+                "reference": "67c5af7489b3c2eea771abd973243f5c58f5fb40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/d8df50fe9229576b254c6822eb5cfff36c02c967",
-                "reference": "d8df50fe9229576b254c6822eb5cfff36c02c967",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/67c5af7489b3c2eea771abd973243f5c58f5fb40",
+                "reference": "67c5af7489b3c2eea771abd973243f5c58f5fb40",
                 "shasum": ""
             },
             "require": {
@@ -2642,7 +2650,7 @@
                 "php-http/async-client-implementation": "*",
                 "php-http/client-implementation": "*",
                 "psr/http-client-implementation": "1.0",
-                "symfony/http-client-implementation": "1.1"
+                "symfony/http-client-implementation": "1.1|2.0"
             },
             "require-dev": {
                 "guzzlehttp/promises": "^1.4",
@@ -2653,7 +2661,7 @@
                 "symfony/http-kernel": "^4.4.13",
                 "symfony/process": "^4.2|^5.0"
             },
-            "time": "2021-01-27T09:09:26+00:00",
+            "time": "2021-02-25T18:06:45+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2681,7 +2689,7 @@
             "description": "Provides powerful methods to fetch HTTP resources synchronously or asynchronously",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v4.4.19"
+                "source": "https://github.com/symfony/http-client/tree/v4.4.20"
             },
             "funding": [
                 {
@@ -3118,8 +3126,8 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.19",
-            "version_normalized": "4.4.19.0",
+            "version": "v4.4.20",
+            "version_normalized": "4.4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -3162,7 +3170,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v4.4.19"
+                "source": "https://github.com/symfony/process/tree/v4.4.20"
             },
             "funding": [
                 {
@@ -3182,8 +3190,8 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.4.19",
-            "version_normalized": "4.4.19.0",
+            "version": "v4.4.20",
+            "version_normalized": "4.4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -3254,7 +3262,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v4.4.19"
+                "source": "https://github.com/symfony/var-dumper/tree/v4.4.20"
             },
             "funding": [
                 {
@@ -3274,17 +3282,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.4.19",
-            "version_normalized": "4.4.19.0",
+            "version": "v4.4.20",
+            "version_normalized": "4.4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "17ed9f14c1aa05b1a5cf2e2c5ef2d0be28058ef9"
+                "reference": "29e61305e1c79d25f71060903982ead8f533e267"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/17ed9f14c1aa05b1a5cf2e2c5ef2d0be28058ef9",
-                "reference": "17ed9f14c1aa05b1a5cf2e2c5ef2d0be28058ef9",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/29e61305e1c79d25f71060903982ead8f533e267",
+                "reference": "29e61305e1c79d25f71060903982ead8f533e267",
                 "shasum": ""
             },
             "require": {
@@ -3300,7 +3308,7 @@
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
             },
-            "time": "2021-01-27T09:09:26+00:00",
+            "time": "2021-02-22T15:36:50+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3328,7 +3336,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v4.4.19"
+                "source": "https://github.com/symfony/yaml/tree/v4.4.20"
             },
             "funding": [
                 {

@@ -100,11 +100,11 @@ class AdminController
     protected $id;
     /** @var bool */
     protected $active;
-    /** @var FlexObjectInterface */
+    /** @var FlexObjectInterface|false|null */
     protected $object;
-    /** @var FlexCollectionInterface */
+    /** @var FlexCollectionInterface|null */
     protected $collection;
-    /** @var FlexDirectoryInterface */
+    /** @var FlexDirectoryInterface|null */
     protected $directory;
 
     /** @var string */
@@ -588,7 +588,7 @@ class AdminController
 
         // Base64 decode the route
         $data['route'] = isset($data['route']) ? base64_decode($data['route']) : null;
-        $data['filters'] = json_decode($options['filters'] ?? '{}', true) + ['type' => ['root', 'dir']];
+        $data['filters'] = json_decode($options['filters'] ?? '{}', true, 512, JSON_THROW_ON_ERROR) + ['type' => ['root', 'dir']];
 
         $initial = $data['initial'] ?? null;
         if ($initial) {
@@ -735,6 +735,9 @@ class AdminController
             $form = $this->getForm($object);
 
             $callable = static function (array $data, array $files, FlexObject $object) use ($form) {
+                if (method_exists($object, 'storeOriginal')) {
+                    $object->storeOriginal();
+                }
                 $object->update($data, $files);
 
                 // Support for expert mode.
@@ -912,7 +915,7 @@ class AdminController
         try {
             $response = $this->forwardMediaTask('action', 'media.list');
 
-            $this->admin->json_response = json_decode($response->getBody(), false);
+            $this->admin->json_response = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -928,7 +931,7 @@ class AdminController
         try {
             $response = $this->forwardMediaTask('task', 'media.upload');
 
-            $this->admin->json_response = json_decode($response->getBody(), false);
+            $this->admin->json_response = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -944,7 +947,7 @@ class AdminController
         try {
             $response = $this->forwardMediaTask('task', 'media.delete');
 
-            $this->admin->json_response = json_decode($response->getBody(), false);
+            $this->admin->json_response = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -968,7 +971,7 @@ class AdminController
         try {
             $response = $this->forwardMediaTask('task', 'media.copy');
 
-            $this->admin->json_response = json_decode($response->getBody(), false);
+            $this->admin->json_response = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -984,7 +987,7 @@ class AdminController
         try {
             $response = $this->forwardMediaTask('task', 'media.remove');
 
-            $this->admin->json_response = json_decode($response->getBody(), false);
+            $this->admin->json_response = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -1019,7 +1022,7 @@ class AdminController
         try {
             $response = $this->forwardMediaTask('action', 'media.picker');
 
-            $this->admin->json_response = json_decode($response->getBody(), false);
+            $this->admin->json_response = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             $this->admin->json_response = ['success' => false, 'error' => $e->getMessage()];
         }
@@ -1405,14 +1408,14 @@ class AdminController
                         $object->language($language);
                     }
                 }
-            }
 
-            if (is_callable([$object, 'refresh'])) {
-                $object->refresh();
-            }
+                if (is_callable([$object, 'refresh'])) {
+                    $object->refresh();
+                }
 
-            // Get updated object via form.
-            $this->object = $object->getForm()->getObject();
+                // Get updated object via form.
+                $this->object = $object ? $object->getForm()->getObject() : false;
+            }
         }
 
         return $this->object ?: null;
@@ -1695,7 +1698,7 @@ class AdminController
             if (is_array($value)) {
                 $value = $this->jsonDecode($value);
             } else {
-                $value = json_decode($value, true);
+                $value = json_decode($value, true, 512, JSON_THROW_ON_ERROR);
             }
         }
 

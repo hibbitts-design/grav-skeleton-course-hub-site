@@ -132,10 +132,11 @@ return [
 	|
 	| Clockwork can show a toolbar with basic metrics on all responses. Here you can enable or disable this feature.
 	| Requires a separate clockwork-browser npm library.
+	| For installation instructions see https://underground.works/clockwork/#docs-viewing-data
 	|
 	*/
 
-	'toolbar' => env('CLOCKWORK_TOOLBAR', false),
+	'toolbar' => env('CLOCKWORK_TOOLBAR', true),
 
 	/*
 	|------------------------------------------------------------------------------------------------------------------
@@ -168,6 +169,7 @@ return [
 		'except' => [
 			'/horizon/.*', // Laravel Horizon requests
 			'/telescope/.*', // Laravel Telescope requests
+			'/_debugbar/.*', // Laravel DebugBar requests
 		],
 
 		// List of URIs that should be collected, any other URI will not be collected if not empty

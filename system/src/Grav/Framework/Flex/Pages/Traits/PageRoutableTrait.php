@@ -18,6 +18,7 @@ use Grav\Common\Uri;
 use Grav\Framework\Filesystem\Filesystem;
 use RocketTheme\Toolbox\ResourceLocator\UniformResourceLocator;
 use RuntimeException;
+use function dirname;
 use function is_string;
 
 /**
@@ -32,6 +33,8 @@ trait PageRoutableTrait
     private $_route;
     /** @var string|null */
     private $_path;
+    /** @var PageInterface|null */
+    private $_parentCache;
 
     /**
      * Returns the page extension, got from the page `url_extension` config and falls back to the
@@ -317,7 +320,7 @@ trait PageRoutableTrait
 
         /** @var UniformResourceLocator $locator */
         $locator = Grav::instance()['locator'];
-        $path = $locator->findResource($folder, false);
+        $path = $locator->isStream($folder) ? $locator->findResource($folder, false) : $folder;
 
         return is_string($path) ? $path : null;
     }
@@ -350,7 +353,7 @@ trait PageRoutableTrait
         if ($folder) {
             /** @var UniformResourceLocator $locator */
             $locator = Grav::instance()['locator'];
-            $folder = $locator($folder);
+            $folder = $locator->isStream($folder) ? $locator->getResource($folder) : GRAV_ROOT . "/{$folder}";
         }
 
         return $this->_path = is_string($folder) ? $folder : null;
@@ -413,26 +416,29 @@ trait PageRoutableTrait
             throw new RuntimeException(__METHOD__ . '(PageInterface): Not Implemented');
         }
 
-        if ($this->root()) {
-            return null;
+        if ($this->_parentCache || $this->root()) {
+            return $this->_parentCache;
         }
 
+        // Use filesystem as \dirname() does not work in Windows because of '/foo' becomes '\'.
         $filesystem = Filesystem::getInstance(false);
         $directory = $this->getFlexDirectory();
         $parentKey = ltrim($filesystem->dirname("/{$this->getKey()}"), '/');
-        if ($parentKey) {
+        if ('' !== $parentKey) {
             $parent = $directory->getObject($parentKey);
             $language = $this->getLanguage();
             if ($language && $parent && method_exists($parent, 'getTranslation')) {
                 $parent = $parent->getTranslation($language) ?? $parent;
             }
 
-            return $parent;
+            $this->_parentCache = $parent;
+        } else {
+            $index = $directory->getIndex();
+
+            $this->_parentCache = \is_callable([$index, 'getRoot']) ? $index->getRoot() : null;
         }
 
-        $index = $directory->getIndex();
-
-        return method_exists($index, 'getRoot') ? $index->getRoot() : null;
+        return $this->_parentCache;
     }
 
     /**
@@ -493,22 +499,22 @@ trait PageRoutableTrait
     public function activeChild(): bool
     {
         $grav = Grav::instance();
+        /** @var Uri $uri */
         $uri = $grav['uri'];
+        /** @var Pages $pages */
         $pages = $grav['pages'];
         $uri_path = rtrim(urldecode($uri->path()), '/');
         $routes = $pages->routes();
 
         if (isset($routes[$uri_path])) {
-            /** @var PageInterface $child_page|null */
-            $child_page = $pages->find($uri->route())->parent();
-            if (null !== $child_page) {
-                while (!$child_page->root()) {
-                    if ($this->path() === $child_page->path()) {
-                        return true;
-                    }
-                    /** @var PageInterface $child_page|null */
-                    $child_page = $child_page->parent();
+            $page = $pages->find($uri->route());
+            /** @var PageInterface|null $child_page */
+            $child_page = $page ? $page->parent() : null;
+            while ($child_page && !$child_page->root()) {
+                if ($this->path() === $child_page->path()) {
+                    return true;
                 }
+                $child_page = $child_page->parent();
             }
         }
 

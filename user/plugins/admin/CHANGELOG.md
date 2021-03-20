@@ -1,3 +1,23 @@
+# v1.10.8
+## 03/19/2021
+
+1. [](#improved)
+    * Include alt text and title for images added to the editor [#2098](https://github.com/getgrav/grav-plugin-admin/issues/2098)
+1. [](#bugfix)
+    * Fixed issue replacing `wildcard` field names in flex collections [#2092](https://github.com/getgrav/grav-plugin-admin/pull/2092)
+    * Fixed legacy Pages having old `modular` reference instead of `module` [#2093](https://github.com/getgrav/grav-plugin-admin/issues/2093)
+    * Fixed issue where Add New modal would close if selecting an item outside of the modal window. It is now necessary go through the Cancel button and clicking the overlay won't trigger the closing of the modal [#2089](https://github.com/getgrav/grav-plugin-admin/issues/2089), [#2065](https://github.com/getgrav/grav-plugin-admin/issues/2065)
+
+# v1.10.7
+## 03/17/2021
+
+1. [](#improved)
+    * Force height of Flex pages admin to fit available space
+    * Updated languages from Crowdin.com
+    * Better field type definitions for file, pagemedia, filepicker and pagemediafield
+1. [](#bugfix)
+    * Fixed error when checking missing log file [#2088](https://github.com/getgrav/grav-plugin-admin/issues/2088)
+
 # v1.10.6
 ## 02/23/2021
 
@@ -7,7 +27,7 @@
     * Flex pages admin better uses available space [#2075](https://github.com/getgrav/grav/issues/2075)
 1. [](#bugfix)
     * Regression: Fixed enabling/disabling plugin or theme corrupting configuration
-    * Fixed unnecessary closing bracket cuasing JS error [#2079](https://github.com/getgrav/grav-plugin-admin/issues/2079)
+    * Fixed unnecessary closing bracket causing JS error [#2079](https://github.com/getgrav/grav-plugin-admin/issues/2079)
     * Fixed wrong language in Admin Tools [#2077](https://github.com/getgrav/grav-plugin-admin/issues/2077)
 
 # v1.10.5

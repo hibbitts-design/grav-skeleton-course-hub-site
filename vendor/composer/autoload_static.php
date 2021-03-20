@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb44d77699cae238a9c0a28998af1c045
+class ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -255,7 +255,7 @@ class ComposerStaticInitb44d77699cae238a9c0a28998af1c045
         ),
         'Nyholm\\Psr7Server\\' => 
         array (
-            0 => __DIR__ . '/..' . '/kodus/psr7-server/src',
+            0 => __DIR__ . '/..' . '/nyholm/psr7-server/src',
         ),
         'Negotiation\\' => 
         array (
@@ -1254,11 +1254,10 @@ class ComposerStaticInitb44d77699cae238a9c0a28998af1c045
         'Negotiation\\Exception\\InvalidMediaType' => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation/Exception/InvalidMediaType.php',
         'Negotiation\\LanguageNegotiator' => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation/LanguageNegotiator.php',
         'Negotiation\\Negotiator' => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation/Negotiator.php',
-        'Nyholm\\Psr7Server\\ServerRequestCreator' => __DIR__ . '/..' . '/kodus/psr7-server/src/ServerRequestCreator.php',
-        'Nyholm\\Psr7Server\\ServerRequestCreatorInterface' => __DIR__ . '/..' . '/kodus/psr7-server/src/ServerRequestCreatorInterface.php',
+        'Nyholm\\Psr7Server\\ServerRequestCreator' => __DIR__ . '/..' . '/nyholm/psr7-server/src/ServerRequestCreator.php',
+        'Nyholm\\Psr7Server\\ServerRequestCreatorInterface' => __DIR__ . '/..' . '/nyholm/psr7-server/src/ServerRequestCreatorInterface.php',
         'Nyholm\\Psr7\\Factory\\HttplugFactory' => __DIR__ . '/..' . '/nyholm/psr7/src/Factory/HttplugFactory.php',
         'Nyholm\\Psr7\\Factory\\Psr17Factory' => __DIR__ . '/..' . '/nyholm/psr7/src/Factory/Psr17Factory.php',
-        'Nyholm\\Psr7\\LowercaseTrait' => __DIR__ . '/..' . '/nyholm/psr7/src/LowercaseTrait.php',
         'Nyholm\\Psr7\\MessageTrait' => __DIR__ . '/..' . '/nyholm/psr7/src/MessageTrait.php',
         'Nyholm\\Psr7\\Request' => __DIR__ . '/..' . '/nyholm/psr7/src/Request.php',
         'Nyholm\\Psr7\\RequestTrait' => __DIR__ . '/..' . '/nyholm/psr7/src/RequestTrait.php',
@@ -2069,11 +2068,11 @@ class ComposerStaticInitb44d77699cae238a9c0a28998af1c045
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb44d77699cae238a9c0a28998af1c045::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb44d77699cae238a9c0a28998af1c045::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitb44d77699cae238a9c0a28998af1c045::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitb44d77699cae238a9c0a28998af1c045::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitb44d77699cae238a9c0a28998af1c045::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$classMap;
 
         }, null, ClassLoader::class);
     }
