@@ -344,7 +344,6 @@ class AdminController
 
                 $grav = Grav::instance();
                 $grav->fireEvent('onFlexAfterDelete', new Event(['type' => 'flex', 'object' => $object]));
-                $grav->fireEvent('gitsync');
             }
         } catch (RuntimeException $e) {
             $this->admin->setMessage('Delete Failed: ' . $e->getMessage(), 'error');
@@ -409,8 +408,13 @@ class AdminController
 
         /** @var UniformResourceLocator $locator */
         $locator = $this->grav['locator'];
+        if ($locator->isStream($new_path)) {
+            $new_path = $locator->findResource($new_path, true, true);
+        } else {
+            $new_path = GRAV_ROOT . '/' . $new_path;
+        }
 
-        Folder::create($locator->findResource($new_path, true, true));
+        Folder::create($new_path);
         Cache::clearCache('invalidate');
 
         $this->grav->fireEvent('onAdminAfterSaveAs', new Event(['path' => $new_path]));
@@ -734,7 +738,7 @@ class AdminController
             /** @var FlexForm $form */
             $form = $this->getForm($object);
 
-            $callable = static function (array $data, array $files, FlexObject $object) use ($form) {
+            $callable = function (array $data, array $files, FlexObject $object) use ($form) {
                 if (method_exists($object, 'storeOriginal')) {
                     $object->storeOriginal();
                 }
@@ -742,6 +746,10 @@ class AdminController
 
                 // Support for expert mode.
                 if (str_ends_with($form->getId(), '-raw') && isset($data['frontmatter']) && is_callable([$object, 'frontmatter'])) {
+                    if (!$this->user->authorize('admin.super')) {
+                        throw new RuntimeException($this->admin::translate('PLUGIN_ADMIN.INSUFFICIENT_PERMISSIONS_FOR_TASK') . ' save raw.',
+                        403);
+                    }
                     $object->frontmatter($data['frontmatter']);
                     unset($data['frontmatter']);
                 }
@@ -833,7 +841,6 @@ class AdminController
 
             $grav = Grav::instance();
             $grav->fireEvent('onFlexAfterSave', new Event(['type' => 'flex', 'object' => $object]));
-            $grav->fireEvent('gitsync');
         } catch (RuntimeException $e) {
             $this->admin->setMessage('Save Failed: ' . $e->getMessage(), 'error');
 

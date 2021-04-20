@@ -404,6 +404,8 @@ return array(
     'Grav\\Common\\Taxonomy' => $baseDir . '/system/src/Grav/Common/Taxonomy.php',
     'Grav\\Common\\Theme' => $baseDir . '/system/src/Grav/Common/Theme.php',
     'Grav\\Common\\Themes' => $baseDir . '/system/src/Grav/Common/Themes.php',
+    'Grav\\Common\\Twig\\Extension\\FilesystemExtension' => $baseDir . '/system/src/Grav/Common/Twig/Extension/FilesystemExtension.php',
+    'Grav\\Common\\Twig\\Extension\\GravExtension' => $baseDir . '/system/src/Grav/Common/Twig/Extension/GravExtension.php',
     'Grav\\Common\\Twig\\Node\\TwigNodeCache' => $baseDir . '/system/src/Grav/Common/Twig/Node/TwigNodeCache.php',
     'Grav\\Common\\Twig\\Node\\TwigNodeMarkdown' => $baseDir . '/system/src/Grav/Common/Twig/Node/TwigNodeMarkdown.php',
     'Grav\\Common\\Twig\\Node\\TwigNodeRender' => $baseDir . '/system/src/Grav/Common/Twig/Node/TwigNodeRender.php',

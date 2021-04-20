@@ -101,7 +101,14 @@ class InitializeProcessor extends ProcessorBase
         // Load pages.
         $this->initializePages($config);
 
-        // Initialize URI.
+        // Load accounts (decides class to be used).
+        // TODO: remove in 2.0.
+        $this->container['accounts'];
+
+        // Initialize session.
+        $this->initializeSession($config);
+
+        // Initialize URI (uses session, see issue #3269).
         $this->initializeUri($config);
 
         // Grav may return redirect response right away.
@@ -114,13 +121,6 @@ class InitializeProcessor extends ProcessorBase
                 return $response;
             }
         }
-
-        // Load accounts (decides class to be used).
-        // TODO: remove in 2.0.
-        $this->container['accounts'];
-
-        // Initialize session.
-        $this->initializeSession($config);
 
         $this->stopTimer('_init');
 
@@ -178,7 +178,7 @@ class InitializeProcessor extends ProcessorBase
         $grav['plugins']->setup();
 
         if (defined('GRAV_SCHEMA') && $config->get('versions') === null) {
-            $filename = GRAV_ROOT . '/user/config/versions.yaml';
+            $filename = USER_DIR . 'config/versions.yaml';
             if (!is_file($filename)) {
                 $versions = [
                     'core' => [

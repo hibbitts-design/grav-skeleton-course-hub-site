@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041
+class ComposerStaticInit9258f810dbb36caa0d12a8963e32a029
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -762,6 +762,8 @@ class ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041
         'Grav\\Common\\Taxonomy' => __DIR__ . '/../..' . '/system/src/Grav/Common/Taxonomy.php',
         'Grav\\Common\\Theme' => __DIR__ . '/../..' . '/system/src/Grav/Common/Theme.php',
         'Grav\\Common\\Themes' => __DIR__ . '/../..' . '/system/src/Grav/Common/Themes.php',
+        'Grav\\Common\\Twig\\Extension\\FilesystemExtension' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Extension/FilesystemExtension.php',
+        'Grav\\Common\\Twig\\Extension\\GravExtension' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Extension/GravExtension.php',
         'Grav\\Common\\Twig\\Node\\TwigNodeCache' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeCache.php',
         'Grav\\Common\\Twig\\Node\\TwigNodeMarkdown' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeMarkdown.php',
         'Grav\\Common\\Twig\\Node\\TwigNodeRender' => __DIR__ . '/../..' . '/system/src/Grav/Common/Twig/Node/TwigNodeRender.php',
@@ -2068,11 +2070,11 @@ class ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit74621fee068a6c49ad2d2cfb794aa041::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$classMap;
 
         }, null, ClassLoader::class);
     }

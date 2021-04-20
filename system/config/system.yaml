@@ -113,6 +113,8 @@ twig:
   autoescape: true                               # Autoescape Twig vars (DEPRECATED, always enabled in strict mode)
   undefined_functions: true                      # Allow undefined functions
   undefined_filters: true                        # Allow undefined filters
+  safe_functions: []                             # List of PHP functions which are allowed to be used as Twig functions
+  safe_filters: []                               # List of PHP functions which are allowed to be used as Twig filters
   umask_fix: false                               # By default Twig creates cached files as 755, fix switches this to 775
 
 assets:                                          # Configuration for Assets Manager (JS, CSS)
@@ -154,6 +156,10 @@ images:
   debug: false                                   # Show an overlay over images indicating the pixel depth of the image when working with retina for example
   auto_fix_orientation: true                     # Automatically fix the image orientation based on the Exif data
   seofriendly: false                             # SEO-friendly processed image names
+  cls:                                           # Cumulative Layout Shift: See https://web.dev/optimize-cls/
+    auto_sizes: false                            # Automatically add height/width to image
+    aspect_ratio: false                          # Reserve space with aspect ratio style
+    retina_scale: 1                              # scale to adjust auto-sizes for better handling of HiDPI resolutions
   defaults:
     loading: auto                                # Let browser pick [auto|lazy|eager]
 

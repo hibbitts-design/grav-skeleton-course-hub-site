@@ -373,7 +373,7 @@ class PageStorage extends FolderStorage
 
         try {
             if ($key === '' && empty($row['root'])) {
-                throw new RuntimeException('No storage key given');
+                throw new RuntimeException('Page has no path');
             }
 
             $grav = Grav::instance();
@@ -394,9 +394,17 @@ class PageStorage extends FolderStorage
                 if ($oldFolder !== $newFolder && file_exists($oldFolder)) {
                     $isCopy = $row['__META']['copy'] ?? false;
                     if ($isCopy) {
+                        if (strpos($newFolder, $oldFolder . '/') === 0) {
+                            throw new RuntimeException(sprintf('Page /%s cannot be copied to itself', $oldKey));
+                        }
+
                         $this->copyRow($oldKey, $newKey);
                         $debugger->addMessage("Page copied: {$oldFolder} => {$newFolder}", 'debug');
                     } else {
+                        if (strpos($newFolder, $oldFolder . '/') === 0) {
+                            throw new RuntimeException(sprintf('Page /%s cannot be moved to itself', $oldKey));
+                        }
+
                         $this->renameRow($oldKey, $newKey);
                         $debugger->addMessage("Page moved: {$oldFolder} => {$newFolder}", 'debug');
                     }
@@ -466,17 +474,28 @@ class PageStorage extends FolderStorage
     }
 
     /**
+     * Check if page folder should be deleted.
+     *
+     * Deleting page can be done either by deleting everything or just a single language.
+     * If key contains the language, delete only it, unless it is the last language.
+     *
      * @param string $key
      * @return bool
      */
     protected function canDeleteFolder(string $key): bool
     {
+        // Return true if there's no language in the key.
         $keys = $this->extractKeysFromStorageKey($key);
-        if ($keys['lang']) {
-            return false;
+        if (!$keys['lang']) {
+            return true;
         }
 
-        return true;
+        // Get the main key and reload meta.
+        $key = $this->buildStorageKey($keys);
+        $meta = $this->getObjectMeta($key, true);
+
+        // Return true if there aren't any markdown files left.
+        return empty($meta['markdown'] ?? []);
     }
 
     /**
@@ -534,7 +553,7 @@ class PageStorage extends FolderStorage
             $markdown = [];
             $children = [];
 
-            if (is_string($path) && file_exists($path)) {
+            if (is_string($path) && is_dir($path)) {
                 $modified = filemtime($path);
                 $iterator = new FilesystemIterator($path, $this->flags);
 

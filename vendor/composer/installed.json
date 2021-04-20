@@ -666,17 +666,17 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.10.0",
-            "version_normalized": "2.10.0.0",
+            "version": "2.12.0",
+            "version_normalized": "2.12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "6ecda5217bf048088b891f7403b262906be5a957"
+                "reference": "d501fd2658d55491a2295ff600ae5978eaad7403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/6ecda5217bf048088b891f7403b262906be5a957",
-                "reference": "6ecda5217bf048088b891f7403b262906be5a957",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/d501fd2658d55491a2295ff600ae5978eaad7403",
+                "reference": "d501fd2658d55491a2295ff600ae5978eaad7403",
                 "shasum": ""
             },
             "require": {
@@ -692,7 +692,7 @@
                 "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
                 "whoops/soap": "Formats errors as SOAP responses"
             },
-            "time": "2021-03-16T12:00:00+00:00",
+            "time": "2021-03-30T12:00:00+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -728,7 +728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.10.0"
+                "source": "https://github.com/filp/whoops/tree/2.12.0"
             },
             "funding": [
                 {
@@ -845,17 +845,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.7.0",
-            "version_normalized": "1.7.0.0",
+            "version": "1.8.1",
+            "version_normalized": "1.8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3"
+                "reference": "35ea11d335fd638b5882ff1725228b3d35496ab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/53330f47520498c0ae1f61f7e2c90f55690c06a3",
-                "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/35ea11d335fd638b5882ff1725228b3d35496ab1",
+                "reference": "35ea11d335fd638b5882ff1725228b3d35496ab1",
                 "shasum": ""
             },
             "require": {
@@ -873,7 +873,7 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2020-09-30T07:37:11+00:00",
+            "time": "2021-03-21T16:25:00+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -917,7 +917,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/1.7.0"
+                "source": "https://github.com/guzzle/psr7/tree/1.8.1"
             },
             "install-path": "../guzzlehttp/psr7"
         },
@@ -2234,17 +2234,17 @@
         },
         {
             "name": "rockettheme/toolbox",
-            "version": "1.5.7",
-            "version_normalized": "1.5.7.0",
+            "version": "1.5.9",
+            "version_normalized": "1.5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rockettheme/toolbox.git",
-                "reference": "8d3ebc4d982595d6eac90e851f2b4d5c0cec0399"
+                "reference": "2d6693235aaca2efaadb61c84dac927aaf4eabfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rockettheme/toolbox/zipball/8d3ebc4d982595d6eac90e851f2b4d5c0cec0399",
-                "reference": "8d3ebc4d982595d6eac90e851f2b4d5c0cec0399",
+                "url": "https://api.github.com/repos/rockettheme/toolbox/zipball/2d6693235aaca2efaadb61c84dac927aaf4eabfa",
+                "reference": "2d6693235aaca2efaadb61c84dac927aaf4eabfa",
                 "shasum": ""
             },
             "require": {
@@ -2259,7 +2259,7 @@
                 "phpstan/phpstan-deprecation-rules": "^0.12",
                 "phpunit/phpunit": "~7.0"
             },
-            "time": "2021-02-17T17:58:36+00:00",
+            "time": "2021-04-14T19:52:40+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2287,7 +2287,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rockettheme/toolbox/issues",
-                "source": "https://github.com/rockettheme/toolbox/tree/1.5.7"
+                "source": "https://github.com/rockettheme/toolbox/tree/1.5.9"
             },
             "install-path": "../rockettheme/toolbox"
         },
@@ -2351,17 +2351,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.20",
-            "version_normalized": "4.4.20.0",
+            "version": "v4.4.21",
+            "version_normalized": "4.4.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c98349bda966c70d6c08b4cd8658377c94166492"
+                "reference": "1ba4560dbbb9fcf5ae28b61f71f49c678086cf23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c98349bda966c70d6c08b4cd8658377c94166492",
-                "reference": "c98349bda966c70d6c08b4cd8658377c94166492",
+                "url": "https://api.github.com/repos/symfony/console/zipball/1ba4560dbbb9fcf5ae28b61f71f49c678086cf23",
+                "reference": "1ba4560dbbb9fcf5ae28b61f71f49c678086cf23",
                 "shasum": ""
             },
             "require": {
@@ -2395,7 +2395,7 @@
                 "symfony/lock": "",
                 "symfony/process": ""
             },
-            "time": "2021-02-22T18:44:15+00:00",
+            "time": "2021-03-26T09:23:24+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2423,7 +2423,7 @@
             "description": "Eases the creation of beautiful and testable command line interfaces",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/console/tree/v4.4.20"
+                "source": "https://github.com/symfony/console/tree/v4.4.21"
             },
             "funding": [
                 {
@@ -2626,17 +2626,17 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v4.4.20",
-            "version_normalized": "4.4.20.0",
+            "version": "v4.4.21",
+            "version_normalized": "4.4.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "67c5af7489b3c2eea771abd973243f5c58f5fb40"
+                "reference": "911177e186b82e5b9a9f41c13af53699b6745657"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/67c5af7489b3c2eea771abd973243f5c58f5fb40",
-                "reference": "67c5af7489b3c2eea771abd973243f5c58f5fb40",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/911177e186b82e5b9a9f41c13af53699b6745657",
+                "reference": "911177e186b82e5b9a9f41c13af53699b6745657",
                 "shasum": ""
             },
             "require": {
@@ -2661,7 +2661,7 @@
                 "symfony/http-kernel": "^4.4.13",
                 "symfony/process": "^4.2|^5.0"
             },
-            "time": "2021-02-25T18:06:45+00:00",
+            "time": "2021-03-25T17:52:07+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2689,7 +2689,7 @@
             "description": "Provides powerful methods to fetch HTTP resources synchronously or asynchronously",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v4.4.20"
+                "source": "https://github.com/symfony/http-client/tree/v4.4.21"
             },
             "funding": [
                 {
@@ -3190,17 +3190,17 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.4.20",
-            "version_normalized": "4.4.20.0",
+            "version": "v4.4.21",
+            "version_normalized": "4.4.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "a1eab2f69906dc83c5ddba4632180260d0ab4f7f"
+                "reference": "0da0e174f728996f5d5072d6a9f0a42259dbc806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/a1eab2f69906dc83c5ddba4632180260d0ab4f7f",
-                "reference": "a1eab2f69906dc83c5ddba4632180260d0ab4f7f",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0da0e174f728996f5d5072d6a9f0a42259dbc806",
+                "reference": "0da0e174f728996f5d5072d6a9f0a42259dbc806",
                 "shasum": ""
             },
             "require": {
@@ -3224,7 +3224,7 @@
                 "ext-intl": "To show region name in time zone dump",
                 "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
             },
-            "time": "2021-01-27T09:09:26+00:00",
+            "time": "2021-03-27T19:49:03+00:00",
             "bin": [
                 "Resources/bin/var-dump-server"
             ],
@@ -3262,7 +3262,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v4.4.20"
+                "source": "https://github.com/symfony/var-dumper/tree/v4.4.21"
             },
             "funding": [
                 {
@@ -3282,17 +3282,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.4.20",
-            "version_normalized": "4.4.20.0",
+            "version": "v4.4.21",
+            "version_normalized": "4.4.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "29e61305e1c79d25f71060903982ead8f533e267"
+                "reference": "3871c720871029f008928244e56cf43497da7e9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/29e61305e1c79d25f71060903982ead8f533e267",
-                "reference": "29e61305e1c79d25f71060903982ead8f533e267",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/3871c720871029f008928244e56cf43497da7e9d",
+                "reference": "3871c720871029f008928244e56cf43497da7e9d",
                 "shasum": ""
             },
             "require": {
@@ -3308,7 +3308,7 @@
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
             },
-            "time": "2021-02-22T15:36:50+00:00",
+            "time": "2021-03-05T17:58:50+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3336,7 +3336,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v4.4.20"
+                "source": "https://github.com/symfony/yaml/tree/v4.4.21"
             },
             "funding": [
                 {
