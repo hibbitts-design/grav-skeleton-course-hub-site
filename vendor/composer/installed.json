@@ -739,25 +739,25 @@
             "install-path": "../filp/whoops"
         },
         {
-            "name": "gregwar/cache",
-            "version": "dev-php8",
-            "version_normalized": "dev-php8",
+            "name": "getgrav/cache",
+            "version": "v2.0.0",
+            "version_normalized": "2.0.0.0",
             "target-dir": "Gregwar/Cache",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getgrav/Cache.git",
-                "reference": "49ccdf9ae760b009a192bc3c7b417980c8a8cc2e"
+                "reference": "56fd63f752779928fcd1074ab7d12f406dde8861"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getgrav/Cache/zipball/49ccdf9ae760b009a192bc3c7b417980c8a8cc2e",
-                "reference": "49ccdf9ae760b009a192bc3c7b417980c8a8cc2e",
+                "url": "https://api.github.com/repos/getgrav/Cache/zipball/56fd63f752779928fcd1074ab7d12f406dde8861",
+                "reference": "56fd63f752779928fcd1074ab7d12f406dde8861",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
             },
-            "time": "2020-12-02T10:54:35+00:00",
+            "time": "2021-04-20T05:48:00+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -765,6 +765,7 @@
                     "Gregwar\\Cache": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -772,6 +773,11 @@
                 {
                     "name": "Gregwar",
                     "email": "g.passault@gmail.com"
+                },
+                {
+                    "name": "Grav CMS",
+                    "email": "hello@getgrav.org",
+                    "homepage": "https://getgrav.org"
                 }
             ],
             "description": "A lightweight file-system cache system",
@@ -782,29 +788,29 @@
                 "system"
             ],
             "support": {
-                "source": "https://github.com/getgrav/Cache/tree/php8"
+                "source": "https://github.com/getgrav/Cache/tree/v2.0.0"
             },
-            "install-path": "../gregwar/cache/Gregwar/Cache"
+            "install-path": "../getgrav/cache/Gregwar/Cache"
         },
         {
-            "name": "gregwar/image",
-            "version": "dev-php8",
-            "version_normalized": "dev-php8",
+            "name": "getgrav/image",
+            "version": "v3.0.0",
+            "version_normalized": "3.0.0.0",
             "target-dir": "Gregwar/Image",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getgrav/Image.git",
-                "reference": "ea23859700f32447a85e79d96f331e3d6c8897a8"
+                "reference": "02c1bb2c179dd894c4f6610c9c49da364ee7d264"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getgrav/Image/zipball/ea23859700f32447a85e79d96f331e3d6c8897a8",
-                "reference": "ea23859700f32447a85e79d96f331e3d6c8897a8",
+                "url": "https://api.github.com/repos/getgrav/Image/zipball/02c1bb2c179dd894c4f6610c9c49da364ee7d264",
+                "reference": "02c1bb2c179dd894c4f6610c9c49da364ee7d264",
                 "shasum": ""
             },
             "require": {
                 "ext-gd": "*",
-                "gregwar/cache": "dev-php8",
+                "getgrav/cache": "^2.0",
                 "php": "^5.6 || ^7.0 || ^8.0"
             },
             "require-dev": {
@@ -814,7 +820,7 @@
             "suggest": {
                 "behat/transliterator": "Transliterator provides ability to set non-latin1 pretty names"
             },
-            "time": "2021-03-15T17:03:52+00:00",
+            "time": "2021-04-20T05:50:18+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -822,6 +828,7 @@
                     "Gregwar\\Image": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -830,6 +837,11 @@
                     "name": "Grégoire Passault",
                     "email": "g.passault@gmail.com",
                     "homepage": "http://www.gregwar.com/"
+                },
+                {
+                    "name": "Grav CMS",
+                    "email": "hello@getgrav.org",
+                    "homepage": "https://getgrav.org"
                 }
             ],
             "description": "Image handling",
@@ -839,9 +851,9 @@
                 "image"
             ],
             "support": {
-                "source": "https://github.com/getgrav/Image/tree/php8"
+                "source": "https://github.com/getgrav/Image/tree/v3.0.0"
             },
-            "install-path": "../gregwar/image/Gregwar/Image"
+            "install-path": "../getgrav/image/Gregwar/Image"
         },
         {
             "name": "guzzlehttp/psr7",

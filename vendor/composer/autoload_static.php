@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9258f810dbb36caa0d12a8963e32a029
+class ComposerStaticInitb2ea3a4686b1ed2c4aa1684dc9e38266
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -354,11 +354,11 @@ class ComposerStaticInit9258f810dbb36caa0d12a8963e32a029
         array (
             'Gregwar\\Image' => 
             array (
-                0 => __DIR__ . '/..' . '/gregwar/image',
+                0 => __DIR__ . '/..' . '/getgrav/image',
             ),
             'Gregwar\\Cache' => 
             array (
-                0 => __DIR__ . '/..' . '/gregwar/cache',
+                0 => __DIR__ . '/..' . '/getgrav/cache',
             ),
         ),
     );
@@ -995,23 +995,23 @@ class ComposerStaticInit9258f810dbb36caa0d12a8963e32a029
         'Grav\\Installer\\VersionUpdater' => __DIR__ . '/../..' . '/system/src/Grav/Installer/VersionUpdater.php',
         'Grav\\Installer\\Versions' => __DIR__ . '/../..' . '/system/src/Grav/Installer/Versions.php',
         'Grav\\Installer\\YamlUpdater' => __DIR__ . '/../..' . '/system/src/Grav/Installer/YamlUpdater.php',
-        'Gregwar\\Cache\\Cache' => __DIR__ . '/..' . '/gregwar/cache/Gregwar/Cache/Cache.php',
-        'Gregwar\\Cache\\CacheInterface' => __DIR__ . '/..' . '/gregwar/cache/Gregwar/Cache/CacheInterface.php',
-        'Gregwar\\Cache\\GarbageCollect' => __DIR__ . '/..' . '/gregwar/cache/Gregwar/Cache/GarbageCollect.php',
-        'Gregwar\\Image\\Adapter\\Adapter' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Adapter/Adapter.php',
-        'Gregwar\\Image\\Adapter\\AdapterInterface' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Adapter/AdapterInterface.php',
-        'Gregwar\\Image\\Adapter\\Common' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Adapter/Common.php',
-        'Gregwar\\Image\\Adapter\\GD' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Adapter/GD.php',
-        'Gregwar\\Image\\Adapter\\Imagick' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Adapter/Imagick.php',
-        'Gregwar\\Image\\Exceptions\\GenerationError' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Exceptions/GenerationError.php',
-        'Gregwar\\Image\\GarbageCollect' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/GarbageCollect.php',
-        'Gregwar\\Image\\Image' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Image.php',
-        'Gregwar\\Image\\ImageColor' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/ImageColor.php',
-        'Gregwar\\Image\\Source\\Create' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Source/Create.php',
-        'Gregwar\\Image\\Source\\Data' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Source/Data.php',
-        'Gregwar\\Image\\Source\\File' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Source/File.php',
-        'Gregwar\\Image\\Source\\Resource' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Source/Resource.php',
-        'Gregwar\\Image\\Source\\Source' => __DIR__ . '/..' . '/gregwar/image/Gregwar/Image/Source/Source.php',
+        'Gregwar\\Cache\\Cache' => __DIR__ . '/..' . '/getgrav/cache/Gregwar/Cache/Cache.php',
+        'Gregwar\\Cache\\CacheInterface' => __DIR__ . '/..' . '/getgrav/cache/Gregwar/Cache/CacheInterface.php',
+        'Gregwar\\Cache\\GarbageCollect' => __DIR__ . '/..' . '/getgrav/cache/Gregwar/Cache/GarbageCollect.php',
+        'Gregwar\\Image\\Adapter\\Adapter' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Adapter/Adapter.php',
+        'Gregwar\\Image\\Adapter\\AdapterInterface' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Adapter/AdapterInterface.php',
+        'Gregwar\\Image\\Adapter\\Common' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Adapter/Common.php',
+        'Gregwar\\Image\\Adapter\\GD' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Adapter/GD.php',
+        'Gregwar\\Image\\Adapter\\Imagick' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Adapter/Imagick.php',
+        'Gregwar\\Image\\Exceptions\\GenerationError' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Exceptions/GenerationError.php',
+        'Gregwar\\Image\\GarbageCollect' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/GarbageCollect.php',
+        'Gregwar\\Image\\Image' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Image.php',
+        'Gregwar\\Image\\ImageColor' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/ImageColor.php',
+        'Gregwar\\Image\\Source\\Create' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Source/Create.php',
+        'Gregwar\\Image\\Source\\Data' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Source/Data.php',
+        'Gregwar\\Image\\Source\\File' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Source/File.php',
+        'Gregwar\\Image\\Source\\Resource' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Source/Resource.php',
+        'Gregwar\\Image\\Source\\Source' => __DIR__ . '/..' . '/getgrav/image/Gregwar/Image/Source/Source.php',
         'GuzzleHttp\\Psr7\\AppendStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/AppendStream.php',
         'GuzzleHttp\\Psr7\\BufferStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/BufferStream.php',
         'GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/CachingStream.php',
@@ -2070,11 +2070,11 @@ class ComposerStaticInit9258f810dbb36caa0d12a8963e32a029
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit9258f810dbb36caa0d12a8963e32a029::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb2ea3a4686b1ed2c4aa1684dc9e38266::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb2ea3a4686b1ed2c4aa1684dc9e38266::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitb2ea3a4686b1ed2c4aa1684dc9e38266::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb2ea3a4686b1ed2c4aa1684dc9e38266::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb2ea3a4686b1ed2c4aa1684dc9e38266::$classMap;
 
         }, null, ClassLoader::class);
     }

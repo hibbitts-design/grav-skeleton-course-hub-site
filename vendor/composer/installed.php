@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'b9ab491cbbfdabc4f7075c6824a3bfe557453348',
+    'reference' => '2ed451130c7f50d9c4b1d38f841cc521654d1fc5',
     'name' => 'getgrav/grav',
   ),
   'versions' => 
@@ -110,6 +110,15 @@
       ),
       'reference' => 'd501fd2658d55491a2295ff600ae5978eaad7403',
     ),
+    'getgrav/cache' => 
+    array (
+      'pretty_version' => 'v2.0.0',
+      'version' => '2.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '56fd63f752779928fcd1074ab7d12f406dde8861',
+    ),
     'getgrav/grav' => 
     array (
       'pretty_version' => 'dev-master',
@@ -117,25 +126,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'b9ab491cbbfdabc4f7075c6824a3bfe557453348',
+      'reference' => '2ed451130c7f50d9c4b1d38f841cc521654d1fc5',
     ),
-    'gregwar/cache' => 
+    'getgrav/image' => 
     array (
-      'pretty_version' => 'dev-php8',
-      'version' => 'dev-php8',
+      'pretty_version' => 'v3.0.0',
+      'version' => '3.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '49ccdf9ae760b009a192bc3c7b417980c8a8cc2e',
-    ),
-    'gregwar/image' => 
-    array (
-      'pretty_version' => 'dev-php8',
-      'version' => 'dev-php8',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'ea23859700f32447a85e79d96f331e3d6c8897a8',
+      'reference' => '02c1bb2c179dd894c4f6610c9c49da364ee7d264',
     ),
     'guzzlehttp/psr7' => 
     array (
