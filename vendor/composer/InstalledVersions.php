@@ -20,6 +20,8 @@ use Composer\Semver\VersionParser;
 
 
 
+
+
 class InstalledVersions
 {
 private static $installed = array (
@@ -30,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '2ed451130c7f50d9c4b1d38f841cc521654d1fc5',
+    'reference' => '668f8ccdbff3f0ae1e0a7bfdbf6ea9a5508eb1fd',
     'name' => 'getgrav/grav',
   ),
   'versions' => 
@@ -64,12 +66,12 @@ private static $installed = array (
     ),
     'doctrine/cache' => 
     array (
-      'pretty_version' => '1.10.2',
-      'version' => '1.10.2.0',
+      'pretty_version' => '1.11.0',
+      'version' => '1.11.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '13e3381b25847283a91948d04640543941309727',
+      'reference' => 'a9c1b59eba5a08ca2770a76eddb88922f504e8e0',
     ),
     'doctrine/collections' => 
     array (
@@ -127,12 +129,12 @@ private static $installed = array (
     ),
     'filp/whoops' => 
     array (
-      'pretty_version' => '2.12.0',
-      'version' => '2.12.0.0',
+      'pretty_version' => '2.12.1',
+      'version' => '2.12.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd501fd2658d55491a2295ff600ae5978eaad7403',
+      'reference' => 'c13c0be93cff50f88bbd70827d993026821914dd',
     ),
     'getgrav/cache' => 
     array (
@@ -150,7 +152,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '2ed451130c7f50d9c4b1d38f841cc521654d1fc5',
+      'reference' => '668f8ccdbff3f0ae1e0a7bfdbf6ea9a5508eb1fd',
     ),
     'getgrav/image' => 
     array (
@@ -634,7 +636,6 @@ foreach (self::getInstalled() as $installed) {
 $packages[] = array_keys($installed['versions']);
 }
 
-
 if (1 === \count($packages)) {
 return $packages[0];
 }
@@ -826,6 +827,7 @@ public static function reload($data)
 self::$installed = $data;
 self::$installedByVendor = array();
 }
+
 
 
 

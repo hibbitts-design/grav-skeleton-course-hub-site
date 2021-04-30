@@ -1,4 +1,4 @@
-last_checked: 1619215558
+last_checked: 1619813480
 data:
   -
     title: 'Skeleton Build Automation'
@@ -29,7 +29,7 @@ data:
     title: 'Grav 1.7 Stable Release - One week away!'
     url: 'https://getgrav.org/blog/grav-17-stable-imminent'
     date: 1610457780
-    nicetime: '3 months ago'
+    nicetime: '4 months ago'
   -
     title: 'Grav Premium Coming Soon'
     url: 'https://getgrav.org/blog/grav-premium-coming-soon'
@@ -44,9 +44,9 @@ data:
     title: 'Raising PHP Requirements... Again'
     url: 'https://getgrav.org/blog/raising-php-requirements-2020'
     date: 1605281160
-    nicetime: '5 months ago'
+    nicetime: '6 months ago'
   -
     title: 'macOS 11.0 Big Sur Apache Setup: LetsEncrypt SSL'
     url: 'https://getgrav.org/blog/macos-bigsur-apache-ssl'
     date: 1605265380
-    nicetime: '5 months ago'
+    nicetime: '6 months ago'
