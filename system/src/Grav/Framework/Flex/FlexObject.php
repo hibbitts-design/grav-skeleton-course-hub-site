@@ -44,6 +44,7 @@ use function is_array;
 use function is_object;
 use function is_scalar;
 use function is_string;
+use function json_encode;
 
 /**
  * Class FlexObject
@@ -69,6 +70,8 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
     private $_blueprint = [];
     /** @var array */
     private $_meta;
+    /** @var array */
+    protected $_original;
     /** @var array */
     protected $_changes;
     /** @var string */
@@ -298,7 +301,11 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
 
         $weight = 0;
         foreach ($properties as $property) {
-            $weight += $this->searchNestedProperty($property, $search, $options);
+            if (strpos($property, '.')) {
+                $weight += $this->searchNestedProperty($property, $search, $options);
+            } else {
+                $weight += $this->searchProperty($property, $search, $options);
+            }
         }
 
         return $weight > 0 ? min($weight, 1) : 0;
@@ -365,7 +372,7 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
      */
     public function searchProperty(string $property, string $search, array $options = null): float
     {
-        $options = $options ?? $this->getFlexDirectory()->getConfig('data.search.options', []);
+        $options = $options ?? (array)$this->getFlexDirectory()->getConfig('data.search.options');
         $value = $this->getProperty($property);
 
         return $this->searchValue($property, $value, $search, $options);
@@ -379,7 +386,7 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
      */
     public function searchNestedProperty(string $property, string $search, array $options = null): float
     {
-        $options = $options ?? $this->getFlexDirectory()->getConfig('data.search.options', []);
+        $options = $options ?? (array)$this->getFlexDirectory()->getConfig('data.search.options');
         if ($property === 'key') {
             $value = $this->getKey();
         } else {
@@ -434,6 +441,16 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
         }
 
         return 0;
+    }
+
+    /**
+     * Get original data before update
+     *
+     * @return array
+     */
+    public function getOriginalData(): array
+    {
+        return $this->_original ?? [];
     }
 
     /**
@@ -649,7 +666,8 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
             }
 
             // Store the changes
-            $this->_changes = Utils::arrayDiffMultidimensional($this->getElements(), $elements);
+            $this->_original = $this->getElements();
+            $this->_changes = Utils::arrayDiffMultidimensional($this->_original, $elements);
         }
 
         if ($files && method_exists($this, 'setUpdatedMedia')) {
@@ -685,6 +703,17 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
         $this->markAsCopy();
 
         return $this->create($key);
+    }
+
+    /**
+     * @param UserInterface|null $user
+     */
+    public function check(UserInterface $user = null): void
+    {
+        // If user has been provided, check if the user has permissions to save this object.
+        if ($user && !$this->isAuthorized('save', null, $user)) {
+            throw new \RuntimeException('Forbidden', 403);
+        }
     }
 
     /**
@@ -805,11 +834,12 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
      */
     public function getForm(string $name = '', array $options = null)
     {
-        if (!isset($this->_forms[$name])) {
-            $this->_forms[$name] = $this->createFormObject($name, $options);
+        $hash = $name . '-' . md5(json_encode($options, JSON_THROW_ON_ERROR));
+        if (!isset($this->_forms[$hash])) {
+            $this->_forms[$hash] = $this->createFormObject($name, $options);
         }
 
-        return $this->_forms[$name];
+        return $this->_forms[$hash];
     }
 
     /**
@@ -1057,6 +1087,17 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
         }
 
         return $action;
+    }
+
+    /**
+     * Method to reset blueprints if the type changes.
+     *
+     * @return void
+     * @since 1.7.18
+     */
+    protected function resetBlueprints(): void
+    {
+        $this->_blueprint = [];
     }
 
     // DEPRECATED METHODS

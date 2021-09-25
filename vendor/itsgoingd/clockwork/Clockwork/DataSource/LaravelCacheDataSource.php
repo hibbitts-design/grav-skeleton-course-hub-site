@@ -23,12 +23,16 @@ class LaravelCacheDataSource extends DataSource
 	// Whether we are collecting cache queries or stats only
 	protected $collectQueries = true;
 
+	// Whether we are collecting values from cache queries
+	protected $collectValues = true;
+
 	// Create a new data source instance, takes an event dispatcher and additional options as argument
-	public function __construct(EventDispatcher $eventDispatcher, $collectQueries = true)
+	public function __construct(EventDispatcher $eventDispatcher, $collectQueries = true, $collectValues = true)
 	{
 		$this->eventDispatcher = $eventDispatcher;
 
 		$this->collectQueries = $collectQueries;
+		$this->collectValues = $collectValues;
 	}
 
 	// Adds cache queries and stats to the request
@@ -97,19 +101,22 @@ class LaravelCacheDataSource extends DataSource
 	{
 		$trace = StackTrace::get()->resolveViewName();
 
-		$query = [
+		$record = [
 			'type'       => $query['type'],
 			'key'        => $query['key'],
-			'value'      => isset($query['value']) ? (new Serializer)->normalize($query['value']) : null,
 			'time'       => microtime(true),
 			'connection' => null,
 			'trace'      => (new Serializer)->trace($trace)
 		];
 
-		$this->incrementQueryCount($query);
+		if ($this->collectValues && isset($query['value'])) {
+			$record['value'] = (new Serializer)->normalize($query['value']);
+		}
 
-		if ($this->collectQueries && $this->passesFilters([ $query ])) {
-			$this->queries[] = $query;
+		$this->incrementQueryCount($record);
+
+		if ($this->collectQueries && $this->passesFilters([ $record ])) {
+			$this->queries[] = $record;
 		}
 	}
 

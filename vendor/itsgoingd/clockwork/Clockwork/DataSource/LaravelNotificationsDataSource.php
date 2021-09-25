@@ -136,7 +136,7 @@ class LaravelNotificationsDataSource extends DataSource
 	{
 		if (! $this->lastNotification) return false;
 
-		if (implode($this->lastNotification->to) != implode($notification->to)) return false;
+		if ($this->lastNotification->to !== $notification->to) return false;
 
 		$this->lastNotification->subject = $notification->subject;
 		$this->lastNotification->from    = $notification->from;
@@ -224,7 +224,10 @@ class LaravelNotificationsDataSource extends DataSource
 		return array_map(function ($address) {
 			if (! is_array($address)) return $address;
 
-			return $address['name'] ? "{$address['name']} <{$address['address']}>" : $address['address'];
+			$email = isset($address['address']) ? $address['address'] : $address[0];
+			$name = isset($address['name']) ? $address['name'] : $address[1];
+
+			return $name ? "{$name} <{$email}>" : $email;
 		}, $address);
 	}
 }

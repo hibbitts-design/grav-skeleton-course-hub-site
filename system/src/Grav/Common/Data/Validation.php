@@ -519,17 +519,32 @@ class Validation
             return false;
         }
 
-        if (isset($params['min']) && $value < $params['min']) {
-            return false;
+        $value = (float)$value;
+
+        $min = 0;
+        if (isset($params['min'])) {
+            $min = (float)$params['min'];
+            if ($value < $min) {
+                return false;
+            }
         }
 
-        if (isset($params['max']) && $value > $params['max']) {
-            return false;
+        if (isset($params['max'])) {
+            $max = (float)$params['max'];
+            if ($value > $max) {
+                return false;
+            }
         }
 
-        $min = $params['min'] ?? 0;
+        if (isset($params['step'])) {
+            $step = (float)$params['step'];
+            // Count of how many steps we are above/below the minimum value.
+            $pos = ($value - $min) / $step;
 
-        return !(isset($params['step']) && fmod($value - $min, $params['step']) === 0);
+            return is_int(static::filterNumber($pos, $params, $field));
+        }
+
+        return true;
     }
 
     /**

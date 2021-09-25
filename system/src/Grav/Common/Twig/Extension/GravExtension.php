@@ -155,10 +155,15 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('bool', [$this, 'boolFilter']),
             new TwigFilter('float', [$this, 'floatFilter'], ['is_safe' => ['all']]),
             new TwigFilter('array', [$this, 'arrayFilter']),
+            new TwigFilter('yaml', [$this, 'yamlFilter']),
 
             // Object Types
             new TwigFilter('get_type', [$this, 'getTypeFunc']),
-            new TwigFilter('of_type', [$this, 'ofTypeFunc'])
+            new TwigFilter('of_type', [$this, 'ofTypeFunc']),
+
+            // PHP methods
+            new TwigFilter('count', 'count'),
+            new TwigFilter('array_diff', 'array_diff'),
         ];
     }
 
@@ -220,7 +225,18 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
 
             // Object Types
             new TwigFunction('get_type', [$this, 'getTypeFunc']),
-            new TwigFunction('of_type', [$this, 'ofTypeFunc'])
+            new TwigFunction('of_type', [$this, 'ofTypeFunc']),
+
+            // PHP methods
+            new TwigFunction('is_numeric', 'is_numeric'),
+            new TwigFunction('is_iterable', 'is_iterable'),
+            new TwigFunction('is_countable', 'is_countable'),
+            new TwigFunction('is_null', 'is_null'),
+            new TwigFunction('is_string', 'is_string'),
+            new TwigFunction('is_array', 'is_array'),
+            new TwigFunction('is_object', 'is_object'),
+            new TwigFunction('count', 'count'),
+            new TwigFunction('array_diff', 'array_diff'),
         ];
     }
 
@@ -790,6 +806,17 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
         }
 
         return (array)$input;
+    }
+
+    /**
+     * @param array|object $value
+     * @param int|null $inline
+     * @param int|null $indent
+     * @return string
+     */
+    public function yamlFilter($value, $inline = null, $indent = null): string
+    {
+        return Yaml::dump($value, $inline, $indent);
     }
 
     /**
@@ -1484,7 +1511,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
             }
 
             //Look for existing class
-            $svg = preg_replace_callback('/^<svg[^>]*(class=\")([^"]*)(\")[^>]*>/', function($matches) use ($classes, &$matched) {
+            $svg = preg_replace_callback('/^<svg[^>]*(class=\"([^"]*)\")[^>]*>/', function($matches) use ($classes, &$matched) {
                 if (isset($matches[2])) {
                     $new_classes = $matches[2] . $classes;
                     $matched = true;
@@ -1500,7 +1527,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
                 $svg = str_replace('<svg ', "<svg class=\"$classes\" ", $svg);
             }
 
-            return $svg;
+            return trim($svg);
         }
 
         return null;

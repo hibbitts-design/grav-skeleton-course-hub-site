@@ -258,12 +258,18 @@ class EloquentDataSource extends DataSource
 	{
 		$connection = $this->databaseManager->connection($connection);
 
-		if ($connection->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME) === 'odbc') {
+		if (! method_exists($connection, 'getPdo')) return;
+
+		$pdo = $connection->getPdo();
+
+		if ($pdo === null) return;
+
+		if ($pdo->getAttribute(\PDO::ATTR_DRIVER_NAME) === 'odbc') {
 			// PDO_ODBC driver doesn't support the quote method, apply simple MSSQL style quoting instead
 			return "'" . str_replace("'", "''", $binding) . "'";
 		}
 
-		return $connection->getPdo()->quote($binding);
+		return $pdo->quote($binding);
 	}
 
 	// Increment query counts for collected query

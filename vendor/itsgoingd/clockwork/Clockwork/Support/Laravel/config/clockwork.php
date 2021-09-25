@@ -30,8 +30,11 @@ return [
 		'cache' => [
 			'enabled' => env('CLOCKWORK_CACHE_ENABLED', true),
 
-			// Collect cache queries including results (high performance impact with a high number of queries)
-			'collect_queries' => env('CLOCKWORK_CACHE_QUERIES', false)
+			// Collect cache queries
+			'collect_queries' => env('CLOCKWORK_CACHE_QUERIES', true),
+
+			// Collect values from cache queries (high performance impact with a very high number of queries)
+			'collect_values' => env('CLOCKWORK_CACHE_COLLECT_VALUES', false)
 		],
 
 		// Database usage stats and queries
@@ -96,7 +99,10 @@ return [
 
 		// Routes list
 		'routes' => [
-			'enabled' => env('CLOCKWORK_ROUTES_ENABLED', false)
+			'enabled' => env('CLOCKWORK_ROUTES_ENABLED', false),
+
+			// Collect only routes from particular namespaces (only application routes by default)
+			'only_namespaces' => [ 'App' ]
 		],
 
 		// Rendered views

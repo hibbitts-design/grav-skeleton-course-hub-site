@@ -318,11 +318,11 @@ class FlexDirectoryForm implements FlexDirectoryFormInterface, JsonSerializable
     }
 
     /**
-     * @param string $field
-     * @param string $filename
+     * @param string|null $field
+     * @param string|null $filename
      * @return Route|null
      */
-    public function getFileDeleteAjaxRoute($field, $filename): ?Route
+    public function getFileDeleteAjaxRoute($field = null, $filename = null): ?Route
     {
         return null;
     }
@@ -453,7 +453,9 @@ class FlexDirectoryForm implements FlexDirectoryFormInterface, JsonSerializable
     protected function doSerialize(): array
     {
         return $this->doTraitSerialize() + [
+                'form' => $this->form,
                 'directory' => $this->directory,
+                'flexName' => $this->flexName
             ];
     }
 
@@ -465,7 +467,9 @@ class FlexDirectoryForm implements FlexDirectoryFormInterface, JsonSerializable
     {
         $this->doTraitUnserialize($data);
 
+        $this->form = $data['form'];
         $this->directory = $data['directory'];
+        $this->flexName = $data['flexName'];
     }
 
     /**

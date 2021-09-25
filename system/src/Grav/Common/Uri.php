@@ -665,7 +665,7 @@ class Uri
      */
     public static function paramsRegex()
     {
-        return '/\/([^\:\#\/\?]*' . Grav::instance()['config']->get('system.param_sep') . '[^\:\#\/\?]*)/';
+        return '/\/{1,}([^\:\#\/\?]*' . Grav::instance()['config']->get('system.param_sep') . '[^\:\#\/\?]*)/';
     }
 
     /**
@@ -675,10 +675,15 @@ class Uri
      */
     public static function ip()
     {
+        $ip = 'UNKNOWN';
+
         if (getenv('HTTP_CLIENT_IP')) {
             $ip = getenv('HTTP_CLIENT_IP');
+        } elseif (getenv('HTTP_CF_CONNECTING_IP')) {
+            $ip = getenv('HTTP_CF_CONNECTING_IP');
         } elseif (getenv('HTTP_X_FORWARDED_FOR') && Grav::instance()['config']->get('system.http_x_forwarded.ip')) {
-            $ip = getenv('HTTP_X_FORWARDED_FOR');
+            $ips = array_map('trim', explode(',', getenv('HTTP_X_FORWARDED_FOR')));
+            $ip = array_shift($ips);
         } elseif (getenv('HTTP_X_FORWARDED') && Grav::instance()['config']->get('system.http_x_forwarded.ip')) {
             $ip = getenv('HTTP_X_FORWARDED');
         } elseif (getenv('HTTP_FORWARDED_FOR')) {
@@ -687,8 +692,6 @@ class Uri
             $ip = getenv('HTTP_FORWARDED');
         } elseif (getenv('REMOTE_ADDR')) {
             $ip = getenv('REMOTE_ADDR');
-        } else {
-            $ip = 'UNKNOWN';
         }
 
         return $ip;
@@ -1258,7 +1261,7 @@ class Uri
             $this->port = null;
         }
 
-        if ($this->hasStandardPort()) {
+        if ($this->port === 0 || $this->hasStandardPort()) {
             $this->port = null;
         }
 
@@ -1311,11 +1314,13 @@ class Uri
         if ($parts === false) {
             throw new RuntimeException('Malformed URL: ' . $url);
         }
+        $port = (int)($parts['port'] ?? 0);
+
         $this->scheme = $parts['scheme'] ?? null;
         $this->user = $parts['user'] ?? null;
         $this->password = $parts['pass'] ?? null;
         $this->host = $parts['host'] ?? null;
-        $this->port = isset($parts['port']) ? (int)$parts['port'] : null;
+        $this->port = $port ?: null;
         $this->path = $parts['path'] ?? '';
         $this->query = $parts['query'] ?? '';
         $this->fragment = $parts['fragment'] ?? null;
@@ -1498,7 +1503,7 @@ class Uri
      * @param string $delimiter
      * @return string
      */
-    private function processParams($uri, $delimiter = ':')
+    private function processParams(string $uri, string $delimiter = ':'): string
     {
         if (strpos($uri, $delimiter) !== false) {
             preg_match_all(static::paramsRegex(), $uri, $matches, PREG_SET_ORDER);

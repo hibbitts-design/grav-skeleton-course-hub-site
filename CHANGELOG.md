@@ -1,3 +1,123 @@
+# v1.7.22
+## 09/16/2021
+
+1. [](#new)
+    * Register plugin autoloaders into plugin objects
+1. [](#bugfix)
+    * Fixed conflicting `$_original` variable in `Flex Pages`
+
+# v1.7.21
+## 09/14/2021
+
+1. [](#new)
+    * Added `|yaml` filter to convert input to YAML
+    * Added `route` and `request` to `onPageNotFound` event
+    * Added file upload/remove support for `Flex Forms`
+    * Added support for `flex-required@: not exists` and `flex-required@: '!exists'` in blueprints
+    * Added `$object->getOriginalData()` to get flex objects data before it was modified with `update()`
+    * Throwing exceptions from Twig templates fires `onDisplayErrorPage.[code]` event allowing better error pages
+2. [](#improved)
+    * Use a simplified text-based `cron` field for scheduler
+    * Add timestamp to logging output of scheduler jobs to see when they ran
+3. [](#bugfix)
+    * Fixed escaping in PageIndex::getLevelListing()
+    * Fixed validation of `number` type [#3433](https://github.com/getgrav/grav/issues/3433)
+    * Fixed excessive `security.yaml` file creation [#3432](https://github.com/getgrav/grav/issues/3432)
+    * Fixed incorrect port :0 with nginx unix socket setup [#3439](https://github.com/getgrav/grav/issues/3439)
+    * Fixed `Session::setFlashCookieObject()` to use the same options as the main session cookie
+
+# v1.7.20
+## 09/01/2021
+
+2. [](#improved)
+    * Added support for `task` and `action` inside JSON request body
+
+# v1.7.19
+## 08/31/2021
+
+1. [](#new)
+    * Include active form and request in `onPageTask` and `onPageAction` events (defaults to `null`)
+    * Added `UserObject::$authorizeCallable` to allow `$user->authorize()` customization
+2. [](#improved)
+    * Added meta support for `UploadedFile` class
+    * Added support for multiple mime-types per file extension [#3422](https://github.com/getgrav/grav/issues/3422)
+    * Added `setCurrent()` method to Page Collection [#3398](https://github.com/getgrav/grav/pull/3398)
+    * Initialize `$grav['uri']` before session
+3. [](#bugfix)
+    * Fixed `Warning: Undefined array key "SERVER_SOFTWARE" in index.php` [#3408](https://github.com/getgrav/grav/issues/3408)
+    * Fixed error in `loadDirectoryConfig()` if configuration hasn't been saved [#3409](https://github.com/getgrav/grav/issues/3409)
+    * Fixed GPM not using non-standard cache path [#3410](https://github.com/getgrav/grav/issues/3410)
+    * Fixed broken `environment://` stream when it doesn't have configuration
+    * Fixed `Flex Object` missing key field value when using `FolderStorage`
+    * Fixed broken Twig try tag when catch has not been defined or is empty
+    * Fixed `FlexForm` serialization
+    * Fixed form validation for numeric values in PHP 8
+    * Fixed `flex-options@` in blueprints duplicating items in array
+    * Fixed wrong form issue with flex objects after cache clear
+    * Fixed Flex object types not implementing `MediaInterface`
+    * Fixed issue with `svgImageFunction()` that was causing broken output
+
+# v1.7.18
+## 07/19/2021
+
+1. [](#improved)
+    * Added support for loading Flex Directory configuration from main configuration
+    * Move SVGs that cannot be sanitized to quarantine folder under `log://quarantine`
+    * Added support for CloudFlare-forwarded client IP in the `URI::ip()` method
+1. [](#bugfix)
+    * Fixed error when using Flex `SimpleStorage` with no entries
+    * Fixed page search to include slug field [#3316](https://github.com/getgrav/grav/issues/3316)
+    * Fixed Admin becoming unusable when GPM cannot be reached [#3383](https://github.com/getgrav/grav/issues/3383)
+    * Fixed `Failed to save entry: Forbidden` when moving a page to a visible page [#3389](https://github.com/getgrav/grav/issues/3389)
+    * Better support for Symfony local server on linux [#3400](https://github.com/getgrav/grav/pull/3400)
+    * Fixed `open_basedir()` error with some forms
+
+# v1.7.17
+## 06/15/2021
+
+1. [](#new)
+    * Interface `FlexDirectoryInterface` now extends `FlexAuthorizeInterface`
+1. [](#improved)
+    * Allow to unset an asset attribute by specifying null (ie, `'defer': null`)
+    * Support specifying custom attributes to assets in a collection [Read more](https://learn.getgrav.org/17/themes/asset-manager#collections-with-attributes?target=_blank) [#3358](https://github.com/getgrav/grav/issues/3358)
+    * File `frontmatter.yaml` isn't part of media, ignore it
+    * Switched default `JQuery` collection to use 3.x rather than 2.x
+1. [](#bugfix)
+    * Fixed missing styles when CSS/JS Pipeline is used and `asset://` folder is missing
+    * Fixed permission check when moving a page [#3382](https://github.com/getgrav/grav/issues/3382)
+
+# v1.7.16
+## 06/02/2021
+
+1. [](#new)
+    * Added 'addFrame()' method to ImageMedium [#3323](https://github.com/getgrav/grav/pull/3323)
+1. [](#improved)
+    * Set `cache.clear_images_by_default` to `false` by default
+    * Improve error on bad nested form data [#3364](https://github.com/getgrav/grav/issues/3364)
+1. [](#bugfix)
+    * Improve Plugin and Theme initialization to fix PHP8 bug [#3368](https://github.com/getgrav/grav/issues/3368)
+    * Fixed `pathinfo()` twig filter in PHP7
+    * Fixed the first visible child page getting ordering number `999999.` [#3365](https://github.com/getgrav/grav/issues/3365)
+    * Fixed flex pages search using only folder name [#3316](https://github.com/getgrav/grav/issues/3316)
+    * Fixed flex pages using wrong type in `onBlueprintCreated` event [#3157](https://github.com/getgrav/grav/issues/3157)
+    * Fixed wrong SRI paths invoked when Grav instance as a sub folder [#3358](https://github.com/getgrav/grav/issues/3358)
+    * Fixed SRI trying to calculate remote assets, only ever set integrity for local files. Use the SRI provided by the remote source and manually add it in the `addJs/addCss` call for remote support. [#3358](https://github.com/getgrav/grav/issues/3358)
+    * Fix for weird regex issue with latest PHP versions on Intel Macs causing params to not parse properly in URI object
+
+# v1.7.15
+## 05/19/2021
+
+1. [](#improved)
+    * Allow optional start date in page collections [#3350](https://github.com/getgrav/grav/pull/3350)
+    * Added `page` and `output` properties to `onOutputGenerated` and `onOutputRendered` events
+1. [](#bugfix)
+    * Fixed twig deprecated TwigFilter messages [#3348](https://github.com/getgrav/grav/issues/3348)
+    * Fixed fatal error with some markdown links [getgrav/grav-premium-issues#95](https://github.com/getgrav/grav-premium-issues/issues/95)
+    * Fixed markdown media operations not working when using `image://` stream [#3333](https://github.com/getgrav/grav/issues/3333) [#3349](https://github.com/getgrav/grav/issues/3349)
+    * Fixed copying page without changing the slug [getgrav/grav-plugin-admin#2135](https://github.com/getgrav/grav-plugin-admin/issues/2139)
+    * Fixed missing and commonly used methods when using `system.twig.undefined_functions = false` [getgrav/grav-plugin-admin#2138](https://github.com/getgrav/grav-plugin-admin/issues/2138)
+    * Fixed uploading images into Flex Object if field destination is not set
+
 # v1.7.14
 ## 04/29/2021
 

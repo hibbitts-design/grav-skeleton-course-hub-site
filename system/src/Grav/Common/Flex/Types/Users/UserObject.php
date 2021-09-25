@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Grav\Common\Flex\Types\Users;
 
+use Closure;
 use Countable;
 use Grav\Common\Config\Config;
 use Grav\Common\Data\Blueprint;
@@ -31,6 +32,7 @@ use Grav\Common\User\Interfaces\UserInterface;
 use Grav\Common\User\Traits\UserTrait;
 use Grav\Framework\File\Formatter\JsonFormatter;
 use Grav\Framework\File\Formatter\YamlFormatter;
+use Grav\Framework\Filesystem\Filesystem;
 use Grav\Framework\Flex\Flex;
 use Grav\Framework\Flex\FlexDirectory;
 use Grav\Framework\Flex\Storage\FileStorage;
@@ -74,6 +76,9 @@ class UserObject extends FlexObject implements UserInterface, Countable
     }
     use UserTrait;
     use UserObjectLegacyTrait;
+
+    /** @var Closure|null */
+    static public $authorizeCallable;
 
     /** @var array|null */
     protected $_uploads_original;
@@ -259,6 +264,15 @@ class UserObject extends FlexObject implements UserInterface, Countable
             }
         }
 
+        $authorizeCallable = static::$authorizeCallable;
+        if ($authorizeCallable instanceof Closure) {
+            $authorizeCallable->bindTo($this);
+            $authorized = $authorizeCallable($action, $scope);
+            if (is_bool($authorized)) {
+                return $authorized;
+            }
+        }
+
         // Check user access.
         $access = $this->getAccess();
         $authorized = $access->authorize($action, $scope);
@@ -290,6 +304,14 @@ class UserObject extends FlexObject implements UserInterface, Countable
         }
 
         return $value;
+    }
+
+    /**
+     * @return UserGroupIndex
+     */
+    public function getRoles(): UserGroupIndex
+    {
+        return $this->getGroups();
     }
 
     /**
@@ -689,6 +711,7 @@ class UserObject extends FlexObject implements UserInterface, Countable
 
     /**
      * @param array $files
+     * @return void
      */
     protected function setUpdatedMedia(array $files): void
     {
@@ -696,10 +719,16 @@ class UserObject extends FlexObject implements UserInterface, Countable
         $locator = Grav::instance()['locator'];
 
         $media = $this->getMedia();
+        if (!$media instanceof MediaUploadInterface) {
+            return;
+        }
+
+        $filesystem = Filesystem::getInstance(false);
 
         $list = [];
         $list_original = [];
         foreach ($files as $field => $group) {
+            // Ignore files without a field.
             if ($field === '') {
                 continue;
             }
@@ -707,7 +736,6 @@ class UserObject extends FlexObject implements UserInterface, Countable
 
             // Load settings for the field.
             $settings = $this->getMediaFieldSettings($field);
-
             foreach ($group as $filename => $file) {
                 if ($file) {
                     // File upload.
@@ -722,8 +750,8 @@ class UserObject extends FlexObject implements UserInterface, Countable
                 }
 
                 if ($file) {
-                    // Check file upload against media limits.
-                    $filename = $media->checkUploadedFile($file, $filename, $settings);
+                    // Check file upload against media limits (except for max size).
+                    $filename = $media->checkUploadedFile($file, $filename, ['filesize' => 0] + $settings);
                 }
 
                 $self = $settings['self'];
@@ -746,18 +774,24 @@ class UserObject extends FlexObject implements UserInterface, Countable
                     continue;
                 }
 
+                // Calculate path without the retina scaling factor.
+                $realpath = $filesystem->pathname($filepath) . str_replace(['@3x', '@2x'], '', basename($filepath));
+
                 $list[$filename] = [$file, $settings];
 
+                $path = str_replace('.', "\n", $field);
                 if (null !== $data) {
                     $data['name'] = $filename;
                     $data['path'] = $filepath;
 
-                    $this->setNestedProperty("{$field}\n{$filepath}", $data, "\n");
+                    $this->setNestedProperty("{$path}\n{$realpath}", $data, "\n");
                 } else {
-                    $this->unsetNestedProperty("{$field}\n{$filepath}", "\n");
+                    $this->unsetNestedProperty("{$path}\n{$realpath}", "\n");
                 }
             }
         }
+
+        $this->clearMediaCache();
 
         $this->_uploads = $list;
         $this->_uploads_original = $list_original;

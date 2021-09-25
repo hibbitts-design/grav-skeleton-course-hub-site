@@ -316,7 +316,7 @@ final class CurlResponse implements ResponseInterface
     /**
      * Parses header lines as curl yields them to us.
      */
-    private static function parseHeaderLine($ch, string $data, array &$info, array &$headers, ?array $options, CurlClientState $multi, int $id, ?string &$location, ?callable $resolveRedirect, ?LoggerInterface $logger, &$content = null): int
+    private static function parseHeaderLine($ch, string $data, array &$info, array &$headers, ?array $options, CurlClientState $multi, int $id, ?string &$location, ?callable $resolveRedirect, ?LoggerInterface $logger): int
     {
         $waitFor = @curl_getinfo($ch, \CURLINFO_PRIVATE) ?: '_0';
 
@@ -335,7 +335,7 @@ final class CurlResponse implements ResponseInterface
                 return \strlen($data);
             }
 
-            if (0 !== strpos($data, 'HTTP/')) {
+            if (!str_starts_with($data, 'HTTP/')) {
                 if (0 === stripos($data, 'Location:')) {
                     $location = trim(substr($data, 9));
                 }

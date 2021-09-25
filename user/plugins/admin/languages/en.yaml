@@ -771,7 +771,7 @@ PLUGIN_ADMIN:
   SCHEDULER_JOBS: "Custom Scheduler Jobs"
   SCHEDULER_STATUS: "Scheduler Status"
   SCHEDULER_RUNAT: "Run At"
-  SCHEDULER_RUNAT_HELP: "Cron formatted 'at' syntax"
+  SCHEDULER_RUNAT_HELP: "Cron formatted 'at' syntax. NOTE: All times are UTC!"
   SCHEDULER_OUTPUT: "Output File"
   SCHEDULER_OUTPUT_HELP: "The path/filename of the output file (from the root of the Grav installation)"
   SCHEDULER_OUTPUT_TYPE: "Output Type"
@@ -1109,3 +1109,6 @@ PLUGIN_ADMIN:
   IMAGES_CLS_RETINA_SCALE: "Retina Scale Factor"
   IMAGES_CLS_RETINA_SCALE_HELP: "Will take the calculated size and divide by scale factor to display a higher resolution image at a smaller pixel size for better handling of HiDPI resolutions"
   AUTOREGENERATE_FOLDER_SLUG: "Auto-regenerate based on page title"
+  ENABLE: Enable
+  PLUGINS_MUST_BE_ENABLED: "Plugin must be enabled to configure"
+  ACTIVATION_REQUIRED: "Activation required to configure"
