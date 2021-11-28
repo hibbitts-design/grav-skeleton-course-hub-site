@@ -24,10 +24,10 @@ use function array_slice;
  * Collection of objects stored into a filesystem.
  *
  * @package Grav\Framework\Collection
- * @template TKey
- * @template T
+ * @template TKey of array-key
+ * @template T of object
  * @extends AbstractLazyCollection<TKey,T>
- * @mplements FileCollectionInterface<TKey,T>
+ * @implements FileCollectionInterface<TKey,T>
  */
 class AbstractFileCollection extends AbstractLazyCollection implements FileCollectionInterface
 {

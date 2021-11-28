@@ -1,3 +1,30 @@
+# v1.10.25
+## 11/16/2021
+
+3. [](#bugfix)
+   * Fixed unescaped messages in JSON responses
+
+# v1.10.24
+## 10/26/2021
+
+1. [](#new)
+   * Require **Grav 1.7.24**
+2. [](#improved)
+   * Use new `Http\Response` rather than deprecated `GPM\Response`
+3. [](#bugfix)
+   * Fixed an issue with invalid HTML throwing errors on HTML security scanning
+   * Clear cache when installing plugins
+
+# v1.10.23
+## 09/29/2021
+
+1. [](#new)
+   * Updated SCSS compiler to v1.8
+2. [](#improved)
+   * Updated with latest language strings from Crowdin.com
+3. [](#bugfix)
+   * Fixed images from plugins/themes disappearing when saving twice
+
 # v1.10.22
 ## 09/16/2021
 

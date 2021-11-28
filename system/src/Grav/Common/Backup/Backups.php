@@ -144,9 +144,8 @@ class Backups
     public static function getTotalBackupsSize()
     {
         $backups = static::getAvailableBackups();
-        $size = array_sum(array_column($backups, 'size'));
 
-        return $size ?? 0;
+        return array_sum(array_column($backups, 'size'));
     }
 
     /**
@@ -222,7 +221,7 @@ class Backups
             $backup_root = rtrim(GRAV_ROOT . $backup_root, '/');
         }
 
-        if (!file_exists($backup_root)) {
+        if (!$backup_root || !file_exists($backup_root)) {
             throw new RuntimeException("Backup location: {$backup_root} does not exist...");
         }
 

@@ -13,7 +13,8 @@ return array(
     '7b11c4dc42b3b3023073cb14e519683c' => $vendorDir . '/ralouphie/getallheaders/src/getallheaders.php',
     'da5f6548f070d3d306f90eee42dd5de6' => $vendorDir . '/donatj/phpuseragentparser/src/UserAgentParser.php',
     'a0edc8309cc5e1d60e3047b5df6b7052' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
-    'def43f6c87e4f8dfd0c9e1b1bab14fe8' => $vendorDir . '/symfony/polyfill-iconv/bootstrap.php',
     'b686b8e46447868025a15ce5d0cb2634' => $vendorDir . '/symfony/polyfill-php74/bootstrap.php',
+    '23c18046f52bef3eea034657bafda50f' => $vendorDir . '/symfony/polyfill-php81/bootstrap.php',
+    'def43f6c87e4f8dfd0c9e1b1bab14fe8' => $vendorDir . '/symfony/polyfill-iconv/bootstrap.php',
     'a686abd6bcd0f7067184e090d1174003' => $baseDir . '/system/defines.php',
 );

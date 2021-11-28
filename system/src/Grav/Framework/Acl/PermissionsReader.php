@@ -21,7 +21,7 @@ use function is_array;
 class PermissionsReader
 {
     /** @var array */
-    private static $types;
+    protected static $types;
 
     /**
      * @param string $filename
@@ -131,7 +131,7 @@ class PermissionsReader
      */
     protected static function getDependencies(array $dependencies): array
     {
-        $list = [];
+        $list = [[]];
         foreach ($dependencies as $name => $deps) {
             $current = $deps ? static::getDependencies($deps) : [];
             $current[] = $name;

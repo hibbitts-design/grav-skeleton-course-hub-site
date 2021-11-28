@@ -90,7 +90,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
      *
      * @return array
      */
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return [
             'grav' => $this->grav,
@@ -102,7 +102,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
      *
      * @return array
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('*ize', [$this, 'inflectorFilter']),
@@ -172,7 +172,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
      *
      * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('array', [$this, 'arrayFilter']),
@@ -217,6 +217,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
             new TwigFunction('cron', [$this, 'cronFunc']),
             new TwigFunction('svg_image', [$this, 'svgImageFunction']),
             new TwigFunction('xss', [$this, 'xssFunc']),
+            new TwigFunction('unique_id', [$this, 'uniqueId']),
 
             // Translations
             new TwigFunction('t', [$this, 'translate'], ['needs_environment' => true]),
@@ -243,7 +244,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
     /**
      * @return array
      */
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return [
             new TwigTokenParserRender(),
@@ -655,6 +656,20 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
     }
 
     /**
+     * Generates a random string with configurable length, prefix and suffix.
+     * Unlike the built-in `uniqid()`, this string is non-conflicting and safe
+     *
+     * @param int $length
+     * @param array $options
+     * @return string
+     * @throws \Exception
+     */
+    public function uniqueId(int $length = 9, array $options = ['prefix' => '', 'suffix' => '']): string
+    {
+        return Utils::uniqueId($length, $options);
+    }
+
+    /**
      * @param string $string
      * @return string
      */
@@ -823,12 +838,8 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
      * @param Environment $twig
      * @return string
      */
-    public function translate(Environment $twig)
+    public function translate(Environment $twig, ...$args)
     {
-        // shift off the environment
-        $args = func_get_args();
-        array_shift($args);
-
         // If admin and tu filter provided, use it
         if (isset($this->grav['admin'])) {
             $numargs = count($args);
@@ -836,6 +847,12 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
 
             if (($numargs === 3 && is_array($args[1])) || ($numargs === 2 && !is_array($args[1]))) {
                 $lang = array_pop($args);
+                /** @var Language $language */
+                $language = $this->grav['language'];
+                if (is_string($lang) && !$language->getLanguageCode($lang)) {
+                    $args[] = $lang;
+                    $lang = null;
+                }
             } elseif ($numargs === 2 && is_array($args[1])) {
                 $subs = array_pop($args);
                 $args = array_merge($args, $subs);
@@ -1343,7 +1360,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
      */
     public function vardumpFunc($var)
     {
-        var_dump($var);
+        dump($var);
     }
 
     /**
@@ -1407,7 +1424,7 @@ class GravExtension extends AbstractExtension implements GlobalsInterface
      * @param array $context      Twig Context
      * @param string $var variable to be found (using dot notation)
      * @param null $default the default value to be used as last resort
-     * @param null $page an optional page to use for the current page
+     * @param PageInterface|null $page an optional page to use for the current page
      * @param bool $exists toggle to simply return the page where the variable is set, else null
      * @return mixed
      */

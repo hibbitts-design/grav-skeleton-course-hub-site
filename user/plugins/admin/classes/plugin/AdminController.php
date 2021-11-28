@@ -56,6 +56,7 @@ class AdminController extends AdminBaseController
     public function initialize(Grav $grav = null, $view = null, $task = null, $route = null, $post = null)
     {
         $this->grav = $grav;
+        $this->admin = $this->grav['admin'];
         $this->view = $view;
         $this->task = $task ?: 'display';
         if (isset($post['data'])) {
@@ -67,7 +68,6 @@ class AdminController extends AdminBaseController
         }
         $this->post  = $this->getPost($post);
         $this->route = $route;
-        $this->admin = $this->grav['admin'];
 
         $this->grav->fireEvent('onAdminControllerInit', new Event(['controller' => &$this]));
     }
@@ -165,7 +165,13 @@ class AdminController extends AdminBaseController
                 // Not used if Flex-Objects plugin handles users.
                 return $this->saveUser();
             default:
-                return $this->saveDefault();
+                if ($this->saveDefault()) {
+                    $route = $this->grav['uri']::getCurrentRoute();
+                    $this->setRedirect($route->withGravParam('task', null)->toString(), 302);
+                    $this->redirect();
+                }
+
+                return false;
         }
     }
 
@@ -282,7 +288,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $this->admin->json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
             return false;
         }
 
@@ -401,7 +407,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
         }
 
         $this->sendJsonResponse($json_response);
@@ -484,7 +490,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
         }
 
         $this->sendJsonResponse($json_response);
@@ -534,7 +540,7 @@ class AdminController extends AdminBaseController
 
             $this->admin->json_response = [
                 'status' => 'error',
-                'message' => $this->admin::translate('PLUGIN_ADMIN.AN_ERROR_OCCURRED') . '. ' . $e->getMessage()
+                'message' => $this->admin::translate('PLUGIN_ADMIN.AN_ERROR_OCCURRED') . '. ' . htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')
             ];
 
             return true;
@@ -911,7 +917,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $this->admin->json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
 
             return false;
         }
@@ -955,7 +961,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $this->admin->json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
 
             return false;
         }
@@ -998,7 +1004,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $this->admin->json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
 
             return false;
         }
@@ -1053,7 +1059,7 @@ class AdminController extends AdminBaseController
             $msg = Utils::contains($msg, '401 Unauthorized') ? "ERROR: License key for this resource is invalid." : $msg;
             $msg = Utils::contains($msg, '404 Not Found') ? "ERROR: Resource not found" : $msg;
 
-            $this->admin->json_response = ['status' => 'error', 'message' => $msg];
+            $this->admin->json_response = ['status' => 'error', 'message' => htmlspecialchars($msg, ENT_QUOTES | ENT_HTML5, 'UTF-8')];
 
             return false;
         }
@@ -1127,7 +1133,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
 
             $this->sendJsonResponse($json_response, 200);
         }
@@ -2062,7 +2068,7 @@ class AdminController extends AdminBaseController
             $debugger = $this->grav['debugger'];
             $debugger->addException($e);
 
-            $this->admin->json_response = ['status' => 'error', 'message' => $e->getMessage()];
+            $this->admin->json_response = ['status' => 'error', 'message' => htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_HTML5, 'UTF-8')];
 
             return false;
         }
@@ -2219,7 +2225,7 @@ class AdminController extends AdminBaseController
             $this->admin->json_response = [
                 'status'  => 'error',
                 'message' => sprintf($this->admin::translate('PLUGIN_ADMIN.FILEUPLOAD_UNABLE_TO_UPLOAD'),
-                    $filename, 'Bad filename')
+                    htmlspecialchars($filename, ENT_QUOTES | ENT_HTML5, 'UTF-8'), 'Bad filename')
             ];
 
             return false;
@@ -2447,7 +2453,7 @@ class AdminController extends AdminBaseController
             if (!$result) {
                 $this->admin->json_response = [
                     'status'  => 'error',
-                    'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_COULD_NOT_BE_DELETED') . ': ' . $filename
+                    'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_COULD_NOT_BE_DELETED') . ': ' . htmlspecialchars($filename, ENT_QUOTES | ENT_HTML5, 'UTF-8')
                 ];
 
                 return false;
@@ -2468,7 +2474,7 @@ class AdminController extends AdminBaseController
                 if (!$result) {
                     $this->admin->json_response = [
                         'status'  => 'error',
-                        'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_COULD_NOT_BE_DELETED') . ': ' . $filename
+                        'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_COULD_NOT_BE_DELETED') . ': ' . htmlspecialchars($filename, ENT_QUOTES | ENT_HTML5, 'UTF-8')
                     ];
 
                     return false;
@@ -2483,7 +2489,7 @@ class AdminController extends AdminBaseController
         if (!$found) {
             $this->admin->json_response = [
                 'status'  => 'error',
-                'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_NOT_FOUND') . ': ' . $filename
+                'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_NOT_FOUND') . ': ' . htmlspecialchars($filename, ENT_QUOTES | ENT_HTML5, 'UTF-8')
             ];
 
             return false;
@@ -2494,7 +2500,7 @@ class AdminController extends AdminBaseController
 
         $this->admin->json_response = [
             'status'  => 'success',
-            'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_DELETED') . ': ' . $filename
+            'message' => $this->admin::translate('PLUGIN_ADMIN.FILE_DELETED') . ': ' . htmlspecialchars($filename, ENT_QUOTES | ENT_HTML5, 'UTF-8')
         ];
 
         return true;

@@ -6,10 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'enshrined\\svgSanitize\\' => array($vendorDir . '/enshrined/svg-sanitize/src'),
     'donatj\\UserAgent\\' => array($vendorDir . '/donatj/phpuseragentparser/src/UserAgent'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
-    'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'Twig\\' => array($baseDir . '/system/src/Twig', $vendorDir . '/twig/twig/src'),
+    'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Php74\\' => array($vendorDir . '/symfony/polyfill-php74'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
@@ -32,13 +32,13 @@ return array(
     'RocketTheme\\Toolbox\\Compat\\' => array($vendorDir . '/rockettheme/toolbox/Compat/src'),
     'RocketTheme\\Toolbox\\Blueprints\\' => array($vendorDir . '/rockettheme/toolbox/Blueprints/src'),
     'RocketTheme\\Toolbox\\ArrayTraits\\' => array($vendorDir . '/rockettheme/toolbox/ArrayTraits/src'),
+    'Rhukster\\DomSanitizer\\' => array($vendorDir . '/rhukster/dom-sanitizer/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Server\\' => array($vendorDir . '/psr/http-server-handler/src', $vendorDir . '/psr/http-server-middleware/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
-    'Phive\\Twig\\Extensions\\Deferred\\' => array($vendorDir . '/phive/twig-extensions-deferred/src'),
     'Nyholm\\Psr7\\' => array($vendorDir . '/nyholm/psr7/src'),
     'Nyholm\\Psr7Server\\' => array($vendorDir . '/nyholm/psr7-server/src'),
     'Negotiation\\' => array($vendorDir . '/willdurand/negotiation/src/Negotiation'),

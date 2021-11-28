@@ -1,9 +1,64 @@
+# v1.7.25
+## 11/16/2021
+
+1. [](#new)
+    * Updated phpstan to v1.0
+    * Added `FlexObject::getDiff()` to see difference to the saved object
+2. [](#improved)
+    * Use Symfony `dump` instead of PHP's `vardump` in side the `{{ vardump(x) }}` Twig vardump function
+    * Added `route` and `request` to `onPagesInitialized` event
+    * Improved page cloning, added method `Page::initialize()`
+    * Improved `FlexObject::getChanges()`: return changed lists and arrays as whole instead of just changed keys/values
+    * Improved form validation JSON responses to contain list of failed fields with their error messages
+    * Improved redirects: send redirect response in JSON if the request was in JSON
+3. [](#bugfix)
+    * Fixed path traversal vulnerability when using `bin/grav server`
+    * Fixed unescaped error messages in JSON error responses
+    * Fixed `|t(variable)` twig filter in admin
+    * Fixed `FlexObject::getChanges()` always returning empty array
+    * Fixed form validation exceptions to use `400 Bad Request` instead of `500 Internal Server Error`
+
+# v1.7.24
+## 10/26/2021
+
+1. [](#new)
+    * Added support for image watermarks
+    * Added support to disable a form, making it readonly
+2. [](#improved)
+    * Flex `$user->authorize()` now checks user groups before `admin.super`, allowing deny rules to work properly
+3. [](#bugfix)
+    * Fixed a bug in `PermissionsReader` in PHP 7.3
+    * Fixed `session_store_active` language option (#3464)
+    * Fixed deprecated warnings on `ArrayAccess` in PHP 8.1
+    * Fixed XSS detection with `&colon;`
+
+# v1.7.23
+## 09/29/2021
+
+1. [](#new)
+    * Added method `Pages::referrerRoute()` to get the referrer route and language
+    * Added true unique `Utils::uniqueId()` / `{{ unique_id() }}` utilities  with length, prefix, and suffix support
+    * Added `UserObject::isMyself()` method to check if flex user is currently logged in
+    * Added support for custom form field options validation with `validate: options: key|ignore`
+2. [](#improved)
+   * Replaced GPL `SVG-Sanitizer` with MIT licensed `DOM-Sanitizer`
+   * `Uri::referrer()` now accepts third parameter, if set to `true`, it returns route without base or language code [#3411](https://github.com/getgrav/grav/issues/3411)
+   * Updated vendor libs with latest
+   * Updated with latest language strings via Crowdin.com
+3. [](#bugfix)
+    * Fixed `Folder::move()` throwing an error when target folder is changed by only appending characters to the end [#3445](https://github.com/getgrav/grav/issues/3445)
+    * Fixed some phpstan issues (all code back to level 1, Framework level 3)
+    * Fixed form reset causing image uploads to fail when using Flex
+
 # v1.7.22
 ## 09/16/2021
 
 1. [](#new)
     * Register plugin autoloaders into plugin objects
-1. [](#bugfix)
+2. [](#improved)
+    * Improve Twig 2 compatibility
+    * Update to customized version of Twig DeferredExtension (Twig 1/2 compatible)
+3. [](#bugfix)
     * Fixed conflicting `$_original` variable in `Flex Pages`
 
 # v1.7.21

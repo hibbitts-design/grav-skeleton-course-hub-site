@@ -44,7 +44,7 @@ class InitializeProcessor extends ProcessorBase
     public $title = 'Initialize';
 
     /** @var bool */
-    private static $cli_initialized = false;
+    protected static $cli_initialized = false;
 
     /**
      * @param Grav $grav
@@ -105,11 +105,11 @@ class InitializeProcessor extends ProcessorBase
         // TODO: remove in 2.0.
         $this->container['accounts'];
 
+        // Initialize session (used by URI, see issue #3269).
+        $this->initializeSession($config);
+
         // Initialize URI (uses session, see issue #3269).
         $this->initializeUri($config);
-
-        // Initialize session.
-        $this->initializeSession($config);
 
         // Grav may return redirect response right away.
         $redirectCode = (int)$config->get('system.pages.redirect_trailing_slash', 1);

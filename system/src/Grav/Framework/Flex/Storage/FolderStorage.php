@@ -224,6 +224,7 @@ class FolderStorage extends AbstractFilesystemStorage
      * @param string $src
      * @param string $dst
      * @return bool
+     * @throws RuntimeException
      */
     public function copyRow(string $src, string $dst): bool
     {
@@ -247,6 +248,7 @@ class FolderStorage extends AbstractFilesystemStorage
     /**
      * {@inheritdoc}
      * @see FlexStorageInterface::renameRow()
+     * @throws RuntimeException
      */
     public function renameRow(string $src, string $dst): bool
     {
@@ -634,7 +636,7 @@ class FolderStorage extends AbstractFilesystemStorage
         $flags = FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS | FilesystemIterator::UNIX_PATHS;
 
         $iterator = new FilesystemIterator($path, $flags);
-        $list = [];
+        $list = [[]];
         /** @var SplFileInfo $info */
         foreach ($iterator as $filename => $info) {
             if (!$info->isDir() || strpos($info->getFilename(), '.') === 0) {
@@ -644,11 +646,7 @@ class FolderStorage extends AbstractFilesystemStorage
             $list[] = $this->buildIndexFromFilesystem($filename);
         }
 
-        if (!$list) {
-            return [];
-        }
-
-        return count($list) > 1 ? array_merge(...$list) : $list[0];
+        return array_merge(...$list);
     }
 
     /**
