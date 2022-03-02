@@ -5,7 +5,7 @@ namespace Grav\Framework\Flex\Traits;
 /**
  * @package    Grav\Framework\Flex
  *
- * @copyright  Copyright (c) 2015 - 2021 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2022 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -44,7 +44,7 @@ trait FlexMediaTrait
     }
 
     /** @var array */
-    protected $_uploads;
+    protected $_uploads = [];
 
     /**
      * @return string|null
@@ -119,7 +119,7 @@ trait FlexMediaTrait
 
         // Load settings for the field.
         $schema = $this->getBlueprint()->schema();
-        $settings = $field && is_object($schema) ? (array)$schema->getProperty($field) : null;
+        $settings = (array)$schema->getProperty($field);
         if (!is_array($settings)) {
             return null;
         }
@@ -165,6 +165,9 @@ trait FlexMediaTrait
         return $settings + ['accept' => '*', 'limit' => 1000, 'self' => true];
     }
 
+    /**
+     * @return array
+     */
     protected function getMediaFields(): array
     {
         // Load settings for the field.
@@ -286,6 +289,7 @@ trait FlexMediaTrait
     /**
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function __debugInfo()
     {
         return parent::__debugInfo() + [
@@ -342,7 +346,7 @@ trait FlexMediaTrait
                 }
 
                 // Calculate path without the retina scaling factor.
-                $realpath = $filesystem->pathname($filepath) . str_replace(['@3x', '@2x'], '', basename($filepath));
+                $realpath = $filesystem->pathname($filepath) . str_replace(['@3x', '@2x'], '', Utils::basename($filepath));
 
                 $list[$filename] = [$file, $settings];
 
@@ -397,11 +401,11 @@ trait FlexMediaTrait
     }
 
     /**
-     * @return array<string, UploadedFileInterface|array|null>
+     * @return array<string,UploadedFileInterface|array|null>
      */
     protected function getUpdatedMedia(): array
     {
-        return $this->_uploads ?? [];
+        return $this->_uploads;
     }
 
     /**
@@ -504,7 +508,7 @@ trait FlexMediaTrait
         user_error(__METHOD__ . '() is deprecated since Grav 1.7, use Media class that implements MediaUploadInterface instead', E_USER_DEPRECATED);
 
         // Check the file extension.
-        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $extension = strtolower(Utils::pathinfo($filename, PATHINFO_EXTENSION));
 
         $grav = Grav::instance();
 

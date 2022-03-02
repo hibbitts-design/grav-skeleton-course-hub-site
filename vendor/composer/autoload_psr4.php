@@ -56,5 +56,4 @@ return array(
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Clockwork\\' => array($vendorDir . '/itsgoingd/clockwork/Clockwork'),
-    '' => array($vendorDir . '/antoligy/dom-string-iterators/src'),
 );

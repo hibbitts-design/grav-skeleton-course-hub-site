@@ -3,6 +3,7 @@
 namespace Grav\Installer;
 
 use Closure;
+use Grav\Common\Utils;
 
 /**
  * Class VersionUpdate
@@ -50,7 +51,7 @@ final class VersionUpdate
 
     public function getPatch(): string
     {
-        return $this->date;
+        return $this->patch;
     }
 
     public function getUpdater(): VersionUpdater

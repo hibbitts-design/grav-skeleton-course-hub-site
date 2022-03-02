@@ -147,7 +147,10 @@ trait HttpClientTrait
 
         // Finalize normalization of options
         $options['http_version'] = (string) ($options['http_version'] ?? '') ?: null;
-        $options['timeout'] = (float) ($options['timeout'] ?? ini_get('default_socket_timeout'));
+        if (0 > $options['timeout'] = (float) ($options['timeout'] ?? ini_get('default_socket_timeout'))) {
+            $options['timeout'] = 172800.0; // 2 days
+        }
+
         $options['max_duration'] = isset($options['max_duration']) ? (float) $options['max_duration'] : 0;
 
         return [$url, $options];
@@ -456,7 +459,7 @@ trait HttpClientTrait
                 throw new InvalidArgumentException(sprintf('Unsupported IDN "%s", try enabling the "intl" PHP extension or running "composer require symfony/polyfill-intl-idn".', $host));
             }
 
-            $host = \defined('INTL_IDNA_VARIANT_UTS46') ? idn_to_ascii($host, \IDNA_DEFAULT, \INTL_IDNA_VARIANT_UTS46) ?: strtolower($host) : strtolower($host);
+            $host = \defined('INTL_IDNA_VARIANT_UTS46') ? idn_to_ascii($host, \IDNA_DEFAULT | \IDNA_USE_STD3_RULES | \IDNA_CHECK_BIDI | \IDNA_CHECK_CONTEXTJ | \IDNA_NONTRANSITIONAL_TO_ASCII, \INTL_IDNA_VARIANT_UTS46) ?: strtolower($host) : strtolower($host);
             $host .= $port ? ':'.$port : '';
         }
 

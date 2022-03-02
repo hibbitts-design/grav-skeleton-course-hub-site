@@ -3,7 +3,7 @@
 /**
  * @package    Grav\Common
  *
- * @copyright  Copyright (c) 2015 - 2021 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2022 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -165,7 +165,7 @@ class Uri
         }
 
         // Handle custom base
-        $custom_base = rtrim($grav['config']->get('system.custom_base_url'), '/');
+        $custom_base = rtrim($grav['config']->get('system.custom_base_url', ''), '/');
         if ($custom_base) {
             $custom_parts = parse_url($custom_base);
             if ($custom_parts === false) {
@@ -217,7 +217,7 @@ class Uri
         $path = $bits['path'] ?? '/';
 
         // remove the extension if there is one set
-        $parts = pathinfo($path);
+        $parts = Utils::pathinfo($path);
 
         // set the original basename
         $this->basename = $parts['basename'];
@@ -337,9 +337,9 @@ class Uri
     /**
      * Get URI parameter.
      *
-     * @param string|null $id
-     * @param string|bool|null $default
-     * @return bool|string
+     * @param string $id
+     * @param string|false|null $default
+     * @return string|false|null
      */
     public function param($id, $default = false)
     {
@@ -623,6 +623,7 @@ class Uri
     /**
      * @return string
      */
+    #[\ReturnTypeWillChange]
     public function __toString()
     {
         return static::buildUrl($this->toArray());
@@ -853,7 +854,7 @@ class Uri
                 }
 
                 if ($full_path) {
-                    $path_info = pathinfo($full_path);
+                    $path_info = Utils::pathinfo($full_path);
                     $page_path = $path_info['dirname'];
                     $filename = '';
 
@@ -898,7 +899,7 @@ class Uri
             $routes = $pages->routes();
 
             // if this is an image, get the proper path
-            $url_bits = pathinfo($url_path);
+            $url_bits = Utils::pathinfo($url_path);
             if (isset($url_bits['extension'])) {
                 $target_path = $url_bits['dirname'];
             } else {
@@ -1045,7 +1046,7 @@ class Uri
         $base_url = rtrim($base . $grav['pages']->base(), '/') . $language_append;
 
         // if absolute and starts with a base_url move on
-        if (pathinfo($markdown_url, PATHINFO_DIRNAME) === '.' && $page->url() === '/') {
+        if (Utils::pathinfo($markdown_url, PATHINFO_DIRNAME) === '.' && $page->url() === '/') {
             return '/' . $markdown_url;
         }
         // no path to convert
@@ -1084,7 +1085,7 @@ class Uri
             return $normalized_url;
         }
 
-        $path_info = pathinfo($full_path);
+        $path_info = Utils::pathinfo($full_path);
         $page_path = $path_info['dirname'];
         $filename = '';
 
@@ -1272,9 +1273,9 @@ class Uri
         $this->path = rawurldecode(parse_url('http://example.com' . $request_uri, PHP_URL_PATH));
 
         // Build query string.
-        $this->query =  $env['QUERY_STRING'] ?? '';
+        $this->query = $env['QUERY_STRING'] ?? '';
         if ($this->query === '') {
-            $this->query = parse_url('http://example.com' . $request_uri, PHP_URL_QUERY);
+            $this->query = parse_url('http://example.com' . $request_uri, PHP_URL_QUERY) ?? '';
         }
 
         // Support ngnix routes.

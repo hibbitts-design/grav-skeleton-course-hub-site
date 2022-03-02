@@ -1,3 +1,47 @@
+# v2.1.4
+## 02/08/2022
+
+2. [](#bugfix)
+   * Fixed bad configuration reference for `processed_content`
+   * Set `processed_content` to false by default - so `content-inject` doesn't try to render with twig
+
+# v2.1.3
+## 02/08/2022
+
+1. [](#improved)
+   * Shortcodes should use `rawHanders()` to support shortcodes/markdown
+
+# v2.1.2
+## 02/08/2022
+
+1. [](#improved)
+   * PHPStan fixes
+   * Support `./` in page paths
+
+# v2.1.1
+## 12/09/2021
+
+1. [](#improved)
+   * Added a modular example in the README.md
+2. [](#bugfix)
+   * Allow null returned by `getInjectedPageContent()`
+
+# v2.1.0
+## 12/06/2021
+
+1. [](#new)
+   * Added `[page-inject]` and `[content-inject]` shortcodes as an alternative syntax
+   * Added support for remote `page-inject` and `content-inject` variations
+2. [](#improved)
+   * Refactored code to work with both markdown and shortcode syntax
+   * Use composer-based autoloader
+
+# v2.0.0
+## 12/03/2021
+
+1. [](#new)
+   * Added support for new remote injects.
+
 # v1.4.5
 ## 04/27/2021
 

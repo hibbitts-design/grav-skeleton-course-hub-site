@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * @package    Grav\Framework\Filesystem
  *
- * @copyright  Copyright (c) 2015 - 2021 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2022 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -31,6 +31,7 @@ interface FilesystemInterface
      * @param int       $levels     The number of parent directories to go up (>= 1).
      * @return string               Returns parent path.
      * @throws RuntimeException
+     * @phpstan-param positive-int $levels
      * @api
      */
     public function parent(string $path, int $levels = 1): string;
@@ -46,7 +47,7 @@ interface FilesystemInterface
     public function normalize(string $path): string;
 
     /**
-     * Returns filename component of path.
+     * Unicode-safe and stream-safe `\basename()` replacement.
      *
      * @param string      $path     A filename or path, does not need to exist as a file.
      * @param string|null $suffix   If the filename ends in suffix this will also be cut off.
@@ -56,7 +57,7 @@ interface FilesystemInterface
     public function basename(string $path, ?string $suffix = null): string;
 
     /**
-     * Stream-safe `\dirname()` replacement.
+     * Unicode-safe and stream-safe `\dirname()` replacement.
      *
      * @see   http://php.net/manual/en/function.dirname.php
      *
@@ -64,12 +65,13 @@ interface FilesystemInterface
      * @param int       $levels     The number of parent directories to go up (>= 1).
      * @return string               Returns path to the directory.
      * @throws RuntimeException
+     * @phpstan-param positive-int $levels
      * @api
      */
     public function dirname(string $path, int $levels = 1): string;
 
     /**
-     * Stream-safe `\pathinfo()` replacement.
+     * Unicode-safe and stream-safe `\pathinfo()` replacement.
      *
      * @see   http://php.net/manual/en/function.pathinfo.php
      *

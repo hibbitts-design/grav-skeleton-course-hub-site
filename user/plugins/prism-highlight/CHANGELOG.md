@@ -1,3 +1,28 @@
+# v2.0.6
+## 02/22/2022
+
+1. [](#bugfix)
+    * Fixed issue with Twig templating
+    
+# v2.0.5
+## 02/18/2022
+
+1. [](#bugfix)
+   * Fixed bad page header tag `prism:` should be `prism-highlight:`
+
+# v2.0.4
+## 01/27/2022
+
+1. [](#new)
+   * Added `bbcode`/`shortcode` language, compatible with Grav's Shortcodes plugin
+ 
+# v2.0.3
+## 01/26/2022
+
+1. [](#improved)
+    * Upgraded to latest 1.26.0 Prism.JS version (with fixes)
+    * Added `C`, `C#`, and `C++` languages
+
 # v2.0.2
 ## 11/23/2021
 
