@@ -233,7 +233,9 @@ final class CurlResponse implements ResponseInterface
 
             $this->doDestruct();
         } finally {
-            curl_setopt($this->handle, \CURLOPT_VERBOSE, false);
+            if (\is_resource($this->handle) || $this->handle instanceof \CurlHandle) {
+                curl_setopt($this->handle, \CURLOPT_VERBOSE, false);
+            }
         }
     }
 
@@ -361,6 +363,7 @@ final class CurlResponse implements ResponseInterface
                 } elseif (303 === $info['http_code'] || ('POST' === $info['http_method'] && \in_array($info['http_code'], [301, 302], true))) {
                     $info['http_method'] = 'HEAD' === $info['http_method'] ? 'HEAD' : 'GET';
                     curl_setopt($ch, \CURLOPT_POSTFIELDS, '');
+                    curl_setopt($ch, \CURLOPT_CUSTOMREQUEST, $info['http_method']);
                 }
             }
 

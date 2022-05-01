@@ -83,6 +83,7 @@ abstract class Utils
 
         $resource = false;
         if (static::contains((string)$input, '://')) {
+            // Url contains a scheme (https:// , user:// etc).
             /** @var UniformResourceLocator $locator */
             $locator = $grav['locator'];
 
@@ -134,14 +135,23 @@ abstract class Utils
                 $resource = $locator->findResource($input, false);
             }
         } else {
-            $root = $uri->rootUrl();
+            // Just a path.
+            /** @var Pages $pages */
+            $pages = $grav['pages'];
 
-            if (static::startsWith($input, $root)) {
-                $input = static::replaceFirstOccurrence($root, '', $input);
+            // Is this a page?
+            $page = $pages->find($input, true);
+            if ($page && $page->routable()) {
+                return $page->url($domain);
+            }
+
+            $root = preg_quote($uri->rootUrl(), '#');
+            $pattern = '#(' . $root . '$|' . $root . '/)#';
+            if (!empty($root) && preg_match($pattern, $input, $matches)) {
+                $input = static::replaceFirstOccurrence($matches[0], '', $input);
             }
 
             $input = ltrim($input, '/');
-
             $resource = $input;
         }
 
@@ -658,18 +668,17 @@ abstract class Utils
      */
     public static function download($file, $force_download = true, $sec = 0, $bytes = 1024, array $options = [])
     {
+        $grav = Grav::instance();
+
         if (file_exists($file)) {
             // fire download event
-            Grav::instance()->fireEvent('onBeforeDownload', new Event(['file' => $file, 'options' => &$options]));
+            $grav->fireEvent('onBeforeDownload', new Event(['file' => $file, 'options' => &$options]));
 
             $file_parts = static::pathinfo($file);
             $mimetype = $options['mime'] ?? static::getMimeByExtension($file_parts['extension']);
             $size = filesize($file); // File size
 
-            // clean all buffers
-            while (ob_get_level()) {
-                ob_end_clean();
-            }
+            $grav->cleanOutputBuffers();
 
             // required for IE, otherwise Content-Disposition may be ignored
             if (ini_get('zlib.output_compression')) {
@@ -704,8 +713,8 @@ abstract class Utils
                 $new_length = $size;
                 header('Content-Length: ' . $size);
 
-                if (Grav::instance()['config']->get('system.cache.enabled')) {
-                    $expires = $options['expires'] ?? Grav::instance()['config']->get('system.pages.expires');
+                if ($grav['config']->get('system.cache.enabled')) {
+                    $expires = $options['expires'] ?? $grav['config']->get('system.pages.expires');
                     if ($expires > 0) {
                         $expires_date = gmdate('D, d M Y H:i:s T', time() + $expires);
                         header('Cache-Control: max-age=' . $expires);
@@ -994,7 +1003,7 @@ abstract class Utils
      * @param int|null $flags
      * @return array|string
      */
-    public static function pathinfo(string $path, int $flags = null)
+    public static function pathinfo($path, int $flags = null)
     {
         $path = str_replace(['%2F', '%5C'], ['/', '\\'], rawurlencode($path));
 
@@ -1020,7 +1029,7 @@ abstract class Utils
      * @param string $suffix
      * @return string
      */
-    public static function basename(string $path, string $suffix = ''): string
+    public static function basename($path, string $suffix = ''): string
     {
         return rawurldecode(basename(str_replace(['%2F', '%5C'], '/', rawurlencode($path)), $suffix));
     }

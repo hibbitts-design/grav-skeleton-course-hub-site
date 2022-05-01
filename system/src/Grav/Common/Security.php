@@ -26,6 +26,22 @@ use function is_string;
 class Security
 {
     /**
+     * @param string $filepath
+     * @param array|null $options
+     * @return string|null
+     */
+    public static function detectXssFromSvgFile(string $filepath, array $options = null): ?string
+    {
+        if (file_exists($filepath) && Grav::instance()['config']->get('security.sanitize_svg')) {
+            $content = file_get_contents($filepath);
+
+            return static::detectXss($content, $options);
+        }
+
+        return null;
+    }
+
+    /**
      * Sanitize SVG string for XSS code
      *
      * @param string $svg
@@ -81,7 +97,7 @@ class Security
      */
     public static function detectXssFromPages(Pages $pages, $route = true, callable $status = null)
     {
-        $routes = $pages->routes();
+        $routes = $pages->getList(null, 0, true);
 
         // Remove duplicate for homepage
         unset($routes['/']);
@@ -94,26 +110,23 @@ class Security
             'steps' => count($routes),
         ]);
 
-        foreach ($routes as $path) {
+        foreach (array_keys($routes) as $route) {
             $status && $status([
                 'type' => 'progress',
             ]);
 
             try {
-                $page = $pages->get($path);
+                $page = $pages->find($route);
+                if ($page->exists()) {
+                    // call the content to load/cache it
+                    $header = (array) $page->header();
+                    $content = $page->value('content');
 
-                // call the content to load/cache it
-                $header = (array) $page->header();
-                $content = $page->value('content');
+                    $data = ['header' => $header, 'content' => $content];
+                    $results = static::detectXssFromArray($data);
 
-                $data = ['header' => $header, 'content' => $content];
-                $results = static::detectXssFromArray($data);
-
-                if (!empty($results)) {
-                    if ($route) {
-                        $list[$page->route()] = $results;
-                    } else {
-                        $list[$page->filePathClean()] = $results;
+                    if (!empty($results)) {
+                        $list[$page->rawRoute()] = $results;
                     }
                 }
             } catch (Exception $e) {
@@ -200,13 +213,14 @@ class Security
         }, $string);
 
         // Clean up entities
-        $string = preg_replace('!(&#0+[0-9]+)!u', '$1;', $string);
+        $string = preg_replace('!(&#[0-9]+);?!u', '$1;', $string);
 
         // Decode entities
         $string = html_entity_decode($string, ENT_NOQUOTES | ENT_HTML5, 'UTF-8');
 
         // Strip whitespace characters
-        $string = preg_replace('!\s!u', '', $string);
+        $string = preg_replace('!\s!u', ' ', $string);
+        $stripped = preg_replace('!\s!u', '', $string);
 
         // Set the patterns we'll test against
         $patterns = [
@@ -229,7 +243,7 @@ class Security
         // Iterate over rules and return label if fail
         foreach ($patterns as $name => $regex) {
             if (!empty($enabled_rules[$name])) {
-                if (preg_match($regex, $string) || preg_match($regex, $orig)) {
+                if (preg_match($regex, $string) || preg_match($regex, $stripped) || preg_match($regex, $orig)) {
                     return $name;
                 }
             }

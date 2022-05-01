@@ -6,6 +6,7 @@ use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
 
 // Stores messages in a Clockwork log instance
+// DEPRECATED Moved to Clockwork\Support\Monolog\Monolog\ClockworkHandler, will be removed in Clockwork 6
 class ClockworkHandler extends AbstractProcessingHandler
 {
 	protected $clockworkLog;
