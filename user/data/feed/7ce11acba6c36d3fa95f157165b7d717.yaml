@@ -1,25 +1,25 @@
-last_checked: 1651419058
+last_checked: 1657134884
 data:
   -
     title: 'macOS 12.0 Monterey Apache Setup: LetsEncrypt SSL'
     url: 'https://getgrav.org/blog/macos-monterey-apache-ssl'
     date: 1635591780
-    nicetime: '6 months ago'
+    nicetime: '8 months ago'
   -
     title: 'macOS 12.0 Monterey Apache Setup: MySQL, Xdebug & More...'
     url: 'https://getgrav.org/blog/macos-monterey-apache-mysql-vhost-apc'
     date: 1635591600
-    nicetime: '6 months ago'
+    nicetime: '8 months ago'
   -
     title: 'macOS 12.0 Monterey Apache Setup: Multiple PHP Versions'
     url: 'https://getgrav.org/blog/macos-monterey-apache-multiple-php-versions'
     date: 1635501600
-    nicetime: '6 months ago'
+    nicetime: '8 months ago'
   -
     title: 'macOS 12.0 Monterey Apache Setup: Upgrading Homebrew'
     url: 'https://getgrav.org/blog/macos-monterey-apache-upgrade-homebrew'
     date: 1633694400
-    nicetime: '7 months ago'
+    nicetime: '9 months ago'
   -
     title: 'Skeleton Build Automation'
     url: 'https://getgrav.org/blog/skeletons-build-automation'
