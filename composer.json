@@ -19,6 +19,7 @@
         "ext-zip": "*",
         "ext-dom": "*",
         "ext-libxml": "*",
+        "ext-gd": "*",
         "symfony/polyfill-mbstring": "~1.23",
         "symfony/polyfill-iconv": "^1.23",
         "symfony/polyfill-php74": "^1.23",
@@ -64,7 +65,7 @@
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
-        "phpstan/phpstan": "^1.2",
+        "phpstan/phpstan": "^1.8",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpunit/php-code-coverage": "~9.2",
         "getgrav/markdowndocs": "^2.0",

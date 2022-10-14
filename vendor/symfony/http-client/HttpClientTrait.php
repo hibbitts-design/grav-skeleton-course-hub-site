@@ -106,7 +106,7 @@ trait HttpClientTrait
         }
 
         // Validate on_progress
-        if (!\is_callable($onProgress = $options['on_progress'] ?? 'var_dump')) {
+        if (isset($options['on_progress']) && !\is_callable($onProgress = $options['on_progress'])) {
             throw new InvalidArgumentException(sprintf('Option "on_progress" must be callable, "%s" given.', \is_object($onProgress) ? \get_class($onProgress) : \gettype($onProgress)));
         }
 
@@ -160,7 +160,7 @@ trait HttpClientTrait
 
         // Finalize normalization of options
         $options['http_version'] = (string) ($options['http_version'] ?? '') ?: null;
-        if (0 > $options['timeout'] = (float) ($options['timeout'] ?? ini_get('default_socket_timeout'))) {
+        if (0 > $options['timeout'] = (float) ($options['timeout'] ?? \ini_get('default_socket_timeout'))) {
             $options['timeout'] = 172800.0; // 2 days
         }
 
@@ -195,9 +195,11 @@ trait HttpClientTrait
 
         $options += $defaultOptions;
 
-        foreach (isset(self::$emptyDefaults) ? self::$emptyDefaults : [] as $k => $v) {
-            if (!isset($options[$k])) {
-                $options[$k] = $v;
+        if (isset(self::$emptyDefaults)) {
+            foreach (self::$emptyDefaults as $k => $v) {
+                if (!isset($options[$k])) {
+                    $options[$k] = $v;
+                }
             }
         }
 
