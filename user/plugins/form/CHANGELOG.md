@@ -1,3 +1,15 @@
+# v7.1.1
+## 11/29/2022
+
+1. [](#bugfix)
+   * Fix missing blueprint entries for Turnstile configuration [#583](https://github.com/getgrav/grav-plugin-form/issues/583)
+
+# v7.1.0
+## 11/16/2022
+
+1. [](#new)
+   * Added Cloudflare's `turnstile` captcha integration [documentation](https://learn.getgrav.org/17/forms/forms/fields-available#turnstile-field-cloudflare)
+
 # v7.0.2
 ## 10/05/2022
 

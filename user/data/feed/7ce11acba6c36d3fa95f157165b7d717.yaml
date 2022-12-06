@@ -1,25 +1,25 @@
-last_checked: 1665778916
+last_checked: 1670358107
 data:
   -
     title: 'Big changes for Email plugin'
     url: 'https://getgrav.org/blog/new-email-plugin'
     date: 1665048600
-    nicetime: '1 weeks ago'
+    nicetime: '2 months ago'
   -
     title: 'macOS 12.0 Monterey Apache Setup: LetsEncrypt SSL'
     url: 'https://getgrav.org/blog/macos-monterey-apache-ssl'
     date: 1635591780
-    nicetime: '11 months ago'
+    nicetime: '1 years ago'
   -
     title: 'macOS 12.0 Monterey Apache Setup: MySQL, Xdebug & More...'
     url: 'https://getgrav.org/blog/macos-monterey-apache-mysql-vhost-apc'
     date: 1635591600
-    nicetime: '11 months ago'
+    nicetime: '1 years ago'
   -
     title: 'macOS 12.0 Monterey Apache Setup: Multiple PHP Versions'
     url: 'https://getgrav.org/blog/macos-monterey-apache-multiple-php-versions'
     date: 1635501600
-    nicetime: '12 months ago'
+    nicetime: '1 years ago'
   -
     title: 'macOS 12.0 Monterey Apache Setup: Upgrading Homebrew'
     url: 'https://getgrav.org/blog/macos-monterey-apache-upgrade-homebrew'
