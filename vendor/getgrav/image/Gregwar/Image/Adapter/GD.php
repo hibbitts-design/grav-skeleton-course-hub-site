@@ -88,7 +88,7 @@ class GD extends Common
      *
      * @return $this
      */
-    protected function doResize($bg, $target_width, $target_height, $new_width, $new_height)
+    protected function doResize($bg, int $target_width, int $target_height, int $new_width, int $new_height)
     {
         $width = $this->width();
         $height = $this->height();
@@ -104,7 +104,19 @@ class GD extends Common
             imagesavealpha($n, true);
         }
 
-        imagecopyresampled($n, $this->resource, ($target_width - $new_width) / 2, ($target_height - $new_height) / 2, 0, 0, $new_width, $new_height, $width, $height);
+        imagecopyresampled(
+            $n,
+            $this->resource,
+            (int) (($target_width - $new_width) / 2),
+            (int) (($target_height - $new_height) / 2),
+            0,
+            0,
+            $new_width,
+            $new_height,
+            $width,
+            $height
+        );
+
         imagedestroy($this->resource);
 
         $this->resource = $n;
@@ -120,7 +132,7 @@ class GD extends Common
         $destination = imagecreatetruecolor($width, $height);
         imagealphablending($destination, false);
         imagesavealpha($destination, true);
-        imagecopy($destination, $this->resource, 0, 0, $x, $y, $this->width(), $this->height());
+        imagecopy($destination, $this->resource, 0, 0, (int) $x, (int) $y, $this->width(), $this->height());
         imagedestroy($this->resource);
         $this->resource = $destination;
 
@@ -602,7 +614,7 @@ class GD extends Common
 
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */

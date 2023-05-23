@@ -316,7 +316,7 @@ abstract class Common extends Adapter
 
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -383,7 +383,7 @@ abstract class Common extends Adapter
             $height = $new_height;
         }
 
-        $this->doResize($background, $width, $height, $new_width, $new_height);
+        $this->doResize($background, (int) $width, (int) $height, (int) $new_width, (int) $new_height);
     }
 
     /**
@@ -457,7 +457,7 @@ abstract class Common extends Adapter
      *
      * @return $this
      */
-    abstract protected function doResize($bg, $target_width, $target_height, $new_width, $new_height);
+    abstract protected function doResize($bg, int $target_width, int $target_height, int $new_width, int $new_height);
 
     /**
      * Gets the color of the $x, $y pixel.

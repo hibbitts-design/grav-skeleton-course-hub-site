@@ -1,6 +1,22 @@
-last_checked: 1670358106
+last_checked: 1684868406
 data:
   feed:
+    -
+      id: 30
+      date: '2023-03-09 11:40'
+      message: '🗳️ Please <b>VOTE NOW</b> for Grav in the 2022 CMS Critic Awards'
+      link: 'https://www.cmscritic.com/vote-for-the-cms-critic-2022-peoples-choice-awards/'
+      type: note
+      location:
+        - feed
+    -
+      id: 29
+      date: '2022-01-02 11:40'
+      message: '🎉 Grav 1.7.38 released to start the new year'
+      link: 'https://getgrav.org/downloads'
+      type: info
+      location:
+        - feed
     -
       id: 28
       date: '2021-04-23 11:40'
@@ -15,14 +31,6 @@ data:
       message: '🚀 Grav Premium available. Turbo-charge your Grav site today.'
       link: 'https://getgrav.org/premium'
       type: info
-      location:
-        - feed
-    -
-      id: 25
-      date: '2020-02-18 11:27'
-      message: '🕵️‍♂️ Would you attend an Official Grav Conference?  We need your help!'
-      link: 'https://forms.gle/22NQJuARmT1SFmXS6'
-      type: note
       location:
         - feed
     -
