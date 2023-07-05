@@ -1,3 +1,29 @@
+# v1.7.42.1
+## 06/15/2023
+
+2. [](#improved)
+   * Quick fix for `isDangerousFunction` when `$name` was a closure [#3727](https://github.com/getgrav/grav/issues/3727)
+
+# v1.7.42
+## 06/14/2023
+
+1. [](#new)
+   * Added a new `system.languages.debug` option that adds a `<span class="translate-debug"></span>` around strings translated with `|t`. This can be styled by the theme as needed.
+1. [](#improved)
+   * More robust SSTI handling in `filter`, `map`, and `reduce` Twig filters and functions
+   * Various SSTI improvements `Utils::isDangerousFunction()`
+1. [](#bugfix)
+   * Fixed Twig `|map()` allowing code execution
+   * Fixed Twig `|reduce()` allowing code execution
+
+# v1.7.41.2
+## 06/01/2023
+
+1. [](#improved)
+   * Added the ability to set a configurable 'key' for the Twig Cache Tag: `{% cache 'my-key' 600 %}`
+1. [](#bugfix)
+   * Fixed an issue with special characters in slug's would cause redirect loops
+
 # v1.7.41.1
 ## 05/10/2023
 
