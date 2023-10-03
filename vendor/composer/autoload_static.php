@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49
+class ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -359,6 +359,7 @@ class ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
         'Clockwork\\Authentication\\AuthenticatorInterface' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Authentication/AuthenticatorInterface.php',
         'Clockwork\\Authentication\\NullAuthenticator' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Authentication/NullAuthenticator.php',
         'Clockwork\\Authentication\\SimpleAuthenticator' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Authentication/SimpleAuthenticator.php',
@@ -472,6 +473,7 @@ class ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49
         'DebugBar\\Bridge\\SlimCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SlimCollector.php',
         'DebugBar\\Bridge\\SwiftMailer\\SwiftLogCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftLogCollector.php',
         'DebugBar\\Bridge\\SwiftMailer\\SwiftMailCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftMailCollector.php',
+        'DebugBar\\Bridge\\Symfony\\SymfonyMailCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Symfony/SymfonyMailCollector.php',
         'DebugBar\\Bridge\\TwigProfileCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/TwigProfileCollector.php',
         'DebugBar\\Bridge\\Twig\\TimeableTwigExtensionProfiler' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TimeableTwigExtensionProfiler.php',
         'DebugBar\\Bridge\\Twig\\TraceableTwigEnvironment' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TraceableTwigEnvironment.php',
@@ -2107,10 +2109,10 @@ class ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit6d9c9dd974dc4ea5179f15e538265d49::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$classMap;
 
         }, null, ClassLoader::class);
     }

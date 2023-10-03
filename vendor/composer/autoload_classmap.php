@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'CURLStringFile' => $vendorDir . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
     'Clockwork\\Authentication\\AuthenticatorInterface' => $vendorDir . '/itsgoingd/clockwork/Clockwork/Authentication/AuthenticatorInterface.php',
     'Clockwork\\Authentication\\NullAuthenticator' => $vendorDir . '/itsgoingd/clockwork/Clockwork/Authentication/NullAuthenticator.php',
     'Clockwork\\Authentication\\SimpleAuthenticator' => $vendorDir . '/itsgoingd/clockwork/Clockwork/Authentication/SimpleAuthenticator.php',
@@ -120,6 +121,7 @@ return array(
     'DebugBar\\Bridge\\SlimCollector' => $vendorDir . '/maximebf/debugbar/src/DebugBar/Bridge/SlimCollector.php',
     'DebugBar\\Bridge\\SwiftMailer\\SwiftLogCollector' => $vendorDir . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftLogCollector.php',
     'DebugBar\\Bridge\\SwiftMailer\\SwiftMailCollector' => $vendorDir . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftMailCollector.php',
+    'DebugBar\\Bridge\\Symfony\\SymfonyMailCollector' => $vendorDir . '/maximebf/debugbar/src/DebugBar/Bridge/Symfony/SymfonyMailCollector.php',
     'DebugBar\\Bridge\\TwigProfileCollector' => $vendorDir . '/maximebf/debugbar/src/DebugBar/Bridge/TwigProfileCollector.php',
     'DebugBar\\Bridge\\Twig\\TimeableTwigExtensionProfiler' => $vendorDir . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TimeableTwigExtensionProfiler.php',
     'DebugBar\\Bridge\\Twig\\TraceableTwigEnvironment' => $vendorDir . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TraceableTwigEnvironment.php',
