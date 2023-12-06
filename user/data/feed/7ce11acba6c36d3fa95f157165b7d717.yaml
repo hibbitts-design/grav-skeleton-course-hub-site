@@ -1,25 +1,25 @@
-last_checked: 1697125264
+last_checked: 1701716658
 data:
   -
-    title: 'macOS 13.0 Ventura Apache Setup: Upgrading Homebrew'
+    title: 'macOS 14.0 Sonoma Apache Setup: Upgrading Homebrew'
     url: 'https://getgrav.org/blog/macos-ventura-apache-upgrade-homebrew'
-    date: 1671969600
-    nicetime: '10 months ago'
+    date: 1697803200
+    nicetime: '1 months ago'
   -
-    title: 'macOS 13.0 Ventura Apache Setup: LetsEncrypt SSL'
-    url: 'https://getgrav.org/blog/macos-ventura-apache-ssl'
-    date: 1671966180
-    nicetime: '10 months ago'
+    title: 'macOS 14.0 Sonoma Apache Setup: LetsEncrypt SSL'
+    url: 'https://getgrav.org/blog/macos-sonoma-apache-ssl'
+    date: 1697799780
+    nicetime: '1 months ago'
   -
-    title: 'macOS 13.0 Ventura Apache Setup: MySQL, Xdebug & More...'
-    url: 'https://getgrav.org/blog/macos-ventura-apache-mysql-vhost-apc'
-    date: 1671966000
-    nicetime: '10 months ago'
+    title: 'macOS 14.0 Sonoma Apache Setup: MySQL, Xdebug & More...'
+    url: 'https://getgrav.org/blog/macos-sonoma-apache-mysql-vhost-apc'
+    date: 1697799600
+    nicetime: '1 months ago'
   -
-    title: 'macOS 13.0 Ventura Apache Setup: Multiple PHP Versions'
-    url: 'https://getgrav.org/blog/macos-ventura-apache-multiple-php-versions'
-    date: 1671962400
-    nicetime: '10 months ago'
+    title: 'macOS 14.0 Sonoma Apache Setup: Multiple PHP Versions'
+    url: 'https://getgrav.org/blog/macos-sonoma-apache-multiple-php-versions'
+    date: 1697796000
+    nicetime: '1 months ago'
   -
     title: 'Big changes for Email plugin'
     url: 'https://getgrav.org/blog/new-email-plugin'
