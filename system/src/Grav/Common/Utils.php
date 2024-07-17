@@ -3,7 +3,7 @@
 /**
  * @package    Grav\Common
  *
- * @copyright  Copyright (c) 2015 - 2023 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -977,10 +977,10 @@ abstract class Utils
      * @param string $filename
      * @return bool
      */
-    public static function checkFilename($filename)
+    public static function checkFilename($filename): bool
     {
         $dangerous_extensions = Grav::instance()['config']->get('security.uploads_dangerous_extensions', []);
-        $extension = static::pathinfo($filename, PATHINFO_EXTENSION);
+        $extension = mb_strtolower(static::pathinfo($filename, PATHINFO_EXTENSION));
 
         return !(
             // Empty filenames are not allowed.
@@ -989,6 +989,8 @@ abstract class Utils
             || strtr($filename, "\t\v\n\r\0\\/", '_______') !== $filename
             // Filename should not start or end with dot or space.
             || trim($filename, '. ') !== $filename
+            // Filename should not contain path traversal
+            || str_replace('..', '', $filename) !== $filename
             // File extension should not be part of configured dangerous extensions
             || in_array($extension, $dangerous_extensions)
         );
@@ -1330,7 +1332,11 @@ abstract class Utils
         if ($dateformat) {
             $datetime = DateTime::createFromFormat($dateformat, $date);
         } else {
-            $datetime = new DateTime($date);
+            try {
+                $datetime = new DateTime($date);
+            } catch (Exception $e) {
+                $datetime = false;
+            }
         }
 
         // fallback to strtotime() if DateTime approach failed
@@ -1835,7 +1841,7 @@ abstract class Utils
         $parts = parse_url($enc_url);
 
         if ($parts === false) {
-            throw new InvalidArgumentException('Malformed URL: ' . $url);
+            $parts = [];
         }
 
         foreach ($parts as $name => $value) {

@@ -9,7 +9,6 @@ use Clockwork\DataSource\LaravelEventsDataSource;
 use Clockwork\DataSource\LaravelNotificationsDataSource;
 use Clockwork\DataSource\LaravelQueueDataSource;
 use Clockwork\DataSource\LaravelRedisDataSource;
-use Clockwork\DataSource\LaravelTwigDataSource;
 use Clockwork\DataSource\LaravelViewsDataSource;
 use Clockwork\DataSource\SwiftDataSource;
 use Clockwork\DataSource\TwigDataSource;
@@ -24,6 +23,11 @@ class ClockworkServiceProvider extends ServiceProvider
 {
 	public function boot()
 	{
+		$this->app['clockwork.support']
+			->configureSerializer()
+			->configureShouldCollect()
+			->configureShouldRecord();
+
 		if ($this->app['clockwork.support']->isCollectingData()) {
 			$this->registerEventListeners();
 			$this->registerMiddleware();
@@ -53,11 +57,6 @@ class ClockworkServiceProvider extends ServiceProvider
 
 		$this->app->make('clockwork.request'); // instantiate the request to have id and time available as early as possible
 
-		$this->app['clockwork.support']
-			->configureSerializer()
-			->configureShouldCollect()
-			->configureShouldRecord();
-
 		if ($this->app['clockwork.support']->getConfig('register_helpers', true)) {
 			require __DIR__ . '/helpers.php';
 		}
@@ -66,7 +65,7 @@ class ClockworkServiceProvider extends ServiceProvider
 	// Register the configuration file
 	protected function registerConfiguration()
 	{
-		$this->publishes([ __DIR__ . '/config/clockwork.php' => config_path('clockwork.php') ]);
+		$this->publishes([ __DIR__ . '/config/clockwork.php' => config_path('clockwork.php') ], 'clockwork');
 		$this->mergeConfigFrom(__DIR__ . '/config/clockwork.php', 'clockwork');
 	}
 

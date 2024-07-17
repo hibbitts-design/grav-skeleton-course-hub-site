@@ -204,7 +204,7 @@ class EloquentDataSource extends DataSource
 			'key'        => $this->getModelKey($model),
 			'action'     => $event,
 			'attributes' => $this->collectModelsRetrieved && $event == 'retrieved' ? $model->getOriginal() : [],
-			'changes'    => $this->collectModelsActions ? $model->getChanges() : [],
+			'changes'    => $this->collectModelsActions && method_exists($model, 'getChanges') ? $model->getChanges() : [],
 			'time'       => microtime(true) / 1000,
 			'query'      => $lastQuery ? $lastQuery['query'] : null,
 			'duration'   => $lastQuery ? $lastQuery['duration'] : null,
@@ -266,8 +266,9 @@ class EloquentDataSource extends DataSource
 
 		if ($pdo === null) return;
 
-		if ($pdo->getAttribute(\PDO::ATTR_DRIVER_NAME) === 'odbc') {
-			// PDO_ODBC driver doesn't support the quote method, apply simple MSSQL style quoting instead
+		if ($pdo->getAttribute(\PDO::ATTR_DRIVER_NAME) === 'odbc' || $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME) === 'crate') {
+			// PDO_ODBC and PDO Crate driver doesn't support the quote method, apply simple MSSQL style quoting instead - Crate sometimes uses a object as a binding - for json support
+			$binding = is_object($binding) ? json_encode($binding) : $binding;
 			return "'" . str_replace("'", "''", $binding) . "'";
 		}
 
