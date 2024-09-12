@@ -276,7 +276,6 @@ Dark Theme CSS (applies when the system is set to dark mode).
         text-decoration: none;
     }
 
-    /* Removed hover effect for dark mode */
     a:hover:not(.btn, .badge, .navbar-brand, .nav-link), a:focus:not(.btn, .badge, .navbar-brand, .nav-link) {
         color: #82aaff;
     }
@@ -297,6 +296,15 @@ Dark Theme CSS (applies when the system is set to dark mode).
         background-color: #82aaff;
     }
 
+    a.btn {
+        color: #000000;
+    }
+
+    a.btn:hover {
+        color: #000000;
+        background-color: #82aaff;
+    }
+      
     .btn-default {
         background-color: #3e3e3e;
         border-color: #5a5a5a;
@@ -378,7 +386,7 @@ Dark Theme CSS (applies when the system is set to dark mode).
 
     .blog-sidebar .active {
         font-weight: bold;
-        color: #bb86fc;
+        color: #82aaff;
     }
 
     .listbullet ul li:before {
