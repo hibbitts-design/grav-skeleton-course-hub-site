@@ -26,115 +26,8 @@ Put your custom CSS in this file.
 
 /*
 ===============================================================================================================================
-Shared Styles (applied to both Light and Dark themes).
-This code was developed with the assistance of ChatGPT, an AI language model by OpenAI.
-===============================================================================================================================
-*/
-
-/* Font family */
-@import url('https://fonts.googleapis.com/css?family=Lato');
-body {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    margin-bottom: 0;
-}
-
-/* Heading sizes */
-h1, .h1 { font-size: 1.75rem; }
-h2, .h2 { font-size: 1.50rem; }
-h3, .h3 { font-size: 1.30rem; }
-h4, .h4 { font-size: 1.20rem; }
-h5, .h5 { font-size: 1.10rem; }
-h6, .h6 { font-size: 1rem; }
-
-.hidden {
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
-
-.card-deck > .card {
-    min-width: 30%;
-    flex-wrap: wrap;
-    flex: initial;
-    margin-bottom: 30px;
-}
-
-/* Responsive header size */
-@media only screen and (min-width: 960px) and (max-width: 1140px) {
-    .myheader { height: 250px; }
-}
-@media only screen and (min-width: 768px) and (max-width: 960px) {
-    .myheader { height: 220px; }
-}
-@media only screen and (min-width: 576px) and (max-width: 768px) {
-    .myheader { height: 180px; }
-    .container { max-width: 720px; }
-}
-@media only screen and (max-width: 576px) {
-    .myheader { height: 130px; }
-}
-
-/* Button styles (shared between themes) */
-.btn-success, .btn-info, .btn-warning, .btn-danger {
-    color: #fff;
-}
-.btn-link {
-    text-decoration: none;
-}
-
-/* Image styles */
-.image-credit-wrapper {
-    overflow: hidden;
-    position: relative;
-    max-width: 1200px;
-}
-.image-credit-wrapper .image-credit {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 11px;
-    font-family: Helvetica;
-    font-weight: 300;
-    padding: 5px 8px;
-    border-top-left-radius: 3px;
-}
-.card-img-top {
-    width: 100%;
-    height: 14vw;
-    object-fit: cover;
-}
-
-/* Pagination */
-.pagination {
-    color: #767676 !important;
-}
-
-/* Miscellaneous text */
-.text-muted {
-    color: #666666 !important;
-}
-.footer {
-    position: relative;
-    height: auto !important;
-    padding: 1em;
-}
-.topics h3 {
-    width: 2.5em;
-    font-weight: 600;
-    text-align: left;
-    margin-top: 1.5rem;
-    padding: 0.25rem 0.5rem;
-}
-.chromeless-hide { display: block; }
-.chromeless-show { display: none; }
-
-/*
-===============================================================================================================================
 Light Theme CSS (default).
+This code was developed with the assistance of ChatGPT, an AI language model by OpenAI.
 ===============================================================================================================================
 */
 
@@ -253,6 +146,7 @@ a:hover:not(.btn, .badge, .navbar-brand, .nav-link), a:focus:not(.btn, .badge, .
 /*
 ===============================================================================================================================
 Dark Theme CSS (applies when the system is set to dark mode).
+This code was developed with the assistance of ChatGPT, an AI language model by OpenAI.
 ===============================================================================================================================
 */
 
