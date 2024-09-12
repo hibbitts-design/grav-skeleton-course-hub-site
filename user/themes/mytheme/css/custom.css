@@ -287,7 +287,13 @@ This code was developed with the assistance of ChatGPT, an AI language model by 
         color: #82aaff; /* Matching the link color */
     }
 
-    /* Update for card-header and card-body in dark mode */
+    /* Update for card, card-header and card-body in dark mode */
+
+    .card {
+        background-color: #1e1e1e;
+        border-color: #E0E0E0;
+    }
+
     .card-header {
         background-color: #2e2e2e;
         color: #E0E0E0;
