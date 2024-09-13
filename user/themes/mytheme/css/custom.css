@@ -34,7 +34,7 @@ This code was developed with the assistance of ChatGPT, an AI language model by 
 /*
 body {
     background-color: #f5f5f5;
-    color: #333333;
+    color: #444444;
 }
 
 .bg-primary .navbar-nav .active > .nav-link {
@@ -100,7 +100,7 @@ a:hover:not(.btn, .badge, .navbar-brand, .nav-link), a:focus:not(.btn, .badge, .
 }
 
 .header {
-    background-color: #222222 !important;
+    background-color: #333333 !important;
 }
 
 .alert-secondary {
@@ -231,18 +231,18 @@ a:hover:not(.btn, .badge, .navbar-brand, .nav-link), a:focus:not(.btn, .badge, .
     }
 
     .alert-secondary {
-        background-color: #333333;
-        border-color: #444444;
+        background-color: #444444;
+        border-color: #555555;
     }
 
     .alert {
         color: #e0e0e0;
-        background-color: #333333;
-        border: 1px solid #444444;
+        background-color: #444444;
+        border: 1px solid #555555;
     }
 
     .footer {
-        background-color: #222222;
+        background-color: #333333;
     }
 
     .image-credit {
@@ -288,7 +288,7 @@ a:hover:not(.btn, .badge, .navbar-brand, .nav-link), a:focus:not(.btn, .badge, .
     .card-header {
         background-color: #2e2e2e;
         color: #E0E0E0;
-        border-bottom: 1px solid #444444;
+        border-bottom: 1px solid #555555;
     }
 
     .card-body {
@@ -296,5 +296,4 @@ a:hover:not(.btn, .badge, .navbar-brand, .nav-link), a:focus:not(.btn, .badge, .
         color: #E0E0E0;
     }
 }
-
 */
