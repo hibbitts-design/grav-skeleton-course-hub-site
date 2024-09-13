@@ -26,11 +26,12 @@ Put your custom CSS in this file.
 
 /*
 ===============================================================================================================================
-Light Theme CSS (default).
+Light and Dark Theme CSS determined by System OS setting (uncomment to use).
 This code was developed with the assistance of ChatGPT, an AI language model by OpenAI.
 ===============================================================================================================================
 */
 
+/*
 body {
     background-color: #f5f5f5;
     color: #333333;
@@ -143,20 +144,12 @@ a:hover:not(.btn, .badge, .navbar-brand, .nav-link), a:focus:not(.btn, .badge, .
     font-weight: bold;
 }
 
-/*
-===============================================================================================================================
-Dark Theme CSS (applies when the system is set to dark mode).
-This code was developed with the assistance of ChatGPT, an AI language model by OpenAI.
-===============================================================================================================================
-*/
-
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #121212;
         color: #E0E0E0;
     }
 
-    /* Ensure headers are lighter in dark mode */
     h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
         color: #FFFFFF;
     }
@@ -284,10 +277,8 @@ This code was developed with the assistance of ChatGPT, an AI language model by 
     }
 
     .listbullet ul li:before {
-        color: #82aaff; /* Matching the link color */
+        color: #82aaff;
     }
-
-    /* Update for card, card-header and card-body in dark mode */
 
     .card {
         background-color: #1e1e1e;
@@ -305,3 +296,5 @@ This code was developed with the assistance of ChatGPT, an AI language model by 
         color: #E0E0E0;
     }
 }
+
+*/
