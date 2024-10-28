@@ -14,22 +14,18 @@
 
         onFilterClick: function(el) {
             $(el).toggleClass(csscls('excluded'));
-
-            var excludedLabels = [];
-            this.$toolbar.find(csscls('.filter') + csscls('.excluded')).each(function() {
-                excludedLabels.push(this.rel);
-            });
-
             this.$list.$el.find("li[connection=" + $(el).attr("rel") + "]").toggle();
-
-            this.set('exclude', excludedLabels);
         },
         onCopyToClipboard: function (el) {
             var code = $(el).parent('li').find('code').get(0);
             var copy = function () {
                 try {
-                    document.execCommand('copy');
-                    alert('Query copied to the clipboard');
+                    if (document.execCommand('copy')) {
+                        $(el).addClass(csscls('copy-clipboard-check'));
+                        setTimeout(function(){
+                            $(el).removeClass(csscls('copy-clipboard-check'));
+                        }, 2000)
+                    }
                 } catch (err) {
                     console.log('Oops, unable to copy');
                 }
@@ -124,10 +120,11 @@
                     li.addClass(csscls('error'));
                     li.append($('<span />').addClass(csscls('error')).text("[" + stmt.error_code + "] " + stmt.error_message));
                 }
-                if ((!stmt.type || stmt.type === 'query') && stmt.show_copy !== false) {
+                if ((!stmt.type || stmt.type === 'query')) {
                     $('<span title="Copy to clipboard" />')
                         .addClass(csscls('copy-clipboard'))
                         .css('cursor', 'pointer')
+                        .html("&#8203;")
                         .on('click', function (event) {
                             self.onCopyToClipboard(this);
                             event.stopPropagation();
@@ -136,13 +133,13 @@
                 }
                 if (typeof(stmt.xdebug_link) !== 'undefined' && stmt.xdebug_link) {
                     var header = $('<span title="Filename" />').addClass(csscls('filename')).text(stmt.xdebug_link.filename + ( stmt.xdebug_link.line ? "#" + stmt.xdebug_link.line : ''));
-                    if (stmt.xdebug_link.ajax) {
-                        $('<a title="' + stmt.xdebug_link.url + '"></a>').on('click', function () {
-                            $.ajax(stmt.xdebug_link.url);
-                        }).addClass(csscls('editor-link')).appendTo(header);
-                    } else {
-                        $('<a href="' + stmt.xdebug_link.url + '"></a>').addClass(csscls('editor-link')).appendTo(header);
-                    }
+                    $('<a href="' + stmt.xdebug_link.url + '"></a>').on('click', function () {
+                        event.stopPropagation();
+                        if (stmt.xdebug_link.ajax) {                            
+                            fetch(stmt.xdebug_link.url);
+                            event.preventDefault();
+                        }
+                    }).addClass(csscls('editor-link')).appendTo(header);
                     header.appendTo(li);
                 }
                 var table = $('<table></table>').addClass(csscls('params'));
@@ -179,6 +176,8 @@
                 if (data.length <= 0 || !data.statements) {
                     return false;
                 }
+                filters = [];
+                this.$toolbar.hide().find(csscls('.filter')).remove();
                 this.$list.set('data', data.statements);
                 this.$status.empty();
 

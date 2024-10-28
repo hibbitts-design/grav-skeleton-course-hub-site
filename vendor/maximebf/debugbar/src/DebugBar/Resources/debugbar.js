@@ -256,7 +256,6 @@ if (typeof(PhpDebugBar) == 'undefined') {
 
         render: function() {
             this.$tab = $('<a />').addClass(csscls('tab'));
-
             this.$icon = $('<i />').appendTo(this.$tab);
             this.bindAttr('icon', function(icon) {
                 if (icon) {
@@ -285,6 +284,9 @@ if (typeof(PhpDebugBar) == 'undefined') {
             this.bindAttr('data', function(data) {
                 if (this.has('widget')) {
                     this.get('widget').set('data', data);
+                    if (!$.isEmptyObject(data)) {
+                        this.$tab.show();
+                    }
                 }
             })
         }
@@ -357,14 +359,14 @@ if (typeof(PhpDebugBar) == 'undefined') {
          * @param {String} suffix
          * @return {String}
          */
-        format: function(id, data, suffix) {
+        format: function(id, data, suffix, nb) {
             if (suffix) {
                 suffix = ' ' + suffix;
             } else {
                 suffix = '';
             }
 
-            var nb = getObjectSize(this.debugbar.datasets) + 1;
+            var nb = nb || getObjectSize(this.debugbar.datasets) ;
 
             if (typeof(data['__meta']) === 'undefined') {
                 return "#" + nb + suffix;
@@ -422,10 +424,15 @@ if (typeof(PhpDebugBar) == 'undefined') {
             this.datasets = {};
             this.firstTabName = null;
             this.activePanelName = null;
+            this.activeDatasetId = null;
+            this.hideEmptyTabs = false;
             this.datesetTitleFormater = new DatasetTitleFormater(this);
             this.options.bodyMarginBottomHeight = parseInt($('body').css('margin-bottom'));
-            this.hasParent = window.parent && window.parent !== window.top
-                && window.parent.phpdebugbar && window.parent.phpdebugbar != this;
+            try {
+                this.isIframe = window.self !== window.top && window.top.phpdebugbar;
+            } catch (error) {
+                this.isIframe = false;
+            }
             this.registerResizeHandler();
         },
 
@@ -435,7 +442,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
          * @this {DebugBar}
          */
         registerResizeHandler: function() {
-            if (typeof this.resize.bind == 'undefined' || this.hasParent) return;
+            if (typeof this.resize.bind == 'undefined' || this.isIframe) return;
 
             var f = this.resize.bind(this);
             this.respCSSSize = 0;
@@ -449,13 +456,13 @@ if (typeof(PhpDebugBar) == 'undefined') {
         resize: function() {
             var contentSize = this.respCSSSize;
             if (this.respCSSSize == 0) {
-                this.$header.find("> div > *:visible").each(function () {
-                    contentSize += $(this).outerWidth();
+                this.$header.find("> *:visible").each(function () {
+                    contentSize += $(this).outerWidth(true);
                 });
             }
 
             var currentSize = this.$header.width();
-            var cssClass = "phpdebugbar-mini-design";
+            var cssClass = csscls("mini-design");
             var bool = this.$header.hasClass(cssClass);
 
             if (currentSize <= contentSize && !bool) {
@@ -476,7 +483,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
          * @this {DebugBar}
          */
         render: function() {
-            if (this.hasParent) {
+            if (this.isIframe) {
                 this.$el.hide();
             }
 
@@ -548,8 +555,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
             this.$datasets = $('<select />').addClass(csscls('datasets-switcher')).attr('name', 'datasets-switcher')
                 .appendTo(this.$headerRight);
             this.$datasets.change(function() {
-                self.dataChangeHandler(self.datasets[this.value]);
-                self.showTab();
+                self.showDataSet(this.value);
             });
         },
 
@@ -579,7 +585,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
          * @this {DebugBar}
          */
         restoreState: function() {
-            if (this.hasParent) return;
+            if (this.isIframe) return;
             // bar height
             var height = localStorage.getItem('phpdebugbar-height');
             this.setHeight(height || this.$body.height());
@@ -594,6 +600,8 @@ if (typeof(PhpDebugBar) == 'undefined') {
                     var tab = localStorage.getItem('phpdebugbar-tab');
                     if (this.isTab(tab)) {
                         this.showTab(tab);
+                    } else {
+                        this.showTab();
                     }
                 }
             }
@@ -636,7 +644,12 @@ if (typeof(PhpDebugBar) == 'undefined') {
                 } else {
                     self.showTab(name);
                 }
-            });
+            })
+            if (this.hideEmptyTabs) {
+                tab.$tab.hide();
+            }
+            tab.$tab.attr('data-collector', name);
+            tab.$el.attr('data-collector', name);
             tab.$el.appendTo(this.$body);
 
             this.controls[name] = tab;
@@ -782,6 +795,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
             this.$el.removeClass(csscls('minimized'));
             localStorage.setItem('phpdebugbar-visible', '1');
             localStorage.setItem('phpdebugbar-tab', name);
+
             this.resize();
         },
 
@@ -930,18 +944,26 @@ if (typeof(PhpDebugBar) == 'undefined') {
          * @return {String} Dataset's id
          */
         addDataSet: function(data, id, suffix, show) {
-            if (this.hasParent) {
-                if (!suffix || ('(iframe)').indexOf(suffix) < 0) {
-                    suffix = '(iframe)' + (suffix || '');
-                }
-                
-                window.parent.phpdebugbar.addDataSet(data, id, suffix, show);
+            if (!data || !data.__meta) return;
+            if (this.isIframe) {
+                window.top.phpdebugbar.addDataSet(data, id, '(iframe)' + (suffix || ''), show);
                 return;
             }
 
-            var label = this.datesetTitleFormater.format(id, data, suffix);
-            id = id || (getObjectSize(this.datasets) + 1);
+            var nb = getObjectSize(this.datasets) + 1;
+            id = id || nb;
+            data.__meta['nb'] = nb;
+            data.__meta['suffix'] = suffix;
             this.datasets[id] = data;
+
+            var label = this.datesetTitleFormater.format(id, this.datasets[id], suffix, nb);
+
+            if (this.datasetTab) {
+                this.datasetTab.set('data', this.datasets);
+                var datasetSize = getObjectSize(this.datasets);
+                this.datasetTab.set('badge', datasetSize > 1 ? datasetSize : null);
+                this.datasetTab.$tab.show();
+            }
 
             this.$datasets.append($('<option value="' + id + '">' + label + '</option>'));
             if (this.$datasets.children().length > 1) {
@@ -951,6 +973,9 @@ if (typeof(PhpDebugBar) == 'undefined') {
             if (typeof(show) == 'undefined' || show) {
                 this.showDataSet(id);
             }
+
+            this.resize();
+
             return id;
         },
 
@@ -990,8 +1015,16 @@ if (typeof(PhpDebugBar) == 'undefined') {
          * @param {String} id
          */
         showDataSet: function(id) {
+            this.activeDatasetId = id;
             this.dataChangeHandler(this.datasets[id]);
-            this.$datasets.val(id);
+
+            if (this.$datasets.val() !== id) {
+                this.$datasets.val(id);
+            }
+
+            if (this.datasetTab) {
+                this.datasetTab.get('widget').set('id', id);
+            }
         },
 
         /**
@@ -1011,6 +1044,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
                     self.getControl(key).set('data', d);
                 }
             });
+            self.resize();
         },
 
         /**
@@ -1028,6 +1062,10 @@ if (typeof(PhpDebugBar) == 'undefined') {
             }
         },
 
+        setHideEmptyTabs: function(hideEmpty) {
+            this.hideEmptyTabs = hideEmpty;
+        },
+
         /**
          * Returns the handler to open past dataset
          *
@@ -1036,7 +1074,26 @@ if (typeof(PhpDebugBar) == 'undefined') {
          */
         getOpenHandler: function() {
             return this.openHandler;
-        }
+        },
+
+        enableAjaxHandlerTab: function() {
+            this.datasetTab = new PhpDebugBar.DebugBar.Tab({"icon":"history", "title":"Request history", "widget": new PhpDebugBar.Widgets.DatasetWidget({
+                    'debugbar': this
+                })});
+            this.datasetTab.$tab.addClass(csscls('tab-history'));
+            this.datasetTab.$tab.attr('data-collector', '__datasets');
+            this.datasetTab.$el.attr('data-collector', '__datasets');
+            this.datasetTab.$tab.insertAfter(this.$openbtn).hide();
+            this.datasetTab.$tab.click(() => {
+                if (!this.isMinimized() && self.activePanelName == '__datasets') {
+                    this.minimize();
+                } else {
+                    this.showTab('__datasets');
+                }
+            });
+            this.datasetTab.$el.appendTo(this.$body);
+            this.controls['__datasets'] = this.datasetTab;
+        },
 
     });
 
@@ -1056,6 +1113,9 @@ if (typeof(PhpDebugBar) == 'undefined') {
         this.debugbar = debugbar;
         this.headerName = headerName || 'phpdebugbar';
         this.autoShow = typeof(autoShow) == 'undefined' ? true : autoShow;
+        if (localStorage.getItem('phpdebugbar-ajaxhandler-autoshow') !== null) {
+            this.autoShow = localStorage.getItem('phpdebugbar-ajaxhandler-autoshow') == '1';
+        }
     };
 
     $.extend(AjaxHandler.prototype, {
@@ -1094,6 +1154,11 @@ if (typeof(PhpDebugBar) == 'undefined') {
 
         isXHR: function(response) {
             return Object.prototype.toString.call(response) == '[object XMLHttpRequest]'
+        },
+
+        setAutoShow: function(autoshow) {
+            this.autoShow = autoshow;
+            localStorage.setItem('phpdebugbar-ajaxhandler-autoshow', autoshow ? '1' : '0');
         },
 
         /**
@@ -1203,10 +1268,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
         },
 
         /**
-         * Attaches an event listener to jQuery.ajaxComplete()
-         *
-         * @this {AjaxHandler}
-         * @param {jQuery} jq Optional
+         * @deprecated use bindToXHR instead
          */
         bindToJquery: function(jq) {
             var self = this;

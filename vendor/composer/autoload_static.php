@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1
+class ComposerStaticInit6f85edb2bd83cfed5c469b1c824a57ac
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -417,6 +417,7 @@ class ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1
         'Clockwork\\Support\\Laravel\\ClockworkSupport' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Support/Laravel/ClockworkSupport.php',
         'Clockwork\\Support\\Laravel\\Console\\CapturingFormatter' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Support/Laravel/Console/CapturingFormatter.php',
         'Clockwork\\Support\\Laravel\\Console\\CapturingLegacyFormatter' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Support/Laravel/Console/CapturingLegacyFormatter.php',
+        'Clockwork\\Support\\Laravel\\Console\\CapturingOldFormatter' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Support/Laravel/Console/CapturingOldFormatter.php',
         'Clockwork\\Support\\Laravel\\Eloquent\\ResolveModelLegacyScope' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Support/Laravel/Eloquent/ResolveModelLegacyScope.php',
         'Clockwork\\Support\\Laravel\\Eloquent\\ResolveModelScope' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Support/Laravel/Eloquent/ResolveModelScope.php',
         'Clockwork\\Support\\Laravel\\Facade' => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork/Support/Laravel/Facade.php',
@@ -477,6 +478,11 @@ class ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1
         'DebugBar\\Bridge\\SwiftMailer\\SwiftMailCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftMailCollector.php',
         'DebugBar\\Bridge\\Symfony\\SymfonyMailCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Symfony/SymfonyMailCollector.php',
         'DebugBar\\Bridge\\TwigProfileCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/TwigProfileCollector.php',
+        'DebugBar\\Bridge\\Twig\\DebugTwigExtension' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/DebugTwigExtension.php',
+        'DebugBar\\Bridge\\Twig\\DumpTwigExtension' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/DumpTwigExtension.php',
+        'DebugBar\\Bridge\\Twig\\MeasureTwigExtension' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/MeasureTwigExtension.php',
+        'DebugBar\\Bridge\\Twig\\MeasureTwigNode' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/MeasureTwigNode.php',
+        'DebugBar\\Bridge\\Twig\\MeasureTwigTokenParser' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/MeasureTwigTokenParser.php',
         'DebugBar\\Bridge\\Twig\\TimeableTwigExtensionProfiler' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TimeableTwigExtensionProfiler.php',
         'DebugBar\\Bridge\\Twig\\TraceableTwigEnvironment' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TraceableTwigEnvironment.php',
         'DebugBar\\Bridge\\Twig\\TraceableTwigTemplate' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TraceableTwigTemplate.php',
@@ -697,6 +703,7 @@ class ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1
         'Grav\\Common\\Media\\Interfaces\\VideoMediaInterface' => __DIR__ . '/../..' . '/system/src/Grav/Common/Media/Interfaces/VideoMediaInterface.php',
         'Grav\\Common\\Media\\Traits\\AudioMediaTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Media/Traits/AudioMediaTrait.php',
         'Grav\\Common\\Media\\Traits\\ImageDecodingTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Media/Traits/ImageDecodingTrait.php',
+        'Grav\\Common\\Media\\Traits\\ImageFetchPriorityTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Media/Traits/ImageFetchPriorityTrait.php',
         'Grav\\Common\\Media\\Traits\\ImageLoadingTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Media/Traits/ImageLoadingTrait.php',
         'Grav\\Common\\Media\\Traits\\ImageMediaTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Media/Traits/ImageMediaTrait.php',
         'Grav\\Common\\Media\\Traits\\MediaFileTrait' => __DIR__ . '/../..' . '/system/src/Grav/Common/Media/Traits/MediaFileTrait.php',
@@ -2115,10 +2122,10 @@ class ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3b106a4d1a271673896d67cbdc8623e1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6f85edb2bd83cfed5c469b1c824a57ac::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6f85edb2bd83cfed5c469b1c824a57ac::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6f85edb2bd83cfed5c469b1c824a57ac::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit6f85edb2bd83cfed5c469b1c824a57ac::$classMap;
 
         }, null, ClassLoader::class);
     }
