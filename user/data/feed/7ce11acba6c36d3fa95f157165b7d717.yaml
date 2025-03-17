@@ -1,52 +1,52 @@
-last_checked: 1730135417
+last_checked: 1741990282
 data:
+  -
+    title: 'TailwindCSS 4.0 upgrade for Typhoon Premium Theme'
+    url: 'https://getgrav.org/blog/tailwindcss4-upgrade-for-typhoon-premium-theme'
+    date: 1739361300
+    nicetime: '4 weeks ago'
+  -
+    title: '2024 CMS Critic Award Voting'
+    url: 'https://getgrav.org/blog/cms-critic-award-vote-2024'
+    date: 1738588260
+    nicetime: '1 months ago'
+  -
+    title: '2024 CMS Critic Award Nominations'
+    url: 'https://getgrav.org/blog/cms-critic-award-nominations-2024'
+    date: 1736169060
+    nicetime: '2 months ago'
+  -
+    title: 'Grav 1.8-beta Released'
+    url: 'https://getgrav.org/blog/grav-18-beta-released'
+    date: 1732197180
+    nicetime: '4 months ago'
+  -
+    title: 'Instagram Feed Plugin is deprecated'
+    url: 'https://getgrav.org/blog/instagram-feed-deprecated'
+    date: 1732107600
+    nicetime: '4 months ago'
   -
     title: 'macOS 15.0 Sequoia Apache Setup: Upgrading Homebrew'
     url: 'https://getgrav.org/blog/macos-sequoia-apache-upgrade-homebrew'
     date: 1726660800
-    nicetime: '1 months ago'
+    nicetime: '6 months ago'
   -
     title: 'macOS 15.0 Sequoia Apache Setup: LetsEncrypt SSL'
     url: 'https://getgrav.org/blog/macos-sequoia-apache-ssl'
     date: 1726657380
-    nicetime: '1 months ago'
+    nicetime: '6 months ago'
   -
     title: 'macOS 15.0 Sequoia Apache Setup: MySQL, Xdebug & More...'
     url: 'https://getgrav.org/blog/macos-sequoia-apache-mysql-vhost-apc'
     date: 1726657200
-    nicetime: '1 months ago'
+    nicetime: '6 months ago'
   -
     title: 'macOS 15.0 Sequoia Apache Setup: Multiple PHP Versions'
     url: 'https://getgrav.org/blog/macos-sequoia-apache-multiple-php-versions'
     date: 1726653600
-    nicetime: '1 months ago'
+    nicetime: '6 months ago'
   -
     title: 'Big changes for Email plugin'
     url: 'https://getgrav.org/blog/new-email-plugin'
     date: 1665048600
     nicetime: '2 years ago'
-  -
-    title: 'Skeleton Build Automation'
-    url: 'https://getgrav.org/blog/skeletons-build-automation'
-    date: 1614347940
-    nicetime: '4 years ago'
-  -
-    title: 'Using Grav''s new built-in Web Server'
-    url: 'https://getgrav.org/blog/using-builtin-webserver'
-    date: 1612186320
-    nicetime: '4 years ago'
-  -
-    title: 'Grav 1.7 CLI Self-Upgrade Bug'
-    url: 'https://getgrav.org/blog/grav-170-cli-self-upgrade-bug'
-    date: 1611222900
-    nicetime: '4 years ago'
-  -
-    title: 'Grav 1.7 Released!'
-    url: 'https://getgrav.org/blog/grav-1.7-released'
-    date: 1611050100
-    nicetime: '4 years ago'
-  -
-    title: 'Grav 1.7 Stable Release - One week away!'
-    url: 'https://getgrav.org/blog/grav-17-stable-imminent'
-    date: 1610457780
-    nicetime: '4 years ago'

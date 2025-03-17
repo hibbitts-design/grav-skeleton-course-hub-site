@@ -1,20 +1,20 @@
-last_checked: 1730135417
+last_checked: 1741990282
 data:
   feed:
+    -
+      id: 32
+      date: '2025-03-01 11:40'
+      message: 'Help Grav achieve 15k stars on GitHub! ⭐️ it today!'
+      link: 'https://github.com/getgrav/grav'
+      type: note
+      location:
+        - feed
     -
       id: 31
       date: '2024-02-13 11:40'
       message: '🗜️Optimize your Grav site with Image Optimize'
       link: 'https://getgrav.org/premium/image-optimize'
       type: info
-      location:
-        - feed
-    -
-      id: 30
-      date: '2024-02-13 11:40'
-      message: '🗳️ Please <b>Cast your vote</b> for Grav in the 2024 CMS Critic Awards'
-      link: 'https://cmscritic.com/vote?utm_source=cmscritic&utm_medium=featured_banner&utm_campaign=CMS+Critic'
-      type: note
       location:
         - feed
     -
