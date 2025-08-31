@@ -1,18 +1,42 @@
-last_checked: 1741990282
+last_checked: 1756654866
 data:
   feed:
     -
-      id: 32
-      date: '2025-03-01 11:40'
-      message: 'Help Grav achieve 15k stars on GitHub! ⭐️ it today!'
-      link: 'https://github.com/getgrav/grav'
-      type: note
+      id: 36
+      date: '2025-08-28 11:40'
+      message: '✍️️ Edit smarter with <b>Editor Pro</b>: Modern WYSIWYM editing, live preview, and powerful content tools!'
+      link: 'https://getgrav.org/premium/editor-pro'
+      type: info
+      location:
+        - feed
+    -
+      id: 35
+      date: '2025-07-30 11:40'
+      message: '🕙️ Power up Grav with <b>Revisions Pro</b>, Track, Compare, Revert content and config!'
+      link: 'https://getgrav.org/premium/revisions-pro'
+      type: info
+      location:
+        - feed
+    -
+      id: 34
+      date: '2025-07-29 11:40'
+      message: '🗳️ Transform your Grav site into an interactive experience with <b>Polls.</b>'
+      link: 'https://getgrav.org/premium/polls'
+      type: info
+      location:
+        - feed
+    -
+      id: 33
+      date: '2025-07-28 11:40'
+      message: '💬 Build a community with <b>Comments Pro</b> for Grav, now available.'
+      link: 'https://getgrav.org/premium/comments-pro'
+      type: info
       location:
         - feed
     -
       id: 31
       date: '2024-02-13 11:40'
-      message: '🗜️Optimize your Grav site with Image Optimize'
+      message: '🗜️Optimize your Grav site with <b>Image Optimize</b>, now available.'
       link: 'https://getgrav.org/premium/image-optimize'
       type: info
       location:
@@ -61,7 +85,7 @@ data:
     -
       id: 27
       date: '2020-02-21 00:01'
-      message: "<style>\n.dashboard-notifications-container, .dashboard-notifications-container .alert, .themes-notifications-container, .themes-notifications-container .alert, .plugins-notifications-container, .plugins-notifications-container .alert {\n    margin: 0;\n    padding: 0;   \n}\n.dashboard-notifications-container .alert.position-dashboard:before,\n.themes-notifications-container .alert.position-themes:before,\n.plugins-notifications-container .alert.position-plugins:before,\n.hide-after-load {\n    display: none;\n}\n</style>\n\n<span class=\"hide-after-load\">Loading...</span>\n<link href=\"https://getgrav.org/notifications/grav-premium-notification.css\" type=\"text/css\" rel=\"stylesheet\">\n<script src=\"https://getgrav.org/notifications/grav-premium-notification.js\" async></script>\n<div class=\"gp-banner hidden\">\n    <div class=\"gp-image\">\n        <img src=\"https://getgrav.org/user/themes/planetoid/images/grav-premium-logo-white.svg\" />\n    </div>\n    <div class=\"gp-sentences\">\n        <span>Turbo-charge your Grav site - from the creators of Grav</span>\n        <span>Image Optimize - Optimize all the images on your Grav site</span>\n        <span>Downloads Pro - Powerful download manager directly integrated with Grav</span>\n        <span>Algolia Pro - Class-leading AI-powered search made easy for Grav</span>\n        <span>SEO-Magic - Advanced SEO tool for Grav with automatic webshot generator</span>\n        <span>Typhoon - The most powerful Grav theme ever built, based on Tailwind 3</span>\n        <span>Cloudflare Manager - Configure and manage your domain right within the admin</span>\n        <span>Lightbox Gallery - A light, versatile and mobile friendly Lightbox Gallery</span>\n    </div>\n    <a class=\"gp-learn-more button\" href=\"https://getgrav.org/premium\" target=\"_blank\">Learn more</a>\n</div>\n"
+      message: "<style>\n.dashboard-notifications-container, .dashboard-notifications-container .alert, .themes-notifications-container, .themes-notifications-container .alert, .plugins-notifications-container, .plugins-notifications-container .alert {\n    margin: 0;\n    padding: 0;   \n}\n.dashboard-notifications-container .alert.position-dashboard:before,\n.themes-notifications-container .alert.position-themes:before,\n.plugins-notifications-container .alert.position-plugins:before,\n.hide-after-load {\n    display: none;\n}\n</style>\n\n<span class=\"hide-after-load\">Loading...</span>\n<link href=\"https://getgrav.org/notifications/grav-premium-notification.css\" type=\"text/css\" rel=\"stylesheet\">\n<script src=\"https://getgrav.org/notifications/grav-premium-notification.js\" async></script>\n<div class=\"gp-banner hidden\">\n    <div class=\"gp-image\">\n        <img src=\"https://getgrav.org/user/themes/planetoid/images/grav-premium-logo-white.svg\" />\n    </div>\n    <div class=\"gp-sentences\">\n        <span>Turbo-charge your Grav site - from the creators of Grav</span>\n        <span>Typhoon - The most powerful Grav theme ever built, now with Tailwind 4</span>\n        <span>Comments Pro - Advanced comments system for Grav, with spam protection</span>\n        <span>Revisions Pro - Track, Compare, and Restore content and configuration changes</span>\n        <span>Polls - Transform your Grav site into an interactive experience</span>\n        <span>Image Optimize - Optimize all the images on your Grav site</span>\n        <span>Downloads Pro - Powerful download manager directly integrated with Grav</span>\n        <span>Algolia Pro - Class-leading AI-powered search made easy for Grav</span>\n        <span>SEO-Magic - Advanced SEO tool for Grav with automatic webshot generator</span>  \n        <span>Site Toolbox - SVG Icons, Warm Cache, Mega-Frontmatter, Zapier RSS</span>\n        <span>Email Office365 - Send email with Office365 with OAuth2 and refresh tokens</span>\n        <span>Cloudflare Manager - Configure and manage your domain right within the admin</span>\n        \n    </div>\n    <a class=\"gp-learn-more button\" href=\"https://getgrav.org/premium\" target=\"_blank\">Learn more</a>\n</div>\n"
       type: notice
       link: 'https://getgrav.org/premium'
       location:
@@ -72,7 +96,7 @@ data:
     -
       id: 27
       date: '2020-02-21 00:01'
-      message: "<style>\n.dashboard-notifications-container, .dashboard-notifications-container .alert, .themes-notifications-container, .themes-notifications-container .alert, .plugins-notifications-container, .plugins-notifications-container .alert {\n    margin: 0;\n    padding: 0;   \n}\n.dashboard-notifications-container .alert.position-dashboard:before,\n.themes-notifications-container .alert.position-themes:before,\n.plugins-notifications-container .alert.position-plugins:before,\n.hide-after-load {\n    display: none;\n}\n</style>\n\n<span class=\"hide-after-load\">Loading...</span>\n<link href=\"https://getgrav.org/notifications/grav-premium-notification.css\" type=\"text/css\" rel=\"stylesheet\">\n<script src=\"https://getgrav.org/notifications/grav-premium-notification.js\" async></script>\n<div class=\"gp-banner hidden\">\n    <div class=\"gp-image\">\n        <img src=\"https://getgrav.org/user/themes/planetoid/images/grav-premium-logo-white.svg\" />\n    </div>\n    <div class=\"gp-sentences\">\n        <span>Turbo-charge your Grav site - from the creators of Grav</span>\n        <span>Image Optimize - Optimize all the images on your Grav site</span>\n        <span>Downloads Pro - Powerful download manager directly integrated with Grav</span>\n        <span>Algolia Pro - Class-leading AI-powered search made easy for Grav</span>\n        <span>SEO-Magic - Advanced SEO tool for Grav with automatic webshot generator</span>\n        <span>Typhoon - The most powerful Grav theme ever built, based on Tailwind 3</span>\n        <span>Cloudflare Manager - Configure and manage your domain right within the admin</span>\n        <span>Lightbox Gallery - A light, versatile and mobile friendly Lightbox Gallery</span>\n    </div>\n    <a class=\"gp-learn-more button\" href=\"https://getgrav.org/premium\" target=\"_blank\">Learn more</a>\n</div>\n"
+      message: "<style>\n.dashboard-notifications-container, .dashboard-notifications-container .alert, .themes-notifications-container, .themes-notifications-container .alert, .plugins-notifications-container, .plugins-notifications-container .alert {\n    margin: 0;\n    padding: 0;   \n}\n.dashboard-notifications-container .alert.position-dashboard:before,\n.themes-notifications-container .alert.position-themes:before,\n.plugins-notifications-container .alert.position-plugins:before,\n.hide-after-load {\n    display: none;\n}\n</style>\n\n<span class=\"hide-after-load\">Loading...</span>\n<link href=\"https://getgrav.org/notifications/grav-premium-notification.css\" type=\"text/css\" rel=\"stylesheet\">\n<script src=\"https://getgrav.org/notifications/grav-premium-notification.js\" async></script>\n<div class=\"gp-banner hidden\">\n    <div class=\"gp-image\">\n        <img src=\"https://getgrav.org/user/themes/planetoid/images/grav-premium-logo-white.svg\" />\n    </div>\n    <div class=\"gp-sentences\">\n        <span>Turbo-charge your Grav site - from the creators of Grav</span>\n        <span>Typhoon - The most powerful Grav theme ever built, now with Tailwind 4</span>\n        <span>Comments Pro - Advanced comments system for Grav, with spam protection</span>\n        <span>Revisions Pro - Track, Compare, and Restore content and configuration changes</span>\n        <span>Polls - Transform your Grav site into an interactive experience</span>\n        <span>Image Optimize - Optimize all the images on your Grav site</span>\n        <span>Downloads Pro - Powerful download manager directly integrated with Grav</span>\n        <span>Algolia Pro - Class-leading AI-powered search made easy for Grav</span>\n        <span>SEO-Magic - Advanced SEO tool for Grav with automatic webshot generator</span>  \n        <span>Site Toolbox - SVG Icons, Warm Cache, Mega-Frontmatter, Zapier RSS</span>\n        <span>Email Office365 - Send email with Office365 with OAuth2 and refresh tokens</span>\n        <span>Cloudflare Manager - Configure and manage your domain right within the admin</span>\n        \n    </div>\n    <a class=\"gp-learn-more button\" href=\"https://getgrav.org/premium\" target=\"_blank\">Learn more</a>\n</div>\n"
       type: notice
       link: 'https://getgrav.org/premium'
       location:
@@ -83,7 +107,7 @@ data:
     -
       id: 27
       date: '2020-02-21 00:01'
-      message: "<style>\n.dashboard-notifications-container, .dashboard-notifications-container .alert, .themes-notifications-container, .themes-notifications-container .alert, .plugins-notifications-container, .plugins-notifications-container .alert {\n    margin: 0;\n    padding: 0;   \n}\n.dashboard-notifications-container .alert.position-dashboard:before,\n.themes-notifications-container .alert.position-themes:before,\n.plugins-notifications-container .alert.position-plugins:before,\n.hide-after-load {\n    display: none;\n}\n</style>\n\n<span class=\"hide-after-load\">Loading...</span>\n<link href=\"https://getgrav.org/notifications/grav-premium-notification.css\" type=\"text/css\" rel=\"stylesheet\">\n<script src=\"https://getgrav.org/notifications/grav-premium-notification.js\" async></script>\n<div class=\"gp-banner hidden\">\n    <div class=\"gp-image\">\n        <img src=\"https://getgrav.org/user/themes/planetoid/images/grav-premium-logo-white.svg\" />\n    </div>\n    <div class=\"gp-sentences\">\n        <span>Turbo-charge your Grav site - from the creators of Grav</span>\n        <span>Image Optimize - Optimize all the images on your Grav site</span>\n        <span>Downloads Pro - Powerful download manager directly integrated with Grav</span>\n        <span>Algolia Pro - Class-leading AI-powered search made easy for Grav</span>\n        <span>SEO-Magic - Advanced SEO tool for Grav with automatic webshot generator</span>\n        <span>Typhoon - The most powerful Grav theme ever built, based on Tailwind 3</span>\n        <span>Cloudflare Manager - Configure and manage your domain right within the admin</span>\n        <span>Lightbox Gallery - A light, versatile and mobile friendly Lightbox Gallery</span>\n    </div>\n    <a class=\"gp-learn-more button\" href=\"https://getgrav.org/premium\" target=\"_blank\">Learn more</a>\n</div>\n"
+      message: "<style>\n.dashboard-notifications-container, .dashboard-notifications-container .alert, .themes-notifications-container, .themes-notifications-container .alert, .plugins-notifications-container, .plugins-notifications-container .alert {\n    margin: 0;\n    padding: 0;   \n}\n.dashboard-notifications-container .alert.position-dashboard:before,\n.themes-notifications-container .alert.position-themes:before,\n.plugins-notifications-container .alert.position-plugins:before,\n.hide-after-load {\n    display: none;\n}\n</style>\n\n<span class=\"hide-after-load\">Loading...</span>\n<link href=\"https://getgrav.org/notifications/grav-premium-notification.css\" type=\"text/css\" rel=\"stylesheet\">\n<script src=\"https://getgrav.org/notifications/grav-premium-notification.js\" async></script>\n<div class=\"gp-banner hidden\">\n    <div class=\"gp-image\">\n        <img src=\"https://getgrav.org/user/themes/planetoid/images/grav-premium-logo-white.svg\" />\n    </div>\n    <div class=\"gp-sentences\">\n        <span>Turbo-charge your Grav site - from the creators of Grav</span>\n        <span>Typhoon - The most powerful Grav theme ever built, now with Tailwind 4</span>\n        <span>Comments Pro - Advanced comments system for Grav, with spam protection</span>\n        <span>Revisions Pro - Track, Compare, and Restore content and configuration changes</span>\n        <span>Polls - Transform your Grav site into an interactive experience</span>\n        <span>Image Optimize - Optimize all the images on your Grav site</span>\n        <span>Downloads Pro - Powerful download manager directly integrated with Grav</span>\n        <span>Algolia Pro - Class-leading AI-powered search made easy for Grav</span>\n        <span>SEO-Magic - Advanced SEO tool for Grav with automatic webshot generator</span>  \n        <span>Site Toolbox - SVG Icons, Warm Cache, Mega-Frontmatter, Zapier RSS</span>\n        <span>Email Office365 - Send email with Office365 with OAuth2 and refresh tokens</span>\n        <span>Cloudflare Manager - Configure and manage your domain right within the admin</span>\n        \n    </div>\n    <a class=\"gp-learn-more button\" href=\"https://getgrav.org/premium\" target=\"_blank\">Learn more</a>\n</div>\n"
       type: notice
       link: 'https://getgrav.org/premium'
       location:

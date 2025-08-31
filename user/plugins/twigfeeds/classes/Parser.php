@@ -1,8 +1,9 @@
 <?php
+
 /**
  * TwigFeeds Plugin, Parser API
  *
- * PHP version 7
+ * PHP version 8
  *
  * @category   Extensions
  * @package    Grav
@@ -11,18 +12,16 @@
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @link       https://github.com/OleVik/grav-plugin-twigfeeds
  */
+
 namespace Grav\Plugin\TwigFeedsPlugin\API;
 
 use DateTime;
 use DateTimeZone;
-use FeedIo\FeedIo;
 use FeedIo\Adapter\Guzzle\Client;
-use FeedIo\Formatter\JsonFormatter;
 use FeedIo\Reader\ReadErrorException;
 use GuzzleHttp\Client as GuzzleClient;
 use Psr\Log\NullLogger;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 /**
  * TwigFeeds Parser
@@ -78,7 +77,6 @@ class Parser
      * @param array $args Feed settings
      * @param array $path Path JSON filename
      *
-     * @throws PicoFeedException If PicoFeed Reader fails
      * @throws IOException If Symfony Filesystem dumpFile fails
      * @throws TimeoutException In case of a timeout
      * @throws Exception For other errors
@@ -144,7 +142,7 @@ class Parser
             if (count($result->toArray()['items']) < 1) {
                 return;
             }
-            
+
             if (!empty($resource->getResponse()->getLastModified())) {
                 $lastModified = $resource->getResponse()->getLastModified();
             } else {

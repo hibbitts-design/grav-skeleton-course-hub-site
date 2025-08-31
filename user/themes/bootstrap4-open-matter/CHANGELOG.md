@@ -1,3 +1,22 @@
+# v4.0.1
+## 08/31/2025
+
+1. [](#improved)
+    * Minor theme cleanup
+
+# v4.0.0
+## 08/30/2025
+
+1. [](#new)
+    * Refreshed theme (theme-2025.css), including optional dark mode. Original theme still available (theme-classic.css).
+    * Updated demo pages in theme '_demo' folder
+
+# v3.8.4
+## 08/25/2025
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+
 # v3.8.3
 ## 12/06/2024
 

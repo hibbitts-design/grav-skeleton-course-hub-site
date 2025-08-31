@@ -3,7 +3,7 @@
 /**
  * @package    Grav\Common\Data
  *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2025 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
@@ -48,12 +48,14 @@ class Validation
         }
 
         $validate = (array)($field['validate'] ?? null);
-        $type = $validate['type'] ?? $field['type'];
+        $validate_type = $validate['type'] ?? null;
         $required = $validate['required'] ?? false;
+        $type = $validate_type ?? $field['type'];
+
+        $required = $required && ($validate_type !== 'ignore');
 
         // If value isn't required, we will stop validation if empty value is given.
-        if ($required !== true && ($value === null || $value === '' || (($field['type'] === 'checkbox' || $field['type'] === 'switch') && $value == false))
-        ) {
+        if ($required !== true && ($value === null || $value === '' || empty($value) || (($field['type'] === 'checkbox' || $field['type'] === 'switch') && $value == false))) {
             return [];
         }
 

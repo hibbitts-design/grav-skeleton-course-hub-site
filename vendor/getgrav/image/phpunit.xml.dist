@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         bootstrap="tests/bootstrap.php"
+>
+    <testsuites>
+        <testsuite name="Image testing">
+            <file>./tests/ImageTests.php</file>
+            <file>./tests/ImagickTests.php</file>
+            <file>./tests/AdapterComparisonTests.php</file>
+        </testsuite>
+    </testsuites>
+
+</phpunit>

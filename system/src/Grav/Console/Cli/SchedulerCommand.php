@@ -3,13 +3,13 @@
 /**
  * @package    Grav\Console\Cli
  *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
+ * @copyright  Copyright (c) 2015 - 2025 Trilby Media, LLC. All rights reserved.
  * @license    MIT License; see LICENSE file for details.
  */
 
 namespace Grav\Console\Cli;
 
-use Cron\CronExpression;
+use Dragonmantank\Cron\CronExpression;
 use Grav\Common\Grav;
 use Grav\Common\Utils;
 use Grav\Common\Scheduler\Scheduler;

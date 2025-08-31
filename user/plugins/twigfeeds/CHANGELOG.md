@@ -1,3 +1,26 @@
+# v5.0.0
+## 30-05-2025
+
+1. [](#new)
+    * Release major-version
+
+# v5.0.0-beta.2
+## 12-04-2022
+
+1. [](#bugfix)
+    * Debug-parameter (#33), thanks @hughbris
+    * Testing-parameter (#32), thanks @hughbris
+
+# v5.0.0-beta.1
+## 02-02-2022
+
+1. [](#new)
+    * Major-version bump of FeedIO (#30, #31), thanks @lesion
+2. [](#improved)
+    * Require PHP v8
+    * Require Grav v1.7
+    * Remove PicoFeed-legacy [#ca09a6b](https://github.com/OleVik/grav-plugin-twigfeeds/pull/31/commits/ca09a6b0c65be52adbc6441b2c7b200e4acba4b9) and cleanup
+
 # v4.0.1
 ## 16-10-2019
 
