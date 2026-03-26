@@ -1,3 +1,23 @@
+# v1.10.49.3
+## 01/27/2026
+
+1. [](#improved)
+    * Support new `licensing.getgrav.org` server for premium downloads
+
+# v1.10.49.2
+## 12/29/2025
+
+1. [](#improved)
+    * Added fallback autoloader to handle class location changes during upgrades
+    * Lazy-load WhiteLabel and ScssCompiler to avoid loading scssphp during upgrades
+    * Use sendJsonResponse() to exit early after package install/reinstall tasks
+
+# v1.10.49.1
+## 09/03/2025
+
+1. [](#bugfix)
+    * Fixed several JS issues with Notifications and Scheduler
+
 # v1.10.49
 ## 08/25/2025
 

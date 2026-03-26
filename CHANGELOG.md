@@ -1,3 +1,24 @@
+# v1.7.49.5
+## 09/10/2025
+
+1. [](#bugfix)
+    * Backup not honoring ignored paths [#3952](https://github.com/getgrav/grav/issues/3952)
+
+# v1.7.49.4
+## 09/03/2025
+
+1. [](#bugfix)
+    * Fixed cron force running jobs severy minute! [#3951](https://github.com/getgrav/grav/issues/3951)
+
+# v1.7.49.3
+## 09/02/2025
+
+1. [](#bugfix)
+    * Fixed an error in ZipArchive that was causing issues on some systems
+    * Fixed namespace change for `Cron\Expression`
+    * Removed broken cron install field... use 'instructions' instead
+    * Fixed duplicate jobs listing in some CLI commands
+
 # v1.7.49.2
 ## 08/28/2025
 
