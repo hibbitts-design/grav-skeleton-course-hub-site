@@ -1,5 +1,5 @@
 name: 'My Theme'
-version: 1.1.0
+version: 2.0.0
 description: 'Customizing Bootstrap4 Open Matter'
 icon: crosshairs
 author:
@@ -94,37 +94,26 @@ form:
           fields:
             generaloptions:
               type: section
-              title: 'Visual Style (Bootstrap4 CSS)'
+              title: 'Visual Style'
               underline: true
-            theme_stylesheet:
+            theme_css:
               type: select
               size: medium
-              classes: fancy
-              label: 'Theme Stylesheet'
-              default: default
+              label: 'Theme Style'
+              default: '2026'
               options:
-                default: Default
-                cerulean: Cerulean
-                cosmo: Cosmo
-                cyborg: Cyborg
-                darkly: Darkly
-                flatly: Flatly
-                journal: Journal
-                litera: Litera
-                lumen: Lumen
-                lux: Lux
-                materia: Materia
-                minty: Minty
-                pulse: Pulse
-                sandstone: Sandstone
-                sketchy: Sketchy
-                simplex: Simplex
-                slate: Slate
-                solar: Solar
-                spacelab: Spacelab
-                superhero: Superhero
-                united: United
-                yeti: Yeti
+                '2026': '2026 Refresh'
+                classic: Classic
+            dark_mode.mode:
+              type: select
+              label: 'Dark Mode'
+              help: 'Off: never. On: always. Auto (System): follows visitor OS preference.'
+              size: medium
+              default: disabled
+              options:
+                disabled: 'Off'
+                enabled: 'On'
+                auto: 'Auto (System)'
             menubaroptions:
               type: section
               title: 'NavBar (Bootstrap4 Menubar)'

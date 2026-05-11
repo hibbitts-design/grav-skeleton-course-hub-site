@@ -15,8 +15,14 @@ class EmbedlyShortcode extends Shortcode
 
             $embedlycardurl= $sc->getParameter('url', $sc->getBbCode());
 
+            $mode = $this->config->get('theme.dark_mode.mode', 'disabled');
+            $darkAttr = ($mode === 'enabled') ? ' data-card-theme="dark"' : '';
+            $darkScript = ($mode === 'auto')
+                ? '<script>if(window.matchMedia&&window.matchMedia(\'(prefers-color-scheme: dark)\').matches){document.querySelectorAll(\'a.embedly-card\').forEach(function(e){e.setAttribute(\'data-card-theme\',\'dark\')})}</script>'
+                : '';
+
             if ($embedlycardurl) {
-                $output = '<a class="embedly-card" data-card-controls="0" data-card-align="left" href="'.$embedlycardurl.'" ></a><script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>';
+                $output = '<a class="embedly-card" data-card-controls="0" data-card-align="left"' . $darkAttr . ' href="'.$embedlycardurl.'" ></a>' . $darkScript . '<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>';
 
                 return $output;
 
@@ -24,7 +30,7 @@ class EmbedlyShortcode extends Shortcode
 
               if ($str) {
 
-                  return '<a class="embedly-card" data-card-controls="0" data-card-align="left" href="'.$str.'" ></a><script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>';
+                  return '<a class="embedly-card" data-card-controls="0" data-card-align="left"' . $darkAttr . ' href="'.$str.'" ></a>' . $darkScript . '<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>';
 
               }
             }

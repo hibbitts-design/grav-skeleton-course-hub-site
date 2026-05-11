@@ -1,3 +1,43 @@
+# v5.0.4
+## 05/11/2026
+
+1. [](#improved)
+    * Add Embedly card dark mode support with Off/On/Auto (System) setting for bootstrap4-open-matter and mytheme.
+
+# v5.0.3
+## 05/10/2026
+
+1. [](#improved)
+    * Add dark mode support for Embedly cards gated on theme dark_mode.enabled option.
+
+# v5.0.2
+## 04/22/2026
+
+1. [](#improved)
+    * Streamlined Theme Style options to 2026 Refresh and Classic.
+
+# v5.0.1
+## 04/21/2026
+
+1. [](#improved)
+    * Update card image to use aspect-ratio 16/9 for consistent display across screen sizes
+    * Updated card layout to responsively transition from three to two to one column as screen width decreases.
+
+# v5.0.0
+## 04/21/2026
+
+1. [](#new)
+    * Added 2026 Refresh theme with accessibility and rendering refinements, plus Dark Mode option for all theme styles. 2025 theme and Classic theme still available via theme settings.
+1. [](#improved)
+    * Removed Bootswatch theme stylesheets. Sites using a custom Bootswatch theme should switch to a Theme Style option.
+    * Existing mytheme installations require manual update of mytheme.yaml and mytheme/blueprints.yaml to surface new Theme Style and Dark Mode options.
+
+# v4.0.2
+## 09/01/2025
+
+1. [](#improved)
+    * Updated demo pages in theme '_demo' folder
+    
 # v4.0.1
 ## 08/31/2025
 

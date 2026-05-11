@@ -130,7 +130,7 @@ class GuzzleDataSource extends DataSource
 			'trace'    => (new Serializer)->trace($trace)
 		];
 		
-		if ($response->getBody()->tell()) $response->getBody()->rewind();
+		if ($response && $response->getBody()->tell()) $response->getBody()->rewind();
 
 		if ($this->passesFilters([ $request ])) {
 			$this->requests[] = $request;

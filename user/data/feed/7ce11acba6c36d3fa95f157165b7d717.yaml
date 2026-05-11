@@ -1,10 +1,35 @@
-last_checked: 1774549473
+last_checked: 1778508445
 data:
+  -
+    title: 'Grav 2.0 Developer Guide: Compatibility Flags'
+    url: 'https://getgrav.org/blog/grav-2-dev-compatibility-flags'
+    date: 1778166000
+    nicetime: '4 days ago'
+  -
+    title: 'Grav 2.0 for Plugin Developers: Overview'
+    url: 'https://getgrav.org/blog/grav-2-for-plugin-developers'
+    date: 1778162400
+    nicetime: '4 days ago'
+  -
+    title: 'Migrating to Grav 2.0: The Side-by-Side Staged Install'
+    url: 'https://getgrav.org/blog/migrating-to-grav-2'
+    date: 1778158800
+    nicetime: '4 days ago'
+  -
+    title: 'Grav 2.0 Release Candidate Released'
+    url: 'https://getgrav.org/blog/grav-2-rc-released'
+    date: 1778155200
+    nicetime: '4 days ago'
+  -
+    title: 'The State of Grav: Where We Are and Where We''re Going'
+    url: 'https://getgrav.org/blog/state-of-grav-2026'
+    date: 1778068800
+    nicetime: '5 days ago'
   -
     title: 'Introducing Our New Licensing & Purchase System'
     url: 'https://getgrav.org/blog/new-licensing-system'
     date: 1769515200
-    nicetime: '2 months ago'
+    nicetime: '3 months ago'
   -
     title: 'TailwindCSS 4.0 upgrade for Typhoon Premium Theme'
     url: 'https://getgrav.org/blog/tailwindcss4-upgrade-for-typhoon-premium-theme'
@@ -25,28 +50,3 @@ data:
     url: 'https://getgrav.org/blog/grav-18-beta-released'
     date: 1732197180
     nicetime: '1 years ago'
-  -
-    title: 'Instagram Feed Plugin is deprecated'
-    url: 'https://getgrav.org/blog/instagram-feed-deprecated'
-    date: 1732107600
-    nicetime: '1 years ago'
-  -
-    title: 'macOS 15.0 Sequoia Apache Setup: Upgrading Homebrew'
-    url: 'https://getgrav.org/blog/macos-sequoia-apache-upgrade-homebrew'
-    date: 1726660800
-    nicetime: '2 years ago'
-  -
-    title: 'macOS 15.0 Sequoia Apache Setup: LetsEncrypt SSL'
-    url: 'https://getgrav.org/blog/macos-sequoia-apache-ssl'
-    date: 1726657380
-    nicetime: '2 years ago'
-  -
-    title: 'macOS 15.0 Sequoia Apache Setup: MySQL, Xdebug & More...'
-    url: 'https://getgrav.org/blog/macos-sequoia-apache-mysql-vhost-apc'
-    date: 1726657200
-    nicetime: '2 years ago'
-  -
-    title: 'macOS 15.0 Sequoia Apache Setup: Multiple PHP Versions'
-    url: 'https://getgrav.org/blog/macos-sequoia-apache-multiple-php-versions'
-    date: 1726653600
-    nicetime: '2 years ago'

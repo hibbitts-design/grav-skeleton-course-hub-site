@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
+class ComposerStaticInit20e189db3f9b142de18286a55ac762f1
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -23,20 +23,19 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
     );
 
     public static $prefixLengthsPsr4 = array (
-        'd' => 
+        'd' =>
         array (
             'donatj\\UserAgent\\' => 17,
         ),
-        'W' => 
+        'W' =>
         array (
             'Whoops\\' => 7,
-            'Webmozart\\Assert\\' => 17,
         ),
-        'T' => 
+        'T' =>
         array (
             'Twig\\' => 5,
         ),
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -53,7 +52,7 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
             'Symfony\\Component\\Console\\' => 26,
             'Seld\\CliPrompt\\' => 15,
         ),
-        'R' => 
+        'R' =>
         array (
             'RocketTheme\\Toolbox\\StreamWrapper\\' => 34,
             'RocketTheme\\Toolbox\\Session\\' => 28,
@@ -66,7 +65,7 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
             'RocketTheme\\Toolbox\\ArrayTraits\\' => 32,
             'Rhukster\\DomSanitizer\\' => 22,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
@@ -75,36 +74,36 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
         ),
-        'N' => 
+        'N' =>
         array (
             'Nyholm\\Psr7\\' => 12,
             'Nyholm\\Psr7Server\\' => 18,
             'Negotiation\\' => 12,
         ),
-        'M' => 
+        'M' =>
         array (
             'Monolog\\' => 8,
             'MatthiasMullie\\PathConverter\\' => 29,
             'MatthiasMullie\\Minify\\' => 22,
         ),
-        'L' => 
+        'L' =>
         array (
             'League\\CLImate\\' => 15,
         ),
-        'G' => 
+        'G' =>
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'Gregwar\\Image\\' => 14,
             'Grav\\' => 5,
         ),
-        'D' => 
+        'D' =>
         array (
             'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
             'DebugBar\\' => 9,
         ),
-        'C' => 
+        'C' =>
         array (
             'Cron\\' => 5,
             'Composer\\Semver\\' => 16,
@@ -114,249 +113,245 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
     );
 
     public static $prefixDirsPsr4 = array (
-        'donatj\\UserAgent\\' => 
+        'donatj\\UserAgent\\' =>
         array (
             0 => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgent',
         ),
-        'Whoops\\' => 
+        'Whoops\\' =>
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
-        'Webmozart\\Assert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/assert/src',
-        ),
-        'Twig\\' => 
+        'Twig\\' =>
         array (
             0 => __DIR__ . '/../..' . '/system/src/Twig',
             1 => __DIR__ . '/..' . '/twig/twig/src',
         ),
-        'Symfony\\Polyfill\\Php81\\' => 
+        'Symfony\\Polyfill\\Php81\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
         ),
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Php74\\' => 
+        'Symfony\\Polyfill\\Php74\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php74',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Iconv\\' => 
+        'Symfony\\Polyfill\\Iconv\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-iconv',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\' => 
+        'Symfony\\Contracts\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/contracts',
         ),
-        'Symfony\\Component\\Yaml\\' => 
+        'Symfony\\Component\\Yaml\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
         ),
-        'Symfony\\Component\\VarDumper\\' => 
+        'Symfony\\Component\\VarDumper\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
-        'Symfony\\Component\\Process\\' => 
+        'Symfony\\Component\\Process\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
-        'Symfony\\Component\\HttpClient\\' => 
+        'Symfony\\Component\\HttpClient\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/http-client',
         ),
-        'Symfony\\Component\\EventDispatcher\\' => 
+        'Symfony\\Component\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
         ),
-        'Symfony\\Component\\Console\\' => 
+        'Symfony\\Component\\Console\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'Seld\\CliPrompt\\' => 
+        'Seld\\CliPrompt\\' =>
         array (
             0 => __DIR__ . '/..' . '/seld/cli-prompt/src',
         ),
-        'RocketTheme\\Toolbox\\StreamWrapper\\' => 
+        'RocketTheme\\Toolbox\\StreamWrapper\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/StreamWrapper/src',
         ),
-        'RocketTheme\\Toolbox\\Session\\' => 
+        'RocketTheme\\Toolbox\\Session\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/Session/src',
         ),
-        'RocketTheme\\Toolbox\\ResourceLocator\\' => 
+        'RocketTheme\\Toolbox\\ResourceLocator\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/ResourceLocator/src',
         ),
-        'RocketTheme\\Toolbox\\File\\' => 
+        'RocketTheme\\Toolbox\\File\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/File/src',
         ),
-        'RocketTheme\\Toolbox\\Event\\' => 
+        'RocketTheme\\Toolbox\\Event\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/Event/src',
         ),
-        'RocketTheme\\Toolbox\\DI\\' => 
+        'RocketTheme\\Toolbox\\DI\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/DI/src',
         ),
-        'RocketTheme\\Toolbox\\Compat\\' => 
+        'RocketTheme\\Toolbox\\Compat\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/Compat/src',
         ),
-        'RocketTheme\\Toolbox\\Blueprints\\' => 
+        'RocketTheme\\Toolbox\\Blueprints\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/Blueprints/src',
         ),
-        'RocketTheme\\Toolbox\\ArrayTraits\\' => 
+        'RocketTheme\\Toolbox\\ArrayTraits\\' =>
         array (
             0 => __DIR__ . '/..' . '/rockettheme/toolbox/ArrayTraits/src',
         ),
-        'Rhukster\\DomSanitizer\\' => 
+        'Rhukster\\DomSanitizer\\' =>
         array (
             0 => __DIR__ . '/..' . '/rhukster/dom-sanitizer/src',
         ),
-        'Psr\\SimpleCache\\' => 
+        'Psr\\SimpleCache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Psr\\Http\\Server\\' => 
+        'Psr\\Http\\Server\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
             1 => __DIR__ . '/..' . '/psr/http-server-handler/src',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Psr\\Cache\\' => 
+        'Psr\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
-        'Nyholm\\Psr7\\' => 
+        'Nyholm\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/nyholm/psr7/src',
         ),
-        'Nyholm\\Psr7Server\\' => 
+        'Nyholm\\Psr7Server\\' =>
         array (
             0 => __DIR__ . '/..' . '/nyholm/psr7-server/src',
         ),
-        'Negotiation\\' => 
+        'Negotiation\\' =>
         array (
             0 => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation',
         ),
-        'Monolog\\' => 
+        'Monolog\\' =>
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'MatthiasMullie\\PathConverter\\' => 
+        'MatthiasMullie\\PathConverter\\' =>
         array (
             0 => __DIR__ . '/..' . '/matthiasmullie/path-converter/src',
         ),
-        'MatthiasMullie\\Minify\\' => 
+        'MatthiasMullie\\Minify\\' =>
         array (
             0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
         ),
-        'League\\CLImate\\' => 
+        'League\\CLImate\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/climate/src',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'GuzzleHttp\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'Gregwar\\Image\\' => 
+        'Gregwar\\Image\\' =>
         array (
             0 => __DIR__ . '/..' . '/getgrav/image',
         ),
-        'Grav\\' => 
+        'Grav\\' =>
         array (
             0 => __DIR__ . '/../..' . '/system/src/Grav',
         ),
-        'Doctrine\\Deprecations\\' => 
+        'Doctrine\\Deprecations\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
         ),
-        'Doctrine\\Common\\Collections\\' => 
+        'Doctrine\\Common\\Collections\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
         ),
-        'Doctrine\\Common\\Cache\\' => 
+        'Doctrine\\Common\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
         ),
-        'DebugBar\\' => 
+        'DebugBar\\' =>
         array (
             0 => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar',
         ),
-        'Cron\\' => 
+        'Cron\\' =>
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
-        'Composer\\Semver\\' => 
+        'Composer\\Semver\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
-        'Composer\\CaBundle\\' => 
+        'Composer\\CaBundle\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
-        'Clockwork\\' => 
+        'Clockwork\\' =>
         array (
             0 => __DIR__ . '/..' . '/itsgoingd/clockwork/Clockwork',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'T' => 
+        'T' =>
         array (
-            'Twig_' => 
+            'Twig_' =>
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
-        'P' => 
+        'P' =>
         array (
-            'Pimple' => 
+            'Pimple' =>
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
-            'ParsedownExtra' => 
+            'ParsedownExtra' =>
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown-extra',
             ),
-            'Parsedown' => 
+            'Parsedown' =>
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown',
             ),
-            'PHPExif' => 
+            'PHPExif' =>
             array (
                 0 => __DIR__ . '/..' . '/miljar/php-exif/lib',
             ),
         ),
-        'G' => 
+        'G' =>
         array (
-            'Gregwar\\Cache' => 
+            'Gregwar\\Cache' =>
             array (
                 0 => __DIR__ . '/..' . '/getgrav/cache',
             ),
@@ -851,6 +846,7 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
         'Grav\\Console\\Application\\GravApplication' => __DIR__ . '/../..' . '/system/src/Grav/Console/Application/GravApplication.php',
         'Grav\\Console\\Application\\PluginApplication' => __DIR__ . '/../..' . '/system/src/Grav/Console/Application/PluginApplication.php',
         'Grav\\Console\\Cli\\BackupCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/BackupCommand.php',
+        'Grav\\Console\\Cli\\CacheCleanupCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/CacheCleanupCommand.php',
         'Grav\\Console\\Cli\\CleanCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/CleanCommand.php',
         'Grav\\Console\\Cli\\ClearCacheCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/ClearCacheCommand.php',
         'Grav\\Console\\Cli\\ComposerCommand' => __DIR__ . '/../..' . '/system/src/Grav/Console/Cli/ComposerCommand.php',
@@ -2111,9 +2107,6 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
         'Twig_Util_TemplateDirIterator' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Util/TemplateDirIterator.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-        'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
-        'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
-        'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
         'Whoops\\Exception\\Frame' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Frame.php',
@@ -2145,10 +2138,10 @@ class ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8d681f74b0bd1f5099bb8fbf788ab3eb::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit20e189db3f9b142de18286a55ac762f1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit20e189db3f9b142de18286a55ac762f1::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit20e189db3f9b142de18286a55ac762f1::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit20e189db3f9b142de18286a55ac762f1::$classMap;
 
         }, null, ClassLoader::class);
     }
