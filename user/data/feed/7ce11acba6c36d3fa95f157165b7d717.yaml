@@ -1,52 +1,52 @@
-last_checked: 1778508445
+last_checked: 1790896021
 data:
   -
-    title: 'Grav 2.0 Developer Guide: Compatibility Flags'
-    url: 'https://getgrav.org/blog/grav-2-dev-compatibility-flags'
-    date: 1778166000
-    nicetime: '4 days ago'
+    title: 'Meet Helpdesk Pro and Mailroom'
+    url: 'https://getgrav.org/blog/helpdesk-pro-and-mailroom'
+    date: 1790597400
+    nicetime: '3 days ago'
   -
-    title: 'Grav 2.0 for Plugin Developers: Overview'
-    url: 'https://getgrav.org/blog/grav-2-for-plugin-developers'
-    date: 1778162400
-    nicetime: '4 days ago'
+    title: 'Grav 2.2 Released: The Fastest Flat-File CMS Is Now 2x Faster'
+    url: 'https://getgrav.org/blog/grav-2-2-released'
+    date: 1790240400
+    nicetime: '1 weeks ago'
   -
-    title: 'Migrating to Grav 2.0: The Side-by-Side Staged Install'
-    url: 'https://getgrav.org/blog/migrating-to-grav-2'
-    date: 1778158800
-    nicetime: '4 days ago'
+    title: 'KahunaCart Is Out'
+    url: 'https://getgrav.org/blog/kahunacart-released'
+    date: 1789380000
+    nicetime: '3 weeks ago'
   -
-    title: 'Grav 2.0 Release Candidate Released'
-    url: 'https://getgrav.org/blog/grav-2-rc-released'
-    date: 1778155200
-    nicetime: '4 days ago'
+    title: 'Grav 2.1 Released: Every Page Speaks Markdown'
+    url: 'https://getgrav.org/blog/grav-2-1-released'
+    date: 1789128000
+    nicetime: '3 weeks ago'
   -
-    title: 'The State of Grav: Where We Are and Where We''re Going'
-    url: 'https://getgrav.org/blog/state-of-grav-2026'
-    date: 1778068800
-    nicetime: '5 days ago'
+    title: 'KahunaCart: A Real Store, Inside Your Grav Site'
+    url: 'https://getgrav.org/blog/kahunacart-coming-soon'
+    date: 1787655600
+    nicetime: '1 months ago'
   -
-    title: 'Introducing Our New Licensing & Purchase System'
-    url: 'https://getgrav.org/blog/new-licensing-system'
-    date: 1769515200
+    title: 'Admin 2.1: Every String on Your Site, Editable'
+    url: 'https://getgrav.org/blog/grav-2-admin-2-1'
+    date: 1786705200
+    nicetime: '2 months ago'
+  -
+    title: 'Forum Pro is Available'
+    url: 'https://getgrav.org/blog/forum-pro-released'
+    date: 1785758400
+    nicetime: '2 months ago'
+  -
+    title: 'Tailwind CSS in Grav, No Node Required'
+    url: 'https://getgrav.org/blog/tailwind-css-without-node'
+    date: 1785515400
+    nicetime: '2 months ago'
+  -
+    title: 'Why I Built Riffle'
+    url: 'https://getgrav.org/blog/why-i-built-riffle'
+    date: 1784642400
+    nicetime: '2 months ago'
+  -
+    title: 'Grav 2.0 Released!'
+    url: 'https://getgrav.org/blog/grav-2-stable-released'
+    date: 1781960400
     nicetime: '3 months ago'
-  -
-    title: 'TailwindCSS 4.0 upgrade for Typhoon Premium Theme'
-    url: 'https://getgrav.org/blog/tailwindcss4-upgrade-for-typhoon-premium-theme'
-    date: 1739361300
-    nicetime: '1 years ago'
-  -
-    title: '2024 CMS Critic Award Voting'
-    url: 'https://getgrav.org/blog/cms-critic-award-vote-2024'
-    date: 1738588260
-    nicetime: '1 years ago'
-  -
-    title: '2024 CMS Critic Award Nominations'
-    url: 'https://getgrav.org/blog/cms-critic-award-nominations-2024'
-    date: 1736169060
-    nicetime: '1 years ago'
-  -
-    title: 'Grav 1.8-beta Released'
-    url: 'https://getgrav.org/blog/grav-18-beta-released'
-    date: 1732197180
-    nicetime: '1 years ago'

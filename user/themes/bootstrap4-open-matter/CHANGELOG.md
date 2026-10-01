@@ -1,3 +1,65 @@
+# v5.2.0
+## 10/01/2026
+
+1. [](#improved)
+    * Removed support for the legacy Presentation plugin (Presentation List page type, presentation blueprints and partials, and related options and CSS)
+    * Removed unused Bootswatch stylesheet files (Bootswatch support was removed in v5.0.0)
+    * Removed legacy NextGen Editor shortcode integration (NextGen Editor has been replaced by Editor Pro)
+
+# v5.1.2
+## 10/01/2026
+
+1. [](#bugfix)
+    * Git Sync edit links now use the configured remote branch instead of always `master`
+    * Git Sync edit links now strip only a trailing `.git` from the repository URL (fixes repos such as `name.github.io`)
+    * Fix H5P content title not displaying
+    * Fix latest custom page type ignoring the parent page's content order setting
+    * Only show featured posts that belong to the current blog (previously matched by slug, so same-named blogs in different courses shared featured posts)
+
+# v5.1.1
+## 08/02/2026
+
+1. [](#bugfix)
+    * Handle unreachable Embedly URLs with a clear "no longer available" link instead of a silent broken card
+    * Explicitly zero out image margin sides in the link preview card, for defensive consistency across any theme this shortcode is bundled with
+
+# v5.1.0
+## 07/11/2026
+
+1. [](#improved)
+    * Fix Grav 2 raw HTML/tagfilter escaping in Embedly, H5P, and Twitter shortcodes by moving embed scripts to the Assets API
+
+# v5.0.9
+## 07/10/2026
+
+1. [](#new)
+    * Add self-hosted [linkpreviewcard] shortcode as a working replacement for legacy Embedly card
+
+# v5.0.8
+## 07/09/2026
+
+1. [](#improved)
+    * Add 1.7|2.0 compatibility flags
+
+# v5.0.7
+## 06/17/2026
+
+1. [](#bugfix)
+    * Replace any pre-registered badge shortcode handler with the theme's own to ensure compatibility
+
+# v5.0.6
+## 06/17/2026
+
+1. [](#bugfix)
+    * Guard against duplicate badge shortcode registration introduced in shortcode-core v6.0.0
+
+# v5.0.5
+## 06/10/2026
+
+1. [](#bugfix)
+    * Display navbar Logout link text with expected color
+    * Fix accordion formating CSS h2 issue
+
 # v5.0.4
 ## 05/11/2026
 
