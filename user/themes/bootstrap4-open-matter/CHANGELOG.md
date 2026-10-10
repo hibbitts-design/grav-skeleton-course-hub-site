@@ -1,3 +1,138 @@
+# v6.1.7
+## 10/09/2026
+
+1. [](#improved)
+    * No "Setup Git Sync" link is shown before Git Sync is connected to a repository, so visitors don't see an unfinished setup step; set it up in the Admin Panel (its own menu item in Grav 2, or Plugins → Git Sync in Grav 1.7)
+
+# v6.1.6
+## 10/08/2026
+
+1. [](#improved)
+    * Deprecated the [twitter] shortcode, as X has heavily restricted embedded timelines; it will be removed in a future release
+    * Deprecated the experimental [wcstopnote] shortcode and Web Component Stop Note page type; they will be removed in a future release
+    * Removed the Twitter feed from the demo sidebar
+
+# v6.1.5
+## 10/08/2026
+
+1. [](#bugfix)
+    * The NavBar highlights a Multi-Section page's menu item on its sections (Grav 1.7)
+
+# v6.1.4
+## 10/08/2026
+
+1. [](#improved)
+    * Tinted NavBar Look keeps the NavBar colour's own hue, with the same lightness for every colour (browsers from 2024 onwards)
+
+# v6.1.3
+## 10/08/2026
+
+1. [](#improved)
+    * 2026 Modern: Accordion page sections as a clean list matching the site's cards, with a chevron that points down when closed and up when open
+    * Accordion page sections are announced correctly by screen readers when closed or open
+1. [](#bugfix)
+    * 2026 Modern: no gaps between the Accordion page's sections
+
+# v6.1.2
+## 10/07/2026
+
+1. [](#improved)
+    * Updated screenshots
+
+# v6.1.1
+## 10/07/2026
+
+1. [](#bugfix)
+    * 2026 Modern: no extra space above the first heading on pages with a hidden page title, such as the course list page
+    * A course one folder deeper keeps the NavBar colour set on its parent folder
+    * Remove stray characters from the NavBar's HTML
+
+# v6.1.0
+## 10/07/2026
+
+1. [](#new)
+    * 2026 Modern Theme Style: 2026 Refresh with bolder headings, Grav Helios-style callouts, card-style boxes, rounded images, underlined links and a clearer current page in the NavBar
+    * NavBar Look option: Solid colour, or Tinted (subtle, standard or strong) with dark text, frosted when Sticky Top
+1. [](#improved)
+    * Existing mytheme installations require manual update of mytheme/blueprints.yaml to surface the new theme options
+
+# v6.0.3
+## 10/06/2026
+
+1. [](#bugfix)
+    * The Setup Git Sync and Site Theme Files links are no longer shown when the Git Sync plugin is turned off
+
+# v6.0.2
+## 10/04/2026
+
+1. [](#new)
+    * Show Search Box option for the course list page (off by default; the all-courses search box was shown automatically in 6.0.0 and 6.0.1)
+
+# v6.0.1
+## 10/04/2026
+
+1. [](#new)
+    * "Standard on home pages, slim elsewhere" option for Header Image Height
+1. [](#improved)
+    * Existing mytheme installations require manual update of mytheme/blueprints.yaml to surface the new theme option
+
+# v6.0.0
+## 10/03/2026
+
+1. [](#new)
+    * Course search with the SimpleSearch plugin, limited to the current course
+    * Course content shortcodes, as in Helios Course Hub (`[objectives]`, `[references]` and more)
+    * `[topics]` shortcode for an A–Z topics index
+    * GitHub-style alerts (`> [!NOTE]` etc.) shown as Bootstrap alerts, with the GitHub Markdown Alerts plugin
+    * Course card description, badge, group and image fields, as in Helios Course Hub
+    * Courses can also be set up with a `course.md` file, as in Helios Course Hub
+    * Print stylesheet
+    * Header Image Height and Display Syndicate Links theme options
+    * Friendlier Page Not Found page
+1. [](#improved)
+    * `?embedded=true` and `?edit_link=false` URL parameters, as in Helios Course Hub
+    * `ratio` and `title` options for the iFrame, Google Slides, PDF and H5P shortcodes
+    * Current page marked in the NavBar
+    * Refreshed sidebar headings, weekly headings, badges and form fields
+    * Existing mytheme installations require manual update of mytheme/blueprints.yaml to surface the new theme options
+1. [](#bugfix)
+    * Embedly Card and Link Preview Card pages no longer show their HTML as text on Grav 2
+    * iFrame shortcode `aspectratio` option no longer ignored
+    * H5P embeds keep resizing when Grav's cache is enabled
+    * Cmd-click on internal links now opens a new tab
+    * Readable Dark Mode button text
+    * Fixed invalid markup in blog post titles and embedded "View all" links
+
+# v5.2.3
+## 10/02/2026
+
+1. [](#new)
+    * Optional Instructor(s) line on course cards, using the same field as Helios Course Hub
+1. [](#improved)
+    * Refreshed course cards: whole card clickable, edge-to-edge images, quieter titles
+    * Point demo documentation links to the README on GitHub
+1. [](#bugfix)
+    * Course card images no longer announced as "Card image cap"
+
+# v5.2.2
+## 10/02/2026
+
+1. [](#bugfix)
+    * jQuery now loads on Grav 2.0.14 and later even when a site's configuration still points to the removed jQuery 2.1.4, falling back to Grav's bundled jQuery 3 (restores Bootstrap menus and theme scripts)
+
+# v5.2.1
+## 10/02/2026
+
+1. [](#improved)
+    * Rewrote README in streamlined style with light and dark mode screenshots, with demo links now pointing to the Open Course Hub demo
+    * Removed unused README image (assets/readme_1.png)
+1. [](#bugfix)
+    * Dark Mode Auto (System) now loads its stylesheet before custom.css, so site customizations are kept as in Dark Mode On
+    * Dark Mode Auto (System) now shows Embedly cards in their dark style
+    * Embedly Card pages show their card again, instead of always reporting the link as no longer available
+    * Embedly cards for pages on sites with bot protection (e.g. Medium) are no longer hidden as unavailable; only missing pages are
+    * Replaced the Guerrilla UX Testing reading in the demo content, no longer available, with the Usability Geek article
+
 # v5.2.0
 ## 10/01/2026
 

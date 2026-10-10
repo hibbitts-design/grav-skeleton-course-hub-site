@@ -1,0 +1,285 @@
+/*
+Shared refinements for every Theme Style - hibbittsdesign.org
+Dark Mode colours for these are in each theme-*-dark.css file.
+*/
+
+/* Slim header image (Theme option: Header Image Height) */
+.myheader.myheader-slim {
+    height: 140px;
+}
+
+@media (max-width: 960px) {
+    .myheader.myheader-slim {
+        height: 110px;
+    }
+}
+
+/* On phones, a slim header image is left out, so the page starts with the NavBar */
+@media (max-width: 576px) {
+    .myheader.myheader-slim {
+        display: none;
+    }
+}
+
+/* Current page in the NavBar */
+.navbar .nav-item.current > .nav-link {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+}
+
+/* Sidebar headings a step quieter than page headings */
+.blog-sidebar h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+/* Weekly (blog post) headings in the text colour, with an underline on hover, like the course cards */
+.list-blog-header h1 a,
+.list-blog-header h2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.list-blog-header h1 a:hover,
+.list-blog-header h1 a:focus,
+.list-blog-header h2 a:hover,
+.list-blog-header h2 a:focus {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+/* "View all of …" links with the course cards' arrow */
+.continue-link-arrow {
+    margin-left: 0.25rem;
+    transition: margin-left 0.2s ease;
+}
+
+a:hover > .continue-link-arrow,
+a:focus > .continue-link-arrow {
+    margin-left: 0.45rem;
+}
+
+/* Soft badges (for example the date badges in reminders, and Default course card badges) */
+.badge.badge-secondary {
+    background-color: rgba(108, 117, 125, 0.16);
+    color: #374151;
+    font-weight: 600;
+}
+
+/* Friendlier "page not found" page */
+.error-page {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: 2rem 0 3rem;
+    text-align: center;
+}
+
+.error-page .error-code {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.error-page .error-search {
+    max-width: 24rem;
+    margin: 1.5rem auto 0;
+}
+
+/* [references] shortcode - a list of sources under a small heading */
+.course-references {
+    border-top: 1px solid rgba(127, 127, 127, 0.25);
+    padding-top: 0.75rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+.course-references-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 0.5rem;
+}
+
+.course-references-body > :last-child {
+    margin-bottom: 0;
+}
+
+/* [excerpt] shortcode - a quoted passage */
+.blockquote.excerpt {
+    border-left: 4px solid rgba(127, 127, 127, 0.35);
+    padding: 0.25rem 0 0.25rem 1rem;
+    font-size: 1.05rem;
+}
+
+.blockquote.excerpt > :last-child {
+    margin-bottom: 0;
+}
+
+/* [topics] shortcode letter headings - a soft label, like the soft badges (corner size set by each Theme Style) */
+h2.topics-letter {
+    display: inline-block;
+    width: auto;
+    min-width: 2.25em;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 0.2em 0.6em;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    background: rgba(108, 117, 125, 0.16);
+    color: inherit;
+}
+
+
+/* NavBar Look "Tinted" (Theme option): the NavBar in a light tint of its colour, with dark text.
+   color-mix() blends some of the NavBar colour into white; older browsers without it use the plain white set just before it.
+   (!important is needed because Bootstrap's bg- classes use it for their background) */
+
+/* How strong the tint is: Tinted (subtle), Tinted, or Tinted (strong).
+   --navbar-tint-lightness and --navbar-tint-chroma are for newer browsers (see the end of this section),
+   --navbar-tint-amount is the share of colour blended into white for older ones. */
+.navbar-tint {
+    --navbar-tint-lightness: 0.915;
+    --navbar-tint-chroma: 0.15;
+    --navbar-tint-amount: 10%;
+}
+
+.navbar-tint.navbar-tint-subtle {
+    --navbar-tint-lightness: 0.94;
+    --navbar-tint-chroma: 0.11;
+    --navbar-tint-amount: 5%;
+}
+
+.navbar-tint.navbar-tint-strong {
+    --navbar-tint-lightness: 0.89;
+    --navbar-tint-chroma: 0.19;
+    --navbar-tint-amount: 18%;
+}
+
+.navbar.navbar-tint {
+    background-color: #ffffff !important;
+    background-color: color-mix(in srgb, var(--navbar-color, #1b6ec2) var(--navbar-tint-amount), #ffffff) !important;
+    /* a hairline along the bottom gives the NavBar a clear edge against the page, as in Grav Helios */
+    border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+}
+
+/* The NavBar Background classes as the colour for the tint */
+.navbar-tint.bg-primary { --navbar-color: #007bff; }
+.navbar-tint.bg-success { --navbar-color: #28a745; }
+.navbar-tint.bg-info    { --navbar-color: #17a2b8; }
+.navbar-tint.bg-warning { --navbar-color: #ffc107; }
+.navbar-tint.bg-danger  { --navbar-color: #dc3545; }
+.navbar-tint.bg-inverse { --navbar-color: #343a40; }
+.navbar-tint.bg-faded   { --navbar-color: #adb5bd; }
+
+/* Dark text for the site title and menu (Bootstrap's light NavBar text can be too pale on a tint) */
+.navbar-tint .navbar-brand,
+.navbar-tint .navbar-brand:hover,
+.navbar-tint .navbar-brand:focus {
+    color: #111827;
+}
+
+.navbar-tint .navbar-nav .nav-link,
+.navbar-tint .navbar-nav .active > .nav-link {
+    color: #1f2937;
+}
+
+.navbar-tint .navbar-nav .nav-link:hover,
+.navbar-tint .navbar-nav .nav-link:focus {
+    color: #000000;
+}
+
+/* Menu items with room on each side for the current page's pill */
+.navbar-tint .navbar-nav .nav-link {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border-radius: 8px;
+}
+
+/* Current page as a white pill with semibold text, a little shorter than the NavBar so it has space around it.
+   This replaces the underline (and 2026 Modern's rounded bar, hidden with display: none). */
+.navbar-tint .navbar-nav .nav-item.current > .nav-link {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    font-weight: 600;
+    color: #111827;
+    text-decoration: none;
+    background-color: #ffffff;
+    /* a thin outline (drawn with box-shadow, so it doesn't change the size) keeps the pill clear on the subtle tint */
+    box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-tint .navbar-nav .nav-item.current > .nav-link::after {
+    display: none;
+}
+
+/* When the menu is in a row, its items are centred in the NavBar, so the shorter pill stays in line with them.
+   The menu is in a row from the NavBar Breakpoint setting's width: Small, Medium or Large. */
+@media (min-width: 576px) {
+    .navbar-tint.navbar-expand-sm .navbar-nav {
+        align-items: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-tint.navbar-expand-md .navbar-nav {
+        align-items: center;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-tint.navbar-expand-lg .navbar-nav {
+        align-items: center;
+    }
+}
+
+/* With NavBar Position "Sticky Top", a frosted NavBar: slightly see-through, blurring the page as it scrolls under.
+   (@supports checks the browser can blur, and visitors who ask their system to reduce transparency keep a solid NavBar) */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .navbar.navbar-tint.sticky-top {
+        background-color: color-mix(in srgb, var(--navbar-color, #1b6ec2) var(--navbar-tint-amount), rgba(255, 255, 255, 0.85)) !important;
+        -webkit-backdrop-filter: saturate(180%) blur(12px);
+        backdrop-filter: saturate(180%) blur(12px);
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .navbar.navbar-tint.sticky-top {
+        background-color: color-mix(in srgb, var(--navbar-color, #1b6ec2) var(--navbar-tint-amount), #ffffff) !important;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
+/* Newer browsers (2024 onwards) make the tint from the NavBar colour's own hue instead of blending it into white,
+   so the tint stays warm or cool like the colour, and every colour gets the same light background.
+   oklch(from ...) is a relative colour: it takes the colour's hue (h), sets a fixed lightness, and keeps a share
+   of its colourfulness (c). @supports checks the browser understands it; others keep the blend above. */
+@supports (color: oklch(from red l c h)) {
+    .navbar.navbar-tint {
+        background-color: oklch(from var(--navbar-color, #1b6ec2) var(--navbar-tint-lightness) calc(c * var(--navbar-tint-chroma)) h) !important;
+    }
+}
+
+/* the same tint for the frosted Sticky Top NavBar, slightly see-through (/ 0.85) */
+@supports (color: oklch(from red l c h)) and ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .navbar.navbar-tint.sticky-top {
+        background-color: oklch(from var(--navbar-color, #1b6ec2) var(--navbar-tint-lightness) calc(c * var(--navbar-tint-chroma)) h / 0.85) !important;
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    @supports (color: oklch(from red l c h)) {
+        .navbar.navbar-tint.sticky-top {
+            background-color: oklch(from var(--navbar-color, #1b6ec2) var(--navbar-tint-lightness) calc(c * var(--navbar-tint-chroma)) h) !important;
+        }
+    }
+}

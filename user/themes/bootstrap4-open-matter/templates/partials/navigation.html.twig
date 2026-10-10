@@ -35,7 +35,9 @@
     {% endif %}
     {% set pages = page.evaluate([{'@page.children':'/' ~ firstfolderofpath }]) %}
 {% elseif page.find('/' ~ firstfolderofpath ~ '/' ~ secondfolderofpath).template == 'course' or page.find('/' ~ firstfolderofpath ~ '/' ~ secondfolderofpath).template == 'subsite' %}
-    {% if page.find('/' ~ firstfolderofpath ).header.navbar_bg_color %}
+    {# the course's own NavBar colour, if it has one (its page is one folder deeper here),
+       so a colour set on its parent folder is kept when the course has none #}
+    {% if page.find('/' ~ firstfolderofpath ~ '/' ~ secondfolderofpath).header.navbar_bg_color %}
       {% set navbar_bg_color = page.find('/' ~ firstfolderofpath ~ '/' ~ secondfolderofpath).header.navbar_bg_color %}
     {% endif %}
     {% set course_home = page.find('/' ~ firstfolderofpath ~ '/' ~ secondfolderofpath).header.course_home %}
@@ -66,12 +68,38 @@
   {% set pages = pages.children.visible %}
 {% endif %}
 
-{% if background_image and not(navbar_position == 'fixed-bottom') %}
-  <div class="myheader" style="background-image: url({{ background_image.url }});"></div>
+{# Header image height: standard, slim, hidden, or standard on home pages and slim elsewhere (Theme option) - hibbittsdesign.org #}
+{% set header_image_size = theme_var('header_image_size') ?: 'standard' %}
+{% if header_image_size == 'home-standard' %}
+  {# a home page is the site's home page, a course's own page, or the course's home page (its course_home setting) #}
+  {% set is_home_page = page.home()
+    or page.template in ['course', 'subsite']
+    or (page.parent.template in ['course', 'subsite'] and page.slug == (course_home ?? '')|trim('/')) %}
+  {% set header_image_size = is_home_page ? 'standard' : 'slim' %}
+{% endif %}
+{% if background_image and not(navbar_position == 'fixed-bottom') and header_image_size != 'hidden' %}
+  <div class="myheader{{ header_image_size == 'slim' ? ' myheader-slim' : '' }}" style="background-image: url({{ background_image.url }});"></div>
+{% endif %}
+
+{# NavBar Look (Theme option): "Tinted" shows the NavBar in a light tint of its colour, with dark text,
+   instead of the solid colour (see "NavBar Look" in css/open-matter.css) - hibbittsdesign.org #}
+{% set navbar_look = theme_var('navbar_look') %}
+{% set navbar_tint = navbar_look in ['tint', 'tint-subtle', 'tint-strong'] %}
+{% if navbar_tint %}
+    {% set navbar_style = 'navbar-light navbar-tint' %}
+    {# "Tinted (subtle)" and "Tinted (strong)" add a class that sets how much of the colour is blended in #}
+    {% if navbar_look == 'tint-subtle' or navbar_look == 'tint-strong' %}
+        {% set navbar_style = navbar_style ~ ' navbar-' ~ navbar_look %}
+    {% endif %}
 {% endif %}
 
 {% if navbar_bg_color %}
-    {% set navbar_bg_color = "style=\"background-color: #{navbar_bg_color}\"" %}
+    {% if navbar_tint %}
+        {# the colour is passed to the CSS as the --navbar-color variable, which mixes it into the tint #}
+        {% set navbar_bg_color = "style=\"--navbar-color: #{navbar_bg_color}\"" %}
+    {% else %}
+        {% set navbar_bg_color = "style=\"background-color: #{navbar_bg_color}\"" %}
+    {% endif %}
     {% set navbar_bg = '' %}
 {% elseif navbar_bg and navbar_bg != 'default' %}
     {% set navbar_bg_color = '' %}
@@ -80,9 +108,18 @@
     {% set navbar_bg_color = '' %}
 {% endif %}
 
-<nav class="navbar {{ navbar_position }} navbar-expand-{{ navbar_breakpoint }} {{ navbar_style }} {{ navbar_bg }}" {{ navbar_bg_color|raw }};" role="navigation">
+<nav class="navbar {{ navbar_position }} navbar-expand-{{ navbar_breakpoint }} {{ navbar_style }} {{ navbar_bg }}" {{ navbar_bg_color|raw }} role="navigation">
     <div class="container">
         <a class="navbar-brand" href="{{ base_url == '' ? '/' : base_url }}">{{ site_title }}</a>
+        {# search all courses on a Subsite List page without a sidebar (course pages have search in their sidebar) - hibbittsdesign.org #}
+        {# only when the Subsite List page's Show Search Box setting is turned on #}
+        {% set navbar_search = config.plugins.simplesearch.enabled and page.template == 'subsitelist' and page.header.show_sidebar is defined and not page.header.show_sidebar
+          and page.header.show_search_box %}
+        {% set navbar_bp = theme_var('navbar_breakpoint') ?: 'md' %}
+        {% if navbar_search %}
+          {# small screens: beside the menu button #}
+          {% include 'partials/simplesearch_searchbox.html.twig' with {search_form_classes: 'form-inline navbar-home-search ml-auto mr-2 d-' ~ navbar_bp ~ '-none', search_input_classes: ''} %}
+        {% endif %}
         {% if (pages|first) or (theme_var('display_of_git_sync_repo_link') == 'menu' or theme_var('display_of_git_sync_repo_link') == empty) %}
           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -90,7 +127,14 @@
         {% endif %}
 
         <div class="navbar-collapse collapse justify-content-end">
+            {% if navbar_search %}
+              {# larger screens: before the menu links #}
+              {% include 'partials/simplesearch_searchbox.html.twig' with {search_form_classes: 'form-inline navbar-home-search mr-3 d-none d-' ~ navbar_bp ~ '-flex', search_input_classes: ''} %}
+            {% endif %}
             <ul class="navbar-nav">
+
+              {# the current page's address, kept before the loop below reuses the name "page" for each menu item - hibbittsdesign.org #}
+              {% set current_page_url = page.url %}
 
               {% for page in pages %}
                 {% if page.visible %}
@@ -113,7 +157,15 @@
                     {% if not (page.find('/' ~ page.slug).template == 'course' or page.find('/' ~ page.slug).template == 'subsite' or page.find('/' ~ page.slug).template == 'coursegroup' or page.find('/' ~ page.slug).template == 'subsitegroup') %}
                       {% set page_url = page.url %}
                       {% set page_menu = page.menu %}
-                      <li class="nav-item {{ current_page }}"><a class="nav-link" href="{{ page_url }}" {% if page.header.menu_target %} target="{{ page.header.menu_target }}" {% endif %}>{% if page.header.menu_icon %}<i class="fa fa-{{ page.header.menu_icon }}"></i>{% endif %}{{ page_menu }}</a></li>
+                      {# mark the current page (or the section it is in) - hibbittsdesign.org #}
+                      {% set is_current = page.active or page.activeChild %}
+                      {# also when the current page's address starts with this item's address and a /, such as a section
+                         of a Multi-Section page (activeChild can miss these on Grav 1.7). Not for the home page,
+                         since every address starts with its address. #}
+                      {% if not is_current and not page.home and (current_page_url starts with page.url ~ '/') %}
+                        {% set is_current = true %}
+                      {% endif %}
+                      <li class="nav-item {{ current_page }}{{ is_current ? ' current' : '' }}"><a class="nav-link" href="{{ page_url }}" {% if is_current %}aria-current="page" {% endif %}{% if page.header.menu_target %} target="{{ page.header.menu_target }}" {% endif %}>{% if page.header.menu_icon %}<i class="fa fa-{{ page.header.menu_icon }}"></i>{% endif %}{{ page_menu }}</a></li>
                     {% endif %}
                   {% endif %}
                 {% endif %}
@@ -147,9 +199,13 @@
 
                 {# check to display git sync link in menu - hibbittsdesign.org #}
                 {% if theme_var('display_of_git_sync_repo_link') == 'menu' or theme_var('display_of_git_sync_repo_link') == empty %}
-                  <li class="nav-item active" >
-                      {% include 'partials/git_sync_repo_link.html.twig' with {linkinmenu: true} %}
-                  </li>
+                  {# include() gets the link first, so the menu item is only added when there is one #}
+                  {% set git_sync_link = include('partials/git_sync_repo_link.html.twig', {linkinmenu: true}) %}
+                  {% if git_sync_link|trim %}
+                    <li class="nav-item active" >
+                        {{ git_sync_link|raw }}
+                    </li>
+                  {% endif %}
                 {% endif %}
 
                 {% if config.plugins.login.enabled and grav.user.username %}

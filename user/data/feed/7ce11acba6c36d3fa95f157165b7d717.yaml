@@ -1,25 +1,25 @@
-last_checked: 1791145066
+last_checked: 1791593915
 data:
   -
     title: 'Meet Helpdesk Pro and Mailroom'
     url: 'https://getgrav.org/blog/helpdesk-pro-and-mailroom'
     date: 1790597400
-    nicetime: '6 days ago'
+    nicetime: '2 weeks ago'
   -
     title: 'Grav 2.2 Released: The Fastest Flat-File CMS Is Now 2x Faster'
     url: 'https://getgrav.org/blog/grav-2-2-released'
     date: 1790240400
-    nicetime: '1 weeks ago'
+    nicetime: '2 weeks ago'
   -
     title: 'KahunaCart Is Out'
     url: 'https://getgrav.org/blog/kahunacart-released'
     date: 1789380000
-    nicetime: '3 weeks ago'
+    nicetime: '4 weeks ago'
   -
     title: 'Grav 2.1 Released: Every Page Speaks Markdown'
     url: 'https://getgrav.org/blog/grav-2-1-released'
     date: 1789128000
-    nicetime: '3 weeks ago'
+    nicetime: '4 weeks ago'
   -
     title: 'KahunaCart: A Real Store, Inside Your Grav Site'
     url: 'https://getgrav.org/blog/kahunacart-coming-soon'
@@ -44,9 +44,9 @@ data:
     title: 'Why I Built Riffle'
     url: 'https://getgrav.org/blog/why-i-built-riffle'
     date: 1784642400
-    nicetime: '2 months ago'
+    nicetime: '3 months ago'
   -
     title: 'Grav 2.0 Released!'
     url: 'https://getgrav.org/blog/grav-2-stable-released'
     date: 1781960400
-    nicetime: '3 months ago'
+    nicetime: '4 months ago'

@@ -65,20 +65,48 @@
             {% do assets.addCss('theme://css/bootstrap/bootstrap.min.css') %}
             {% do assets.add('theme://css/font-awesome.min.css') %}
             {% do assets.add('theme://css-compiled/theme.css') %}
+            {# callout styles for GitHub-style alerts and the course content shortcodes - hibbittsdesign.org #}
+            {% do assets.addCss('theme://css/github-alerts.css') %}
             {% set active_theme_css = theme_var('theme_css') ?: '2025' %}
+            {# "2026 Modern" is the 2026 Refresh style plus a few modern touches, kept in their own files and loaded after it #}
+            {% set modern_touches = false %}
+            {% if active_theme_css == '2026-modern' %}
+              {% set active_theme_css = '2026' %}
+              {% set modern_touches = true %}
+            {% endif %}
             {% do assets.addCss('theme://css/theme-' ~ active_theme_css ~ '.css') %}
+            {% do assets.addCss('theme://css/open-matter.css') %}
+            {# (after open-matter.css, so its rounded bar for the current page replaces the underline there) #}
+            {% if modern_touches %}
+              {% do assets.addCss('theme://css/theme-2026-modern.css') %}
+            {% endif %}
             {% if theme_var('dark_mode.mode') == 'enabled' %}
               {% do assets.addCss('theme://css/theme-' ~ active_theme_css ~ '-dark.css') %}
+              {% if modern_touches %}
+                {% do assets.addCss('theme://css/theme-2026-modern-dark.css') %}
+              {% endif %}
+            {% elseif theme_var('dark_mode.mode') == 'auto' and not config.system.assets.css_pipeline %}
+              {% do assets.addCss('theme://css/theme-' ~ active_theme_css ~ '-dark.css', {media: '(prefers-color-scheme: dark)'}) %}
+              {% if modern_touches %}
+                {% do assets.addCss('theme://css/theme-2026-modern-dark.css', {media: '(prefers-color-scheme: dark)'}) %}
+              {% endif %}
             {% endif %}
+            {% do assets.addCss('theme://css/print.css') %}
             {% do assets.addCss('theme://css/custom.css') %}
 
-            {% if ((grav.uri.param('chromeless') or grav.uri.param('embedded') or grav.uri.param('standalone')) or theme_var('chromeless.enabled')) %}
+            {% if (embedded_mode or theme_var('chromeless.enabled')) %}
               {% do assets.addInlineCss('.chromeless-show{display:block}.chromeless-hide{display:none}') %}
             {% endif %}
         {% endblock %}
 
         {% block javascripts %}
-            {% do assets.add('jquery', 102) %}
+            {# load jQuery, falling back to Grav's bundled jQuery 3 when a site's configured jQuery file no longer exists (e.g. jquery-2.1.4.min.js, removed in Grav 2.0.14) - hibbittsdesign.org #}
+            {% set jquery_asset = config.system.assets.collections.jquery %}
+            {% if jquery_asset is iterable or (jquery_asset and url(jquery_asset)) %}
+                {% do assets.add('jquery', 102) %}
+            {% else %}
+                {% do assets.add('system://assets/jquery/jquery-3.x.min.js', 102) %}
+            {% endif %}
             {% do assets.add('theme://js/bootstrap.min.js', 101) %}
             {% do assets.add('theme://js/modernizr-custom.js', 100) %}
             {% do assets.add('theme://js/site.js', {group:'bottom'}) %}
@@ -93,8 +121,16 @@
 
         {% block assets deferred %}
             {{ assets.css()|raw }}
-            {% if theme_var('dark_mode.mode') == 'auto' %}
-              <link rel="stylesheet" href="{{ url('theme://css/theme-' ~ (theme_var('theme_css') ?: '2025') ~ '-dark.css') }}" media="(prefers-color-scheme: dark)">
+            {% if theme_var('dark_mode.mode') == 'auto' and config.system.assets.css_pipeline %}
+              {% set dark_theme_css = theme_var('theme_css') ?: '2025' %}
+              {# "2026 Modern" uses the 2026 Refresh dark colours, plus its own (as in the stylesheets above) #}
+              {% if dark_theme_css == '2026-modern' %}
+                {% set dark_theme_css = '2026' %}
+              {% endif %}
+              <link rel="stylesheet" href="{{ url('theme://css/theme-' ~ dark_theme_css ~ '-dark.css') }}" media="(prefers-color-scheme: dark)">
+              {% if theme_var('theme_css') == '2026-modern' %}
+                <link rel="stylesheet" href="{{ url('theme://css/theme-2026-modern-dark.css') }}" media="(prefers-color-scheme: dark)">
+              {% endif %}
             {% endif %}
             {{ assets.js()|raw }}
         {% endblock %}
@@ -102,10 +138,10 @@
         {% endblock head %}
     </head>
 
-    <body class="{% block body_classes %}{{ page.header.body_classes }}{% if (grav.uri.param('chromeless') or grav.uri.param('embedded') or grav.uri.param('standalone')) or (theme_var('chromeless.enabled')) %} chromeless{% endif %}{% endblock %}">
+    <body class="{% block body_classes %}{{ page.header.body_classes }}{% if embedded_mode or (theme_var('chromeless.enabled')) %} chromeless{% endif %}{% endblock %}">
 
         {# check content display flag - hibbittsdesign.org #}
-        {% if not (grav.uri.param('chromeless') or grav.uri.param('embedded') or grav.uri.param('standalone')) and not(theme_var('chromeless.enabled')) %}
+        {% if not embedded_mode and not(theme_var('chromeless.enabled')) %}
 
           {% if config.plugins.langswitcher.enabled %}
               {% include 'partials/langswitcher.html.twig' %}
@@ -119,7 +155,7 @@
         {% block content %}{% endblock %}
         {% block pagination %}{% endblock %}
 
-        {% if not (grav.uri.param('chromeless') or grav.uri.param('embedded') or grav.uri.param('standalone')) and not(theme_var('chromeless.enabled')) %}
+        {% if not embedded_mode and not(theme_var('chromeless.enabled')) %}
           <div class="footer">
               <div class="container">
                 {% if page.find('/footer').header.footer_scroll %}
@@ -133,10 +169,18 @@
                 {# use footer folder page for content - hibbittsdesign.org #}
                 <div class="text-muted">
                   {% if (page.header.git_sync_repo_link_display is defined and page.header.git_sync_repo_link_display == 'footer' ) or (( theme_var('display_of_git_sync_repo_link') == 'footer' and page.header.git_sync_repo_link_display is not defined ) and not (page.header.hide_git_sync_repo_link)) %}
-                    <p>{% include 'partials/git_sync_repo_link.html.twig' %}</p>
+                    {# include() gets the link first, so this line is only added when there is one #}
+                    {% set git_sync_link = include('partials/git_sync_repo_link.html.twig') %}
+                    {% if git_sync_link|trim %}
+                      <p>{{ git_sync_link|raw }}</p>
+                    {% endif %}
                   {% endif %}
                   {% if theme_var('git_sync_edit_theme_link_location') == 'footer' %}
-                    <p>{% include 'partials/git_sync_theme_link.html.twig' %}</p>
+                    {# include() gets the link first, so this line is only added when there is one #}
+                    {% set git_sync_theme_link = include('partials/git_sync_theme_link.html.twig') %}
+                    {% if git_sync_theme_link|trim %}
+                      <p>{{ git_sync_theme_link|raw }}</p>
+                    {% endif %}
                   {% endif %}
                   {% if footer_content %}
                     {{ footer_content|raw }}

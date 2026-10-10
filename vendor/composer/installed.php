@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'getgrav/grav',
-        'pretty_version' => '1.7.53.4',
-        'version' => '1.7.53.4',
-        'reference' => '253b5eb2ff4fabf797cd902288e00a1c219fbeaf',
+        'pretty_version' => '1.7.53.5',
+        'version' => '1.7.53.5',
+        'reference' => '69c5be26e70fd5fafff8aee912c53b4d72fb5c5e',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -110,9 +110,9 @@
             'dev_requirement' => false,
         ),
         'getgrav/grav' => array(
-            'pretty_version' => '1.7.53.4',
-            'version' => '1.7.53.4',
-            'reference' => '253b5eb2ff4fabf797cd902288e00a1c219fbeaf',
+            'pretty_version' => '1.7.53.5',
+            'version' => '1.7.53.5',
+            'reference' => '69c5be26e70fd5fafff8aee912c53b4d72fb5c5e',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -372,9 +372,9 @@
             'dev_requirement' => false,
         ),
         'rhukster/dom-sanitizer' => array(
-            'pretty_version' => '1.0.11',
-            'version' => '1.0.11.0',
-            'reference' => '02d08ec8b36b93b04517d74fe82b715ef06273bd',
+            'pretty_version' => '1.0.18',
+            'version' => '1.0.18.0',
+            'reference' => '47888d28e45f5dd13ff8c804f3bb20f543a23842',
             'type' => 'library',
             'install_path' => __DIR__ . '/../rhukster/dom-sanitizer',
             'aliases' => array(),

@@ -1,7 +1,7 @@
 name: 'Bootstrap4 Open Matter'
 type: theme
 slug: bootstrap4-open-matter
-version: 5.2.0
+version: 6.1.7
 description: "A customized version of the Bootstrap4 theme for open blogs, course hubs and more. Includes Git Sync and 'chromeless' content display for seamless embedding."
 icon: bold
 author:
@@ -9,7 +9,7 @@ author:
     email: hello@hibbittsdesign.org
     url: 'https://hibbittsdesign.org'
 homepage: 'https://github.com/hibbitts-design/grav-theme-bootstrap4-open-matter'
-demo: 'https://demo.hibbittsdesign.org/grav-theme-bootstrap4-open-matter/'
+demo: 'https://demo.hibbittsdesign.org/grav-open-course-hub/'
 docs: 'https://github.com/hibbitts-design/grav-theme-bootstrap4-open-matter/blob/master/README.md'
 keywords: 'open, courses, resources, oer, git, gitsync, chromeless'
 bugs: 'https://github.com/hibbitts-design/grav-theme-bootstrap4-open-matter/issues'
@@ -125,9 +125,11 @@ form:
               type: select
               size: medium
               label: 'Theme Style'
+              help: '2026 Modern adds bolder headings, a clearer current page in the NavBar, and card-style boxes to 2026 Refresh.'
               default: '2026'
               options:
                 '2026': '2026 Refresh'
+                '2026-modern': '2026 Modern'
                 classic: Classic
             dark_mode.mode:
               type: select
@@ -139,10 +141,43 @@ form:
                 disabled: 'Off'
                 enabled: 'On'
                 auto: 'Auto (System)'
+            header_image_size:
+              type: select
+              label: 'Header Image Height'
+              help: 'Height of the header image above the NavBar. Slim keeps more of the page in view, especially on phones. "Standard on home pages" shows the full image on the home page (and each course home page), and the slim one elsewhere.'
+              size: medium
+              default: standard
+              options:
+                standard: Standard
+                slim: Slim
+                home-standard: 'Standard on home pages, slim elsewhere'
+                hidden: Hidden
+            display_syndicate:
+              type: toggle
+              label: 'Display Syndicate (RSS) Links in Sidebar'
+              help: 'Shows Atom and RSS feed buttons in the sidebar of blog pages when the Feed plugin is enabled.'
+              highlight: 1
+              default: 1
+              options:
+                '1': Yes
+                '0': No
+              validate:
+                type: bool
             menubaroptions:
               type: section
               title: 'NavBar (Bootstrap4 Menubar)'
               underline: true
+            navbar_look:
+              type: select
+              label: 'NavBar Look'
+              help: 'Tinted: a light tint of the NavBar colour, with dark text (frosted when Sticky Top).'
+              size: medium
+              default: solid
+              options:
+                solid: 'Solid colour'
+                tint-subtle: 'Tinted (subtle)'
+                tint: 'Tinted'
+                tint-strong: 'Tinted (strong)'
             navbar_style:
               type: select
               label: 'NavBar Style'
