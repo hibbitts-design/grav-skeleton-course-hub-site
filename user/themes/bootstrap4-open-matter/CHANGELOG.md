@@ -1,3 +1,308 @@
+# v6.4.31
+## 11/10/2026
+
+1. [](#new)
+    * Course list pages can show text below the course cards: a line with just `===` in the page's content puts the text after it below the cards, as on Open Publishing Space's Guides List
+
+# v6.4.30
+## 11/08/2026
+
+1. [](#improved)
+    * The module list's hover shade is lighter than the current page's, so the page being read stays clearly highlighted
+
+# v6.4.29
+## 11/06/2026
+
+1. [](#bugfix)
+    * Hero header images (such as a blog's) fill the header again with the 2025 and 2026 styles, instead of showing a small, enlarged corner
+
+# v6.4.28
+## 11/04/2026
+
+1. [](#new)
+    * Accordion sections: [details summary="…" class="accordion"] shows as rows like the Accordion page type, in light and dark
+
+# v6.4.27
+## 10/30/2026
+
+1. [](#improved)
+    * Course and module cards: a little less space under titles and at the bottom of each card
+
+# v6.4.26
+## 10/29/2026
+
+1. [](#improved)
+    * A page's Markdown version (Grav 2's .md address) keeps its callouts as > [!NOTE] and so on, so Docsify-This, GitHub and others show them as callouts
+2. [](#bugfix)
+    * A page's Markdown version (Grav 2) no longer comes out empty on pages without their own main content area, such as standard pages
+
+# v6.4.25
+## 10/28/2026
+
+1. [](#improved)
+    * Previous/Next Bar on Phones: page titles are a little smaller, so more of each shows, as in Grav Open Publishing Space guides
+
+# v6.4.24
+## 10/28/2026
+
+1. [](#new)
+    * Previous/Next Bar on Phones: a new theme option (off by default) for a Previous/Next bar fixed to the bottom of the screen on module pages, as in Grav Open Publishing Space guides
+
+# v6.4.23
+## 10/28/2026
+
+1. [](#bugfix)
+    * Side Box: its text now lines up with the module list instead of being set in
+
+# v6.4.22
+## 10/28/2026
+
+1. [](#new)
+    * Side Box: Markdown under the module list, from a page's, the Modules page's or the course's new Side Box setting (`side_box`), as in Grav Open Publishing Space guides
+
+# v6.4.21
+## 10/28/2026
+
+1. [](#bugfix)
+    * Link to Course List: the "All Courses" link now sits on the page itself, rather than on a strip of the site's background colour
+
+# v6.4.20
+## 10/28/2026
+
+1. [](#new)
+    * Arrow keys: on module pages, the left and right arrow keys go to the previous and next page, as in Grav Open Publishing Space guides – handy when presenting a module by screen sharing
+    * Link to Course List: a new theme option (off by default) adds an "All Courses" link below the NavBar of each course's pages on MultiCourse sites
+    * Keep My Place: a course's Modules page shows returning readers a "Continue where you left off" box, as in Grav Open Publishing Space guides. On by default; can be turned off in the theme options, or per course with `keep_my_place: false`
+2. [](#bugfix)
+    * NavBar: on phones, a long site or course name now wraps instead of running off the screen
+
+# v6.4.19
+## 10/28/2026
+
+1. [](#new)
+    * Learning Objectives: a course page's new Learning Objectives setting (`learning_objectives`, on its Module tab) is shown at the top of the page as a Learning Objectives box – on module pages, Modules pages and standard course pages – using the same setting as Quark 2 Open Publishing and Quark Open Publishing guides, so a guide page's objectives carry over to a course unchanged
+
+# v6.4.18
+## 10/26/2026
+
+1. [](#new)
+    * Hide sidebar: on wider screens, a "Hide sidebar" button at the top right of a module page's sidebar hides it (the module list and its search box), leaving a small button in the same place to show it again, so readers can focus on the page; the page is centred at a comfortable width, and a page inside a module shows its link back to the module. The choice is remembered in the reader's browser, and phones are unchanged. It can be turned off with the new Hide Sidebar Button theme option, as in Quark 2 Open Publishing and Quark Open Publishing
+
+# v6.4.17
+## 10/25/2026
+
+1. [](#bugfix)
+    * The NavBar menu button only shows when the menu has items, so a MultiCourse course list page (whose courses aren't in the menu) no longer shows a button that opens an empty menu
+
+# v6.4.16
+## 10/23/2026
+
+1. [](#improved)
+    * Dark mode: code blocks switch to the One Dark colours that match the Prism Highlight plugin's default One Light theme, instead of staying light
+1. [](#bugfix)
+    * Dark mode: tables in page content have a dark header background and dark borders, instead of light header text on a light background (all three Dark Mode stylesheets)
+
+# v6.4.15
+## 10/23/2026
+
+1. [](#improved)
+    * The link-only and title-only templates for iFrame, PDF and SpeakerDeck pages are the same as in Quark 2 Open Publishing and Quark Open Publishing, and each stays on one line for Page Inject
+    * The [clearboth], [twitter], [hideifembedded], [showifembedded] and [h5p] shortcodes and the H5P page template are the same as in the Quark themes (code layout and comments only; an [h5p] activity is now wrapped in a span rather than a paragraph, and the H5P page no longer adds two line breaks after the activity)
+1. [](#bugfix)
+    * An iFrame page shown as a title with Page Inject (template=partials/iframetitleonly) now shows its title, instead of its address
+    * The SpeakerDeck link-only template no longer adds a space before the link address and the title
+
+# v6.4.14
+## 10/20/2026
+
+1. [](#new)
+    * On phones, a page inside a module starts with a link back up to its module, above the page title, as in Grav Open Publishing Space
+1. [](#improved)
+    * README: the link back to the module on phones
+
+# v6.4.13
+## 10/20/2026
+
+1. [](#improved)
+    * Module list: on a page inside a module, only that page is bold, and its module looks like the others, as in Grav Open Publishing Space
+
+# v6.4.12
+## 10/20/2026
+
+1. [](#improved)
+    * Module list: only the module or page being read has the grey highlight; on a page inside a module, that module is shown in bold without one
+    * On phones, the course search box and module list share one box, with the current module or page as a rounded row inside it and a thin line beside a module's pages, as in Grav Open Publishing Space
+    * On phones, the "On this page" box is slimmer, with a "›" on the right in place of the triangle, as in Grav Open Publishing Space
+
+# v6.4.11
+## 10/19/2026
+
+1. [](#new)
+    * The / key jumps to the course search box, ready to type (as on GitHub and many documentation sites), except while typing in a box, as in Grav Helios Course Hub
+1. [](#improved)
+    * README: the / key for search
+
+# v6.4.10
+## 10/18/2026
+
+1. [](#improved)
+    * French and German translations are complete, for every text the theme shows readers (search, error pages, module pages, pagination, Previous/Next and more)
+    * Text that was only in English in the templates – such as Previous/Next and "In this module" on module pages, "On this page", pagination and several labels screen readers hear – is now translatable
+    * README: which languages are complete
+
+# v6.4.9
+## 10/18/2026
+
+1. [](#new)
+    * Tap or click an image in a page that's shown smaller than its full size to see it larger, filling the screen (handy for diagrams and screenshots on phones), as in Grav Open Publishing Space; Escape, the Close button or a tap closes it
+1. [](#improved)
+    * README: seeing an image larger
+
+# v6.4.8
+## 10/18/2026
+
+1. [](#improved)
+    * Demo content: the Welcome module has a "Start here" badge on its card, a captioned photo, and text shown only on the site or only when embedded ([hideifembedded] and [showifembedded]), as in Grav Open Course Hub
+
+# v6.4.7
+## 10/17/2026
+
+1. [](#new)
+    * Badge Label and Badge Color settings for modules and their pages: a short badge such as "New", "Draft" or "Due Friday" on the page's card, shown as on the course cards
+    * Captions for images in plain Markdown: an italic line right after an image on its own line (such as `*Photo by …*`) shows as a caption – smaller, softer and just below the image – so photo credits and captions need no HTML, as in Quark Open Publishing
+1. [](#improved)
+    * Images in page text are no taller than a little over half the screen, so an image and the text around it fit on screen together, when reading or presenting a module (card and header images are unchanged)
+    * [topics] index: letters a little larger and bold, letters without topics clearly faded and skipped by screen readers, and a clear outline on the letter with keyboard focus, as in Grav Helios Course Hub
+    * README: image captions and badges on module cards
+1. [](#bugfix)
+    * A module group named with just a number (such as `group: 2026`) no longer stops the Modules page from loading
+    * Green and Purple badges (Badge Color on course and module cards, or `[badge type="success"]` and `type="info"`) have enough contrast for their white text, and Purple is now purple instead of teal
+
+# v6.4.6
+## 10/15/2026
+
+1. [](#new)
+    * A "Skip to content" link, shown when it gets keyboard focus, takes keyboard users past the NavBar to the page content (not on embedded or chromeless pages)
+1. [](#bugfix)
+    * Demo content: the UX Techniques Guide's Job Stories page has its own title, not Interviews
+
+# v6.4.5
+## 10/15/2026
+
+1. [](#bugfix)
+    * RSS Feeds pages show each item's preview text and image again with Twig Feeds 5, which no longer provides item.description
+    * RSS Feeds preview images keep their shape when narrowed to fit the page
+
+# v6.4.4
+## 10/14/2026
+
+1. [](#bugfix)
+    * Embedded module pages leave out their Previous and Next buttons, as in Helios Course Hub
+
+# v6.4.3
+## 10/13/2026
+
+1. [](#bugfix)
+    * On blog posts and weekly units, the site name in the NavBar links to the home page, not the blog
+
+# v6.4.2
+## 10/13/2026
+
+1. [](#bugfix)
+    * In chromeless mode (/chromeless:true), links to other sites and email links work
+    * In chromeless mode, links with # or ? and links to files such as PDFs open the right address
+
+# v6.4.1
+## 10/13/2026
+
+1. [](#improved)
+    * Demo content: the old separate blog demo is removed, as the course demo now includes a course blog
+1. [](#bugfix)
+    * Yes/No switches in the theme and page settings show their labels in Admin on hosts with PHP's native YAML extension
+    * Git Sync link fields in the theme and page settings show as normal text boxes in Admin 2
+
+# v6.4.0
+## 10/13/2026
+
+1. [](#new)
+    * Blog sidebar with Popular Tags, Archives and RSS, per blog, on blog pages only
+    * Filtered blog lists say what they show, with a link back to all posts
+    * Module pages list their sections under the current page in the module list (with the Page TOC plugin), or in an "On this page" box on phones
+1. [](#improved)
+    * More even spacing around course panels (the announcement and reminders box), in every Theme Style
+    * The module list stays in view while reading a long module page, and its heading matches the other sidebar headings
+    * Quieter blog tags, Archives and RSS buttons in 2026 Modern
+    * Accessibility: page regions, one page title per page, and screen reader labels for blog links
+    * README: modules, a blog, or weekly units, and a Blogs section
+1. [](#bugfix)
+    * Featured posts no longer top filtered blog lists
+    * Tag links on a blog page open that blog's list
+    * Panels above blog posts no longer add empty paragraphs
+
+# v6.3.3
+## 10/12/2026
+
+1. [](#bugfix)
+    * Course search leaves out pages inside any unpublished page, such as the unpublished Modules example, instead of only those in an unpublished course
+
+# v6.3.2
+## 10/12/2026
+
+1. [](#improved)
+    * Demo content: a separate Weekly Units page for the weekly units (now at weekly-units/week-01 and so on), a Home page with just the announcement and reminders, pages reordered, and the (unpublished) Modules example, matching the Open Course Hub skeleton
+    * README: page address example updated for the Weekly Units page
+
+# v6.3.1
+## 10/12/2026
+
+1. [](#new)
+    * Group headings in the module list, as on the cards
+1. [](#improved)
+    * Module pages: the module list is now on the right, where the course sidebar is on other pages, with the course search box above it
+    * The "On this page" list is removed, so module pages match the rest of the course and Open Publishing Space; the Page TOC plugin is no longer used
+1. [](#bugfix)
+    * Module pages show only the content when embedded in an LMS, as other pages do
+
+# v6.3.0
+## 10/11/2026
+
+1. [](#new)
+    * Modules, as in Grav Helios Course Hub: a Modules page with module cards, and module pages with a module list and Previous/Next buttons
+    * "On this page" list on module pages, with the Page TOC plugin
+    * Module Description Lines theme option for the module cards
+    * Optional header image on module pages
+1. [](#improved)
+    * Sections pages: the section list matches the module list, and screen readers announce the current section
+    * Demo content: weekly pages renamed from `module-NN` to `week-NN`
+
+# v6.2.2
+## 10/11/2026
+
+1. [](#improved)
+    * On phones, more space between the page content and the sidebar below it
+
+# v6.2.1
+## 10/10/2026
+
+1. [](#improved)
+    * Demo content: new Topics page and UX Techniques Guide example (unpublished, using the accordion page type), matching the Open Course Hub skeleton
+
+# v6.2.0
+## 10/10/2026
+
+1. [](#new)
+    * Header Image Height option "Standard on home pages, hidden elsewhere": the full image on the home page (and each course home page), and no image on other pages
+1. [](#improved)
+    * Theme options reorganized to match Quark Open Publishing: Open Matter Options now lists Chromeless Site, Menu, Creative Commons License and H5P Setup; Bootstrap4 Options groups Visual Style, Header Defaults and Sidebar Defaults
+    * Shorter Header Image Height help, and clearer labels: "NavBar Position", "Display Dropdowns in Menu", "H5P Embed Source URL" and "Custom Git Repository Tree URL"
+    * The header image code uses plain steps, with comments
+
+# v6.1.8
+## 10/10/2026
+
+1. [](#improved)
+    * Updated screenshots, showing the slate blue NavBar used by the Open Course Hub skeleton
+
 # v6.1.7
 ## 10/09/2026
 

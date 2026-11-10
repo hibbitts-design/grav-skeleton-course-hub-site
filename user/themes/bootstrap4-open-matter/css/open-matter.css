@@ -35,6 +35,14 @@ Dark Mode colours for these are in each theme-*-dark.css file.
     margin-bottom: 0.6rem;
 }
 
+/* On phones the sidebar sits below the page content: extra space keeps it
+   from reading as part of the page (767.98px = below Bootstrap's md) */
+@media (max-width: 767.98px) {
+    .blog-sidebar {
+        margin-top: 2.5rem;
+    }
+}
+
 /* Weekly (blog post) headings in the text colour, with an underline on hover, like the course cards */
 .list-blog-header h1 a,
 .list-blog-header h2 a {
@@ -68,6 +76,40 @@ a:focus > .continue-link-arrow {
     background-color: rgba(108, 117, 125, 0.16);
     color: #374151;
     font-weight: 600;
+}
+
+/* Green, teal and purple badges (Badge Color Green and Purple, or [badge type="success"] and type="info"):
+   Bootstrap's own green and teal are too light for their white text, so these are darker (at least 4.5:1).
+   badge-purple is the theme's own, so Badge Color Purple is purple rather than Bootstrap's teal. White text
+   on these colours also reads well in Dark Mode, so they need no Dark Mode version. */
+.badge.badge-success {
+    background-color: #1e7e34;
+}
+
+.badge.badge-info {
+    background-color: #117a8b;
+}
+
+.badge.badge-purple {
+    color: #fff;
+    background-color: #6f42c1;
+}
+
+/* a little darker when a badge with a link (url) is hovered or focused */
+a.badge.badge-success:hover,
+a.badge.badge-success:focus {
+    background-color: #155d27;
+}
+
+a.badge.badge-info:hover,
+a.badge.badge-info:focus {
+    background-color: #0c5460;
+}
+
+a.badge.badge-purple:hover,
+a.badge.badge-purple:focus {
+    color: #fff;
+    background-color: #59339d;
 }
 
 /* Friendlier "page not found" page */
@@ -282,4 +324,259 @@ h2.topics-letter {
             background-color: oklch(from var(--navbar-color, #1b6ec2) var(--navbar-tint-lightness) calc(c * var(--navbar-tint-chroma)) h) !important;
         }
     }
+}
+
+/* Course panels, such as the announcement, "What's Happening This Week" and "Looking Ahead to Next Week", on a
+   Home page or above a blog's posts. The last line in a reminders box (.listbullet.alert, in any Alert Style colour)
+   adds no extra space of its own, so the space below it matches the space above (each Theme Style sets the padding) */
+.listbullet.alert > :last-child {
+    margin-bottom: 0;
+}
+
+/* More space below an announcement, so it doesn't sit tight against the box that follows it. On a Home page the
+   announcement is followed directly by the box (.list-item); above a blog's posts each panel is in its own .blog-panel.
+   (The space between two boxes is the larger of their margins, not both added together, so this is the full space.
+   !important as some Theme Styles set .list-item's margin with !important.) */
+.blog-main > .md-alert + .list-item {
+    margin-top: 1.5rem!important;
+}
+
+.blog-panel > .md-alert {
+    margin-bottom: 1.5rem;
+}
+
+/* The line between the panels and a blog's posts, with room on both sides so the posts read as their own section */
+.blog-panels-end {
+    margin: 2.5rem 0;
+}
+
+/* "Skip to content": the first link on the page, for keyboard users. Bootstrap's sr-only and sr-only-focusable
+   classes keep it hidden until it gets keyboard focus; these rules place it at the top left when it shows */
+.skip-link:focus {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 2000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    background: #fff;
+    color: #212529;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Images in page text are no taller than a little over half the screen, so an image and the text around it fit
+   on screen together - when reading, and when presenting a module in class or by screen sharing. A shortened
+   image keeps its shape. Only images in the page's own text (inside a paragraph) are limited, not card or
+   header images - the same as Quark Open Publishing - hibbittsdesign.org */
+.main-content p > img {
+    max-height: 55vh;
+    width: auto;
+    max-width: 100%;
+}
+
+/* A caption in plain Markdown: an italic line right after an image on its own, such as
+   ![A photo](photo.jpg) followed by *Photo by …* - shown like a figure caption (smaller and softer, just below
+   the image), so authors need no HTML. It works with the italic line in its own paragraph (after a blank line)
+   or on the line just below the image (the same paragraph), as in Quark Open Publishing.
+   (":only-child" here looks at elements only, so text beside them still counts) */
+.main-content p:has(> img:only-child):has(+ p > em:only-child) {
+    margin-bottom: 0.375rem;
+}
+
+.main-content p:has(> img:only-child) + p:has(> em:only-child),
+.main-content p > img:first-child + em:last-child {
+    display: block;
+    margin-top: 0;
+    font-size: 90%;
+    /* softer than the page text, but still 4.5:1 contrast or more (70%, as figure captions use, is just under) */
+    opacity: 0.8;
+}
+
+/* the image in the same paragraph as its caption sits on its own line */
+.main-content p > img:first-child:has(+ em:last-child) {
+    display: block;
+    margin-bottom: 0.375rem;
+}
+
+/* [topics] shortcode: the A-Z index - letters a little larger and bold, so they're easy to read and tap, with letters
+   without topics clearly faded (they aren't links, and screen readers skip them), and a clear outline around the letter
+   that has keyboard focus, instead of Bootstrap's faint glow - the same as Grav Helios Course Hub - hibbittsdesign.org */
+.topics-index .page-link {
+    min-width: 2.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.topics-index .page-item.disabled .page-link {
+    opacity: 0.45;
+}
+
+.topics-index .page-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+/* ---------- Seeing an image larger ---------- */
+
+/* An image in a page that's shown smaller than its full size can be tapped or clicked to see it larger
+   (js/image-zoom.js adds image-zoom to it): a zoom-in pointer, and a visible focus ring for keyboard users */
+img.image-zoom {
+    cursor: zoom-in;
+}
+
+img.image-zoom:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+/* the larger view: the image as large as fits the screen, on a dark background, with a Close button at the top right */
+.image-zoom-dialog {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 3.5rem 1rem 1rem;
+    border: 0;
+    background: rgba(0, 0, 0, 0.92);
+    cursor: zoom-out;
+}
+
+.image-zoom-dialog[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-zoom-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.image-zoom-dialog img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* the Close button: white on the dark background, 44px so it's easy to tap */
+.image-zoom-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.image-zoom-close:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Link to Course List option: "‹ All Courses" just below the NavBar of a course on a MultiCourse site, at the top left
+   above the page, in the link colour like the link back to a module on phones */
+/* in the page's own colour, with its rounded top corners, so the link reads as the top of the page below rather
+   than a strip of the site's background (the page below then has square top corners) */
+.course-list-bar {
+    padding-top: 0.75rem;
+    margin-bottom: -0.75rem; /* so the page below keeps its usual distance from the NavBar */
+    background-color: #ffffff;
+    border-radius: 12px 12px 0 0;
+}
+.course-list-bar ~ .main-content {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.course-list-link {
+    display: inline-block;
+    padding: 0.25rem 0; /* a little taller, for easier tapping */
+}
+.course-list-link .fa {
+    font-size: 0.75em;
+}
+
+/* Below the NavBar Breakpoint (where the menu collapses to a button), a long site or course name wraps onto a second
+   line instead of running off the screen, and takes the space beside the menu button so the button stays on its row */
+@media (max-width: 575.98px) {
+    .navbar-expand-sm .navbar-brand { white-space: normal; flex: 1 1 0; min-width: 0; }
+}
+@media (max-width: 767.98px) {
+    .navbar-expand-md .navbar-brand { white-space: normal; flex: 1 1 0; min-width: 0; }
+}
+@media (max-width: 991.98px) {
+    .navbar-expand-lg .navbar-brand { white-space: normal; flex: 1 1 0; min-width: 0; }
+}
+
+/* Accordion sections – [details summary="…" class="accordion"] – shown like the Accordion page type's rows: sections
+   next to each other share one bordered box, each with a row that opens it and a chevron pointing down (closed) or up
+   (open). The theme styles below set the colours. */
+details.accordion {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    overflow: hidden; /* the row's hover tint follows the rounded corners */
+}
+details.accordion + details.accordion {
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+details.accordion:has(+ details.accordion) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+details.accordion:not(:has(+ details.accordion)) {
+    margin-bottom: 1rem; /* space below the last section */
+}
+details.accordion > summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none; /* no browser triangle (::-webkit-details-marker below for older Safari) */
+}
+details.accordion > summary::-webkit-details-marker {
+    display: none;
+}
+details.accordion > summary::after {
+    content: '';
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: -0.25rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+}
+details.accordion[open] > summary {
+    font-weight: 600;
+}
+details.accordion[open] > summary::after {
+    margin-top: 0.25rem;
+    transform: rotate(-135deg);
+}
+/* the section's text, inside the box */
+details.accordion > :not(summary) {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+}
+details.accordion > summary + * {
+    margin-top: 0.5rem;
+}
+details.accordion[open] {
+    padding-bottom: 0.5rem;
 }

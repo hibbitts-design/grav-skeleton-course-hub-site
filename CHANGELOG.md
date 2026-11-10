@@ -1,3 +1,45 @@
+# v1.7.53.10
+## 11/03/2026
+
+1. [](#bugfix)
+    * When a cache file can't be deleted, the cache purge job and `bin/grav clear` now name the file and the reason (such as "Permission denied") instead of "Unknown error", and carry on with the rest of the cache instead of stopping at the first one ([#4384](https://github.com/getgrav/grav/issues/4384))
+
+# v1.7.53.9
+## 10/31/2026
+
+1. [](#bugfix)
+    * Sites behind a proxy that ends HTTPS (such as Cloudflare in front of a server on port 80) no longer redirect visitors to the address with `:80` added, for example when reloading the admin
+
+# v1.7.53.8
+## 10/31/2026
+
+1. [](#bugfix)
+    * [security] The root `.htaccess` also keeps the `tmp/` folder private, refuses scripts in `images/` and `assets/`, and refuses requests in `images/`, `assets/`, `system/`, `vendor/` and `user/` that map to a file with a path after it, and upgrading adds these rules to an existing site's `.htaccess`. Backport of the Grav 2 rules
+    * [security] The bundled IIS `web.config` applies its rules in any letter case and however a file path is written, and also keeps hidden files, `.env` files, `tmp/`, root files such as `composer.json`, Markdown files and scripts in `images/` and `assets/` private (IIS sites copy the updated rules from `webserver-configs/` by hand). Backport of the Grav 2 rules
+    * [security] The bundled `nginx.conf` also keeps hidden files, `.env` files, `tmp/`, `webserver-configs/`, Markdown files and scripts in `images/` and `assets/` private, and its folder rules match from the site root only, so page routes such as `/docs/cache/` reach Grav (nginx sites copy the updated rules from `webserver-configs/` by hand). Backport of the Grav 2 rules
+    * [security] The bundled Caddy 2 `Caddyfile` is rebuilt so every deny rule takes effect, and both Caddyfiles protect the same folders and file types as the Apache rules (Caddy sites copy the updated rules from `webserver-configs/` by hand). Backport of the Grav 2 rules
+    * [security] The bundled `lighttpd.conf` matches its rules in any letter case, serves `/.well-known/` files such as ACME challenges, and protects the same folders and file types as the Apache rules (lighttpd sites copy the updated rules from `webserver-configs/` by hand). Backport of the Grav 2 rules
+    * [security] The `php -S` development router (`system/router.php`) keeps `tmp/`, `user/config/`, `user/env/`, `user/accounts/` and `user/data/` private and refuses scripts in `images/` and `assets/`, the same as the shipped web-server rules. Backport of the Grav 2 rules
+    * [security] The Apache `.htaccess` exception for `/.well-known/` now covers that folder only, so other hidden files and folders whose names start with `well-known` stay blocked. Upgrading updates existing `.htaccess` files
+
+# v1.7.53.7
+## 10/31/2026
+
+1. [](#bugfix)
+    * [security] The security fixes below were found by Anthropic's OSS Scanner
+    * [security] Image conversions now accept only supported image formats and keep cached files in their intended folder. Backport of the Grav 2.2.18 fix
+    * [security] Responses that set cookies now stay private even when pages or plugins set their own cache headers. Backport of the Grav 2.2.18 fix
+    * [security] Existing accounts are now counted correctly when the installation folder contains special characters. Backport of the Grav 2.2.18 fix
+    * [security] Request URLs now respect the site's protocol forwarding setting. Backport of the Grav 2.2.18 fix
+    * [security] A media `.meta.yaml` file can no longer change which file a medium points to or where it is served from, and only files ending in `.meta.yaml` are read as media metadata. Backport of the Grav 2.2.18 fix
+
+# v1.7.53.6
+## 10/23/2026
+
+1. [](#bugfix)
+    * [security] Clockwork profiler data now requires a configured `debugger.token`, including for requests that reach Grav from the local machine, such as through a reverse proxy on the same server. Backport of the Grav 2.1.7 fix. Thanks @xfscott
+    * Page slugs and other names made from titles keep accented and other non-English letters intact on PHP 7.3 to 8.1 when the site's language uses a single-byte locale, instead of turning them into broken characters
+
 # v1.7.53.5
 ## 10/04/2026
 

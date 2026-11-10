@@ -1,0 +1,95 @@
+title: Course Page Options
+'@extends':
+    type: default
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+
+        module:
+          type: tab
+          title: Module
+
+          fields:
+
+            module_info:
+              type: display
+              label: false
+              markdown: true
+              content: 'Used when this page is inside a Modules page, as in Grav Helios Course Hub.'
+
+            header.description:
+              type: textarea
+              label: Card Description
+              toggleable: true
+              rows: 2
+              placeholder: 'A short description for this page'
+              help: 'Shown on this page''s card instead of the start of its content.'
+
+            header.group:
+              type: text
+              label: Group
+              toggleable: true
+              placeholder: 'e.g. Readings'
+              help: 'Shows this page under a heading with this name, on the cards and in the module list.'
+
+            header.badge_label:
+              type: text
+              size: medium
+              label: Badge Label
+              toggleable: true
+              placeholder: 'e.g. New, Draft, Due Friday'
+              help: 'A short status badge on this page''s card.'
+
+            header.badge_color:
+              type: select
+              label: Badge Color
+              toggleable: true
+              default: default
+              options:
+                default: Default
+                blue: Blue
+                green: Green
+                yellow: Yellow
+                red: Red
+                purple: Purple
+                plain: Plain
+              help: 'The badge colour.'
+
+            header.learning_objectives:
+              type: textarea
+              label: Learning Objectives
+              toggleable: true
+              rows: 5
+              placeholder: "- Understand the key concepts\n- Apply the methods described"
+              help: 'Shown at the top of this page as a Learning Objectives box. Supports Markdown.'
+
+            header.side_box:
+              type: textarea
+              label: Side Box
+              toggleable: true
+              rows: 4
+              help: 'Markdown shown under the module list on this page, in place of the course''s Side Box (false hides it).'
+
+        options:
+          type: tab
+
+          fields:
+
+            # Inside a Modules page the sidebar is off unless set here, so this is only saved when turned on
+            header.show_sidebar:
+              type: toggle
+              label: Display Sidebar on Page
+              toggleable: true
+              help: 'Off by default inside a Modules page.'
+              highlight: 1
+              options:
+                1: 'Yes'
+                0: 'No'
+              validate:
+                type: bool

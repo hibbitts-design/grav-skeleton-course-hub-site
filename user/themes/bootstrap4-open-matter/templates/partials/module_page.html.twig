@@ -1,0 +1,332 @@
+{# A course page inside a Modules page: a list of the modules (with the current module's pages),
+   the page content, and Previous/Next through all modules and their pages, in order.
+   module_list_page is the page whose pages are listed (a Modules page, or a course page such as a
+   single module), set by course-page.html.twig - hibbittsdesign.org #}
+
+{# The current module: the page itself, or its parent when it's a page inside a module #}
+{% set current_module = page %}
+{% if page.parent.route != module_list_page.route %}
+  {% set current_module = page.parent %}
+{% endif %}
+
+{% set modules = module_list_page.children.visible %}
+
+{# Every page in reading order (each module, then its pages), for Previous/Next #}
+{% set reading_order = [] %}
+{% for module in modules %}
+  {% set reading_order = reading_order|merge([module]) %}
+  {% for module_page in module.children.visible %}
+    {% set reading_order = reading_order|merge([module_page]) %}
+  {% endfor %}
+{% endfor %}
+
+{# Find this page's place in the reading order, and the pages either side of it #}
+{% set previous_page = null %}
+{% set next_page = null %}
+{% for item in reading_order %}
+  {% if item.route == page.route %}
+    {% if not loop.first %}
+      {% set previous_page = reading_order[loop.index0 - 1] %}
+    {% endif %}
+    {% if not loop.last %}
+      {% set next_page = reading_order[loop.index0 + 1] %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% do assets.addCss('theme://css/modules.css') %}
+{# the Hide/Show sidebar button (wider screens) #}
+{% do assets.addJs('theme://js/module-nav.js', {group:'bottom'}) %}
+
+{% embed 'partials/base.html.twig' %}
+
+{# The course sidebar is off on module pages, as the module list takes its place on the right;
+   a page can turn it on with show_sidebar: true #}
+{% if page.header.show_sidebar is defined %}
+  {% set show_sidebar = page.header.show_sidebar %}
+{% else %}
+  {% set show_sidebar = false %}
+{% endif %}
+
+{# When embedded in an LMS (chromeless), only the page content is shown, as on other pages:
+   no module list, search box or course sidebar #}
+{% set chromeless_page = false %}
+{% if embedded_mode or theme_var('chromeless.enabled') %}
+  {% set chromeless_page = true %}
+{% endif %}
+
+  {% block content %}
+    <div class="main-content">
+      <div class="container">
+        <div class="row">
+
+          {# The reader's saved choice to hide the module list (see js/module-nav.js), applied here, before the page is
+             drawn, so the list doesn't appear and then disappear (only with the theme's Hide Sidebar Button option on) #}
+          {% if theme_var('sidebar_hide_button', true) and not chromeless_page %}
+            <script>
+              try {
+                if (localStorage.getItem('om-modules-hidden') === '1') {
+                  document.documentElement.classList.add('module-nav-hidden');
+                }
+              } catch (error) {}
+            </script>
+          {% endif %}
+
+          {# The content on the left and the module list on the right, at the same widths as the
+             content and course sidebar on other pages (and like the section list in Open Publishing
+             Space); on phones the list follows the content #}
+          {% if chromeless_page %}
+            <div class="col-md-12 blog-main" role="main">
+          {% elseif show_sidebar %}
+            <div class="col-md-5 blog-main module-page-main" role="main">
+          {% else %}
+            <div class="col-md-8 blog-main module-page-main" role="main">
+          {% endif %}
+            {# On phones, a page inside a module starts with a link back up to its module, as in Open Publishing
+               Space guides (on wider screens the module list beside the page already shows it; left out when
+               embedded, which shows content only, and from print). A nav, as it's a navigation link (Grav 2's
+               Markdown output also leaves navigation out) #}
+            {% if page.route != current_module.route and not chromeless_page %}
+              <nav class="module-back d-md-none d-print-none" aria-label="{{ current_module.menu|e('html_attr') }}">
+                <p class="module-back-link"><a href="{{ current_module.url }}"><i class="fa fa-chevron-left" aria-hidden="true"></i> <span>{{ current_module.menu }}</span></a></p>
+              </nav>
+            {% endif %}
+
+            {% if not (page.header.hide_page_title) and not (grav.uri.param('hidepagetitle')) %}
+              <h1>{{ page.title }}</h1>
+            {% else %}
+              <h1 class="hidden">{{ page.title }}</h1>
+            {% endif %}
+            {# a header image, as on weekly pages, when the page asks for one #}
+            {% include 'partials/course_page_header_image.html.twig' %}
+            {# on phones, this page's sections above the content (not when embedded, which shows content only) #}
+            {% if not chromeless_page %}
+              {% include 'partials/module_sections.html.twig' with {'show_above_content': true} %}
+            {% endif %}
+
+            {# the page's own content (its section headings get a little space above them when jumped to) #}
+            {# Keep My Place: remember this page for its course's Modules page (see js/course-place.js) #}
+            {% set course_keeps_place = module_list_page.parent.header.keep_my_place is not defined or module_list_page.parent.header.keep_my_place %}
+            {% if theme_var('keep_my_place', true) and course_keeps_place and not chromeless_page %}
+              {% do assets.addJs('theme://js/course-place.js', {group:'bottom'}) %}
+              <div class="course-save-place" data-course="{{ module_list_page.parent.url }}" data-url="{{ page.url }}" data-title="{{ page.title|e('html_attr') }}" hidden></div>
+            {% endif %}
+            <div class="module-page-content">
+              {% include 'partials/learning_objectives.html.twig' %}
+              {{ page.content|raw }}
+            </div>
+
+            {# a module's own pages as cards below its content, as in Helios Course Hub #}
+            {% if page.route == current_module.route and page.children.visible|length > 0 %}
+              <h2 class="module-group-title">{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.IN_THIS_MODULE'|t }}</h2>
+              {# the same description lines as the cards on the Modules page: the theme option,
+                 or that page's card_description_lines #}
+              {% set card_description_lines = theme_var('module_description_lines') %}
+              {% if card_description_lines is null %}
+                {% set card_description_lines = 2 %}
+              {% endif %}
+              {% if module_list_page.header.card_description_lines is defined %}
+                {% set card_description_lines = module_list_page.header.card_description_lines %}
+              {% endif %}
+              {% include 'partials/module_cards.html.twig' with {'cards_page': page, 'card_description_lines': card_description_lines, 'cards_under_heading': true} %}
+            {% endif %}
+
+            {# Previous and Next as two boxes, each with a small label above the page title; left out when
+               embedded (for example in an LMS), which has its own navigation, as in Helios Course Hub #}
+            {% if (previous_page or next_page) and not embedded_mode and not theme_var('chromeless.enabled') %}
+              <nav class="module-prev-next" aria-label="{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.PREVIOUS_AND_NEXT'|t|e('html_attr') }}">
+                {% if previous_page %}
+                  <a class="module-prev" href="{{ previous_page.url }}">
+                    <span class="module-prev-next-label"><i class="fa fa-chevron-left" aria-hidden="true"></i> {{ 'THEME_BOOTSTRAP4_OPEN_MATTER.PREVIOUS'|t }}</span>
+                    {{ previous_page.menu }}
+                  </a>
+                {% endif %}
+                {% if next_page %}
+                  <a class="module-next" href="{{ next_page.url }}">
+                    <span class="module-prev-next-label">{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.NEXT'|t }} <i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                    {{ next_page.menu }}
+                  </a>
+                {% endif %}
+              </nav>
+
+              {# Previous/Next bar on phones (Previous/Next Bar on Phones option), fixed to the bottom of the screen in
+                 place of the boxes above, as in Grav Open Publishing Space guides (see css/modules.css) #}
+              {% if theme_var('prev_next_bar') %}
+                <nav class="module-prev-next-bar d-print-none" aria-label="{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.PREVIOUS_AND_NEXT_BAR'|t|e('html_attr') }}">
+                  {% if previous_page %}
+                    <a class="module-bar-link module-bar-prev" href="{{ previous_page.url }}">
+                      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                      <span class="module-bar-text">
+                        <span class="module-bar-label">{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.PREVIOUS'|t }}</span>
+                        <span class="module-bar-title">{{ previous_page.menu }}</span>
+                      </span>
+                    </a>
+                  {% else %}
+                    {# an empty space, so Next stays on the right #}
+                    <span></span>
+                  {% endif %}
+                  {% if next_page %}
+                    <a class="module-bar-link module-bar-next" href="{{ next_page.url }}">
+                      <span class="module-bar-text">
+                        <span class="module-bar-label">{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.NEXT'|t }}</span>
+                        <span class="module-bar-title">{{ next_page.menu }}</span>
+                      </span>
+                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </a>
+                  {% endif %}
+                </nav>
+              {% endif %}
+            {% endif %}
+
+            {# Creative Commons License - hibbittsdesign.org #}
+            {% if not embedded_mode and not(theme_var('chromeless.enabled')) and (theme_var('cc_license.enabled') and not(page.header.hide_cc_license)) %}
+              <p>{% include 'partials/creative_commons_license.html.twig' %}</p>
+            {% endif %}
+          </div>
+
+          {# Module navigation: all modules, with the current module's pages below it. With the course
+             sidebar also turned on, both share the right side #}
+          {% if not chromeless_page %}
+          {# module-nav-column: stays in view while reading a long page, on wider screens (see modules.css) #}
+          {% if show_sidebar %}
+            <div class="col-md-3 blog-sidebar module-nav-column" id="module-nav-column">
+          {% else %}
+            <div class="col-md-4 blog-sidebar module-nav-column" id="module-nav-column">
+          {% endif %}
+
+            {# On wider screens: a button, in its own row at the top right of the sidebar, that collapses it (the search
+               box and module list) to just this button, in the same place, so readers can focus on the page, or expands it
+               again. Hidden until js/module-nav.js sets it up, so it only appears when it works; not on phones (where the
+               list follows the page) or in print. The arrows point to the edge (») to collapse, back («) to expand #}
+            {# (the button can be turned off with the theme's Hide Sidebar Button option) #}
+            {% if theme_var('sidebar_hide_button', true) %}
+            <div class="module-nav-toggle-row d-none d-md-flex d-print-none">
+              <button type="button" class="module-nav-toggle" aria-controls="module-nav-column" aria-expanded="true" hidden>
+                <span class="module-nav-toggle-hide">{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.HIDE_SIDEBAR'|t }}</span>
+                <span class="module-nav-toggle-show">{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.SHOW_SIDEBAR'|t }}</span>
+                <svg class="module-nav-toggle-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>
+              </button>
+            </div>
+            {% endif %}
+
+            {# module-nav-card: on phones, the search box and module list share one box, so they read as one
+               place to find your way around the course (see modules.css; no box on wider screens) #}
+            <div class="module-nav-card">
+
+            {# the course search box, in the same place as in the course sidebar on other pages
+               (when the course sidebar is also turned on, it has its own search box instead) #}
+            {% if config.plugins.simplesearch.enabled and not show_sidebar %}
+              <div class="sidebar-content sidebar-search mb-4">
+                <h2>{{ 'SIDEBAR.SIMPLE_SEARCH.HEADLINE'|t }}</h2>
+                {% include 'partials/simplesearch_searchbox.html.twig' with {search_form_classes: '', search_input_classes: ''} %}
+              </div>
+            {% endif %}
+
+            {# the list is named by its heading, which looks like the other sidebar headings in every Theme Style #}
+            <nav class="module-nav" aria-labelledby="module-nav-title">
+              <h2 class="module-nav-title" id="module-nav-title">{{ module_list_page.menu }}</h2>
+              <ul class="nav flex-column">
+                {# a group heading (from a module's group: setting) wherever the group changes,
+                   like the part headings in an Open Publishing Space guide's index #}
+                {% set previous_group = '' %}
+                {% for module in modules %}
+                  {% set module_group = '' %}
+                  {% if module.header.group %}
+                    {% set module_group = module.header.group %}
+                  {% endif %}
+                  {% if module_group and module_group != previous_group %}
+                    <li class="nav-item module-nav-group">{{ module_group }}</li>
+                  {% endif %}
+                  {% set previous_group = module_group %}
+                  {% set module_class = '' %}
+                  {% if module.route == current_module.route %}
+                    {% set module_class = 'active' %}
+                  {% endif %}
+                  <li class="nav-item">
+                    {# aria-current tells screen readers which link is the page they're on #}
+                    {% if module.route == page.route %}
+                      <a class="nav-link {{ module_class }}" href="{{ module.url }}" aria-current="page">{{ module.menu }}</a>
+                      {% include 'partials/module_sections.html.twig' %}
+                    {% else %}
+                      <a class="nav-link {{ module_class }}" href="{{ module.url }}">{{ module.menu }}</a>
+                    {% endif %}
+                    {% if module.route == current_module.route and module.children.visible|length > 0 %}
+                      <ul class="nav flex-column module-nav-pages">
+                        {# the same group headings for the module's own pages #}
+                        {% set previous_page_group = '' %}
+                        {% for module_page in module.children.visible %}
+                          {% set page_group = '' %}
+                          {% if module_page.header.group %}
+                            {% set page_group = module_page.header.group %}
+                          {% endif %}
+                          {% if page_group and page_group != previous_page_group %}
+                            <li class="nav-item module-nav-group">{{ page_group }}</li>
+                          {% endif %}
+                          {% set previous_page_group = page_group %}
+                          {% set page_class = '' %}
+                          {% if module_page.route == page.route %}
+                            {% set page_class = 'active' %}
+                          {% endif %}
+                          <li class="nav-item">
+                            {% if module_page.route == page.route %}
+                              <a class="nav-link {{ page_class }}" href="{{ module_page.url }}" aria-current="page">{{ module_page.menu }}</a>
+                              {% include 'partials/module_sections.html.twig' %}
+                            {% else %}
+                              <a class="nav-link {{ page_class }}" href="{{ module_page.url }}">{{ module_page.menu }}</a>
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </nav>
+
+            {# Side Box (side_box), as in Grav Open Publishing Space: the page's own, else the Modules page's, else the
+               course's; none on the pages of a module set to false #}
+            {% set course_page = null %}
+            {% if module_list_page.parent.template in ['course', 'subsite'] %}
+              {% set course_page = module_list_page.parent %}
+            {% endif %}
+
+            {% if page.header.side_box is defined %}
+              {% set side_box = page.header.side_box %}
+            {% elseif module_list_page.header.side_box is defined %}
+              {% set side_box = module_list_page.header.side_box %}
+            {% elseif course_page %}
+              {% set side_box = course_page.header.side_box %}
+            {% else %}
+              {% set side_box = null %}
+            {% endif %}
+
+            {# the page's module has its Side Box turned off ("false" is also how Admin saves it) #}
+            {% set module = page.parent %}
+            {% set in_a_module = module.route != module_list_page.route %}
+            {% set module_turned_off = module.header.side_box is defined and (not module.header.side_box or module.header.side_box == 'false') %}
+            {% if page.header.side_box is not defined and in_a_module and module_turned_off %}
+              {% set side_box = false %}
+            {% endif %}
+
+            {% if side_box and side_box != 'false' %}
+              <div class="module-side-box">
+                {{ side_box|markdown|shortcodes|raw }}
+              </div>
+            {% endif %}
+
+            </div>
+          </div>
+          {% endif %}
+
+          {% if show_sidebar and not chromeless_page %}
+            <div class="col-md-4 blog-sidebar">
+              {% include 'partials/sidebar.html.twig' with {'blog':page} %}
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+{% endembed %}

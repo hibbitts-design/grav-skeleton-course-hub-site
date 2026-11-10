@@ -1,8 +1,8 @@
 name: 'Bootstrap4 Open Matter'
 type: theme
 slug: bootstrap4-open-matter
-version: 6.1.7
-description: "A customized version of the Bootstrap4 theme for open blogs, course hubs and more. Includes Git Sync and 'chromeless' content display for seamless embedding."
+version: 6.4.31
+description: "A customized version of the Bootstrap4 theme for open blogs, course hubs (organised by weeks or by modules) and more. Includes Git Sync and 'chromeless' content display for seamless embedding."
 icon: bold
 author:
     name: 'HibbittsDesign.org'
@@ -11,7 +11,7 @@ author:
 homepage: 'https://github.com/hibbitts-design/grav-theme-bootstrap4-open-matter'
 demo: 'https://demo.hibbittsdesign.org/grav-open-course-hub/'
 docs: 'https://github.com/hibbitts-design/grav-theme-bootstrap4-open-matter/blob/master/README.md'
-keywords: 'open, courses, resources, oer, git, gitsync, chromeless'
+keywords: 'open, courses, modules, resources, oer, git, gitsync, chromeless'
 bugs: 'https://github.com/hibbitts-design/grav-theme-bootstrap4-open-matter/issues'
 license: MIT
 compatibility:
@@ -52,23 +52,24 @@ form:
               highlight: 1
               default: 0
               options:
-                '0': No
-                '1': Yes
+                '0': 'No'
+                '1': 'Yes'
               validate:
                 type: bool
-            h5pcontent:
+            menuoptions:
               type: section
-              title: 'H5P Content'
+              title: Menu
               underline: true
-            h5pembedrootpath:
-              type: text
-              size: long
-              label: 'H5P Content Embed Source URL'
-              default: 'https://h5p.org/h5p/embed/'
-              help: 'Enter the embed source URL path up to, but not including, the H5P Content ID.'
-              description: 'H5P embed source URL path up to, but not including, the Content ID. For example, ''https://h5p.org/h5p/embed/'' or ''https://yourorganization.h5p.com/content/'' or ''https://yourWPsite/h5p/wp-admin/admin-ajax.php?action=h5p_embed&id=''.'
+            dropdown.enabled:
+              type: toggle
+              label: 'Display Dropdowns in Menu'
+              highlight: 1
+              default: 1
+              options:
+                '0': Disabled
+                '1': Enabled
               validate:
-                type: URL
+                type: bool
             creativecommonslicenseoptions:
               type: section
               title: 'Creative Commons License'
@@ -79,8 +80,8 @@ form:
               highlight: 1
               default: 0
               options:
-                '0': No
-                '1': Yes
+                '0': 'No'
+                '1': 'Yes'
               validate:
                 type: bool
             cc_license.type:
@@ -102,8 +103,8 @@ form:
               highlight: 1
               default: 0
               options:
-                '0': No
-                '1': Yes
+                '0': 'No'
+                '1': 'Yes'
               validate:
                 type: bool
             cc_license.text:
@@ -113,9 +114,22 @@ form:
               label: 'Additional CC License Text'
               validate:
                 type: text
+            h5psetup:
+              type: section
+              title: 'H5P Setup'
+              underline: true
+            h5pembedrootpath:
+              type: text
+              size: long
+              label: 'H5P Embed Source URL'
+              default: 'https://h5p.org/h5p/embed/'
+              help: 'Enter the embed source URL path up to, but not including, the H5P Content ID.'
+              description: 'H5P embed source URL path up to, but not including, the Content ID. For example, ''https://h5p.org/h5p/embed/'' or ''https://yourorganization.h5p.com/content/'' or ''https://yourWPsite/h5p/wp-admin/admin-ajax.php?action=h5p_embed&id=''.'
+              validate:
+                type: URL
         bootstrap4_options:
           type: tab
-          title: 'Bootstrap4  Options'
+          title: 'Bootstrap4 Options'
           fields:
             generaloptions:
               type: section
@@ -141,32 +155,22 @@ form:
                 disabled: 'Off'
                 enabled: 'On'
                 auto: 'Auto (System)'
+            headeroptions:
+              type: section
+              title: 'Header Defaults'
+              underline: true
             header_image_size:
               type: select
               label: 'Header Image Height'
-              help: 'Height of the header image above the NavBar. Slim keeps more of the page in view, especially on phones. "Standard on home pages" shows the full image on the home page (and each course home page), and the slim one elsewhere.'
+              help: 'Slim or hidden keeps more of the page in view, especially on phones.'
               size: medium
               default: standard
               options:
                 standard: Standard
                 slim: Slim
                 home-standard: 'Standard on home pages, slim elsewhere'
+                home-hidden: 'Standard on home pages, hidden elsewhere'
                 hidden: Hidden
-            display_syndicate:
-              type: toggle
-              label: 'Display Syndicate (RSS) Links in Sidebar'
-              help: 'Shows Atom and RSS feed buttons in the sidebar of blog pages when the Feed plugin is enabled.'
-              highlight: 1
-              default: 1
-              options:
-                '1': Yes
-                '0': No
-              validate:
-                type: bool
-            menubaroptions:
-              type: section
-              title: 'NavBar (Bootstrap4 Menubar)'
-              underline: true
             navbar_look:
               type: select
               label: 'NavBar Look'
@@ -208,7 +212,7 @@ form:
               size: small
             navbar_position:
               type: select
-              label: 'NavBar Postion'
+              label: 'NavBar Position'
               size: small
               default: top
               options:
@@ -223,14 +227,79 @@ form:
                 lg: Large
                 md: Medium
                 sm: Small
-            dropdown.enabled:
+            course_list_link:
               type: toggle
-              label: 'Dropdown in NavBar'
+              label: 'Link to Course List'
+              help: 'On a MultiCourse site, adds an "All Courses" link at the top of each course''s pages.'
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            sidebaroptions:
+              type: section
+              title: 'Sidebar Defaults'
+              underline: true
+            display_syndicate:
+              type: toggle
+              label: 'Display Syndicate (RSS) Links in Sidebar'
+              help: 'Shows Atom and RSS feed buttons in the sidebar of blog pages when the Feed plugin is enabled.'
               highlight: 1
               default: 1
               options:
-                '0': Disabled
-                '1': Enabled
+                '0': 'No'
+                '1': 'Yes'
+              validate:
+                type: bool
+            moduleoptions:
+              type: section
+              title: 'Module Defaults'
+              underline: true
+            module_description_lines:
+              type: select
+              label: 'Module Description Lines'
+              help: 'Lines shown in each card description on Modules pages.'
+              size: medium
+              default: 2
+              options:
+                2: '2 lines (default)'
+                3: '3 lines'
+                0: 'No limit'
+              validate:
+                type: int
+            prev_next_bar:
+              type: toggle
+              label: 'Previous/Next Bar on Phones'
+              help: 'On phones, a Previous/Next bar fixed to the bottom of the screen on module pages.'
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            keep_my_place:
+              type: toggle
+              label: 'Keep My Place'
+              help: 'Shows returning readers a "Continue where you left off" box on a course''s Modules page.'
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            sidebar_hide_button:
+              type: toggle
+              label: 'Hide Sidebar Button'
+              help: 'Let readers hide the module list on wider screens to focus on the page.'
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
         custommenu_options:
@@ -244,8 +313,8 @@ form:
               default: 0
               highlight: 1
               options:
-                '0': No
-                '1': Yes
+                '0': 'No'
+                '1': 'Yes'
               validate:
                 type: bool
             custommenu:
@@ -307,21 +376,21 @@ form:
               title: Appearance
               underline: true
             custom_git_sync_repo_link_icon:
-              type: input.text
+              type: text
               size: small
               label: 'Custom Font Awesome Icon'
               description: 'Short name, e.g. ''code-fork''.'
               validate:
                 type: text
             custom_git_sync_repo_link_text:
-              type: input.text
+              type: text
               size: long
               label: 'Custom Link Text'
               description: 'Link text, e.g. ''View Page in GitHub'' or ''View Page as Markdown''.'
               validate:
                 type: text
             git_sync_edit_note_text:
-              type: input.text
+              type: text
               size: medium
               label: 'Text before Page Link'
               description: 'The text before Git Sync Link located on a Page, e.g. ''Have a suggestion or correction?'' or ''Want to reuse this open content?''.'
@@ -338,7 +407,7 @@ form:
                 footer: Footer
                 none: None
             git_sync.edit_theme_link_text:
-              type: input.text
+              type: text
               size: medium
               label: 'Site Theme Files Link Text'
               default: 'Site Theme Files'
@@ -348,8 +417,8 @@ form:
               title: Advanced
               underline: true
             git_sync_repo_link:
-              type: input.url
-              label: 'Custom Git Repository URL'
+              type: url
+              label: 'Custom Git Repository Tree URL'
               help: 'Enter the URL that leads to the Pages folder in your Git Repository.'
               description: 'URL path to a Git repository up to, but not including, ''/pages'' and everything following it. For example, ''https://github.com/paulhibbitts/demo-grav-course-hub/tree/master''.'
               validate:

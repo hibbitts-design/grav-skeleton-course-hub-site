@@ -7,6 +7,8 @@ visible: false
 
 ## What’s Happening This Week
 
+**[Module 4 – How to explore and communicate possible design solutions?](/modules/module-04)**
+
 ### Important Reminders
 * [Journey Map](https://canvas.sfu.ca/courses/55288/assignments) assignment due Tue Jun 12 11:59pm PT
 * [Course Reflection Log](https://canvas.sfu.ca/courses/55288/assignments) assignment due Fri Aug 3rd 11:59pm PT

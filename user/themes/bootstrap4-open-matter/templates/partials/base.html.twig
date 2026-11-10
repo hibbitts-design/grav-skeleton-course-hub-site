@@ -112,6 +112,8 @@
             {% do assets.add('theme://js/site.js', {group:'bottom'}) %}
             {# load custom js - hibbittsdesign.org #}
             {% do assets.addJs('theme://js/my.js', 99) %}
+            {# tap or click an image in a page to see it larger - hibbittsdesign.org #}
+            {% do assets.addJs('theme://js/image-zoom.js', {group:'bottom'}) %}
 
             {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}
                 {% do assets.add('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') %}
@@ -138,10 +140,14 @@
         {% endblock head %}
     </head>
 
-    <body class="{% block body_classes %}{{ page.header.body_classes }}{% if embedded_mode or (theme_var('chromeless.enabled')) %} chromeless{% endif %}{% endblock %}">
+    {# (the data- labels are for js/image-zoom.js, which lets readers tap an image to see it larger) #}
+    <body class="{% block body_classes %}{{ page.header.body_classes }}{% if embedded_mode or (theme_var('chromeless.enabled')) %} chromeless{% endif %}{% endblock %}" data-image-larger-label="{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.IMAGE_LARGER'|t|e('html_attr') }}" data-image-close-label="{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.IMAGE_CLOSE'|t|e('html_attr') }}">
 
         {# check content display flag - hibbittsdesign.org #}
         {% if not embedded_mode and not(theme_var('chromeless.enabled')) %}
+
+          {# A "Skip to content" link first on the page, shown when it gets keyboard focus - hibbittsdesign.org #}
+          <a class="skip-link sr-only sr-only-focusable" href="#main-content">{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.SKIP_TO_CONTENT'|t }}</a>
 
           {% if config.plugins.langswitcher.enabled %}
               {% include 'partials/langswitcher.html.twig' %}
@@ -152,16 +158,20 @@
           {% endblock %}
         {% endif %}
 
-        {% block content %}{% endblock %}
+        {# where "Skip to content" goes: just after the NavBar. It holds the page's content, so a page's .md address
+           (Grav 2) finds the content here too - hibbittsdesign.org #}
+        <div id="main-content">
+          {% block content %}{% endblock %}
+        </div>
         {% block pagination %}{% endblock %}
 
         {% if not embedded_mode and not(theme_var('chromeless.enabled')) %}
-          <div class="footer">
+          <div class="footer" role="contentinfo">
               <div class="container">
                 {% if page.find('/footer').header.footer_scroll %}
                   {# added top of page navigation element - hibbittsdesign.org #}
                   <div class="up-arrow">
-                    <a href="#" id="top" title="Top of Page">
+                    <a href="#" id="top" title="{{ 'THEME_BOOTSTRAP4_OPEN_MATTER.TOP_OF_PAGE'|t|e('html_attr') }}">
                       <i class="fa fa-angle-up" aria-hidden="true"></i>
                     </a>
                   </div>

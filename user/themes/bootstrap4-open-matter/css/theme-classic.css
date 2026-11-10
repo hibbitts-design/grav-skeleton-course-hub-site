@@ -216,6 +216,13 @@ body {
     padding: .75rem 1.25rem .25rem 1.25rem!important;
 }
 
+/* Reminders boxes (such as "What's Happening This Week", in any Alert Style colour) with even padding, as their last
+   line adds no space of its own, and the same space below them as below an announcement above them */
+.listbullet.alert {
+    padding-bottom: .75rem!important;
+    margin-bottom: 1.5rem;
+}
+
 .list-item {
     margin: -1px 0 0px!important;
 }
@@ -439,4 +446,9 @@ div.keeptogether {
 /* Corner size for the [topics] letter headings */
 h2.topics-letter {
     border-radius: 4px;
+}
+
+/* the "All Courses" link above the page (Link to Course List): square corners, like the page */
+.course-list-bar {
+    border-radius: 0;
 }

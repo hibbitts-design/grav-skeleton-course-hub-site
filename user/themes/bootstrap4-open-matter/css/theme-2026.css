@@ -151,7 +151,7 @@ body {
 }
 
 .header {
-    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    background-image: linear-gradient(135deg, #1f2937 0%, #111827 100%);
 }
 
 .myheader {
@@ -190,6 +190,13 @@ body {
 .alert-secondary {
     background-color: #f8fafc;
     color: #374151;
+}
+
+/* Reminders boxes (such as "What's Happening This Week", in any Alert Style colour) with the same, roomier space
+   on every side, and the same space below them as above a heading, so the next section doesn't sit tight against them */
+.listbullet.alert {
+    padding: 1.5rem 1.75rem!important;
+    margin-bottom: 2.25rem;
 }
 
 .card-header .fa {

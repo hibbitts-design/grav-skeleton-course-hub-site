@@ -32,6 +32,11 @@ function apiHeaders(json = false) {
     const token = window.__GRAV_API_TOKEN;
     if (token) h['X-API-Token'] = token;
     if (json) h['Content-Type'] = 'application/json';
+    // The environment picked in Admin2's selector ('default' = base config).
+    // With API 1.0.50+ the settings are read from and saved to that layer;
+    // older API plugins ignore the header.
+    const env = window.__GRAV_ENVIRONMENT;
+    if (typeof env === 'string' && env !== '') h['X-Config-Environment'] = env;
     return h;
 }
 
@@ -653,7 +658,7 @@ class WizardModal {
 
             <label class="inline-checkbox" style="margin: 0.75rem 0; display: block;">
                 <input type="checkbox" data-webhook-enabled ${this.draft.webhook_enabled ? 'checked' : ''} />
-                ${t('WIZARD_WEBHOOK_SECRET_CHECK', 'Use a webhook secret (recommended; not supported by Bitbucket)')}
+                ${t('WIZARD_WEBHOOK_SECRET_CHECK', 'Enable the webhook (calls must be signed with the secret below)')}
             </label>
             ${this.draft.webhook_enabled ? `
                 <label class="field">

@@ -1,0 +1,605 @@
+/*
+Modules and course pages (module.md and course-page.md, as in Grav Helios Course Hub) - hibbittsdesign.org
+Lines and backgrounds use a see-through grey, and labels use the text colour made lighter with
+opacity, so these work with every Theme Style and in Dark Mode without their own dark versions.
+*/
+
+/* ── Module list (right column on course pages inside a Modules page) ── */
+
+/* "Modules" heading: styled by each Theme Style's sidebar headings (.blog-sidebar h2), with no extra
+   space above it, as it follows the search box */
+.module-nav .module-nav-title {
+    margin-top: 0;
+}
+
+/* Each module, a little smaller than the page text and in the text colour rather than the
+   link colour, so the list reads as navigation, separate from the links in the content
+   (.blog-sidebar is included so the Theme Styles' own sidebar link padding doesn't override this).
+   Normal weight, as each Theme Style makes the current link bold (.blog-sidebar .active), and here
+   only the page being read is bold (see below) */
+.blog-sidebar .module-nav .nav-link {
+    color: inherit;
+    font-weight: normal;
+    /* "em" sizes it from the page text, so it stays a little smaller than the page text in
+       every Theme Style (page text is 18px in 2025 and 2026, and 16px in Classic) */
+    font-size: 0.97em;
+    padding: 0.35rem 0.6rem;
+    line-height: 1.35;
+    border-radius: 0.375rem;
+}
+
+/* A light grey background on hover (see-through, so it works in Dark Mode too), half the shade of the
+   page being read, so that page stays the one clearly highlighted row */
+.module-nav .nav-link:hover {
+    background-color: rgba(128, 128, 128, 0.06);
+    text-decoration: none;
+}
+
+/* Only the module or page being read is bold, on a light grey background, so just one row is
+   highlighted, as in Open Publishing Space guides; on a page inside a module, that module looks like
+   the others (only the link to the page being read has aria-current, which the template adds for
+   screen readers) */
+.blog-sidebar .module-nav .nav-link[aria-current="page"] {
+    font-weight: 600;
+    background-color: rgba(128, 128, 128, 0.12);
+}
+
+/* The current module's pages: indented below it, at the same text size */
+.module-nav .module-nav-pages {
+    margin: 0.1rem 0 0.4rem 0.75rem;
+}
+
+.blog-sidebar .module-nav .module-nav-pages .nav-link {
+    padding: 0.3rem 0.6rem;
+}
+
+/* The current page's sections (from the Page TOC plugin), a level below the module names:
+   indented further, and a little smaller and lighter */
+.module-nav .module-nav-sections {
+    margin: 0.2rem 0 0.5rem 1rem;
+}
+
+.blog-sidebar .module-nav .module-nav-sections .nav-link {
+    font-size: 0.875em;
+    line-height: 1.3;
+    padding: 0.2rem 0.75rem;
+    /* a little lighter than the module names, while keeping the text at about 7:1 contrast */
+    opacity: 0.85;
+}
+
+/* Full strength on hover or focus, so the section being pointed at stands out */
+.blog-sidebar .module-nav .module-nav-sections .nav-link:hover,
+.blog-sidebar .module-nav .module-nav-sections .nav-link:focus {
+    opacity: 1;
+}
+
+/* On wider screens, the module column stays in view while reading a long page; if the list is taller
+   than the window, it scrolls on its own. align-self keeps the column only as tall as its contents,
+   which sticky needs (768px is Bootstrap's md, where the column sits beside the content). Only in windows
+   at least 700px tall: in shorter ones (such as when zoomed in), the list scrolls with the page instead.
+   .blog-sidebar.module-nav-column (both classes) outranks Bootstrap's position: relative on all columns */
+@media (min-width: 768px) and (min-height: 700px) {
+    .blog-sidebar.module-nav-column {
+        position: sticky;
+        top: 1rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+    }
+
+    /* below a Sticky Top NavBar instead of behind it (:has() matches a page that has one) */
+    body:has(.navbar.sticky-top) .blog-sidebar.module-nav-column {
+        top: 5rem;
+        max-height: calc(100vh - 6rem);
+    }
+}
+
+/* On phones, "On this page" above the content: a slim box that opens to show the sections,
+   like the one in Open Publishing Space guides */
+.module-sections-above {
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    margin-bottom: 1.25rem;
+}
+
+/* "On this page" with a "›" on the right instead of the browser's triangle on the left
+   (list-style removes the triangle in most browsers, ::-webkit-details-marker in older Safari) */
+.module-sections-above summary {
+    /* flex puts the "›" at the right edge (older Safari shows it just after the words instead) */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.module-sections-above summary::-webkit-details-marker {
+    display: none;
+}
+
+.module-sections-above summary::after {
+    content: "\203A";
+    font-size: 1.4em;
+    line-height: 1;
+    opacity: 0.6;
+    transition: transform 0.15s ease;
+}
+
+/* the "›" turns to point down while the box is open */
+.module-sections-above[open] summary::after {
+    transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .module-sections-above summary::after {
+        transition: none;
+    }
+}
+
+.module-sections-above-list {
+    margin: 0.5rem 0 0.25rem;
+    padding-left: 1.25rem;
+}
+
+/* On phones, the link back up to the module above a page inside a module: in the link colour (so it
+   looks tappable, like the page names in Previous/Next), without an underline, at the page text size
+   (easy to read) and a height that's easy to tap
+   (.main-content .module-back is included so the Theme Styles' own link underline doesn't override this) */
+.module-back-link {
+    /* "em" keeps it the same size as the page text in every Theme Style */
+    font-size: 1em;
+    /* only a little space below, so the link reads as part of the page title below it */
+    margin: 0 0 0.25rem;
+}
+
+.main-content .module-back .module-back-link a {
+    /* the "‹" and the module name side by side, so a long name that wraps onto a second line
+       lines up under the name rather than under the "‹" */
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4em;
+    padding: 0.25rem 0; /* a little taller, for easier tapping */
+    text-decoration: none;
+}
+
+/* on hover or focus, an underline under the module name only, not under the "‹" */
+.main-content .module-back .module-back-link a:hover span,
+.main-content .module-back .module-back-link a:focus-visible span {
+    text-decoration: underline;
+}
+
+/* the "‹" a little smaller than the text, raised slightly so it's centred on the first line of the
+   module name (at its smaller size it would otherwise sit low, on the text's baseline) */
+.module-back-link .fa {
+    font-size: 0.75em;
+    position: relative;
+    top: -0.15em;
+}
+
+/* A little space above a section heading when jumped to, so it isn't right at the top edge
+   (or hidden behind a Sticky Top NavBar) */
+.module-page-content h2,
+.module-page-content h3 {
+    scroll-margin-top: 1rem;
+}
+
+body:has(.navbar.sticky-top) .module-page-content h2,
+body:has(.navbar.sticky-top) .module-page-content h3 {
+    scroll-margin-top: 5rem;
+}
+
+/* The list moves left by the links' side padding, so the module names line up with the
+   "Modules" label and the search box above them (the highlight extends into the gap
+   beside the content instead). "> .nav" matches only the module list's own list */
+.module-nav > .nav {
+    margin-left: -0.6rem;
+}
+
+/* On phones, where the module list comes after the page: the search box and module list share one
+   box (module-nav-card), like the side list in Open Publishing Space guides, with a thin line between
+   the search box and the list. The list stays inside the box's padding, so the grey highlight on the
+   current module or page is a rounded row set in from the box's edge (767.98px = below Bootstrap's md) */
+@media (max-width: 767.98px) {
+    .module-nav-card {
+        border: 1px solid rgba(108, 117, 125, 0.25);
+        /* the same rounded corners as the cards */
+        border-radius: 12px;
+        padding: 1.25rem 1rem;
+    }
+
+    .module-nav-card .sidebar-search {
+        margin-bottom: 1rem !important; /* replaces Bootstrap's mb-4, which also uses !important */
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+    }
+
+    .module-nav > .nav {
+        margin-left: 0;
+    }
+
+    /* the module's pages with a thin line to their left, so they read as part of that module */
+    .module-nav .module-nav-pages {
+        padding-left: 0.5rem;
+        border-left: 1px solid rgba(128, 128, 128, 0.25);
+    }
+}
+
+/* Group headings in the list (from group: on a module or page), small and in capitals like
+   the "Modules" label; the side padding lines them up with the names below them */
+.module-nav .module-nav-group {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+    padding: 0 0.6rem;
+    margin: 0.75rem 0 0.25rem;
+}
+
+/* ── Modules page and module pages: the cards ── */
+
+/* A short description under the Modules page title */
+.module-intro {
+    color: inherit;
+    opacity: 0.75;
+    margin-bottom: 1.5rem;
+}
+
+/* "In this module" and group headings above a set of cards, like the sidebar headings
+   (.blog-main is included so the page's own heading sizes don't override these) */
+.blog-main .module-group-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: inherit;
+    opacity: 0.75;
+    margin: 1.5rem 0 0.75rem;
+}
+
+/* Card descriptions limited to 2 or 3 lines (card_description_lines on the Modules page),
+   ending with "…"; with 0 the description is shown in full */
+.module-cards-lines-2 .card-text,
+.module-cards-lines-3 .card-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.module-cards-lines-2 .card-text {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.module-cards-lines-3 .card-text {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+/* ── Previous / Next ── */
+
+/* Two boxes side by side: Previous on the left, Next on the right */
+.module-prev-next {
+    display: flex;
+    gap: 1rem;
+    margin: 2.5rem 0 1.5rem;
+}
+
+.module-prev-next a {
+    /* each box is half the width, even when it's the only one */
+    flex: 0 1 calc(50% - 0.5rem);
+    display: block;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(108, 117, 125, 0.25);
+    /* the same rounded corners as the cards */
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.module-prev-next a:hover,
+.module-prev-next a:focus-visible {
+    border-color: currentColor;
+    text-decoration: none;
+}
+
+/* the Next box keeps to the right, even when there's no Previous box */
+.module-prev-next .module-next {
+    margin-left: auto;
+    text-align: right;
+}
+
+/* "Previous" / "Next" in small grey text above the page title */
+.module-prev-next .module-prev-next-label {
+    display: block;
+    font-size: 0.8rem;
+    color: inherit;
+    opacity: 0.75;
+}
+
+/* On phones the boxes stack, one per line */
+@media (max-width: 575.98px) {
+    .module-prev-next {
+        flex-direction: column;
+    }
+
+    .module-prev-next a,
+    .module-prev-next .module-next {
+        flex-basis: auto;
+        margin-left: 0;
+    }
+}
+
+/* ── Header image on a course page ── */
+
+/* Space between the header image and the content below it, as on weekly pages */
+.course-page-header-image {
+    margin-bottom: 1.5rem;
+}
+
+/* The Hide/Show sidebar button (wider screens only, see templates/partials/module_page.html.twig): in its own row at the
+   top right of the module list's column, in the page's text colour (it follows every Theme Style, light or dark), at
+   least 40px tall: "Hide sidebar »" while expanded, and just « while collapsed, its name then read by screen readers and
+   shown on hover (see js/module-nav.js) */
+.module-nav-toggle-row {
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+.module-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    margin: 0;
+    padding: 0 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    background: none;
+    font-size: 0.9em;
+    color: inherit;
+    cursor: pointer;
+}
+
+.module-nav-toggle[hidden] {
+    display: none;
+}
+
+.module-nav-toggle:hover {
+    background: rgba(128, 128, 128, 0.12);
+}
+
+.module-nav-toggle:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* the words: "Hide sidebar" shown while expanded; while collapsed, "Show sidebar" is for screen readers only */
+html:not(.module-nav-hidden) .module-nav-toggle-show,
+.module-nav-hidden .module-nav-toggle-hide {
+    display: none;
+}
+
+.module-nav-toggle-show {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Collapsed (768px and up, where the list sits beside the page): the column shrinks to just the button, in the same top
+   corner, with a light outline so it reads as a control, staying in view while reading; the page is centred, at about
+   the width it has beside the list, so lines don't become too long */
+@media (min-width: 768px) {
+    .module-nav-hidden .blog-sidebar.module-nav-column {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
+        position: sticky;
+        top: 1rem;
+        align-self: flex-start;
+        max-height: none;
+        overflow: visible;
+    }
+
+    /* below a Sticky Top NavBar instead of behind it, in windows of any height */
+    .module-nav-hidden body:has(.navbar.sticky-top) .blog-sidebar.module-nav-column {
+        top: 5rem;
+    }
+
+    .module-nav-hidden .module-nav-column > :not(.module-nav-toggle-row) {
+        display: none;
+    }
+
+    .module-nav-hidden .module-page-main {
+        flex: 1 1 0;
+        max-width: 48rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .module-nav-hidden .module-nav-toggle {
+        border-color: rgba(128, 128, 128, 0.4);
+    }
+
+    /* the arrows point back («) to expand */
+    .module-nav-hidden .module-nav-toggle-icon {
+        transform: rotate(180deg);
+    }
+}
+
+/* the link back up to the module, above a page inside a module, which is otherwise only on phones (on wider screens the
+   module list beside the page has it): with the list hidden, it shows here too, so readers can still go up (on screen
+   only - it stays out of print, like the rest of the page's navigation) */
+@media screen and (min-width: 768px) {
+    .module-nav-hidden .module-back.d-md-none {
+        display: block !important;
+    }
+}
+
+/* Keep My Place: "Continue where you left off" on a course's Modules page (see js/course-place.js), a quiet box in a
+   light tint of the text colour, so it works in light and dark modes */
+.course-resume {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0 0 1.25rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-radius: 0.375rem;
+    background: rgba(127, 127, 127, 0.1);
+}
+.course-resume[hidden] {
+    display: none;
+}
+.course-resume-link {
+    flex: 1;
+    min-width: 0;
+    color: inherit;
+}
+.course-resume-title {
+    font-weight: 600;
+}
+.course-resume-dismiss {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: inherit;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.course-resume-dismiss:hover,
+.course-resume-dismiss:focus {
+    background: rgba(127, 127, 127, 0.15);
+}
+
+/* Side Box: under the module list, after a thin line like the one under the search box */
+.module-side-box {
+    margin-top: 1rem;
+    padding: 1rem 0 0; /* text lines up with the module list and its heading */
+    border-top: 1px solid rgba(128, 128, 128, 0.25);
+    font-size: 0.97em;
+    line-height: 1.5;
+}
+.module-side-box > :first-child {
+    margin-top: 0;
+}
+.module-side-box > :last-child {
+    margin-bottom: 0;
+}
+
+/* Previous/Next bar on phones (Previous/Next Bar on Phones option), as in Grav Open Publishing Space guides: fixed to
+   the bottom of the screen in place of the Previous/Next boxes, below the width where the module list moves under the
+   page. Not on very short screens (phones turned sideways), where it would take too much of the screen */
+.module-prev-next-bar {
+    display: none;
+}
+
+@media (max-width: 767.98px) and (min-height: 500px) {
+    .module-prev-next-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1010; /* below the NavBar and its phone menu, whether fixed (1030) or sticky (1020) */
+        background-color: #ffffff; /* the page's colour (Dark Mode: in the theme-*-dark.css files) */
+        border-top: 1px solid rgba(128, 128, 128, 0.25);
+        padding-bottom: env(safe-area-inset-bottom); /* room for the iPhone's home bar */
+    }
+
+    /* the bar replaces the boxes, when it's there */
+    body:has(.module-prev-next-bar) .module-prev-next {
+        display: none;
+    }
+
+    /* room below the page for the bar, so it never covers the end of the page */
+    body:has(.module-prev-next-bar) {
+        padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+    }
+
+    /* links reached with the Tab key, and places jumped to, stay above the bar rather than behind it */
+    html:has(.module-prev-next-bar) {
+        scroll-padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+    }
+
+    /* while typing in a box (such as the search box), the bar steps aside so it doesn't cover it */
+    body:has(input:not([type="checkbox"], [type="radio"], [type="button"], [type="submit"], [type="reset"]):focus, textarea:focus) .module-prev-next-bar {
+        display: none;
+    }
+}
+
+/* each half of the bar: an arrow, and a small label above the page title */
+.module-bar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    min-height: 3.5rem;
+    padding: 0.5rem 1rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.module-bar-link:hover,
+.module-bar-link:focus {
+    color: inherit;
+    text-decoration: none;
+}
+
+.module-bar-link:hover .module-bar-title {
+    text-decoration: underline;
+}
+
+.module-bar-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -2px;
+}
+
+.module-bar-prev {
+    border-right: 1px solid rgba(128, 128, 128, 0.25);
+}
+
+.module-bar-next {
+    grid-column: 2;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.module-bar-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.module-bar-label {
+    font-size: 0.75rem;
+    opacity: 0.75;
+}
+
+/* the page title on one line, cut with "…" when it's too long; a little smaller than the page text, as in Grav Open
+   Publishing Space guides, so more of it shows */
+.module-bar-title {
+    overflow: hidden;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.module-bar-link .fa {
+    flex-shrink: 0;
+    opacity: 0.75;
+}

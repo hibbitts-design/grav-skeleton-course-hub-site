@@ -175,10 +175,10 @@ class Bootstrap4OpenMatter extends Theme
             }
         }
 
-        // Leave out pages of an unpublished course or course group
+        // Leave out pages inside an unpublished page, such as an unpublished course, course group,
+        // Modules page or Weekly Units page (Grav still lets its own pages be published and found)
         foreach ($this->getParentPages($page) as $parent) {
-            $isCourseOrGroup = $this->isCoursePage($parent) || $this->isCourseGroupPage($parent);
-            if ($isCourseOrGroup && !$parent->published()) {
+            if (!$parent->published()) {
                 return true;
             }
         }
@@ -473,6 +473,14 @@ class Bootstrap4OpenMatter extends Theme
         if ($this->config->get('plugins.github-markdown-alerts.wrapper_class', 'md-alert md-alert--') === 'md-alert md-alert--') {
             $this->config->set('plugins.github-markdown-alerts.wrapper_class', 'alert md-alert md-alert--');
             $this->config->set('plugins.github-markdown-alerts.include_css', false);
+        }
+
+        // A page's .md address (Grav 2) keeps its callouts as > [!TIP] and so on (see classes/CalloutsMarkdownOutput.php)
+        if (class_exists('Grav\Common\Page\Markdown\MarkdownOutput')) {
+            if (!class_exists('HibbittsDesign\CalloutsMarkdownOutput')) {
+                require_once __DIR__ . '/classes/CalloutsMarkdownOutput.php';
+            }
+            \HibbittsDesign\CalloutsMarkdownOutput::useForMarkdownVersions($this->grav);
         }
     }
 

@@ -1,8 +1,8 @@
 navbar_style: navbar-dark
 navbar_position: top
 navbar_breakpoint: md
-git_sync.edit_theme_link_location: none
-theme_css: '2026'
+theme_css: '2026-modern'
+navbar_look: tint
 dark_mode:
   mode: disabled
 dropdown:
@@ -26,7 +26,6 @@ cc_license:
   enabled: false
   type: ccby
   icon: false
-  text: null
 displaycustommenus:
   enabled: false
 custommenu:
@@ -36,10 +35,7 @@ custommenu:
     url: 'https://getgrav.org/'
     target: _blank
 navbar_bg: default
-navbar_bg_color: '#991b1b'
+navbar_bg_color: '#3b5682'
 git_sync_edit_theme_link_location: none
-custom_git_sync_repo_link_icon: null
-custom_git_sync_repo_link_text: null
-custom_git_sync_repo_presentation_link_text: null
-git_sync_repo_link: null
-theme_stylesheet: default
+header_image_size: home-hidden
+display_syndicate: true

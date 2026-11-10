@@ -1,3 +1,22 @@
+# v3.4.16
+## 11/01/2026
+
+1. [](#bugfix)
+    * Git Sync works again with Git versions older than 2.9, which stopped with a "Missing value for 'credential.helper'" error [#268](https://github.com/trilbymedia/grav-plugin-git-sync/pull/268)
+
+# v3.4.15
+## 10/29/2026
+
+1. [](#bugfix)
+    * The webhook's on/off switch was labelled as a secret option, so leaving it off made the webhook URL answer 404. It is now labelled Enable Web Hook, a disabled webhook says so instead of returning Page Not Found, and the URL works whether it's saved with or without the leading slash, with a trailing slash, or as the full address [#267](https://github.com/trilbymedia/grav-plugin-git-sync/issues/267)
+    * Webhooks signed only with SHA-256 (newer GitHub setups, Gitea and Forgejo) are accepted
+
+# v3.4.14
+## 10/14/2026
+
+1. [](#bugfix)
+    * With API plugin 1.0.50 or later, saving Git Sync settings in Admin2 (the settings page or the wizard) goes to the environment picked in the environment selector instead of always to the host's environment folder, and only settings that differ from the layers beneath it are stored
+
 # v3.4.13
 ## 09/17/2026
 

@@ -1,3 +1,66 @@
+# v9.2.0
+## 11/09/2026
+
+1. [](#new)
+    * Cap runs a browser check with every challenge and refuses headless and automated browsers, so scripts that only solve the proof of work no longer get through. It can be switched off, or set to log instead of block, in the Cap settings
+    * Experimental behavior and AI agent checks for Cap, off by default, that can report or refuse forms sent by scripts
+    * Cap gets harder for floods: once one IP address has sent 10 submissions in 10 minutes, each further one doubles the work, up to 256 times the normal cost
+    * A Cap token now only works on the form that asked for it
+    * A form with Cap has to be on the page for 3 seconds before it can be sent, since bots usually send at once
+1. [](#improved)
+    * A form with a captcha field but no `captcha: true` process action now checks the captcha anyway and logs a warning, instead of letting every submission through
+    * The bundled Cap widget is updated to 0.1.61 and the Cap server library to 1.2.0, both still served from your own site
+1. [](#bugfix)
+    * A Cap token can no longer be used on several submissions sent at the same moment. Cap now keeps one file per record in `tmp/cap` by default, and the Grav cache option only takes effect with a Redis or Memcached cache
+    * A captcha placed inside columns, a fieldset or tabs is now checked on submit; before, it was only checked when it sat at the top level of the form
+
+# v9.1.40
+## 11/05/2026
+
+1. [](#bugfix)
+    * [security] File uploads are checked as SVG by every extension in their name, not only the last, and a file under an extension Grav doesn't recognise is refused when it holds HTML or XML markup
+
+# v9.1.39
+## 11/01/2026
+
+1. [](#improved)
+    * Form runs on PHP 7.3 and newer again, so Grav 1.7 sites on older PHP get updates; only the Cap captcha needs PHP 8.1 [#662](https://github.com/getgrav/grav-plugin-form/issues/662)
+1. [](#bugfix)
+    * A form using the Cap captcha on PHP older than 8.1 is now refused instead of skipping the captcha
+
+# v9.1.38
+## 10/31/2026
+
+1. [](#bugfix)
+    * [security] The security fixes below were found by Anthropic's OSS Scanner
+    * [security] A file upload is now accepted only for a file field the form declares, or one a plugin has set up through `onFormUploadSettings`
+    * [security] A form that holds too much data, or nests it too deeply, to keep between steps now answers with an error message instead of failing
+    * [security] An SVG upload that can't be cleaned is now refused and removed, instead of being kept as it was sent
+
+# v9.1.37
+## 10/30/2026
+
+1. [](#bugfix)
+    * An SVG upload that can't be read as SVG markup is refused with an error, instead of the sanitizer quietly saving it as an empty file
+
+# v9.1.36
+## 10/26/2026
+
+1. [](#bugfix)
+    * A form included from Twig in page content gets the real site settings again, so its script no longer breaks and file and honeypot fields render [#661](https://github.com/getgrav/grav-plugin-form/issues/661)
+
+# v9.1.35
+## 10/13/2026
+
+1. [](#improved)
+    * The Spanish translation covers the Cap widget and the Turnstile and reCAPTCHA settings. Thanks @pmoreno-rodriguez [#660](https://github.com/getgrav/grav-plugin-form/pull/660)
+
+# v9.1.34
+## 10/09/2026
+
+1. [](#improved)
+    * The Cap and Debug settings in the Form plugin's configuration can now be translated, and the Spanish translation is more complete. Thanks @pmoreno-rodriguez [#659](https://github.com/getgrav/grav-plugin-form/pull/659)
+
 # v9.1.33
 ## 10/07/2026
 

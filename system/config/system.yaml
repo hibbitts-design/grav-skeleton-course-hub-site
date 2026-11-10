@@ -11,7 +11,7 @@ username_regex: '^[a-z0-9_-]{3,16}$'             # Only lowercase chars, digits,
 pwd_regex: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' # At least one number, one uppercase and lowercase letter, and be at least 8+ chars
 intl_enabled: true                               # Special logic for PHP International Extension (mod_intl)
 http_x_forwarded:                                # Configuration options for the various HTTP_X_FORWARD headers
-  protocol: true
+  protocol: true                                # X-Forwarded-Proto / CloudFront-Forwarded-Proto
   host: false
   port: true
   ip: true
@@ -153,7 +153,7 @@ debugger:
   enabled: false                                 # Enable Grav debugger and following settings
   provider: clockwork                            # Debugger provider: debugbar | clockwork
   censored: false                                # Censor potentially sensitive information (POST parameters, cookies, files, configuration and most array/object data in log messages)
-  token: ''                                      # Shared secret a remote client must send as `X-Clockwork-Auth` to read `/__clockwork/` profiler data. Empty means loopback-only
+  token: ''                                      # Shared secret required as `X-Clockwork-Auth` to read `/__clockwork/` profiler data. Empty denies all profiler-data reads
   shutdown:
     close_connection: true                       # Close the connection before calling onShutdown(). false for debugging
 
